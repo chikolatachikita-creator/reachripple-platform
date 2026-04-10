@@ -5,6 +5,9 @@ import axios, {
 } from "axios";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001/api";
+const LOCALTUNNEL_BYPASS_HEADERS = API_BASE_URL.includes(".loca.lt")
+  ? { "bypass-tunnel-reminder": "true" }
+  : {};
 
 // --------------------
 // Token storage helpers
@@ -77,6 +80,7 @@ const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true,
   timeout: 30000,  // 30 second timeout prevents hanging requests
+  headers: LOCALTUNNEL_BYPASS_HEADERS,
 });
 
 // --------------------
@@ -113,7 +117,10 @@ const refreshAccessToken = async (): Promise<string | null> => {
     const response = await axios.post(
       `${API_BASE_URL}/auth/refresh`,
       refreshToken ? { refreshToken } : {},
-      { withCredentials: true } // Ensures HttpOnly cookie is sent
+      {
+        withCredentials: true, // Ensures HttpOnly cookie is sent
+        headers: LOCALTUNNEL_BYPASS_HEADERS,
+      }
     );
 
     const newAccessToken = response.data.accessToken as string;

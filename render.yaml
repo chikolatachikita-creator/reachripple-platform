@@ -27,7 +27,7 @@ services:
 
   # ─── Frontend Static Site ────────────────────────────
   - type: web
-    name: reachripple
+    name: reachripple-live-web
     runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build

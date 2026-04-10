@@ -1,0 +1,21 @@
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  roots: ['<rootDir>/tests'],
+  testMatch: ['**/*.test.ts'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  collectCoverageFrom: [
+    'controllers/**/*.ts',
+    'routes/**/*.ts',
+    'middleware/**/*.ts',
+    'services/**/*.ts',
+    '!**/*.d.ts',
+  ],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'html'],
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
+  testTimeout: 30000,
+  verbose: true,
+  forceExit: true,
+  detectOpenHandles: true,
+};

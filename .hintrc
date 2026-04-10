@@ -1,0 +1,19 @@
+{
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not and_ff <= 146",
+    "not firefox <= 146",
+    "not opera <= 125"
+  ],
+  "hints": {
+    "compat-api/html": [
+      "default",
+      {
+        "ignore": [
+          "meta[name=theme-color]"
+        ]
+      }
+    ]
+  }
+}

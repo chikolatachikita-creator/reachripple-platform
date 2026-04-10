@@ -1,0 +1,442 @@
+/* postcss-import */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   Scrollbar Hide Utility
+   ===================================================== */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* =====================================================
+   Safe area for mobile devices with notches
+   ===================================================== */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* =====================================================
+   Theme Transition Styles
+   ===================================================== */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: background-color 200ms ease-out,
+              border-color 200ms ease-out,
+              color 100ms ease-out !important;
+}
+
+/* Disable transitions on initial load and for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after {
+    transition: none !important;
+  }
+}
+
+/* =====================================================
+   Focus Visible Styles (Keyboard-only focus)
+   ===================================================== */
+.focus-visible-ring:focus {
+  outline: none;
+}
+
+.focus-visible-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.4);
+}
+
+/* =====================================================
+   Skip Link Styles
+   ===================================================== */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #ec4899;
+  color: white;
+  padding: 8px 16px;
+  z-index: 100;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* =====================================================
+   Scrollbar hiding utility
+   ===================================================== */
+.hide-scrollbar {
+  /* scrollbar-width: none; */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* =====================================================
+   Card animations
+   ===================================================== */
+
+/* VIP rose gold to gold gradient border */
+.vip-gradient-border {
+  border: 3px solid transparent;
+  background-image: linear-gradient(white, white), linear-gradient(135deg, #e8b4b8, #d4a574, #c9a227);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* Featured purple-pink-navy gradient border (subtle) */
+.featured-gradient-border {
+  border: 2px solid transparent;
+  background-image: linear-gradient(white, white), linear-gradient(135deg, #a855f7, #ec4899, #1e3a5f);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  opacity: 0.85;
+}
+
+@keyframes cardPop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cardFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-card-pop {
+  animation: cardPop 0.45s ease-out;
+  animation-delay: var(--delay, 0ms);
+  animation-fill-mode: both;
+}
+
+.animate-card-fade {
+  animation: cardFade 0.4s ease-out;
+  animation-delay: var(--delay, 0ms);
+  animation-fill-mode: both;
+}
+
+/* Reduced motion: disable carousel and card animations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-card-pop,
+  .animate-card-fade {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+  
+  /* Disable pulse on swipe hint */
+  .animate-pulse {
+    animation: none !important;
+  }
+  
+  /* Smooth scroll still works but instantly */
+  .snap-x {
+    scroll-behavior: auto;
+  }
+}
+
+/* =====================================================
+   Hero deep breathing animation for the main title
+   Subtle breathing in and out - gentle expansion and contraction
+   ===================================================== */
+@keyframes heartbeatSoft {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  /* Breathing in - subtle expansion */
+  25% {
+    transform: scale(1.04);
+    opacity: 0.99;
+  }
+  /* Peak of breathing in */
+  50% {
+    transform: scale(1.04);
+    opacity: 0.99;
+  }
+  /* Breathing out - subtle contraction */
+  75% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  /* Back to rest */
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.heartbeat-soft {
+  animation: heartbeatSoft 5.5s ease-in-out infinite;
+}
+
+/* =====================================================
+   Toast notification animations
+   ===================================================== */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.animate-slide-out {
+  animation: slideOut 0.3s ease-in forwards;
+}
+
+/* =====================================================
+   Modal animations
+   ===================================================== */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+/* =====================================================
+   Profile Title Animation - Seductive Typewriter + Gradient
+   ===================================================== */
+@keyframes letterBlurIn {
+  0% {
+    filter: blur(12px);
+    opacity: 0.3;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes attentionGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px #ec4899,
+      0 0 20px #ec4899,
+      0 0 40px #a855f7,
+      0 0 60px #a855f7;
+  }
+  50% {
+    text-shadow: 
+      0 0 20px #a855f7,
+      0 0 40px #ec4899,
+      0 0 60px #ec4899,
+      0 0 80px #a855f7;
+  }
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.typewriter-letter {
+  display: inline-block;
+  filter: blur(12px);
+  opacity: 0.3;
+  background: linear-gradient(
+    90deg,
+    #ec4899 0%,
+    #d946ef 25%,
+    #a855f7 50%,
+    #d946ef 75%,
+    #ec4899 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: 
+    letterBlurIn 1.5s ease-out forwards,
+    gradientFlow 3s ease-in-out infinite 1.5s;
+}
+
+.typewriter-container {
+  /* No glow - clean look */
+}
+/* =====================================================
+   Micro-Interactions & Polish
+   ===================================================== */
+
+/* Button click animation */
+.btn-interactive {
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-interactive:active {
+  transform: scale(0.98);
+}
+
+.btn-interactive:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Card hover lift */
+.card-interactive {
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Dropdown slide-fade animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.dropdown-enter {
+  animation: slideDown 120ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown-exit {
+  animation: slideUp 120ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ripple effect for touch feedback */
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple-effect::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ripple 600ms ease-out;
+}
+
+/* Smooth page transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: fadeIn 300ms ease-out, slideInUp 400ms ease-out;
+}
+
+/* Touch feedback with reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .btn-interactive,
+  .card-interactive,
+  .dropdown-enter,
+  .dropdown-exit,
+  .page-enter {
+    animation: none !important;
+    transition: none !important;
+  }
+}

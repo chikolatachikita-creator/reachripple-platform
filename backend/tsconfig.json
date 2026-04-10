@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "rootDir": ".",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "types": ["node", "jest"]
+  },
+  "include": ["src/**/*", "scripts/**/*", "tests/**/*", "*.ts", "controllers/**/*", "models/**/*", "routes/**/*", "middleware/**/*", "services/**/*", "validators/**/*", "config/**/*", "utils/**/*"],
+  "exclude": ["node_modules", "dist", "**/future/**", "**/*.bak/**", "**/future.bak/**"]
+}

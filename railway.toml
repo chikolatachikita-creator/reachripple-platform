@@ -1,0 +1,19 @@
+# Railway configuration for Reach Ripple platform
+# Deploy backend, frontend, MongoDB
+
+[[services]]
+name = "backend"
+buildCommand = "cd backend && npm install && npm run build"
+startCommand = "cd backend && npm start"
+nixpacks.providers = ["nodejs"]
+
+[[services]]
+name = "frontend"  
+buildCommand = "cd frontend && npm install && npm run build"
+startCommand = "cd frontend && npm start"
+nixpacks.providers = ["nodejs"]
+
+[[services]]
+name = "mongodb"
+image = "mongo:latest"
+port = 27017

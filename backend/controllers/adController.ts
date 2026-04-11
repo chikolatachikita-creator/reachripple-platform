@@ -186,6 +186,28 @@ function milesToMeters(miles: number): number {
   return Math.round(miles * 1609.34);
 }
 
+function escapeRegexPattern(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function buildCategoryFilter(categoryValue?: string) {
+  const normalized = String(categoryValue || "").trim().toLowerCase();
+  if (!normalized) return undefined;
+
+  const aliases = new Set<string>([normalized]);
+
+  if (normalized === "escort" || normalized === "escorts") {
+    aliases.add("escort");
+    aliases.add("escorts");
+  }
+
+  const patterns = Array.from(aliases).map(
+    (alias) => new RegExp(`^${escapeRegexPattern(alias)}$`, "i")
+  );
+
+  return patterns.length === 1 ? patterns[0] : { $in: patterns };
+}
+
 // =====================================================
 // END GEOCODE HELPERS
 // =====================================================
@@ -272,7 +294,8 @@ export const getAds = async (req: Request, res: Response) => {
         ];
       }
     }
-    if (category) query.category = category;
+    const categoryFilter = buildCategoryFilter(category);
+    if (categoryFilter) query.category = categoryFilter;
     if (location) {
       const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       query.location = new RegExp(escapeRegex(location), "i");

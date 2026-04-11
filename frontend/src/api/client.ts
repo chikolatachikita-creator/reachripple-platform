@@ -3,8 +3,8 @@ import axios, {
   AxiosInstance,
   InternalAxiosRequestConfig,
 } from "axios";
+import { API_BASE_URL } from "../config/api";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001/api";
 const LOCALTUNNEL_BYPASS_HEADERS = API_BASE_URL.includes(".loca.lt")
   ? { "bypass-tunnel-reminder": "true" }
   : {};

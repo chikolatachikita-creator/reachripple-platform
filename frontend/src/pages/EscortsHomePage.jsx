@@ -99,7 +99,7 @@ export default function ReachRippleHomePage() {
   const fetchAds = async () => {
     setIsLoading(true);
     try {
-      const data = await getHomeData('', 50, 'Escorts');
+      const data = await getHomeData('', 50, 'escort');
       // Server returns { vip, featured, standard, totalCount, ... } inside data
       const homeData = data?.data || data || {};
       setVipAds(homeData.vip || []);
@@ -111,7 +111,7 @@ export default function ReachRippleHomePage() {
       console.error("Failed to fetch homepage data:", err);
       // Fallback to basic getAds if /api/home fails
       try {
-        const fallback = await getAds({ status: "approved", limit: 40, category: "Escorts" });
+        const fallback = await getAds({ status: "approved", limit: 40, category: "escort" });
         const allAds = fallback.ads || [];
         setAds(allAds);
         setVipAds(allAds.filter(a => a.boostTier === 'FEATURED').slice(0, 12));

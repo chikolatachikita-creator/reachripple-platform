@@ -198,6 +198,24 @@ function applyDailyRotation(ads: RankedAd[], seed: string, percentage: number = 
   return [...fixed, ...shuffled];
 }
 
+function buildCategoryMatcher(category?: string) {
+  const normalized = String(category || '').trim().toLowerCase();
+  if (!normalized) return undefined;
+
+  const aliases = new Set<string>([normalized]);
+
+  if (normalized === 'escort' || normalized === 'escorts') {
+    aliases.add('escort');
+    aliases.add('escorts');
+  }
+
+  const patterns = Array.from(aliases).map(
+    (alias) => new RegExp(`^${escapeRegex(alias)}$`, 'i')
+  );
+
+  return patterns.length === 1 ? patterns[0] : { $in: patterns };
+}
+
 // ============================================
 // MAIN QUERY FUNCTION
 // ============================================
@@ -257,10 +275,10 @@ export async function buildHomeLists(params: HomeQueryParams = {}): Promise<Home
     ];
   }
   
-  // Category filter
-  if (category) {
-    baseQuery.$or = baseQuery.$or || [];
-    baseQuery.category = new RegExp(escapeRegex(category), 'i');
+  // Category filter (accept both escort/escorts variants)
+  const categoryMatcher = buildCategoryMatcher(category);
+  if (categoryMatcher) {
+    baseQuery.category = categoryMatcher;
   }
   
   // Exclude specific ads

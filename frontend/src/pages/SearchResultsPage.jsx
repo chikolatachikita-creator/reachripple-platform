@@ -352,7 +352,7 @@ export default function SearchResultsPage() {
         status: "approved",
         limit: 20,
         page: pageNum,
-        category: "Escorts", // Only show escort ads on this page
+        category: "escort", // Only show escort ads on this page
       };
 
       // Apply filters

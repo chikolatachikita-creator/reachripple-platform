@@ -413,10 +413,7 @@ export const getAds = async (req: Request, res: Response) => {
     }
     
     // Determine if we should use $geoNear aggregation
-    const useGeoNear = distanceMiles > 0 && hasGeoCoords;
-    
-    // Track if some ads might be missing from results due to no geo
-    let geoWarning: string | undefined;
+    let useGeoNear = distanceMiles > 0 && hasGeoCoords;
     
     if (useGeoNear) {
       // =====================================================
@@ -469,48 +466,63 @@ export const getAds = async (req: Request, res: Response) => {
         { $limit: limitNum },
       ];
       
-      ads = await Ad.aggregate(pipeline);
-      
-      // Get total count using same geo query
-      const countPipeline: any[] = [
-        {
-          $geoNear: {
-            near: { type: "Point" as const, coordinates: [centerLng, centerLat] as [number, number] },
-            distanceField: "distanceMeters",
-            maxDistance: meters,
-            spherical: true,
-            query: matchStage,
+      try {
+        ads = await Ad.aggregate(pipeline);
+        
+        // Get total count using same geo query
+        const countPipeline: any[] = [
+          {
+            $geoNear: {
+              near: { type: "Point" as const, coordinates: [centerLng, centerLat] as [number, number] },
+              distanceField: "distanceMeters",
+              maxDistance: meters,
+              spherical: true,
+              query: matchStage,
+            },
           },
-        },
-        { $count: "total" },
-      ];
-      const countResult = await Ad.aggregate(countPipeline);
-      const dbTotal = countResult[0]?.total || 0;
-      
-      // Check if there are ads without geo that might be missing
-      const adsWithoutGeo = await Ad.countDocuments({
-        ...query,
-        $or: [
-          { geo: { $exists: false } },
-          { "geo.coordinates": { $exists: false } },
-        ],
-      });
-      
-      if (adsWithoutGeo > 0) {
-        geoWarning = `${adsWithoutGeo} ad(s) may not appear in distance search (missing postcode/location data)`;
+          { $count: "total" },
+        ];
+        const countResult = await Ad.aggregate(countPipeline);
+        const dbTotal = countResult[0]?.total || 0;
+        
+        // Check if there are ads without geo that might be missing
+        const adsWithoutGeo = await Ad.countDocuments({
+          ...query,
+          $or: [
+            { geo: { $exists: false } },
+            { "geo.coordinates": { $exists: false } },
+          ],
+        });
+        
+        let geoWarning: string | undefined;
+        if (adsWithoutGeo > 0) {
+          geoWarning = `${adsWithoutGeo} ad(s) may not appear in distance search (missing postcode/location data)`;
+        }
+        
+        return res.json({ 
+          ads, 
+          total: dbTotal, 
+          dbTotal,
+          distanceEnabled: true,
+          centerPoint: { lat: centerLat, lng: centerLng },
+          radiusMiles: distanceMiles,
+          geoWarning,
+        });
+      } catch (geoErr: any) {
+        // Geospatial query failed - fall back to regular search without distance
+        logger.warn("Geospatial query failed, falling back to regular search", { 
+          error: geoErr.message,
+          distanceMiles,
+          centerLat,
+          centerLng
+        });
+        
+        // Fall through to standard query below
+        useGeoNear = false;
       }
-      
-      return res.json({ 
-        ads, 
-        total: dbTotal, 
-        dbTotal,
-        distanceEnabled: true,
-        centerPoint: { lat: centerLat, lng: centerLng },
-        radiusMiles: distanceMiles,
-        geoWarning,
-      });
-      
-    } else {
+    }
+    
+    if (!useGeoNear) {
       // =====================================================
       // STANDARD QUERY (no geo, use find())
       // =====================================================

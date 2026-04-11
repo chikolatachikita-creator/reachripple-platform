@@ -496,8 +496,8 @@ AdSchema.index({ categorySlug: 1, districtSlug: 1, status: 1 }); // Fast distric
 AdSchema.index({ outcode: 1, districtSlug: 1, status: 1 }); // Location combo
 AdSchema.index({ status: 1, outcode: 1, lastPulsedAt: -1 }); // Results page main query
 
-// Geospatial index for distance queries
-AdSchema.index({ geo: "2dsphere" });
+// Geospatial index for distance queries (sparse - only index docs with geo data)
+AdSchema.index({ geo: "2dsphere" }, { sparse: true });
 
 // Tier-based queries (FEATURED → PRIORITY_PLUS → PRIORITY → STANDARD, then by bump time)
 // This is the main query pattern for homepage

@@ -4,6 +4,7 @@
  */
 
 import { Router, Request, Response } from "express";
+import mongoose from "mongoose";
 import {
   getHealthStatus,
   getPerformanceStats,
@@ -22,10 +23,12 @@ const router = Router();
 router.get("/", (req: Request, res: Response) => {
   try {
     const health = getHealthStatus();
+    const mongoState = ["disconnected", "connected", "connecting", "disconnecting"];
     res.status(200).json({
       status: health.status === "healthy" ? "ok" : health.status,
       timestamp: health.timestamp,
       uptime: Math.round(health.uptime),
+      mongo: mongoState[mongoose.connection.readyState] || "unknown",
     });
   } catch (err) {
     baseLogger.error("Health check error", err);

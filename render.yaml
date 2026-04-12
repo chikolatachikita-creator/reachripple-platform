@@ -1,3 +1,4 @@
+# Render blueprint
 services:
   # ─── Backend API ──────────────────────────────────────
   - type: web

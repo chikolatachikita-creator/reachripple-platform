@@ -2,7 +2,7 @@
  * Create and seed test profiles
  */
 import mongoose from "mongoose";
-import { Ad } from "./models/Ad";
+import Ad from "./models/Ad";
 
 const MONGO_URI = "mongodb+srv://reachriple-app:Password1@reachripple.fmnurep.mongodb.net/reachripple?retryWrites=true&w=majority&appName=reachripple";
 

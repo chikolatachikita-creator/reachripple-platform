@@ -152,6 +152,11 @@ const corsOptions = {
       return callback(null, true);
     }
 
+    // Allow all Render subdomains (e.g. reachripple-live-web.onrender.com)
+    if (origin.endsWith(".onrender.com") && origin.startsWith("https://")) {
+      return callback(null, true);
+    }
+
     return callback(new Error("Not allowed by CORS"));
   },
   credentials: true,

@@ -79,6 +79,7 @@ export default function SearchResultsPage() {
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const [error, setError] = useState(null);
+  const retryCountRef = useRef(0);
 
   // Track if we've hydrated from URL to avoid double fetches
   const didHydrateRef = useRef(false);
@@ -408,6 +409,13 @@ export default function SearchResultsPage() {
         }).catch(() => { /* ignore - not critical */ });
       }
     } catch (err) {
+      // Retry once after 3s for Render cold starts
+      if (!append && retryCountRef.current < 1) {
+        retryCountRef.current += 1;
+        setTimeout(() => fetchProfiles(pageNum, append), 3000);
+        return;
+      }
+      retryCountRef.current = 0;
       showToastError("Failed to load profiles. Please try again.");
       setError(err);
       if (!append) {

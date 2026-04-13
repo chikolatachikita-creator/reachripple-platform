@@ -59,20 +59,30 @@ export default function NotificationCenter() {
     }
   }, []);
 
+  // Track consecutive failures to avoid request storms
+  const failCountRef = React.useRef(0);
+
   // Fetch unread count periodically
   const fetchUnreadCount = useCallback(async () => {
     try {
       const response = await notificationsAPI.getUnreadCount();
       setUnreadCount(response.data.count || 0);
+      failCountRef.current = 0;
     } catch (err) {
-      console.error('Failed to fetch unread count:', err);
+      failCountRef.current += 1;
+      if (failCountRef.current <= 2) {
+        console.error('Failed to fetch unread count:', err);
+      }
     }
   }, []);
 
-  // Initial fetch and periodic refresh
+  // Initial fetch and periodic refresh (60s interval, stops after 3 consecutive failures)
   useEffect(() => {
     fetchUnreadCount();
-    const interval = setInterval(fetchUnreadCount, 30000); // Check every 30 seconds
+    const interval = setInterval(() => {
+      if (failCountRef.current >= 3) return;
+      fetchUnreadCount();
+    }, 60000);
     return () => clearInterval(interval);
   }, [fetchUnreadCount]);
 

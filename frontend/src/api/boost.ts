@@ -137,7 +137,7 @@ export const getBoostHistory = async (limit: number = 20) => {
 export const getHomeData = async (location: string = '', limit: number = 50, category?: string) => {
   const params: Record<string, any> = { location, limit };
   if (category) params.category = category;
-  const res = await api.get<HomeData>('/home', { params });
+  const res = await api.get<HomeData>('/home', { params, timeout: 45000 });
   return res.data;
 };
 

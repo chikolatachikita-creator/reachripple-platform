@@ -96,7 +96,7 @@ export default function ReachRippleHomePage() {
   }, []);
 
   // Fetch homepage data using server-side tier ranking
-  const fetchAds = async () => {
+  const fetchAds = async (retryCount = 0) => {
     setIsLoading(true);
     try {
       const data = await getHomeData('', 50, 'escort');
@@ -119,6 +119,11 @@ export default function ReachRippleHomePage() {
         setStandardAds(allAds.filter(a => !['FEATURED', 'PRIORITY_PLUS'].includes(a.boostTier)));
       } catch (fallbackErr) {
         console.error("Fallback fetch also failed:", fallbackErr);
+        // Retry once after 3s (handles Render cold starts)
+        if (retryCount < 2) {
+          setTimeout(() => fetchAds(retryCount + 1), 3000);
+          return; // Don't set isLoading false yet
+        }
         setAds([]);
         setVipAds([]);
         setFeaturedAds([]);

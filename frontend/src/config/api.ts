@@ -6,7 +6,7 @@
 /** Full API base URL (e.g., http://localhost:3001/api) */
 function resolveApiBaseUrl(): string {
   const configuredUrl = process.env.REACT_APP_API_BASE_URL?.trim();
-  if (configuredUrl) {
+  if (configuredUrl && /^https?:\/\//.test(configuredUrl)) {
     return configuredUrl.replace(/\/+$/, '');
   }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getCategoryBySlug } from "../config/categories";
+import { getAssetUrl } from "../config/api";
 import * as LucideIcons from "lucide-react";
 import Footer from "../components/Footer";
 import api from "../api/client";
@@ -133,7 +134,7 @@ export default function CategoryPage() {
                 >
                   {ad.images && ad.images[0] ? (
                     <img
-                      src={ad.images[0]}
+                      src={getAssetUrl(ad.images[0])}
                       alt={ad.title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />

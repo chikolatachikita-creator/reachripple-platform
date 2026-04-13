@@ -3,13 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import api from "../api/client";
 import { useToastContext } from "../context/ToastContextGlobal";
-import { API_HOST } from "../config/api";
+import { getAssetUrl } from "../config/api";
 
-const getImageUrl = (p) => {
-  if (!p) return null;
-  if (p.startsWith("http")) return p;
-  return `${API_HOST}${p}`;
-};
+const getImageUrl = (p) => getAssetUrl(p);
 
 // ─── Stat Card ────────────────────────────────────────────
 const StatCard = ({ label, value, sub, accent }) => (

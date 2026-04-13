@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { X, Star, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { API_HOST } from '../config/api';
+import { getAssetUrl } from '../config/api';
 
-// Helper to build full image URL (handles relative paths from backend)
-const getImageUrl = (path) => {
-  if (!path) return '/placeholder.jpg';
-  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) return path;
-  return `${API_HOST}${path}`;
-};
+const getImageUrl = (path) => getAssetUrl(path) || '/placeholder.jpg';
 
 /**
  * ProfileQuickViewModal - Instant preview of profile without navigation

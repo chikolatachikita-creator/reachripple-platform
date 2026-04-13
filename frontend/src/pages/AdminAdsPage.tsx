@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getAdminAds, AdminAd, updateAdStatus, deleteAdminAd } from "../api/admin";
+import { getAssetUrl } from "../config/api";
 import { useConfirmModal } from "../components/ConfirmModal";
 import { useToastContext } from "../context/ToastContextGlobal";
 import Pagination from "../components/ui/Pagination";
@@ -234,7 +235,7 @@ export default function AdminAdsPage() {
                   <tr key={ad._id} className="border-b hover:bg-gray-50">
                     <td className="px-6 py-4">
                       {ad.images && ad.images.length > 0 ? (
-                        <img src={ad.images[0]} alt={ad.title} className="h-12 w-12 object-cover rounded-lg" />
+                        <img src={getAssetUrl(ad.images[0])} alt={ad.title} className="h-12 w-12 object-cover rounded-lg" />
                       ) : (
                         <div className="h-12 w-12 bg-gray-200 rounded-lg flex items-center justify-center text-xs text-gray-500">No img</div>
                       )}

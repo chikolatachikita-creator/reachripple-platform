@@ -1,5 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { getAssetUrl } from "../../config/api";
+
+const FALLBACK_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500' fill='%23e4e4e7'%3E%3Crect width='400' height='500'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2371717a' font-size='18'%3ENo Image%3C/text%3E%3C/svg%3E";
 
 /**
  * SearchResultCard — compact card for search results grid.
@@ -10,10 +13,8 @@ const SearchResultCard = ({ profile, index, onQuickView }) => {
 
   const mainImage =
     profile.images && profile.images.length > 0
-      ? profile.images[0].startsWith("http")
-        ? profile.images[0]
-        : `/uploads/${profile.images[0]}`
-      : "/placeholder.jpg";
+      ? getAssetUrl(profile.images[0])
+      : FALLBACK_IMG;
 
   const handleClick = () => {
     navigate(`/profile/${profile._id}`);
@@ -31,6 +32,7 @@ const SearchResultCard = ({ profile, index, onQuickView }) => {
           alt={profile.title || profile.name || "Profile"}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading={index < 6 ? "eager" : "lazy"}
+          onError={(e) => { e.target.onerror = null; e.target.src = FALLBACK_IMG; }}
         />
 
         {/* Tier badge */}

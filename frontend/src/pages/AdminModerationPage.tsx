@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { getAssetUrl } from "../config/api";
 import {
   getModerationQueue,
   moderateAd,
@@ -215,7 +216,7 @@ export default function AdminModerationPage() {
                 {/* Thumbnail */}
                 {ad.images?.[0] && (
                   <img
-                    src={ad.images[0].startsWith("http") ? ad.images[0] : `${process.env.REACT_APP_API_URL || ""}${ad.images[0]}`}
+                    src={getAssetUrl(ad.images[0])}
                     alt=""
                     className="w-14 h-14 rounded object-cover flex-shrink-0"
                   />

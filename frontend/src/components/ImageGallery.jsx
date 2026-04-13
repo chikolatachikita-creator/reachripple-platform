@@ -1,13 +1,8 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { API_HOST } from '../config/api';
+import { getAssetUrl } from '../config/api';
 
-// Helper to build full image URL (handles relative paths from backend)
-const getImageUrl = (path) => {
-  if (!path) return '/placeholder.jpg';
-  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) return path;
-  return `${API_HOST}${path}`;
-};
+const getImageUrl = (path) => getAssetUrl(path) || '/placeholder.jpg';
 
 /**
  * Image Lightbox Gallery

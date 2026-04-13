@@ -85,7 +85,7 @@ export const register = async (req: Request, res: Response) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       path: "/api/auth",
     });
@@ -157,7 +157,7 @@ export const login = async (req: Request, res: Response) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       path: "/api/auth",
     });
@@ -190,7 +190,7 @@ export const refresh = (req: Request, res: Response) => {
     res.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
       path: "/api/auth",
     });
@@ -455,7 +455,7 @@ export const logout = async (req: Request, res: Response) => {
     res.clearCookie("refreshToken", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       path: "/api/auth",
     });
     
@@ -607,7 +607,7 @@ export const deleteAccount = async (req: Request, res: Response) => {
     await user.save();
 
     // Clear cookies
-    res.clearCookie("refreshToken", { httpOnly: true, sameSite: "strict" });
+    res.clearCookie("refreshToken", { httpOnly: true, sameSite: process.env.NODE_ENV === "production" ? "none" as const : "strict", secure: process.env.NODE_ENV === "production" });
 
     return res.json({ 
       message: "Account deleted successfully. We're sorry to see you go.",

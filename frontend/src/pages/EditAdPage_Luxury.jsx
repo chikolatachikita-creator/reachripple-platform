@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import api from "../api/client";
 import { sanitizeText, sanitizeHtml } from "../utils/security";
-import { API_HOST } from "../config/api";
+import { getAssetUrl } from "../config/api";
 import { useToastContext } from "../context/ToastContextGlobal";
 import ConfirmModal from "../components/ConfirmModal";
 import { PLATFORM_CATEGORIES } from "../config/categories";
@@ -20,11 +20,10 @@ const categoryNameToSlug = (name) => {
   return cat ? cat.slug : null;
 };
 
-// Helper to build full image URL (handles relative paths from backend)
 const getImageUrl = (path) => {
   if (!path) return null;
-  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:') || path.startsWith('blob:')) return path;
-  return `${API_HOST}${path}`;
+  if (path.startsWith('blob:')) return path;
+  return getAssetUrl(path);
 };
 
 function EditAdPageLuxury() {

@@ -3,14 +3,9 @@ import { Link } from "react-router-dom";
 import { Eye } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import ProfileQuickViewModal from "./ProfileQuickViewModal";
-import { API_HOST } from "../config/api";
+import { getAssetUrl } from "../config/api";
 
-// Helper to build full image URL (handles relative paths from backend)
-const getImageUrl = (path) => {
-  if (!path) return null;
-  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) return path;
-  return `${API_HOST}${path}`;
-};
+const getImageUrl = (path) => getAssetUrl(path);
 
 /**
  * Crown SVG icon for VIP badge
@@ -209,6 +204,7 @@ function AdCard({
             decoding="async"
             fetchPriority={fetchPriority || "auto"}
             onLoad={() => setImageLoaded(true)}
+            onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; setImageLoaded(true); }}
             style={{ opacity: imageLoaded ? 1 : 0.7 }}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />

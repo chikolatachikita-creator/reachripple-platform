@@ -4,7 +4,7 @@ import DOMPurify from 'dompurify';
 import api from '../api/client';
 import { useToastContext } from '../context/ToastContextGlobal';
 import { useAuth } from '../context/AuthContext';
-import { API_HOST } from '../config/api';
+import { getAssetUrl } from '../config/api';
 import Icons from '../components/ProfileIcons';
 import { LoadingScreen, ErrorScreen, Lightbox } from '../components/ProfileSubComponents';
 import PlatformDisclaimer from '../components/trust/PlatformDisclaimer';
@@ -14,11 +14,7 @@ import { useReportModal } from '../components/trust/ReportModal';
 import './EscortProfilePage_Cinematic.css';
 
 // ─── Helpers ─────────────────────────────────────────────
-const getImageUrl = (path) => {
-  if (!path) return null;
-  if (path.startsWith('http://') || path.startsWith('https://')) return path;
-  return `${API_HOST}${path}`;
-};
+const getImageUrl = (path) => getAssetUrl(path);
 
 /** Rate badge metadata keyed by pricing field name */
 const PRICE_LABELS = {

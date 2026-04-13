@@ -43,3 +43,13 @@ docker-compose.override.yml
 
 # MCP Configuration (user-specific)
 .vscode/mcp.json
+
+# User uploads (ephemeral in production)
+uploads/
+
+# Playwright MCP snapshots
+.playwright-mcp/
+
+# Sensitive environment files
+render-env.txt
+*.env.render

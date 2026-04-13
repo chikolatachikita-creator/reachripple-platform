@@ -7,14 +7,9 @@ import NotificationsBanner from "../components/NotificationsBanner";
 import BoostModal from "../components/BoostModal";
 import ConfirmModal from "../components/ConfirmModal";
 import { useToastContext } from "../context/ToastContextGlobal";
-import { API_HOST } from "../config/api";
+import { getAssetUrl } from "../config/api";
 
-// Helper to build full image URL (handles relative paths from backend)
-const getImageUrl = (path) => {
-  if (!path) return null;
-  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) return path;
-  return `${API_HOST}${path}`;
-};
+const getImageUrl = (path) => getAssetUrl(path);
 
 const STATUS_COLORS = {
   draft: "bg-zinc-100 text-zinc-700 border border-zinc-200",

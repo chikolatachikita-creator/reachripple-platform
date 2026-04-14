@@ -158,14 +158,17 @@ export default function CategoryPage() {
           </div>
         ) : listings.length === 0 ? (
           <div className="text-center py-20">
-            <IconComponent className={`w-16 h-16 mx-auto mb-4 ${category.color} opacity-40`} />
-            <h3 className="text-xl font-semibold text-gray-600 dark:text-zinc-400 mb-2">No listings yet</h3>
-            <p className="text-gray-400 dark:text-zinc-500">Be the first to post in {category.name}!</p>
+            <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 flex items-center justify-center">
+              <IconComponent className={`w-10 h-10 ${category.color} opacity-60`} />
+            </div>
+            <h3 className="text-2xl font-bold text-zinc-800 dark:text-white mb-2">No listings yet</h3>
+            <p className="text-zinc-500 dark:text-zinc-400 mb-1">Be the first to post in {category.name}!</p>
+            <p className="text-sm text-pink-500 dark:text-pink-400 font-medium">Early listings get featured free ⭐</p>
             <Link
               to={`/create-ad/${category.slug}`}
-              className={`mt-6 inline-block px-6 py-3 bg-gradient-to-r ${category.bgGradient} text-white rounded-lg hover:shadow-lg transition-all font-medium`}
+              className={`mt-6 inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r ${category.bgGradient} text-white rounded-xl hover:shadow-lg hover:scale-[1.03] active:scale-[0.97] transition-all font-bold`}
             >
-              Post a Listing
+              <span className="text-lg">+</span> Post a Listing
             </Link>
           </div>
         ) : (

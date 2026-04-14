@@ -9,8 +9,8 @@ const EmptyState = ({ type = "no-results", location, onClearFilters, suggestedLo
     return (
       <div className="text-center py-16">
         <div className="text-5xl mb-4">⚠️</div>
-        <h3 className="text-xl font-bold text-zinc-900 mb-2">Something went wrong</h3>
-        <p className="text-sm text-zinc-500 mb-6">
+        <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Something went wrong</h3>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">
           We couldn't load results. Please try refreshing the page.
         </p>
         <button
@@ -26,8 +26,8 @@ const EmptyState = ({ type = "no-results", location, onClearFilters, suggestedLo
   return (
     <div className="text-center py-8">
       <div className="text-5xl mb-4">🔍</div>
-      <h3 className="text-xl font-bold text-zinc-900 mb-2">No results found</h3>
-      <p className="text-sm text-zinc-500 mb-6">
+      <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">No results found</h3>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">
         {location
           ? `We couldn't find any profiles near ${location}. Try expanding your search area or adjusting filters.`
           : "Try adjusting your filters or search criteria."}
@@ -47,7 +47,7 @@ const EmptyState = ({ type = "no-results", location, onClearFilters, suggestedLo
       {/* Suggested locations */}
       {suggestedLocations && suggestedLocations.length > 0 && (
         <div className="mt-6">
-          <p className="text-xs text-zinc-400 mb-3">Try searching in:</p>
+          <p className="text-xs text-zinc-400 dark:text-zinc-500 mb-3">Try searching in:</p>
           <div className="flex flex-wrap gap-2 justify-center">
             {suggestedLocations.map((loc) => {
               const label = typeof loc === 'string' ? loc : loc.name;
@@ -55,7 +55,7 @@ const EmptyState = ({ type = "no-results", location, onClearFilters, suggestedLo
               return (
                 <span
                   key={key}
-                  className="px-3 py-1.5 text-xs font-medium bg-zinc-100 text-zinc-600 rounded-full"
+                  className="px-3 py-1.5 text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-full"
                 >
                   {label}
                 </span>

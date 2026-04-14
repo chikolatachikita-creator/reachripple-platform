@@ -282,6 +282,28 @@ export default function ReachRippleHomePage() {
       </section>
 
       {/* ===================================================== */}
+      {/* EMPTY STATE - When no listings at all */}
+      {/* ===================================================== */}
+      {!isLoading && vipRow.length === 0 && popularRow.length === 0 && standardFeed.length === 0 && (
+        <section className="mt-4 px-4" aria-label="No listings available">
+          <div className="max-w-2xl mx-auto text-center py-16">
+            <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 flex items-center justify-center">
+              <span className="text-3xl">💎</span>
+            </div>
+            <h3 className="text-2xl font-bold text-zinc-800 dark:text-white mb-2">No listings yet</h3>
+            <p className="text-zinc-500 dark:text-zinc-400 mb-1">Be the first to post and get maximum visibility!</p>
+            <p className="text-sm text-pink-500 dark:text-pink-400 font-medium">Early listings get featured free ⭐</p>
+            <button
+              onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
+              className="mt-6 inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 hover:scale-[1.03] active:scale-[0.97] transition-all font-bold cursor-pointer"
+            >
+              <span className="text-lg">+</span> Post a Listing
+            </button>
+          </div>
+        </section>
+      )}
+
+      {/* ===================================================== */}
       {/* FEATURED CAROUSEL SECTION */}
       {/* ===================================================== */}
       {!isLoading && vipRow.length > 0 && (

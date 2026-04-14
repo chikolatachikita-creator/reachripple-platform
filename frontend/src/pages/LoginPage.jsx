@@ -5,6 +5,7 @@ import { login, getOAuthConfig } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
 import { validators } from "../utils/formValidation";
 import { LoadingButton } from "../components/ui/LoadingButton";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white flex transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
+    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 flex transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
       <Helmet><title>Log In | ReachRipple</title></Helmet>
       {/* Left Panel - Decorative */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 relative overflow-hidden">
@@ -136,16 +137,19 @@ export default function LoginPage() {
       {/* Right Panel - Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center px-5 sm:px-6 py-8 sm:py-12">
         <div className="w-full max-w-md">
-          {/* Mobile Logo */}
-          <Link to="/" className="lg:hidden flex items-center gap-3 mb-8">
-            <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md" />
-            <span className="text-zinc-900 font-bold text-lg"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></span>
-          </Link>
+          {/* Mobile Logo + Theme Toggle */}
+          <div className="lg:hidden flex items-center justify-between mb-8">
+            <Link to="/" className="flex items-center gap-3">
+              <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md" />
+              <span className="text-zinc-900 dark:text-white font-bold text-lg"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></span>
+            </Link>
+            <ThemeToggle />
+          </div>
 
           {/* Title */}
           <div className="mb-8">
-            <h1 className="text-2xl md:text-3xl font-bold text-zinc-900">Sign in to your account</h1>
-            <p className="mt-2 text-zinc-500">
+            <h1 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white">Sign in to your account</h1>
+            <p className="mt-2 text-zinc-500 dark:text-zinc-400">
               Don't have an account?{" "}
               <Link to="/signup" className="text-orange-600 font-medium hover:text-orange-700">
                 Create one
@@ -168,7 +172,7 @@ export default function LoginPage() {
           <form onSubmit={handleLogin} className="space-y-5">
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">Email address</label>
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Email address</label>
               <div className="relative">
                 <input
                   type="email"
@@ -217,7 +221,7 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">Password</label>
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -293,9 +297,9 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="my-8 flex items-center gap-4">
-            <div className="h-px bg-zinc-200 flex-1"></div>
+            <div className="h-px bg-zinc-200 dark:bg-zinc-700 flex-1"></div>
             <span className="text-xs text-zinc-400 font-medium">OR</span>
-            <div className="h-px bg-zinc-200 flex-1"></div>
+            <div className="h-px bg-zinc-200 dark:bg-zinc-700 flex-1"></div>
           </div>
 
           {/* Social Login Buttons */}

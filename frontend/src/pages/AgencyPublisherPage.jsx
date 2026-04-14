@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import api from "../api/client";
 import SearchResultCard from "../components/search/SearchResultCard";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function AgencyPublisherPage() {
   const { userId } = useParams();
@@ -41,7 +42,7 @@ export default function AgencyPublisherPage() {
 
   return (
     <div
-      className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white transition-all duration-500 ${
+      className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 transition-all duration-500 ${
         fadeIn ? "opacity-100" : "opacity-0 translate-y-2"
       }`}
     >
@@ -50,7 +51,7 @@ export default function AgencyPublisherPage() {
       </Helmet>
 
       {/* Navbar */}
-      <nav className="w-full bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-zinc-100">
+      <nav className="w-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl sticky top-0 z-50 border-b border-zinc-100 dark:border-zinc-800">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
@@ -63,7 +64,7 @@ export default function AgencyPublisherPage() {
           </Link>
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 transition-colors"
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
           >
             <svg
               className="w-4 h-4"
@@ -80,6 +81,7 @@ export default function AgencyPublisherPage() {
             </svg>
             Back
           </button>
+          <ThemeToggle />
         </div>
       </nav>
 
@@ -90,10 +92,10 @@ export default function AgencyPublisherPage() {
             <span className="text-2xl">🏢</span>
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-black text-zinc-900">
+            <h1 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">
               {agencyName}
             </h1>
-            <p className="text-zinc-500 text-sm flex items-center gap-2">
+            <p className="text-zinc-500 dark:text-zinc-400 text-sm flex items-center gap-2">
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 text-sky-600 text-xs font-semibold">
                 🏢 Agency
               </span>
@@ -126,14 +128,14 @@ export default function AgencyPublisherPage() {
             ))}
           </div>
         ) : ads.length === 0 ? (
-          <div className="bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-12 text-center border border-zinc-100">
+          <div className="bg-white dark:bg-zinc-800/60 rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-12 text-center border border-zinc-100 dark:border-zinc-700">
             <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-zinc-100 to-zinc-50 flex items-center justify-center mx-auto mb-6">
               <span className="text-4xl">📭</span>
             </div>
-            <h2 className="text-xl font-bold text-zinc-800 mb-2">
+            <h2 className="text-xl font-bold text-zinc-800 dark:text-white mb-2">
               No Active Listings
             </h2>
-            <p className="text-zinc-500 mb-6">
+            <p className="text-zinc-500 dark:text-zinc-400 mb-6">
               This publisher doesn't have any active listings at the moment.
             </p>
             <Link
@@ -153,7 +155,7 @@ export default function AgencyPublisherPage() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-100 bg-white py-8 mt-16">
+      <footer className="border-t border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 py-8 mt-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">

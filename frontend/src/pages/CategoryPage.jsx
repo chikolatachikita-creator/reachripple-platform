@@ -4,6 +4,7 @@ import { getCategoryBySlug } from "../config/categories";
 import { getAssetUrl } from "../config/api";
 import * as LucideIcons from "lucide-react";
 import Footer from "../components/Footer";
+import ThemeToggle from "../components/ThemeToggle";
 import api from "../api/client";
 
 /**
@@ -51,10 +52,10 @@ export default function CategoryPage() {
 
   if (!category) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-900">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Category Not Found</h1>
-          <p className="text-gray-500 mb-6">The category you're looking for doesn't exist.</p>
+          <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">Category Not Found</h1>
+          <p className="text-gray-500 dark:text-zinc-400 mb-6">The category you're looking for doesn't exist.</p>
           <Link to="/" className="text-pink-600 hover:underline font-medium">
             ← Back to Home
           </Link>
@@ -68,14 +69,15 @@ export default function CategoryPage() {
   const subcategories = ["All", ...(category.subcategories || [])];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-zinc-900">
       {/* Breadcrumbs */}
-      <nav className="max-w-7xl mx-auto px-4 py-3 text-sm" aria-label="Breadcrumb">
-        <ol className="flex items-center gap-2 text-zinc-500">
-          <li><Link to="/" className="hover:text-zinc-800 transition-colors">Home</Link></li>
-          <li className="text-zinc-300">/</li>
-          <li className="text-zinc-800 font-medium">{category.name}</li>
+      <nav className="max-w-7xl mx-auto px-4 py-3 text-sm flex items-center justify-between" aria-label="Breadcrumb">
+        <ol className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
+          <li><Link to="/" className="hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors">Home</Link></li>
+          <li className="text-zinc-300 dark:text-zinc-600">/</li>
+          <li className="text-zinc-800 dark:text-white font-medium">{category.name}</li>
         </ol>
+        <ThemeToggle />
       </nav>
 
       {/* Hero Section */}
@@ -107,7 +109,7 @@ export default function CategoryPage() {
               className={`px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap touch-target flex items-center justify-center ${
                 selectedSub === sub
                   ? `bg-gradient-to-r ${category.bgGradient} text-white shadow-md`
-                  : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
+                  : "bg-white dark:bg-zinc-800 text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-700 border border-gray-200 dark:border-zinc-700"
               }`}
             >
               {sub}
@@ -123,7 +125,7 @@ export default function CategoryPage() {
               placeholder={`Search ${category.name}...`}
               value={searchQuery}
               onChange={(e) => { setSearchQuery(e.target.value); setPage(1); }}
-              className="w-full h-11 sm:h-10 border border-gray-200 rounded-xl pl-9 pr-4 text-sm outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100 bg-white"
+              className="w-full h-11 sm:h-10 border border-gray-200 dark:border-zinc-700 rounded-xl pl-9 pr-4 text-sm outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100 bg-white dark:bg-zinc-800 dark:text-white dark:placeholder-zinc-500"
             />
             <svg className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -132,7 +134,7 @@ export default function CategoryPage() {
           <select
             value={sortBy}
             onChange={(e) => { setSortBy(e.target.value); setPage(1); }}
-            className="h-11 sm:h-10 border border-gray-200 rounded-xl px-3 text-sm outline-none focus:border-pink-400 bg-white cursor-pointer"
+            className="h-11 sm:h-10 border border-gray-200 dark:border-zinc-700 rounded-xl px-3 text-sm outline-none focus:border-pink-400 bg-white dark:bg-zinc-800 dark:text-white cursor-pointer"
           >
             <option value="">Sort: Default</option>
             <option value="newest">Newest First</option>
@@ -147,18 +149,18 @@ export default function CategoryPage() {
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[...Array(8)].map((_, i) => (
-              <div key={i} className="bg-white rounded-xl shadow-sm p-3 sm:p-4 animate-pulse">
-                <div className="bg-gray-200 h-36 sm:h-44 md:h-48 rounded-lg mb-3 sm:mb-4" />
-                <div className="bg-gray-200 h-4 rounded w-3/4 mb-2" />
-                <div className="bg-gray-200 h-4 rounded w-1/2" />
+              <div key={i} className="bg-white dark:bg-zinc-800 rounded-xl shadow-sm p-3 sm:p-4 animate-pulse">
+                <div className="bg-gray-200 dark:bg-zinc-700 h-36 sm:h-44 md:h-48 rounded-lg mb-3 sm:mb-4" />
+                <div className="bg-gray-200 dark:bg-zinc-700 h-4 rounded w-3/4 mb-2" />
+                <div className="bg-gray-200 dark:bg-zinc-700 h-4 rounded w-1/2" />
               </div>
             ))}
           </div>
         ) : listings.length === 0 ? (
           <div className="text-center py-20">
             <IconComponent className={`w-16 h-16 mx-auto mb-4 ${category.color} opacity-40`} />
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">No listings yet</h3>
-            <p className="text-gray-400">Be the first to post in {category.name}!</p>
+            <h3 className="text-xl font-semibold text-gray-600 dark:text-zinc-400 mb-2">No listings yet</h3>
+            <p className="text-gray-400 dark:text-zinc-500">Be the first to post in {category.name}!</p>
             <Link
               to={`/create-ad/${category.slug}`}
               className={`mt-6 inline-block px-6 py-3 bg-gradient-to-r ${category.bgGradient} text-white rounded-lg hover:shadow-lg transition-all font-medium`}
@@ -173,7 +175,7 @@ export default function CategoryPage() {
                 <Link
                   key={ad._id}
                   to={`/profile/${ad._id}`}
-                  className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all group overflow-hidden"
+                  className="bg-white dark:bg-zinc-800 rounded-xl shadow-sm hover:shadow-md transition-all group overflow-hidden"
                 >
                   {ad.images && ad.images[0] ? (
                     <img
@@ -188,12 +190,12 @@ export default function CategoryPage() {
                     </div>
                   )}
                   <div className="p-4">
-                    <h3 className="font-semibold text-gray-800 truncate group-hover:text-pink-600 transition-colors">
+                    <h3 className="font-semibold text-gray-800 dark:text-white truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
                       {ad.title}
                     </h3>
-                    <p className="text-sm text-gray-500 mt-1">{ad.location}</p>
+                    <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1">{ad.location}</p>
                     {ad.price > 0 && (
-                      <p className="text-lg font-bold text-gray-900 mt-2">£{ad.price}</p>
+                      <p className="text-lg font-bold text-gray-900 dark:text-white mt-2">£{ad.price}</p>
                     )}
                   </div>
                 </Link>
@@ -206,17 +208,17 @@ export default function CategoryPage() {
                 <button
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="px-3 sm:px-4 py-2.5 rounded-lg bg-white border border-gray-200 text-gray-600 disabled:opacity-40 hover:bg-gray-50 text-sm touch-target"
+                  className="px-3 sm:px-4 py-2.5 rounded-lg bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-zinc-300 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-zinc-700 text-sm touch-target"
                 >
                   Previous
                 </button>
-                <span className="px-3 sm:px-4 py-2.5 text-gray-600 text-sm">
+                <span className="px-3 sm:px-4 py-2.5 text-gray-600 dark:text-zinc-400 text-sm">
                   {page} / {totalPages}
                 </span>
                 <button
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                   disabled={page === totalPages}
-                  className="px-3 sm:px-4 py-2.5 rounded-lg bg-white border border-gray-200 text-gray-600 disabled:opacity-40 hover:bg-gray-50 text-sm touch-target"
+                  className="px-3 sm:px-4 py-2.5 rounded-lg bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-zinc-300 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-zinc-700 text-sm touch-target"
                 >
                   Next
                 </button>

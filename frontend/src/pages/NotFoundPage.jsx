@@ -28,7 +28,7 @@ export default function NotFoundPage() {
   }, [navigate]);
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-zinc-50 via-purple-50/30 to-pink-50/30 flex items-center justify-center p-6 transition-all duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`min-h-screen bg-gradient-to-br from-zinc-50 via-purple-50/30 to-pink-50/30 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 flex items-center justify-center p-6 transition-all duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <Helmet><title>Page Not Found | ReachRipple</title></Helmet>
       <div className="max-w-lg w-full text-center">
         {/* Animated 404 illustration */}
@@ -49,10 +49,10 @@ export default function NotFoundPage() {
         </div>
 
         {/* Error message */}
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-3">
           Page Not Found
         </h2>
-        <p className="text-gray-500 text-lg mb-8 max-w-md mx-auto">
+        <p className="text-gray-500 dark:text-zinc-400 text-lg mb-8 max-w-md mx-auto">
           Oops! The page you're looking for seems to have wandered off. 
           Let's get you back on track.
         </p>
@@ -70,7 +70,7 @@ export default function NotFoundPage() {
           </Link>
           <button
             onClick={() => navigate(-1)}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white text-gray-700 font-bold shadow-md border border-gray-100 hover:bg-gray-50 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white dark:bg-zinc-800 text-gray-700 dark:text-zinc-300 font-bold shadow-md border border-gray-100 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-700 hover:scale-[1.02] active:scale-[0.98] transition-all"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -80,15 +80,15 @@ export default function NotFoundPage() {
         </div>
 
         {/* Auto-redirect notice */}
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-gray-400 dark:text-zinc-500">
           Redirecting to home in{' '}
           <span className="font-semibold text-purple-600">{countdown}</span>
           {' '}seconds...
         </p>
 
         {/* Quick links */}
-        <div className="mt-10 pt-8 border-t border-gray-100">
-          <p className="text-sm text-gray-500 mb-4">Popular pages you might be looking for:</p>
+        <div className="mt-10 pt-8 border-t border-gray-100 dark:border-zinc-800">
+          <p className="text-sm text-gray-500 dark:text-zinc-400 mb-4">Popular pages you might be looking for:</p>
           <div className="flex flex-wrap gap-2 justify-center">
             {[
               { to: '/search', label: 'Browse Profiles' },
@@ -99,7 +99,7 @@ export default function NotFoundPage() {
               <Link
                 key={link.to}
                 to={link.to}
-                className="px-4 py-2 rounded-full bg-white text-gray-600 text-sm font-medium border border-gray-100 hover:border-purple-200 hover:text-purple-600 hover:bg-purple-50 transition-all"
+                className="px-4 py-2 rounded-full bg-white dark:bg-zinc-800 text-gray-600 dark:text-zinc-300 text-sm font-medium border border-gray-100 dark:border-zinc-700 hover:border-purple-200 dark:hover:border-purple-700 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
               >
                 {link.label}
               </Link>

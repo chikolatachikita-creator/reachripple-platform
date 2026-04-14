@@ -10,6 +10,7 @@ import api from "../api/client";
 import { sanitizeText, sanitizeHtml } from "../utils/security";
 import { getAssetUrl } from "../config/api";
 import { useToastContext } from "../context/ToastContextGlobal";
+import ThemeToggle from "../components/ThemeToggle";
 import ConfirmModal from "../components/ConfirmModal";
 import { PLATFORM_CATEGORIES } from "../config/categories";
 import { getCategoryFormConfig } from "../config/categoryFormConfig";
@@ -482,6 +483,7 @@ function EditAdPageLuxury() {
             <Link to={`/profile/${id}`} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
               <Home className="w-5 h-5 text-white" />
             </Link>
+            <ThemeToggle />
           </div>
         </div>
       </header>

@@ -590,7 +590,7 @@ export default function SearchResultsPage() {
 
   // ===== RENDER =====
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white text-zinc-800">
+    <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200">
       {/* Age Gate - shown once per session for adult categories */}
       <AgeGateModal />
 
@@ -598,7 +598,7 @@ export default function SearchResultsPage() {
       <Navbar />
 
       {/* SEARCH BAR (Compact) */}
-      <section className="px-3 md:px-4 py-2 md:py-3 bg-gradient-to-b from-zinc-100/50 to-transparent">
+      <section className="px-3 md:px-4 py-2 md:py-3 bg-gradient-to-b from-zinc-100/50 to-transparent dark:from-zinc-800/50">
         <div className="max-w-7xl mx-auto">
           <SearchCardVivaStreet
             defaultCategorySlug={categorySlug}
@@ -675,7 +675,7 @@ export default function SearchResultsPage() {
 
       {/* ACTIVE FILTER CHIPS (VivaStreet-style removable chips) */}
       {activeFilterCount > 0 && (
-        <section className="px-4 py-2 bg-white border-b border-zinc-100">
+        <section className="px-4 py-2 bg-white dark:bg-zinc-900 border-b border-zinc-100 dark:border-zinc-800">
           <div className="max-w-7xl mx-auto">
             <ActiveFilterChips
               filters={filters}
@@ -734,7 +734,7 @@ export default function SearchResultsPage() {
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-black text-zinc-900">{totalCount}</span>
+                <span className="text-2xl font-black text-zinc-900 dark:text-white">{totalCount}</span>
                 <span className="text-sm text-zinc-500">
                   profiles found
                   {locationLabel && (
@@ -755,12 +755,12 @@ export default function SearchResultsPage() {
       </section>
 
       {/* MAIN CONTENT: Sidebar + Results */}
-      <section className="px-4 pb-32 lg:pb-20 bg-zinc-50 min-h-screen">
+      <section className="px-4 pb-32 lg:pb-20 bg-zinc-50 dark:bg-zinc-950 min-h-screen">
         <div className="max-w-[1400px] mx-auto flex gap-8 items-start pt-6">
           {/* DESKTOP SIDEBAR */}
           <div className="hidden lg:block w-80 shrink-0 sticky top-24 self-start">
-            <div className="bg-white rounded-2xl shadow-sm border border-zinc-200/60 p-5 overflow-y-auto max-h-[calc(100vh-8rem)] custom-scrollbar">
-              <h3 className="text-lg font-bold text-zinc-900 mb-6 flex items-center gap-2">
+            <div className="bg-white dark:bg-zinc-800/60 rounded-2xl shadow-sm border border-zinc-200/60 dark:border-zinc-700 p-5 overflow-y-auto max-h-[calc(100vh-8rem)] custom-scrollbar">
+              <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-6 flex items-center gap-2">
                 <span className="text-xl">⚡</span> Filters
               </h3>
               <FilterSidebar

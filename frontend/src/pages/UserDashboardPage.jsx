@@ -7,6 +7,7 @@ import SkeletonTable from "../components/ui/SkeletonTable";
 import { useToastContext } from "../context/ToastContextGlobal";
 import { useAuth } from "../context/AuthContext";
 import UpsellBanner from "../components/dashboard/UpsellBanner";
+import ThemeToggle from "../components/ThemeToggle";
 
 const PLAN_LABELS = { free: "Free", basic: "Basic", premium: "Premium" };
 
@@ -87,7 +88,7 @@ export default function UserDashboardPage() {
   }
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
+    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
       <Helmet><title>Dashboard | ReachRipple</title></Helmet>
       {/* Modern Navbar */}
       <nav className="w-full bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-zinc-100">
@@ -96,13 +97,13 @@ export default function UserDashboardPage() {
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <div className="hidden sm:block">
               <div className="text-sm font-bold leading-tight"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></div>
-              <div className="text-[11px] text-zinc-400 leading-tight">Dashboard</div>
+              <div className="text-[11px] text-zinc-400 dark:text-zinc-500 leading-tight">Dashboard</div>
             </div>
           </Link>
           <div className="flex items-center gap-3">
             <Link 
               to="/account" 
-              className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 transition-colors"
+              className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -123,7 +124,7 @@ export default function UserDashboardPage() {
             </Link>
             <button
               onClick={handleLogout}
-              className="p-2.5 rounded-xl text-zinc-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+              className="p-2.5 rounded-xl text-zinc-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors"
               title="Logout"
               aria-label="Logout"
             >
@@ -131,6 +132,7 @@ export default function UserDashboardPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
               </svg>
             </button>
+            <ThemeToggle />
           </div>
         </div>
       </nav>
@@ -143,16 +145,16 @@ export default function UserDashboardPage() {
               {user?.name?.[0]?.toUpperCase() || "U"}
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black text-zinc-900">
+              <h1 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">
                 Welcome back, {user?.name?.split(' ')[0] || "User"}! 👋
               </h1>
-              <p className="text-zinc-500 text-sm mt-0.5">{user?.email}</p>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-0.5">{user?.email}</p>
             </div>
           </div>
           <Link
             to="/my-ads"
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold
-                       border border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:border-zinc-300
+                       border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600
                        active:scale-[0.98] transition-all"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -235,47 +237,47 @@ export default function UserDashboardPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100 hover:shadow-lg transition-shadow">
+          <div className="bg-white dark:bg-zinc-800/60 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100 dark:border-zinc-700 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-100 to-pink-50 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-100 to-pink-50 dark:from-purple-900/40 dark:to-pink-900/20 flex items-center justify-center">
                 <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
               </div>
-              <p className="text-zinc-500 text-sm font-medium">Total Ads</p>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Total Ads</p>
             </div>
-            <p className="text-3xl font-black text-zinc-900">{ads.length}</p>
+            <p className="text-3xl font-black text-zinc-900 dark:text-white">{ads.length}</p>
           </div>
-          <div className="bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100 hover:shadow-lg transition-shadow">
+          <div className="bg-white dark:bg-zinc-800/60 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100 dark:border-zinc-700 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-100 to-emerald-50 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-100 to-emerald-50 dark:from-green-900/40 dark:to-emerald-900/20 flex items-center justify-center">
                 <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <p className="text-zinc-500 text-sm font-medium">Approved</p>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Approved</p>
             </div>
             <p className="text-3xl font-black text-green-600">{ads.filter((a) => a.status === "approved").length}</p>
           </div>
-          <div className="bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100 hover:shadow-lg transition-shadow">
+          <div className="bg-white dark:bg-zinc-800/60 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100 dark:border-zinc-700 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-100 to-orange-50 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-100 to-orange-50 dark:from-amber-900/40 dark:to-orange-900/20 flex items-center justify-center">
                 <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <p className="text-zinc-500 text-sm font-medium">Pending</p>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Pending</p>
             </div>
             <p className="text-3xl font-black text-amber-600">{ads.filter((a) => a.status === "pending").length}</p>
           </div>
-          <div className="bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100 hover:shadow-lg transition-shadow">
+          <div className="bg-white dark:bg-zinc-800/60 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100 dark:border-zinc-700 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-100 to-rose-50 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-100 to-rose-50 dark:from-red-900/40 dark:to-rose-900/20 flex items-center justify-center">
                 <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <p className="text-zinc-500 text-sm font-medium">Rejected</p>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Rejected</p>
             </div>
             <p className="text-3xl font-black text-red-500">{ads.filter((a) => a.status === "rejected").length}</p>
           </div>
@@ -293,11 +295,11 @@ export default function UserDashboardPage() {
         )}
 
         {/* My Ads Section */}
-        <div className="bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100 overflow-hidden">
-          <div className="p-5 border-b border-zinc-100 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center bg-gradient-to-r from-zinc-50 to-white">
+        <div className="bg-white dark:bg-zinc-800/60 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100 dark:border-zinc-700 overflow-hidden">
+          <div className="p-5 border-b border-zinc-100 dark:border-zinc-700 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center bg-gradient-to-r from-zinc-50 to-white dark:from-zinc-800 dark:to-zinc-800/60">
             <div>
-              <h2 className="text-lg font-bold text-zinc-900">Recent Ads</h2>
-              <p className="text-sm text-zinc-500">Your latest listings</p>
+              <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Recent Ads</h2>
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">Your latest listings</p>
             </div>
             <Link
               to="/create-ad"
@@ -318,8 +320,8 @@ export default function UserDashboardPage() {
               <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-zinc-100 to-zinc-50 flex items-center justify-center mx-auto mb-6">
                 <span className="text-4xl">📢</span>
               </div>
-              <h3 className="text-xl font-bold text-zinc-800 mb-2">No Ads Yet</h3>
-              <p className="text-zinc-500 mb-6 max-w-md mx-auto">
+              <h3 className="text-xl font-bold text-zinc-800 dark:text-white mb-2">No Ads Yet</h3>
+              <p className="text-zinc-500 dark:text-zinc-400 mb-6 max-w-md mx-auto">
                 You haven't posted any ads yet. Create your first listing to get started!
               </p>
               <Link 
@@ -335,28 +337,28 @@ export default function UserDashboardPage() {
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-zinc-50 border-b border-zinc-100">
+                <thead className="bg-zinc-50 dark:bg-zinc-800 border-b border-zinc-100 dark:border-zinc-700">
                   <tr>
-                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 uppercase tracking-wider">Title</th>
-                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 uppercase tracking-wider hidden sm:table-cell">Category</th>
-                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 uppercase tracking-wider hidden md:table-cell">Location</th>
-                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 uppercase tracking-wider">Price</th>
-                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 uppercase tracking-wider">Status</th>
-                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 uppercase tracking-wider">Actions</th>
+                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Title</th>
+                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider hidden sm:table-cell">Category</th>
+                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider hidden md:table-cell">Location</th>
+                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Price</th>
+                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Status</th>
+                    <th className="px-5 py-4 text-left text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-100">
+                <tbody className="divide-y divide-zinc-100 dark:divide-zinc-700/50">
                   {ads.slice(0, 5).map((ad) => (
-                    <tr key={ad._id} className="hover:bg-zinc-50/50 transition-colors">
+                    <tr key={ad._id} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-700/30 transition-colors">
                       <td className="px-5 py-4">
-                        <Link to={`/profile/${ad._id}`} className="text-zinc-900 hover:text-pink-600 font-semibold transition-colors line-clamp-1">
+                        <Link to={`/profile/${ad._id}`} className="text-zinc-900 dark:text-white hover:text-pink-600 dark:hover:text-pink-400 font-semibold transition-colors line-clamp-1">
                           {ad.title}
                         </Link>
                       </td>
-                      <td className="px-5 py-4 text-zinc-600 text-sm hidden sm:table-cell">{ad.category}</td>
-                      <td className="px-5 py-4 text-zinc-600 text-sm hidden md:table-cell">{ad.location}</td>
+                      <td className="px-5 py-4 text-zinc-600 dark:text-zinc-400 text-sm hidden sm:table-cell">{ad.category}</td>
+                      <td className="px-5 py-4 text-zinc-600 dark:text-zinc-400 text-sm hidden md:table-cell">{ad.location}</td>
                       <td className="px-5 py-4">
-                        <span className="font-semibold text-zinc-900">£{ad.price}</span>
+                        <span className="font-semibold text-zinc-900 dark:text-white">£{ad.price}</span>
                       </td>
                       <td className="px-5 py-4"><StatusPill status={ad.status} /></td>
                       <td className="px-5 py-4">
@@ -387,7 +389,7 @@ export default function UserDashboardPage() {
                 </tbody>
               </table>
               {ads.length > 5 && (
-                <div className="p-4 border-t border-zinc-100 bg-zinc-50/50 text-center">
+                <div className="p-4 border-t border-zinc-100 dark:border-zinc-700 bg-zinc-50/50 dark:bg-zinc-800/30 text-center">
                   <Link 
                     to="/my-ads" 
                     className="text-sm font-semibold text-pink-600 hover:text-pink-700 transition-colors"

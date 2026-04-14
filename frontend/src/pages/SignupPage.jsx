@@ -5,6 +5,7 @@ import { register } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
 import { validators } from "../utils/formValidation";
 import { LoadingButton } from "../components/ui/LoadingButton";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ export default function SignupPage() {
     if (touched[fieldName] && !fieldErrors[fieldName]) {
       return `${baseClasses} border-green-300 bg-green-50/30 focus:ring-green-500/20 focus:border-green-500`;
     }
-    return `${baseClasses} border-zinc-200 bg-zinc-50 hover:bg-white focus:bg-white focus:ring-orange-500/20 focus:border-orange-500`;
+    return `${baseClasses} border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 dark:text-white hover:bg-white dark:hover:bg-zinc-700 focus:bg-white dark:focus:bg-zinc-700 focus:ring-orange-500/20 focus:border-orange-500`;
   };
 
   // Validation icon component
@@ -175,21 +176,24 @@ export default function SignupPage() {
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white flex transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
+    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 flex transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
       <Helmet><title>Sign Up | ReachRipple</title></Helmet>
       {/* Left Panel - Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center px-5 sm:px-6 py-8 sm:py-12">
         <div className="w-full max-w-md">
-          {/* Mobile Logo */}
-          <Link to="/" className="lg:hidden flex items-center gap-3 mb-8">
-            <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md" />
-            <span className="text-zinc-900 font-bold text-lg"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></span>
-          </Link>
+          {/* Mobile Logo + Theme Toggle */}
+          <div className="lg:hidden flex items-center justify-between mb-8">
+            <Link to="/" className="flex items-center gap-3">
+              <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md" />
+              <span className="text-zinc-900 dark:text-white font-bold text-lg"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></span>
+            </Link>
+            <ThemeToggle />
+          </div>
 
           {/* Title */}
           <div className="mb-8">
-            <h1 className="text-2xl md:text-3xl font-bold text-zinc-900">Create your account</h1>
-            <p className="mt-2 text-zinc-500">
+            <h1 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white">Create your account</h1>
+            <p className="mt-2 text-zinc-500 dark:text-zinc-400">
               Already have an account?{" "}
               <Link to="/login" className="text-orange-600 font-medium hover:text-orange-700">
                 Sign in
@@ -212,7 +216,7 @@ export default function SignupPage() {
           <form onSubmit={handleSignup} className="space-y-5">
             {/* Name */}
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">Full name</label>
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Full name</label>
               <div className="relative">
                 <input
                   type="text"
@@ -238,7 +242,7 @@ export default function SignupPage() {
 
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">Email address</label>
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Email address</label>
               <div className="relative">
                 <input
                   type="email"
@@ -264,7 +268,7 @@ export default function SignupPage() {
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">Password</label>
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -284,7 +288,7 @@ export default function SignupPage() {
                       ? 'border-red-300 bg-red-50/50 focus:ring-red-500/20 focus:border-red-500' 
                       : touched.password && !fieldErrors.password 
                         ? 'border-green-300 bg-green-50/30 focus:ring-green-500/20 focus:border-green-500'
-                        : 'border-zinc-200 bg-zinc-50 hover:bg-white focus:bg-white focus:ring-orange-500/20 focus:border-orange-500'}`}
+                        : 'border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 dark:text-white hover:bg-white dark:hover:bg-zinc-700 focus:bg-white dark:focus:bg-zinc-700 focus:ring-orange-500/20 focus:border-orange-500'}`}
                   required
                 />
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
@@ -314,7 +318,7 @@ export default function SignupPage() {
               {password && (
                 <div className="mt-2">
                   <div className="flex items-center gap-2 mb-1">
-                    <div className="flex-1 h-1.5 bg-zinc-200 rounded-full overflow-hidden">
+                    <div className="flex-1 h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
                       <div
                         className={`h-full ${strength.color} transition-all duration-300`}
                         style={{ width: `${(strength.score / 5) * 100}%` }}
@@ -328,7 +332,7 @@ export default function SignupPage() {
                       {strength.label}
                     </span>
                   </div>
-                  <p className="text-xs text-zinc-500">
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
                     Use 8+ characters with uppercase, lowercase, and numbers
                   </p>
                 </div>
@@ -337,7 +341,7 @@ export default function SignupPage() {
 
             {/* Password Confirm */}
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">Confirm password</label>
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Confirm password</label>
               <div className="relative">
                 <input
                   type={showConfirmPassword ? "text" : "password"}
@@ -354,7 +358,7 @@ export default function SignupPage() {
                              ? "border-red-300 bg-red-50/50 focus:ring-red-500/20 focus:border-red-500" 
                              : touched.passwordConfirm && !fieldErrors.passwordConfirm
                                ? "border-green-300 bg-green-50/30 focus:ring-green-500/20 focus:border-green-500"
-                               : "border-zinc-200 bg-zinc-50 hover:bg-white focus:bg-white focus:ring-orange-500/20 focus:border-orange-500"
+                               : "border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 dark:text-white hover:bg-white dark:hover:bg-zinc-700 focus:bg-white dark:focus:bg-zinc-700 focus:ring-orange-500/20 focus:border-orange-500"
                            }`}
                   required
                 />
@@ -391,7 +395,7 @@ export default function SignupPage() {
             </div>
 
             {/* Terms */}
-            <p className="text-xs text-zinc-500 leading-relaxed">
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
               By creating an account, you agree to our{" "}
               <Link to="/terms" className="text-orange-600 hover:underline">Terms of Service</Link>
               {" "}and{" "}
@@ -415,7 +419,7 @@ export default function SignupPage() {
           {/* Back to Home */}
           <Link
             to="/"
-            className="flex items-center justify-center gap-2 text-sm text-zinc-500 hover:text-zinc-700 mt-8 transition-colors"
+            className="flex items-center justify-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 mt-8 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

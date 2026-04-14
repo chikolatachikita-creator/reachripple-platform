@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import api from "../api/client";
 import AdCard from "../components/AdCard";
 import { useToastContext } from "../context/ToastContextGlobal";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function SavedProfilesPage() {
   const { showError, showSuccess } = useToastContext();
@@ -122,29 +123,32 @@ export default function SavedProfilesPage() {
   }
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white text-zinc-800 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
+    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
       <Helmet><title>Saved Profiles | ReachRipple</title></Helmet>
       {/* Modern Navbar */}
-      <nav className="w-full bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-zinc-100">
+      <nav className="w-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl sticky top-0 z-50 border-b border-zinc-100 dark:border-zinc-800">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <div className="hidden sm:block">
               <div className="text-sm font-bold leading-tight"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></div>
-              <div className="text-[11px] text-zinc-400 leading-tight">Saved Profiles</div>
+              <div className="text-[11px] text-zinc-400 dark:text-zinc-500 leading-tight">Saved Profiles</div>
             </div>
           </Link>
-          <Link
-            to="/search"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold 
-                       border border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:border-zinc-300 
-                       active:scale-[0.98] transition-all"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            Browse Profiles
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/search"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold 
+                         border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600 
+                         active:scale-[0.98] transition-all"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              Browse Profiles
+            </Link>
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
 
@@ -156,8 +160,8 @@ export default function SavedProfilesPage() {
               <span className="text-white text-xl">⭐</span>
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black text-zinc-900">Saved Profiles</h1>
-              <p className="text-zinc-500 text-sm">
+              <h1 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">Saved Profiles</h1>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm">
                 {ads.length} profile{ads.length !== 1 ? "s" : ""} saved
               </p>
             </div>
@@ -166,12 +170,12 @@ export default function SavedProfilesPage() {
 
         {ads.length === 0 ? (
           /* Empty state - Modern design */
-          <div className="bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-12 text-center border border-zinc-100">
+          <div className="bg-white dark:bg-zinc-800/60 rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-12 text-center border border-zinc-100 dark:border-zinc-700">
             <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-zinc-100 to-zinc-50 flex items-center justify-center mx-auto mb-6">
               <span className="text-4xl">💝</span>
             </div>
-            <h2 className="text-xl font-bold text-zinc-800 mb-2">No Saved Profiles Yet</h2>
-            <p className="text-zinc-500 mb-8 max-w-md mx-auto leading-relaxed">
+            <h2 className="text-xl font-bold text-zinc-800 dark:text-white mb-2">No Saved Profiles Yet</h2>
+            <p className="text-zinc-500 dark:text-zinc-400 mb-8 max-w-md mx-auto leading-relaxed">
               Start saving profiles you like to keep track of your favorites and compare them later
             </p>
             <Link
@@ -193,8 +197,8 @@ export default function SavedProfilesPage() {
             {ads.map((ad, index) => (
               <div 
                 key={ad._id} 
-                className="group relative bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] 
-                           hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] border border-zinc-100 
+                className="group relative bg-white dark:bg-zinc-800/60 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] 
+                           hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] border border-zinc-100 dark:border-zinc-700 
                            hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                 style={{ animationDelay: `${index * 50}ms` }}
               >

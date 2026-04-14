@@ -205,7 +205,7 @@ export default function ReachRippleHomePage() {
   );
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white text-zinc-800 pb-24 sm:pb-20 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
+    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200 pb-24 sm:pb-20 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
       {/* ===================================================== */}
       {/* NAVBAR - Using shared component */}
       {/* ===================================================== */}
@@ -303,7 +303,7 @@ export default function ReachRippleHomePage() {
       {/* ===================================================== */}
       {(isLoading || vipRow.length > 0) && (
         <section className="mt-4 px-3 sm:px-4" aria-label="VIP Spotlight listings">
-          <div className="max-w-6xl mx-auto rounded-2xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] overflow-hidden border border-amber-100">
+          <div className="max-w-6xl mx-auto rounded-2xl bg-white dark:bg-zinc-800/60 shadow-[0_4px_20px_rgba(0,0,0,0.06)] overflow-hidden border border-amber-100 dark:border-amber-900/30">
             {/* Section header */}
             <div className="px-4 py-3 flex items-center justify-between bg-gradient-to-r from-amber-50 via-orange-50/50 to-transparent border-b border-amber-100/50">
               <div className="flex items-center gap-3">
@@ -407,7 +407,7 @@ export default function ReachRippleHomePage() {
                   <span className="text-white text-base">⭐</span>
                 </div>
                 <div>
-                  <span className="text-sm font-bold text-zinc-900">Featured Profiles</span>
+                  <span className="text-sm font-bold text-zinc-900 dark:text-white">Featured Profiles</span>
                   <p className="text-[10px] text-zinc-500">Most popular in your area</p>
                 </div>
               </div>
@@ -479,7 +479,7 @@ export default function ReachRippleHomePage() {
                   
                   {/* Text content */}
                   <div className="flex-1 text-center sm:text-left">
-                    <h3 className="text-lg sm:text-xl font-bold text-zinc-900 mb-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white mb-1">
                       Upgrade to VIP Spotlight
                     </h3>
                     <p className="text-sm text-zinc-600 mb-0 sm:mb-0">
@@ -522,11 +522,11 @@ export default function ReachRippleHomePage() {
                   <span className="text-white text-base">📋</span>
                 </div>
                 <div>
-                  <span className="text-sm font-bold text-zinc-900">All Listings</span>
+                  <span className="text-sm font-bold text-zinc-900 dark:text-white">All Listings</span>
                   <p className="text-[10px] text-zinc-500">{standardFeed.length} profiles available</p>
                 </div>
               </div>
-              <Link to="/escort/gb" className="text-xs font-semibold text-zinc-600 hover:text-zinc-900 bg-zinc-100 hover:bg-zinc-200 px-3 py-1.5 rounded-lg transition-all">
+              <Link to="/escort/gb" className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-3 py-1.5 rounded-lg transition-all">
                 View all →
               </Link>
             </div>
@@ -623,7 +623,7 @@ export default function ReachRippleHomePage() {
       <section className="mt-10 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-6">
-            <h3 className="text-lg font-bold text-zinc-900">Why Choose Us</h3>
+            <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Why Choose Us</h3>
             <p className="text-sm text-zinc-500 mt-1">Trusted by thousands across the UK</p>
           </div>
           
@@ -636,7 +636,7 @@ export default function ReachRippleHomePage() {
             ].map((stat, index) => (
               <div 
                 key={stat.label} 
-                className="group bg-white rounded-2xl p-5 text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-zinc-100 hover:-translate-y-1 transition-all duration-300"
+                className="group bg-white dark:bg-zinc-800/60 rounded-2xl p-5 text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-zinc-100 dark:border-zinc-700 hover:-translate-y-1 transition-all duration-300"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className={`w-12 h-12 mx-auto rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center text-xl shadow-lg mb-3`}>

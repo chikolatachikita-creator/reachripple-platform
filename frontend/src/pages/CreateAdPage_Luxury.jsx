@@ -8,6 +8,7 @@ import {
 import api from "../api/client";
 import { sanitizeText, sanitizeHtml } from "../utils/security";
 import { useToastContext } from "../context/ToastContextGlobal";
+import ThemeToggle from "../components/ThemeToggle";
 
 function CreateAdPageLuxury() {
   const navigate = useNavigate();
@@ -395,6 +396,7 @@ function CreateAdPageLuxury() {
               ✕ Exit Preview
             </button>
           )}
+          <ThemeToggle />
         </div>
 
         {/* Progress Bar */}

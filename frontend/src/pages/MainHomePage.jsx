@@ -383,38 +383,38 @@ export default function MainHomePage() {
   ]);
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
+    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
       {/* Top Bar */}
-      <header className="sticky top-0 z-40 border-b border-zinc-100 bg-white/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-zinc-100 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
           <Link to="/" className="flex items-center gap-3 group">
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <div>
               <div className="text-sm font-bold leading-tight"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></div>
-              <div className="text-xs text-zinc-400 leading-tight">Premium Classifieds & Services</div>
+              <div className="text-xs text-zinc-400 dark:text-zinc-500 leading-tight">Premium Classifieds & Services</div>
             </div>
           </Link>
           
           <div className="flex items-center gap-1.5 sm:gap-2 flex-nowrap">
             <ThemeToggle />
-            <Link to="/saved" className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-all whitespace-nowrap">
+            <Link to="/saved" className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all whitespace-nowrap">
               <span>⭐</span> Saved
             </Link>
             {isLoggedIn ? (
               <>
-                <Link to="/my-ads" className="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-all whitespace-nowrap">
+                <Link to="/my-ads" className="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all whitespace-nowrap">
                   My Ads
                 </Link>
                 <button
                   onClick={logout}
-                  className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-zinc-700 border border-zinc-200 hover:bg-zinc-100 transition-all whitespace-nowrap"
+                  className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all whitespace-nowrap"
                 >
                   Logout
                 </button>
               </>
             ) : (
               <>
-                <Link to="/login" className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-zinc-700 border border-zinc-200 hover:bg-zinc-100 transition-all whitespace-nowrap">
+                <Link to="/login" className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all whitespace-nowrap">
                   Login
                 </Link>
                 <Link to="/signup" className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap">
@@ -483,18 +483,18 @@ export default function MainHomePage() {
 
               {/* Right: Search Card */}
               <div>
-                <div className={`bg-white rounded-2xl p-5 sm:p-6 shadow-2xl shadow-black/20 border border-white/20 transition-all duration-300 ${searchFocused ? 'ring-2 ring-orange-400/50 shadow-orange-500/20' : ''}`}>
-                  <h2 className="text-lg font-bold text-zinc-900 mb-4">Find what you need</h2>
+                <div className={`bg-white dark:bg-zinc-800 rounded-2xl p-5 sm:p-6 shadow-2xl shadow-black/20 border border-white/20 dark:border-zinc-700 transition-all duration-300 ${searchFocused ? 'ring-2 ring-orange-400/50 shadow-orange-500/20' : ''}`}>
+                  <h2 className="text-lg font-bold text-zinc-900 dark:text-white mb-4">Find what you need</h2>
                   <form onSubmit={handleSearch} className="grid gap-4">
                     <div>
-                      <label htmlFor="cat" className="block text-xs font-bold text-zinc-600 tracking-wide mb-2">Category</label>
+                      <label htmlFor="cat" className="block text-xs font-bold text-zinc-600 dark:text-zinc-400 tracking-wide mb-2">Category</label>
                       <select
                         id="cat"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         onFocus={() => setSearchFocused(true)}
                         onBlur={() => setSearchFocused(false)}
-                        className="w-full h-12 border border-zinc-200 rounded-xl px-4 text-sm font-medium outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 bg-zinc-50 hover:bg-white transition-all cursor-pointer"
+                        className="w-full h-12 border border-zinc-200 dark:border-zinc-600 rounded-xl px-4 text-sm font-medium text-zinc-900 dark:text-white outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 dark:focus:ring-orange-900 bg-zinc-50 dark:bg-zinc-700 hover:bg-white dark:hover:bg-zinc-600 transition-all cursor-pointer"
                       >
                         <option value="">All categories</option>
                         {categoryOptions.map((opt) => (
@@ -505,14 +505,14 @@ export default function MainHomePage() {
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="geo" className="block text-xs font-bold text-zinc-600 tracking-wide mb-2">Location</label>
+                      <label htmlFor="geo" className="block text-xs font-bold text-zinc-600 dark:text-zinc-400 tracking-wide mb-2">Location</label>
                       <select
                         id="geo"
                         value={region}
                         onChange={(e) => setRegion(e.target.value)}
                         onFocus={() => setSearchFocused(true)}
                         onBlur={() => setSearchFocused(false)}
-                        className="w-full h-12 border border-zinc-200 rounded-xl px-4 text-sm font-medium outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 bg-zinc-50 hover:bg-white transition-all cursor-pointer"
+                        className="w-full h-12 border border-zinc-200 dark:border-zinc-600 rounded-xl px-4 text-sm font-medium text-zinc-900 dark:text-white outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 dark:focus:ring-orange-900 bg-zinc-50 dark:bg-zinc-700 hover:bg-white dark:hover:bg-zinc-600 transition-all cursor-pointer"
                       >
                         {UK_REGIONS.map((r) => (
                           <option key={r.value} value={r.value}>{r.label}</option>
@@ -537,7 +537,7 @@ export default function MainHomePage() {
         </section>
 
         {/* ===== TRUST BAR ===== */}
-        <section className="bg-white border-b border-zinc-100">
+        <section className="bg-white dark:bg-zinc-900 border-b border-zinc-100 dark:border-zinc-800">
           <div className="max-w-6xl mx-auto px-4 py-5">
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
               {[
@@ -546,7 +546,7 @@ export default function MainHomePage() {
                 { icon: "🛡️", text: "No spam / moderated listings" },
                 { icon: "🇬🇧", text: "UK-based platform" },
               ].map((item) => (
-                <span key={item.text} className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700">
+                <span key={item.text} className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">
                   <span className="text-base">{item.icon}</span> {item.text}
                 </span>
               ))}
@@ -555,11 +555,11 @@ export default function MainHomePage() {
         </section>
 
         {/* ===== VALUE SECTION — Why Choose Us ===== */}
-        <section className="py-12 sm:py-16 bg-zinc-50">
+        <section className="py-12 sm:py-16 bg-zinc-50 dark:bg-zinc-900">
           <div className="max-w-5xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900">Why Choose Us</h2>
-              <p className="mt-2 text-sm sm:text-base text-zinc-500">Everything you need to sell faster and buy smarter</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">Why Choose Us</h2>
+              <p className="mt-2 text-sm sm:text-base text-zinc-500 dark:text-zinc-400">Everything you need to sell faster and buy smarter</p>
             </div>
             <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
               {[
@@ -568,11 +568,11 @@ export default function MainHomePage() {
                 { icon: "🛡️", title: "Safer interactions with real users", desc: "Verified accounts and active moderation keep you protected." },
                 { icon: "⚡", title: "Faster replies — no dead listings", desc: "Active community means real people responding to your ads." },
               ].map((item) => (
-                <div key={item.title} className="flex gap-4 bg-white rounded-2xl p-5 sm:p-6 border border-zinc-100 shadow-sm hover:shadow-md transition-shadow">
+                <div key={item.title} className="flex gap-4 bg-white dark:bg-zinc-800 rounded-2xl p-5 sm:p-6 border border-zinc-100 dark:border-zinc-700 shadow-sm hover:shadow-md transition-shadow">
                   <span className="text-3xl flex-shrink-0">{item.icon}</span>
                   <div>
-                    <h3 className="font-bold text-base text-zinc-900">{item.title}</h3>
-                    <p className="mt-1 text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
+                    <h3 className="font-bold text-base text-zinc-900 dark:text-white">{item.title}</h3>
+                    <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -602,26 +602,26 @@ export default function MainHomePage() {
         </section>
 
         {/* ===== SPEED HOOK ===== */}
-        <section className="py-12 sm:py-16 bg-white">
+        <section className="py-12 sm:py-16 bg-white dark:bg-zinc-950">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-sm font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 text-amber-700 dark:text-amber-400 text-sm font-semibold mb-6">
               <span>⚡</span> Speed Guarantee
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900 leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900 dark:text-white leading-tight">
               Get Replies Within 24 Hours<br className="hidden sm:block" /> — Or We Boost Your Ad Again
             </h2>
-            <p className="mt-4 text-sm sm:text-base text-zinc-500 max-w-lg mx-auto">
+            <p className="mt-4 text-sm sm:text-base text-zinc-500 dark:text-zinc-400 max-w-lg mx-auto">
               Our guarantee system ensures your listing stays visible until you get the results you need.
             </p>
           </div>
         </section>
 
         {/* ===== HOW IT WORKS ===== */}
-        <section className="py-12 sm:py-16 bg-zinc-50">
+        <section className="py-12 sm:py-16 bg-zinc-50 dark:bg-zinc-900">
           <div className="max-w-5xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900">How It Works</h2>
-              <p className="mt-2 text-sm sm:text-base text-zinc-500">Three simple steps to start getting replies</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">How It Works</h2>
+              <p className="mt-2 text-sm sm:text-base text-zinc-500 dark:text-zinc-400">Three simple steps to start getting replies</p>
             </div>
             <div className="grid gap-6 sm:grid-cols-3">
               {[
@@ -629,13 +629,13 @@ export default function MainHomePage() {
                 { step: "2", icon: "🚀", title: "We boost it automatically", desc: "Your listing gets premium placement so buyers find it first." },
                 { step: "3", icon: "💬", title: "Start getting replies", desc: "Real users reach out to you. Faster and safer than ever." },
               ].map((item) => (
-                <div key={item.step} className="relative bg-white rounded-2xl p-6 sm:p-8 border border-zinc-100 shadow-sm text-center hover:shadow-md transition-shadow">
+                <div key={item.step} className="relative bg-white dark:bg-zinc-800 rounded-2xl p-6 sm:p-8 border border-zinc-100 dark:border-zinc-700 shadow-sm text-center hover:shadow-md transition-shadow">
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center text-white text-sm font-black shadow-lg">
                     {item.step}
                   </div>
                   <span className="text-4xl block mt-2 mb-4">{item.icon}</span>
-                  <h3 className="font-bold text-base text-zinc-900">{item.title}</h3>
-                  <p className="mt-2 text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
+                  <h3 className="font-bold text-base text-zinc-900 dark:text-white">{item.title}</h3>
+                  <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -643,17 +643,17 @@ export default function MainHomePage() {
         </section>
 
         {/* ===== SAFETY SECTION ===== */}
-        <section className="py-12 sm:py-16 bg-white">
+        <section className="py-12 sm:py-16 bg-white dark:bg-zinc-950">
           <div className="max-w-5xl mx-auto px-4">
             <div className="grid gap-8 lg:grid-cols-2 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-semibold mb-4">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 text-green-700 dark:text-green-400 text-sm font-semibold mb-4">
                   <span>🔒</span> Your Safety First
                 </div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900 leading-tight">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900 dark:text-white leading-tight">
                   Built for Safer Buying &amp; Selling
                 </h2>
-                <p className="mt-3 text-sm sm:text-base text-zinc-500 leading-relaxed">
+                <p className="mt-3 text-sm sm:text-base text-zinc-500 dark:text-zinc-400 leading-relaxed">
                   We take safety seriously so you can focus on what matters — connecting with real people.
                 </p>
               </div>
@@ -663,11 +663,11 @@ export default function MainHomePage() {
                   { icon: "✅", title: "Verified accounts", desc: "Email and identity verification builds trust between users." },
                   { icon: "👁️", title: "Active moderation", desc: "Our team monitors listings around the clock to remove bad actors." },
                 ].map((item) => (
-                  <div key={item.title} className="flex gap-4 bg-zinc-50 rounded-xl p-4 border border-zinc-100">
+                  <div key={item.title} className="flex gap-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl p-4 border border-zinc-100 dark:border-zinc-700">
                     <span className="text-2xl flex-shrink-0">{item.icon}</span>
                     <div>
-                      <h3 className="font-bold text-sm text-zinc-900">{item.title}</h3>
-                      <p className="mt-0.5 text-sm text-zinc-500">{item.desc}</p>
+                      <h3 className="font-bold text-sm text-zinc-900 dark:text-white">{item.title}</h3>
+                      <p className="mt-0.5 text-sm text-zinc-500 dark:text-zinc-400">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -677,29 +677,29 @@ export default function MainHomePage() {
         </section>
 
         {/* ===== BROWSE CATEGORIES ===== */}
-        <section id="categories" className="py-8 sm:py-10 bg-zinc-50 scroll-mt-20 pb-10 sm:pb-12 md:pb-10">
+        <section id="categories" className="py-8 sm:py-10 bg-zinc-50 dark:bg-zinc-900 scroll-mt-20 pb-10 sm:pb-12 md:pb-10">
           <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900 mb-2">Browse Categories</h2>
-            <p className="text-xs sm:text-sm text-zinc-500 mb-4 sm:mb-6">Discover listings across all our categories</p>
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900 dark:text-white mb-2">Browse Categories</h2>
+            <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mb-4 sm:mb-6">Discover listings across all our categories</p>
             <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {PLATFORM_CATEGORIES.map((cat) => (
                 <Link
                   key={cat.slug}
                   to={cat.slug === "escorts" ? "/escorts" : `/category/${cat.slug}`}
-                  className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-white border border-zinc-200 p-4 sm:p-6
-                              hover:shadow-lg hover:border-zinc-300 hover:scale-[1.01] sm:hover:scale-[1.02] active:scale-[0.98] transition-all group"
+                  className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-4 sm:p-6
+                              hover:shadow-lg hover:border-zinc-300 dark:hover:border-zinc-600 hover:scale-[1.01] sm:hover:scale-[1.02] active:scale-[0.98] transition-all group"
                 >
                   <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${cat.bgGradient}`} />
                   <div className="relative z-10 pl-2">
-                    <h3 className="text-base sm:text-lg font-bold text-zinc-900 mb-0.5 sm:mb-1 group-hover:text-pink-600 transition-colors">{cat.name}</h3>
-                    <p className="text-xs sm:text-sm text-zinc-500 line-clamp-2">{cat.description}</p>
+                    <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white mb-0.5 sm:mb-1 group-hover:text-pink-600 transition-colors">{cat.name}</h3>
+                    <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 line-clamp-2">{cat.description}</p>
                     {cat.monetized && (
                       <span className="mt-3 inline-block text-xs bg-pink-50 text-pink-600 border border-pink-100 px-2 py-0.5 rounded-full">
                         Premium
                       </span>
                     )}
                   </div>
-                  <div className="absolute right-4 bottom-4 text-2xl text-zinc-200 group-hover:text-zinc-400 transition-colors font-bold">
+                  <div className="absolute right-4 bottom-4 text-2xl text-zinc-200 dark:text-zinc-600 group-hover:text-zinc-400 transition-colors font-bold">
                     →
                   </div>
                 </Link>
@@ -729,17 +729,17 @@ export default function MainHomePage() {
         </section>
 
         {/* Testimonials / Trust Section */}
-        <section className="py-16 bg-zinc-50">
+        <section className="py-16 bg-zinc-50 dark:bg-zinc-900">
           <div className="max-w-5xl mx-auto px-4">
-            <h2 className="text-xl md:text-2xl font-bold text-zinc-900 text-center mb-2">Trusted by Advertisers Across the UK</h2>
-            <p className="text-sm text-zinc-500 text-center mb-10">See what our users are saying</p>
+            <h2 className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-white text-center mb-2">Trusted by Advertisers Across the UK</h2>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 text-center mb-10">See what our users are saying</p>
             <div className="grid gap-6 md:grid-cols-3">
               {[
                 { name: "Sarah T.", role: "Independent Advertiser", text: "ReachRipple doubled my profile visibility within the first week. The boost system actually works.", rating: 5 },
                 { name: "James R.", role: "Agency Manager", text: "Finally a platform that takes safety seriously. Verification and reporting tools are top-notch.", rating: 5 },
                 { name: "Mia K.", role: "Premium Advertiser", text: "The analytics dashboard helps me understand my audience. I can see exactly which listings perform best.", rating: 4 },
               ].map((t, i) => (
-                <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-zinc-100 hover:shadow-md transition-shadow">
+                <div key={i} className="bg-white dark:bg-zinc-800 rounded-2xl p-6 shadow-sm border border-zinc-100 dark:border-zinc-700 hover:shadow-md transition-shadow">
                   <div className="flex gap-1 mb-3">
                     {Array.from({ length: 5 }, (_, s) => (
                       <svg key={s} className={`w-4 h-4 ${s < t.rating ? 'text-amber-400' : 'text-zinc-200'}`} fill="currentColor" viewBox="0 0 20 20">
@@ -747,10 +747,10 @@ export default function MainHomePage() {
                       </svg>
                     ))}
                   </div>
-                  <p className="text-sm text-zinc-600 mb-4 leading-relaxed">"{t.text}"</p>
+                  <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-4 leading-relaxed">"{t.text}"</p>
                   <div>
-                    <div className="text-sm font-semibold text-zinc-900">{t.name}</div>
-                    <div className="text-xs text-zinc-500">{t.role}</div>
+                    <div className="text-sm font-semibold text-zinc-900 dark:text-white">{t.name}</div>
+                    <div className="text-xs text-zinc-500 dark:text-zinc-400">{t.role}</div>
                   </div>
                 </div>
               ))}
@@ -760,12 +760,12 @@ export default function MainHomePage() {
 
         {/* Mobile Bottom Bar */}
         <nav className="fixed left-1/2 -translate-x-1/2 bottom-4 w-[min(400px,calc(100%-32px))]
-                        rounded-2xl bg-white/95 p-1.5 shadow-2xl shadow-black/15 backdrop-blur-xl border border-zinc-200/80
+                        rounded-2xl bg-white/95 dark:bg-zinc-900/95 p-1.5 shadow-2xl shadow-black/15 backdrop-blur-xl border border-zinc-200/80 dark:border-zinc-700/80
                         flex gap-1.5 md:hidden z-50 safe-area-bottom mobile-bottom-bar">
           <a
             href="#search"
             className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm
-                       bg-zinc-50 text-zinc-700 hover:bg-zinc-100
+                       bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700
                        active:scale-95 transition-all flex items-center justify-center gap-1.5"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -784,7 +784,7 @@ export default function MainHomePage() {
           <Link
             to="/saved"
             className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm
-                       bg-zinc-50 text-zinc-700 hover:bg-zinc-100
+                       bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700
                        active:scale-95 transition-all flex items-center justify-center gap-1.5"
           >
             <span>⭐</span> Saved

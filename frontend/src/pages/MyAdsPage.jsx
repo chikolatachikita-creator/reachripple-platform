@@ -8,6 +8,7 @@ import BoostModal from "../components/BoostModal";
 import ConfirmModal from "../components/ConfirmModal";
 import { useToastContext } from "../context/ToastContextGlobal";
 import { getAssetUrl } from "../config/api";
+import ThemeToggle from "../components/ThemeToggle";
 
 const getImageUrl = (path) => getAssetUrl(path);
 
@@ -131,22 +132,22 @@ export default function MyAdsPage() {
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
+    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
       <Helmet><title>My Ads | ReachRipple</title></Helmet>
       {/* Modern Navbar */}
-      <nav className="w-full bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-zinc-100">
+      <nav className="w-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl sticky top-0 z-50 border-b border-zinc-100 dark:border-zinc-800">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <div className="hidden sm:block">
               <div className="text-sm font-bold leading-tight"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></div>
-              <div className="text-[11px] text-zinc-400 leading-tight">My Ads</div>
+              <div className="text-[11px] text-zinc-400 dark:text-zinc-500 leading-tight">My Ads</div>
             </div>
           </Link>
           <div className="flex items-center gap-3">
             <Link 
               to="/dashboard" 
-              className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 transition-colors"
+              className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -165,6 +166,7 @@ export default function MyAdsPage() {
               </svg>
               <span className="hidden sm:inline">New Ad</span>
             </Link>
+            <ThemeToggle />
           </div>
         </div>
       </nav>
@@ -182,7 +184,7 @@ export default function MyAdsPage() {
               </svg>
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black text-zinc-900">My Ads</h1>
+              <h1 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">My Ads</h1>
               <p className="text-zinc-500 text-sm">
                 {ads.length} listing{ads.length !== 1 ? "s" : ""}
                 {postingLimits && (
@@ -254,12 +256,12 @@ export default function MyAdsPage() {
             ))}
           </div>
         ) : ads.length === 0 ? (
-          <div className="bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-12 text-center border border-zinc-100">
+          <div className="bg-white dark:bg-zinc-800/60 rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-12 text-center border border-zinc-100 dark:border-zinc-700">
             <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-zinc-100 to-zinc-50 flex items-center justify-center mx-auto mb-6">
               <span className="text-4xl">📭</span>
             </div>
-            <h2 className="text-xl font-bold text-zinc-800 mb-2">No Ads Yet</h2>
-            <p className="text-zinc-500 mb-8 max-w-md mx-auto leading-relaxed">
+            <h2 className="text-xl font-bold text-zinc-800 dark:text-white mb-2">No Ads Yet</h2>
+            <p className="text-zinc-500 dark:text-zinc-400 mb-8 max-w-md mx-auto leading-relaxed">
               Create your first ad to start getting noticed by potential clients
             </p>
             <Link
@@ -276,9 +278,9 @@ export default function MyAdsPage() {
             </Link>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100 overflow-hidden">
+          <div className="bg-white dark:bg-zinc-800/60 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100 dark:border-zinc-700 overflow-hidden">
             {/* Table Header */}
-            <div className="hidden md:grid grid-cols-12 gap-4 px-6 py-4 bg-gradient-to-r from-zinc-50 to-white border-b border-zinc-100 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+            <div className="hidden md:grid grid-cols-12 gap-4 px-6 py-4 bg-gradient-to-r from-zinc-50 to-white dark:from-zinc-800 dark:to-zinc-800/60 border-b border-zinc-100 dark:border-zinc-700 text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
               <div className="col-span-4">Ad</div>
               <div className="col-span-2">Status</div>
               <div className="col-span-1 text-center">Views</div>
@@ -291,8 +293,8 @@ export default function MyAdsPage() {
             {ads.map((ad, index) => (
               <div
                 key={ad._id}
-                className="grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 border-b border-zinc-100 
-                           hover:bg-zinc-50/50 transition items-center"
+                className="grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 border-b border-zinc-100 dark:border-zinc-700/50 
+                           hover:bg-zinc-50/50 dark:hover:bg-zinc-700/30 transition items-center"
                 style={{ animationDelay: `${index * 30}ms` }}
               >
                 {/* Ad Info */}
@@ -314,10 +316,10 @@ export default function MyAdsPage() {
                     )}
                   </div>
                   <div className="min-w-0">
-                    <Link to={`/profile/${ad._id}`} className="font-semibold text-zinc-900 hover:text-pink-600 transition-colors line-clamp-1">
+                    <Link to={`/profile/${ad._id}`} className="font-semibold text-zinc-900 dark:text-white hover:text-pink-600 dark:hover:text-pink-400 transition-colors line-clamp-1">
                       {ad.title}
                     </Link>
-                    <p className="text-sm text-zinc-500">{ad.location} • £{ad.price}/hr</p>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400">{ad.location} • £{ad.price}/hr</p>
                     {ad.category && ad.category !== "Escorts" && (
                       <span className="inline-block mt-1 text-[10px] font-medium px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full">
                         {ad.category}
@@ -340,18 +342,18 @@ export default function MyAdsPage() {
 
                 {/* Views */}
                 <div className="col-span-1 text-center hidden md:block">
-                  <span className="text-zinc-900 font-bold">{ad.views || 0}</span>
+                  <span className="text-zinc-900 dark:text-white font-bold">{ad.views || 0}</span>
                   <span className="text-xs text-zinc-400 block mt-0.5">views</span>
                 </div>
 
                 {/* Clicks */}
                 <div className="col-span-1 text-center hidden md:block">
-                  <span className="text-zinc-900 font-bold">{ad.clicks || 0}</span>
+                  <span className="text-zinc-900 dark:text-white font-bold">{ad.clicks || 0}</span>
                   <span className="text-xs text-zinc-400 block mt-0.5">clicks</span>
                 </div>
 
                 {/* Created */}
-                <div className="col-span-2 text-sm text-zinc-500 hidden md:block">
+                <div className="col-span-2 text-sm text-zinc-500 dark:text-zinc-400 hidden md:block">
                   {formatDate(ad.createdAt)}
                 </div>
 
@@ -454,31 +456,31 @@ export default function MyAdsPage() {
         {/* Stats Summary */}
         {ads.length > 0 && (
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100">
+            <div className="bg-white dark:bg-zinc-800/60 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100 dark:border-zinc-700">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-100 to-pink-50 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-100 to-pink-50 dark:from-purple-900/40 dark:to-pink-900/20 flex items-center justify-center">
                   <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
                 </div>
               </div>
-              <p className="text-2xl font-black text-zinc-900">{ads.length}</p>
-              <p className="text-sm text-zinc-500">Total Ads</p>
+              <p className="text-2xl font-black text-zinc-900 dark:text-white">{ads.length}</p>
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">Total Ads</p>
             </div>
-            <div className="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100">
+            <div className="bg-white dark:bg-zinc-800/60 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100 dark:border-zinc-700">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-100 to-green-50 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-100 to-green-50 dark:from-emerald-900/40 dark:to-green-900/20 flex items-center justify-center">
                   <svg className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
               </div>
               <p className="text-2xl font-black text-emerald-600">{ads.filter(a => a.status === "approved").length}</p>
-              <p className="text-sm text-zinc-500">Live</p>
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">Live</p>
             </div>
-            <div className="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100">
+            <div className="bg-white dark:bg-zinc-800/60 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100 dark:border-zinc-700">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-50 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-50 dark:from-blue-900/40 dark:to-indigo-900/20 flex items-center justify-center">
                   <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -486,11 +488,11 @@ export default function MyAdsPage() {
                 </div>
               </div>
               <p className="text-2xl font-black text-blue-600">{ads.reduce((sum, a) => sum + (a.views || 0), 0)}</p>
-              <p className="text-sm text-zinc-500">Total Views</p>
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">Total Views</p>
             </div>
-            <div className="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100">
+            <div className="bg-white dark:bg-zinc-800/60 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100 dark:border-zinc-700">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-100 to-rose-50 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-100 to-rose-50 dark:from-pink-900/40 dark:to-rose-900/20 flex items-center justify-center">
                   <svg className="w-5 h-5 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                   </svg>

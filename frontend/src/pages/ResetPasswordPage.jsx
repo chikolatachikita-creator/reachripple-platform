@@ -41,12 +41,12 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-zinc-50 to-white px-4">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg border border-zinc-100 p-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 px-4">
+      <div className="max-w-md w-full bg-white dark:bg-zinc-800 rounded-2xl shadow-lg border border-zinc-100 dark:border-zinc-700 p-8">
         {status === "form" && (
           <>
-            <h1 className="text-xl font-semibold text-zinc-800 text-center mb-2">Reset Your Password</h1>
-            <p className="text-zinc-500 text-center mb-6 text-sm">Enter your new password below.</p>
+            <h1 className="text-xl font-semibold text-zinc-800 dark:text-white text-center mb-2">Reset Your Password</h1>
+            <p className="text-zinc-500 dark:text-zinc-400 text-center mb-6 text-sm">Enter your new password below.</p>
 
             {errors.length > 0 && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
@@ -56,24 +56,24 @@ export default function ResetPasswordPage() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1">New Password</label>
+                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">New Password</label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 py-2.5 border border-zinc-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+                  className="w-full px-3 py-2.5 border border-zinc-300 dark:border-zinc-600 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none bg-white dark:bg-zinc-700 dark:text-white"
                   placeholder="Min 8 characters, 1 uppercase, 1 number"
                   required
                   minLength={8}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1">Confirm Password</label>
+                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Confirm Password</label>
                 <input
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-3 py-2.5 border border-zinc-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+                  className="w-full px-3 py-2.5 border border-zinc-300 dark:border-zinc-600 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none bg-white dark:bg-zinc-700 dark:text-white"
                   placeholder="Re-enter your password"
                   required
                   minLength={8}
@@ -92,7 +92,7 @@ export default function ResetPasswordPage() {
         {status === "loading" && (
           <div className="text-center py-8">
             <div className="w-12 h-12 border-4 border-rose-200 border-t-rose-500 rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-zinc-500">Resetting your password...</p>
+            <p className="text-zinc-500 dark:text-zinc-400">Resetting your password...</p>
           </div>
         )}
 
@@ -103,8 +103,8 @@ export default function ResetPasswordPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h1 className="text-xl font-semibold text-zinc-800">Password Reset!</h1>
-            <p className="text-zinc-500 mt-2">{message}</p>
+            <h1 className="text-xl font-semibold text-zinc-800 dark:text-white">Password Reset!</h1>
+            <p className="text-zinc-500 dark:text-zinc-400 mt-2">{message}</p>
             <Link
               to="/login"
               className="mt-6 inline-block px-6 py-2.5 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition font-medium"
@@ -121,8 +121,8 @@ export default function ResetPasswordPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </div>
-            <h1 className="text-xl font-semibold text-zinc-800">Invalid Link</h1>
-            <p className="text-zinc-500 mt-2">{message}</p>
+            <h1 className="text-xl font-semibold text-zinc-800 dark:text-white">Invalid Link</h1>
+            <p className="text-zinc-500 dark:text-zinc-400 mt-2">{message}</p>
             <Link
               to="/login"
               className="mt-6 inline-block px-6 py-2.5 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition font-medium"

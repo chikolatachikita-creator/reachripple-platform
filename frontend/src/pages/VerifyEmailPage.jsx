@@ -32,13 +32,13 @@ export default function VerifyEmailPage() {
   }, [token]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-zinc-50 to-white px-4">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg border border-zinc-100 p-8 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 px-4">
+      <div className="max-w-md w-full bg-white dark:bg-zinc-800 rounded-2xl shadow-lg border border-zinc-100 dark:border-zinc-700 p-8 text-center">
         {status === "verifying" && (
           <>
             <div className="w-12 h-12 border-4 border-rose-200 border-t-rose-500 rounded-full animate-spin mx-auto mb-4" />
-            <h1 className="text-xl font-semibold text-zinc-800">Verifying your email...</h1>
-            <p className="text-zinc-500 mt-2">Please wait a moment.</p>
+            <h1 className="text-xl font-semibold text-zinc-800 dark:text-white">Verifying your email...</h1>
+            <p className="text-zinc-500 dark:text-zinc-400 mt-2">Please wait a moment.</p>
           </>
         )}
 
@@ -49,8 +49,8 @@ export default function VerifyEmailPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h1 className="text-xl font-semibold text-zinc-800">Email Verified!</h1>
-            <p className="text-zinc-500 mt-2">{message}</p>
+            <h1 className="text-xl font-semibold text-zinc-800 dark:text-white">Email Verified!</h1>
+            <p className="text-zinc-500 dark:text-zinc-400 mt-2">{message}</p>
             <Link
               to="/login"
               className="mt-6 inline-block px-6 py-2.5 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition font-medium"
@@ -67,8 +67,8 @@ export default function VerifyEmailPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </div>
-            <h1 className="text-xl font-semibold text-zinc-800">Verification Failed</h1>
-            <p className="text-zinc-500 mt-2">{message}</p>
+            <h1 className="text-xl font-semibold text-zinc-800 dark:text-white">Verification Failed</h1>
+            <p className="text-zinc-500 dark:text-zinc-400 mt-2">{message}</p>
             <Link
               to="/login"
               className="mt-6 inline-block px-6 py-2.5 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition font-medium"

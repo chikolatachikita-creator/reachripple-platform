@@ -433,51 +433,66 @@ export default function MainHomePage() {
       </header>
 
       <main className="relative">
-        {/* Hero Section */}
+        {/* ===== HERO SECTION ===== */}
         <section className="relative overflow-hidden">
-          {/* Gradient Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900" />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-transparent to-zinc-900/50" />
-          
-          {/* Animated gradient orbs */}
           <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
 
-          <div className="relative max-w-6xl mx-auto px-4 py-10 md:py-20">
+          <div className="relative max-w-6xl mx-auto px-4 py-12 md:py-24">
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
-              {/* Left: Title + Search */}
               <div className="text-center lg:text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white/80 text-xs font-medium mb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white/80 text-xs font-medium mb-5">
                   <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                  120,000+ active listings
+                  Free boosted listings for early users
                 </div>
-                
+
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
-                  Welcome to
-                  <span className="block">
-                    <span className="text-pink-400">Reach</span><span className="bg-gradient-to-r from-purple-400 to-blue-600 bg-clip-text text-transparent">Ripple</span>
+                  Get More Replies on Your Ads
+                  <span className="block mt-1">
+                    <span className="bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">— Faster &amp; Safer</span>
                   </span>
                 </h1>
-                
-                <p className="mt-4 text-white/70 text-base md:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0">
-                  The UK's premier classifieds platform. Buy, sell, hire and connect locally.
+
+                <p className="mt-5 text-white/70 text-base md:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0">
+                  Free boosted listings for early users. No spam. No wasted time.
                 </p>
 
-                {/* Search Card */}
-                <div className={`mt-6 sm:mt-8 bg-white rounded-2xl p-4 sm:p-5 shadow-2xl shadow-black/20 border border-white/20 transition-all duration-300 ${searchFocused ? 'ring-2 ring-orange-400/50 shadow-orange-500/20' : ''}`}>
-                  <form onSubmit={handleSearch} className="grid gap-3 sm:gap-4 md:grid-cols-[1fr_1fr_auto]">
+                <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start">
+                  <Link
+                    to="/create-ad"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl
+                               bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold text-base
+                               shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                  >
+                    <span>⚡</span> Post Your Ad in 60 Seconds
+                  </Link>
+                  <button
+                    onClick={() => document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl
+                               bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold text-base
+                               hover:bg-white/20 active:scale-[0.98] transition-all"
+                  >
+                    Browse Active Listings
+                  </button>
+                </div>
+              </div>
+
+              {/* Right: Search Card */}
+              <div>
+                <div className={`bg-white rounded-2xl p-5 sm:p-6 shadow-2xl shadow-black/20 border border-white/20 transition-all duration-300 ${searchFocused ? 'ring-2 ring-orange-400/50 shadow-orange-500/20' : ''}`}>
+                  <h2 className="text-lg font-bold text-zinc-900 mb-4">Find what you need</h2>
+                  <form onSubmit={handleSearch} className="grid gap-4">
                     <div>
-                      <label htmlFor="cat" className="block text-xs font-bold text-zinc-600 tracking-wide mb-2">
-                        Pick a category
-                      </label>
+                      <label htmlFor="cat" className="block text-xs font-bold text-zinc-600 tracking-wide mb-2">Category</label>
                       <select
                         id="cat"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         onFocus={() => setSearchFocused(true)}
                         onBlur={() => setSearchFocused(false)}
-                        className="w-full h-12 border border-zinc-200 rounded-xl px-4 text-sm font-medium
-                                   outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 bg-zinc-50 hover:bg-white transition-all cursor-pointer"
+                        className="w-full h-12 border border-zinc-200 rounded-xl px-4 text-sm font-medium outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 bg-zinc-50 hover:bg-white transition-all cursor-pointer"
                       >
                         <option value="">All categories</option>
                         {categoryOptions.map((opt) => (
@@ -487,125 +502,180 @@ export default function MainHomePage() {
                         ))}
                       </select>
                     </div>
-
                     <div>
-                      <label htmlFor="geo" className="block text-xs font-bold text-zinc-600 tracking-wide mb-2">
-                        Pick a location
-                      </label>
+                      <label htmlFor="geo" className="block text-xs font-bold text-zinc-600 tracking-wide mb-2">Location</label>
                       <select
                         id="geo"
                         value={region}
                         onChange={(e) => setRegion(e.target.value)}
                         onFocus={() => setSearchFocused(true)}
                         onBlur={() => setSearchFocused(false)}
-                        className="w-full h-12 border border-zinc-200 rounded-xl px-4 text-sm font-medium
-                                   outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 bg-zinc-50 hover:bg-white transition-all cursor-pointer"
+                        className="w-full h-12 border border-zinc-200 rounded-xl px-4 text-sm font-medium outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 bg-zinc-50 hover:bg-white transition-all cursor-pointer"
                       >
                         {UK_REGIONS.map((r) => (
-                          <option key={r.value} value={r.value}>
-                            {r.label}
-                          </option>
+                          <option key={r.value} value={r.value}>{r.label}</option>
                         ))}
                       </select>
                     </div>
-
-                    <div className="flex items-end">
-                      <button
-                        type="submit"
-                        className="w-full md:w-auto h-12 px-8 bg-gradient-to-r from-orange-500 to-pink-600 text-white
-                                   font-bold text-sm rounded-xl shadow-lg shadow-orange-500/30
-                                   hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all
-                                   flex items-center justify-center gap-2"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        Search
-                      </button>
-                    </div>
+                    <button
+                      type="submit"
+                      className="w-full h-12 bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-orange-500/30
+                                 hover:shadow-orange-500/50 hover:scale-[1.01] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                      Search
+                    </button>
                   </form>
-
-                  {/* Trust chips */}
-                  <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-zinc-100">
-                    {[
-                      { icon: "✓", text: "Verified posters" },
-                      { icon: "🔒", text: "Secure" },
-                      { icon: "⚡", text: "Updated live" },
-                    ].map((chip) => (
-                      <span key={chip.text} className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500">
-                        <span>{chip.icon}</span> {chip.text}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Right: Decorative Info Panel */}
-              <div className="hidden lg:block relative">
-                <div className="relative w-full h-[420px] rounded-3xl overflow-hidden shadow-2xl"
-                     style={{
-                       background: "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%)",
-                     }}>
-                  {/* Gradient overlays */}
-                  <div className="absolute inset-0 pointer-events-none"
-                       style={{
-                         background: `radial-gradient(circle at 30% 30%, rgba(255,255,255,.12), transparent 50%),
-                                      radial-gradient(circle at 80% 70%, rgba(168,85,247,.20), transparent 50%)`,
-                       }} />
-                  
-                  {/* Floating orbs */}
-                  <div className="absolute top-10 right-10 w-20 h-20 bg-gradient-to-br from-pink-400/30 to-purple-500/30 rounded-full blur-xl animate-pulse" />
-                  <div className="absolute bottom-20 left-8 w-16 h-16 bg-gradient-to-br from-orange-400/30 to-pink-500/30 rounded-full blur-xl animate-pulse" style={{ animationDelay: '0.5s' }} />
-
-                  {/* Top Float Card */}
-                  <div className="absolute left-5 top-6 right-5 bg-white/95 text-zinc-900 rounded-2xl p-4 shadow-xl backdrop-blur-md border border-white/50">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center">
-                        <span className="text-white text-lg">⚡</span>
-                      </div>
-                      <div>
-                        <div className="text-sm font-bold text-zinc-900">Post in under 60 seconds</div>
-                        <div className="text-xs text-zinc-500">Photos, title, price, location — done.</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Middle Stats */}
-                  <div className="absolute left-5 top-1/2 -translate-y-1/2 right-5">
-                    <div className="grid grid-cols-2 gap-3">
-                      {[
-                        { value: "120K+", label: "Active ads" },
-                        { value: "50K+", label: "Users" },
-                        { value: "12", label: "Categories" },
-                        { value: "24/7", label: "Support" },
-                      ].map((stat) => (
-                        <div key={stat.label} className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
-                          <div className="text-xl font-black text-white">{stat.value}</div>
-                          <div className="text-xs text-white/60">{stat.label}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Bottom Float Card */}
-                  <div className="absolute left-5 bottom-6 right-5 bg-white/95 text-zinc-900 rounded-2xl p-4 shadow-xl backdrop-blur-md border border-white/50">
-                    <div className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Trending now</div>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {["🎯 Jobs", "🏠 Property", "🚗 Vehicles", "💝 Dating"].map((tag) => (
-                        <span key={tag} className="bg-zinc-100 rounded-full px-3 py-1 text-xs font-medium text-zinc-700">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* All Categories Section */}
-        <section className="py-8 sm:py-10 pb-28 sm:pb-32 md:pb-16">
+        {/* ===== TRUST BAR ===== */}
+        <section className="bg-white border-b border-zinc-100">
+          <div className="max-w-6xl mx-auto px-4 py-5">
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+              {[
+                { icon: "✅", text: "Verified users" },
+                { icon: "⚡", text: "Fast responses" },
+                { icon: "🛡️", text: "No spam / moderated listings" },
+                { icon: "🇬🇧", text: "UK-based platform" },
+              ].map((item) => (
+                <span key={item.text} className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700">
+                  <span className="text-base">{item.icon}</span> {item.text}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== VALUE SECTION — Why Choose Us ===== */}
+        <section className="py-12 sm:py-16 bg-zinc-50">
+          <div className="max-w-5xl mx-auto px-4">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900">Why Choose Us</h2>
+              <p className="mt-2 text-sm sm:text-base text-zinc-500">Everything you need to sell faster and buy smarter</p>
+            </div>
+            <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
+              {[
+                { icon: "🚀", title: "Your ad gets seen", desc: "We boost new listings so you get maximum visibility from day one." },
+                { icon: "✨", title: "Cleaner, easier-to-use platform", desc: "No clutter, no confusion — just a fast, modern experience." },
+                { icon: "🛡️", title: "Safer interactions with real users", desc: "Verified accounts and active moderation keep you protected." },
+                { icon: "⚡", title: "Faster replies — no dead listings", desc: "Active community means real people responding to your ads." },
+              ].map((item) => (
+                <div key={item.title} className="flex gap-4 bg-white rounded-2xl p-5 sm:p-6 border border-zinc-100 shadow-sm hover:shadow-md transition-shadow">
+                  <span className="text-3xl flex-shrink-0">{item.icon}</span>
+                  <div>
+                    <h3 className="font-bold text-base text-zinc-900">{item.title}</h3>
+                    <p className="mt-1 text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== OFFER SECTION ===== */}
+        <section className="relative overflow-hidden py-12 sm:py-16">
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.15),transparent_60%)]" />
+          <div className="relative max-w-4xl mx-auto px-4 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
+              Post Now — Get Featured for Free
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-white/90 max-w-xl mx-auto leading-relaxed">
+              We're promoting early users heavily. Your ad will appear at the top of listings for maximum visibility.
+            </p>
+            <Link
+              to="/create-ad"
+              className="mt-8 inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-zinc-900 font-bold text-base
+                         shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              <span>🔥</span> Post Free Ad Now
+            </Link>
+          </div>
+        </section>
+
+        {/* ===== SPEED HOOK ===== */}
+        <section className="py-12 sm:py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-sm font-semibold mb-6">
+              <span>⚡</span> Speed Guarantee
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900 leading-tight">
+              Get Replies Within 24 Hours<br className="hidden sm:block" /> — Or We Boost Your Ad Again
+            </h2>
+            <p className="mt-4 text-sm sm:text-base text-zinc-500 max-w-lg mx-auto">
+              Our guarantee system ensures your listing stays visible until you get the results you need.
+            </p>
+          </div>
+        </section>
+
+        {/* ===== HOW IT WORKS ===== */}
+        <section className="py-12 sm:py-16 bg-zinc-50">
+          <div className="max-w-5xl mx-auto px-4">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900">How It Works</h2>
+              <p className="mt-2 text-sm sm:text-base text-zinc-500">Three simple steps to start getting replies</p>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-3">
+              {[
+                { step: "1", icon: "📝", title: "Post your ad", desc: "Takes just 60 seconds. Add photos, description, and location." },
+                { step: "2", icon: "🚀", title: "We boost it automatically", desc: "Your listing gets premium placement so buyers find it first." },
+                { step: "3", icon: "💬", title: "Start getting replies", desc: "Real users reach out to you. Faster and safer than ever." },
+              ].map((item) => (
+                <div key={item.step} className="relative bg-white rounded-2xl p-6 sm:p-8 border border-zinc-100 shadow-sm text-center hover:shadow-md transition-shadow">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center text-white text-sm font-black shadow-lg">
+                    {item.step}
+                  </div>
+                  <span className="text-4xl block mt-2 mb-4">{item.icon}</span>
+                  <h3 className="font-bold text-base text-zinc-900">{item.title}</h3>
+                  <p className="mt-2 text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== SAFETY SECTION ===== */}
+        <section className="py-12 sm:py-16 bg-white">
+          <div className="max-w-5xl mx-auto px-4">
+            <div className="grid gap-8 lg:grid-cols-2 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-semibold mb-4">
+                  <span>🔒</span> Your Safety First
+                </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900 leading-tight">
+                  Built for Safer Buying &amp; Selling
+                </h2>
+                <p className="mt-3 text-sm sm:text-base text-zinc-500 leading-relaxed">
+                  We take safety seriously so you can focus on what matters — connecting with real people.
+                </p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-1">
+                {[
+                  { icon: "🚨", title: "Report users instantly", desc: "One-tap reporting with our moderation team reviewing within hours." },
+                  { icon: "✅", title: "Verified accounts", desc: "Email and identity verification builds trust between users." },
+                  { icon: "👁️", title: "Active moderation", desc: "Our team monitors listings around the clock to remove bad actors." },
+                ].map((item) => (
+                  <div key={item.title} className="flex gap-4 bg-zinc-50 rounded-xl p-4 border border-zinc-100">
+                    <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                    <div>
+                      <h3 className="font-bold text-sm text-zinc-900">{item.title}</h3>
+                      <p className="mt-0.5 text-sm text-zinc-500">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== BROWSE CATEGORIES ===== */}
+        <section id="categories" className="py-8 sm:py-10 bg-zinc-50 scroll-mt-20 pb-10 sm:pb-12 md:pb-10">
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900 mb-2">Browse Categories</h2>
             <p className="text-xs sm:text-sm text-zinc-500 mb-4 sm:mb-6">Discover listings across all our categories</p>
@@ -633,6 +703,26 @@ export default function MainHomePage() {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ===== FINAL CTA ===== */}
+        <section className="py-12 sm:py-16 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
+              Join early users getting more replies today
+            </h2>
+            <p className="mt-4 text-base text-white/60 max-w-lg mx-auto">
+              Don't miss your chance to get featured listings for free. Start posting now.
+            </p>
+            <Link
+              to="/create-ad"
+              className="mt-8 inline-flex items-center gap-2 px-10 py-4 rounded-xl
+                         bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold text-base
+                         shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              <span>🚀</span> Post Your Ad Now
+            </Link>
           </div>
         </section>
 

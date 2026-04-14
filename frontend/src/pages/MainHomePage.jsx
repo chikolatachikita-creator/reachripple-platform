@@ -689,6 +689,7 @@ export default function MainHomePage() {
                 {CATEGORIES.map((cat) => (
                   <button
                     key={cat.id}
+                    onMouseEnter={() => setActiveTab(cat.id)}
                     onClick={() => setActiveTab(activeTab === cat.id ? null : cat.id)}
                     className={`relative px-4 py-3 text-sm font-semibold whitespace-nowrap transition-all cursor-pointer
                       ${activeTab === cat.id

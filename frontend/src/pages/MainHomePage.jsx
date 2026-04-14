@@ -326,6 +326,7 @@ export default function MainHomePage() {
   const { isLoggedIn, logout } = useAuth();
   const [region, setRegion] = useState("gb");
   const [searchFocused, setSearchFocused] = useState(false);
+  const [activeTab, setActiveTab] = useState(null);
 
   useEffect(() => {
     requestAnimationFrame(() => setFadeIn(true));
@@ -681,30 +682,66 @@ export default function MainHomePage() {
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900 dark:text-white mb-2">Browse Categories</h2>
             <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mb-4 sm:mb-6">Discover listings across all our categories</p>
-            <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {PLATFORM_CATEGORIES.map((cat) => (
-                <Link
-                  key={cat.slug}
-                  to={cat.slug === "escorts" ? "/escorts" : `/category/${cat.slug}`}
-                  className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-4 sm:p-6
-                              hover:shadow-lg hover:border-zinc-300 dark:hover:border-zinc-600 hover:scale-[1.01] sm:hover:scale-[1.02] active:scale-[0.98] transition-all group"
-                >
-                  <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${cat.bgGradient}`} />
-                  <div className="relative z-10 pl-2">
-                    <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white mb-0.5 sm:mb-1 group-hover:text-pink-600 transition-colors">{cat.name}</h3>
-                    <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 line-clamp-2">{cat.description}</p>
-                    {cat.monetized && (
-                      <span className="mt-3 inline-block text-xs bg-pink-50 text-pink-600 border border-pink-100 px-2 py-0.5 rounded-full">
-                        Premium
-                      </span>
+
+            {/* Category Tabs */}
+            <div className="overflow-x-auto hide-scrollbar -mx-4 px-4">
+              <div className="flex gap-0 border-b border-zinc-200 dark:border-zinc-700 min-w-max">
+                {CATEGORIES.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveTab(activeTab === cat.id ? null : cat.id)}
+                    className={`relative px-4 py-3 text-sm font-semibold whitespace-nowrap transition-all cursor-pointer
+                      ${activeTab === cat.id
+                        ? "text-pink-600 dark:text-pink-400"
+                        : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200"
+                      }`}
+                  >
+                    <span className="flex items-center gap-1.5">
+                      <span>{cat.icon}</span>
+                      <span>{cat.title}</span>
+                    </span>
+                    {activeTab === cat.id && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-t" />
                     )}
-                  </div>
-                  <div className="absolute right-4 bottom-4 text-2xl text-zinc-200 dark:text-zinc-600 group-hover:text-zinc-400 transition-colors font-bold">
-                    →
-                  </div>
-                </Link>
-              ))}
+                  </button>
+                ))}
+              </div>
             </div>
+
+            {/* Subcategories Panel */}
+            {activeTab && (() => {
+              const activeCat = CATEGORIES.find((c) => c.id === activeTab);
+              if (!activeCat) return null;
+
+              // Group subcategories into columns for multi-column layout
+              const subs = activeCat.subs;
+
+              return (
+                <div className="mt-0 bg-white dark:bg-zinc-800 border border-t-0 border-zinc-200 dark:border-zinc-700 rounded-b-xl p-5 sm:p-6 animate-in fade-in duration-200">
+                  <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider mb-4">
+                    {activeCat.title}
+                  </h3>
+                  <div className={`grid gap-x-8 gap-y-2 grid-cols-1 sm:grid-cols-2 ${subs.length > 8 ? 'md:grid-cols-4' : subs.length > 4 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+                    {subs.map((sub) => (
+                      <Link
+                        key={sub.slug}
+                        to={sub.link || (activeCat.id === "free-personals" ? `/escorts` : `/category/${activeCat.id}`)}
+                        className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-pink-600 dark:hover:text-pink-400 transition-colors py-1"
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* Collapsed state hint */}
+            {!activeTab && (
+              <div className="mt-4 text-center py-8 bg-white dark:bg-zinc-800 border border-t-0 border-zinc-200 dark:border-zinc-700 rounded-b-xl">
+                <p className="text-sm text-zinc-400 dark:text-zinc-500">Select a category above to browse subcategories</p>
+              </div>
+            )}
           </div>
         </section>
 

@@ -675,19 +675,19 @@ const EscortProfilePage = () => {
             {/* Left Column - Main Content */}
             <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
               
-              {/* ABOUT SECTION */}
+              {/* ABOUT ME & SERVICES (merged) */}
               <section className="content-card animate-fadeIn">
                 <h2 className="section-title">
                   <span className="section-icon from-rose-500 to-pink-600">✨</span>
                   About Me
                 </h2>
                 
-                <div className="prose max-w-none mb-4 sm:mb-8">
+                <div className="prose max-w-none">
                   <p className="text-gray-700 leading-relaxed text-sm sm:text-base lg:text-lg" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(profile.description || 'Contact me to learn more about my services and personality! I look forward to meeting you.', { ALLOWED_TAGS: ['br', 'p', 'strong', 'em'] }) }} />
                 </div>
                 
                 {/* Profile Stats List */}
-                <div className="divide-y divide-gray-100">
+                <div className="mt-5 divide-y divide-gray-100">
                   {[
                     { label: 'Age', value: profile.age || '—', icon: '📅' },
                     { label: 'Type', value: profile.profileFields?.type || 'Independent', icon: profile.profileFields?.type === 'Agency' ? '🏢' : '👤' },
@@ -704,43 +704,37 @@ const EscortProfilePage = () => {
                     </div>
                   ))}
                 </div>
-              </section>
 
-              {/* SERVICES SECTION */}
-              <section className="content-card animate-fadeIn" style={{ animationDelay: '0.1s' }}>
-                <h2 className="section-title">
-                  <span className="section-icon from-purple-500 to-indigo-600">💫</span>
-                  Services
-                  {allServices.length > 0 && <span className="ml-auto text-sm font-normal text-gray-500 bg-gray-100 px-3 py-1 rounded-full">{allServices.length} available</span>}
-                </h2>
-                
-                {allServices.length > 0 ? (
-                  <div className="flex flex-wrap gap-1.5 sm:gap-3">
-                    {allServices.map((service, idx) => (
-                      <span key={idx} className="service-chip">
-                        <span className="service-chip-icon">
-                          <Icons.Check className="w-3 h-3" />
+                {/* Services */}
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
+                    💫 Services
+                    {allServices.length > 0 && <span className="ml-auto text-xs font-normal text-gray-500 bg-gray-100 px-2.5 py-0.5 rounded-full">{allServices.length}</span>}
+                  </h3>
+                  
+                  {allServices.length > 0 ? (
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                      {allServices.map((service, idx) => (
+                        <span key={idx} className="service-chip">
+                          <span className="service-chip-icon">
+                            <Icons.Check className="w-3 h-3" />
+                          </span>
+                          {service}
                         </span>
-                        {service}
-                      </span>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-12 rounded-2xl border border-dashed border-gray-300 bg-gray-50">
-                    <span className="text-4xl mb-3 block">💭</span>
-                    <p className="text-gray-600 font-medium">Contact me to discuss services</p>
-                    <p className="text-gray-400 text-sm mt-1">I'm happy to answer any questions</p>
-                  </div>
-                )}
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-gray-400">Contact me to discuss services</p>
+                  )}
+                </div>
                 
-                {/* INCALL / OUTCALL INFO */}
-                <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
+                {/* Incall / Outcall */}
+                <div className="mt-6 pt-6 border-t border-gray-200">
                   <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
                     <Icons.MapPin className="w-4 h-4 text-rose-500" />
                     Service Locations
                   </h3>
                   <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                    {/* Incall Card */}
                     <div className={`location-card group ${profile.profileFields?.incall !== false ? 'location-card-available' : 'location-card-unavailable'}`}>
                       <div className="flex items-center gap-2 sm:gap-3">
                         <span className={`location-icon ${profile.profileFields?.incall !== false ? 'bg-gradient-to-br from-emerald-500 to-teal-600' : 'bg-gray-300'}`}>
@@ -759,8 +753,6 @@ const EscortProfilePage = () => {
                         </span>
                       )}
                     </div>
-                    
-                    {/* Outcall Card */}
                     <div className={`location-card group ${profile.profileFields?.outcall !== false ? 'location-card-available' : 'location-card-unavailable'}`}>
                       <div className="flex items-center gap-2 sm:gap-3">
                         <span className={`location-icon ${profile.profileFields?.outcall !== false ? 'bg-gradient-to-br from-purple-500 to-indigo-600' : 'bg-gray-300'}`}>
@@ -780,8 +772,6 @@ const EscortProfilePage = () => {
                       )}
                     </div>
                   </div>
-                  
-                  {/* Travel Note */}
                   {profile.profileFields?.outcall !== false && profile.profileFields?.travelRadius && (
                     <p className="mt-3 text-sm text-gray-600 flex items-center gap-1.5">
                       <span className="w-1 h-1 rounded-full bg-purple-400"></span>

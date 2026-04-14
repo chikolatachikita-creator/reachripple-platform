@@ -121,15 +121,15 @@ export default function Navbar({ showSaved = true }) {
               {/* Login */}
               <Link
                 to="/login"
-                className="hidden sm:inline-flex px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+                className="hidden sm:inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800 whitespace-nowrap"
               >
-                Log in
+                Login
               </Link>
 
               {/* Sign Up */}
               <Link
                 to="/signup"
-                className="hidden sm:inline-flex px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:brightness-110 transition-all shadow-sm"
+                className="hidden sm:inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:brightness-110 transition-all shadow-sm whitespace-nowrap"
               >
                 Sign Up
               </Link>
@@ -137,9 +137,9 @@ export default function Navbar({ showSaved = true }) {
               {/* Post an Ad */}
               <Link
                 to="/create-ad"
-                className="hidden sm:inline-flex px-5 py-2 rounded-xl text-white font-semibold shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 hover:brightness-110 transition-all"
+                className="hidden sm:inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 hover:brightness-110 transition-all whitespace-nowrap"
               >
-                Post an Ad
+                + Post Ad
               </Link>
             </>
           )}

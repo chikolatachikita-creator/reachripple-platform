@@ -758,6 +758,161 @@ export default function MainHomePage() {
           </div>
         </section>
 
+        {/* ===== PRICING / PLANS ===== */}
+        <section id="pricing" className="py-12 sm:py-16 bg-white dark:bg-zinc-950">
+          <div className="max-w-5xl mx-auto px-4">
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 text-purple-700 dark:text-purple-400 text-sm font-semibold mb-4">
+                <span>💎</span> Simple Pricing
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">Choose Your Plan</h2>
+              <p className="mt-2 text-sm sm:text-base text-zinc-500 dark:text-zinc-400">Start free. Upgrade when you need more visibility.</p>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  name: "Free",
+                  price: "£0",
+                  period: "forever",
+                  bestFor: "Getting started",
+                  features: ["1 active ad", "5 images per ad", "Standard placement", "Basic support"],
+                  cta: "Start Free",
+                  highlighted: false,
+                  gradient: "from-zinc-500 to-zinc-600",
+                },
+                {
+                  name: "Standard",
+                  price: "£9.99",
+                  period: "/month",
+                  bestFor: "Regular advertisers",
+                  features: ["3 active ads", "10 images per ad", "1 video per ad", "2h bump cooldown", "Email support"],
+                  cta: "Upgrade",
+                  highlighted: false,
+                  gradient: "from-blue-500 to-indigo-600",
+                },
+                {
+                  name: "Prime",
+                  price: "£24.99",
+                  period: "/month",
+                  bestFor: "Power sellers",
+                  features: ["5 active ads", "15 images per ad", "3 videos per ad", "1h bump cooldown", "10% boost discount", "Priority support"],
+                  cta: "Go Prime",
+                  highlighted: true,
+                  gradient: "from-orange-500 to-pink-600",
+                },
+                {
+                  name: "Spotlight",
+                  price: "£49.99",
+                  period: "/month",
+                  bestFor: "Top performers",
+                  features: ["10 active ads", "20 images per ad", "5 videos per ad", "30min bump cooldown", "20% boost discount", "Priority placement", "Dedicated support"],
+                  cta: "Go Spotlight",
+                  highlighted: false,
+                  gradient: "from-amber-500 to-orange-600",
+                },
+              ].map((plan) => (
+                <div
+                  key={plan.name}
+                  className={`relative rounded-2xl p-6 border transition-all hover:shadow-lg ${
+                    plan.highlighted
+                      ? "bg-gradient-to-br from-orange-50 to-pink-50 dark:from-orange-950/30 dark:to-pink-950/30 border-orange-200 dark:border-orange-800 shadow-md ring-2 ring-orange-400/30"
+                      : "bg-white dark:bg-zinc-800/60 border-zinc-100 dark:border-zinc-700 shadow-sm"
+                  }`}
+                >
+                  {plan.highlighted && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-orange-500 to-pink-600 text-white text-xs font-bold shadow-lg">
+                      Most Popular
+                    </div>
+                  )}
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${plan.gradient} flex items-center justify-center text-white text-sm font-black shadow-lg mb-4`}>
+                    {plan.name[0]}
+                  </div>
+                  <h3 className="text-lg font-bold text-zinc-900 dark:text-white">{plan.name}</h3>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Best for: {plan.bestFor}</p>
+                  <div className="mt-3 mb-4">
+                    <span className="text-3xl font-black text-zinc-900 dark:text-white">{plan.price}</span>
+                    <span className="text-sm text-zinc-500 dark:text-zinc-400">{plan.period}</span>
+                  </div>
+                  <ul className="space-y-2 mb-6">
+                    {plan.features.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-sm text-zinc-600 dark:text-zinc-300">
+                        <svg className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    onClick={() => navigate(isLoggedIn ? '/dashboard' : '/signup')}
+                    className={`w-full py-3 rounded-xl font-bold text-sm transition-all cursor-pointer ${
+                      plan.highlighted
+                        ? "bg-gradient-to-r from-orange-500 to-pink-600 text-white shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98]"
+                        : "bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-600"
+                    }`}
+                  >
+                    {plan.cta}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== FAQ SECTION ===== */}
+        <section className="py-12 sm:py-16 bg-zinc-50 dark:bg-zinc-900">
+          <div className="max-w-3xl mx-auto px-4">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">Frequently Asked Questions</h2>
+              <p className="mt-2 text-sm sm:text-base text-zinc-500 dark:text-zinc-400">Everything you need to know before posting</p>
+            </div>
+            <div className="space-y-3">
+              {[
+                {
+                  q: "Is it really free to post an ad?",
+                  a: "Yes! The Free plan lets you post 1 ad with up to 5 images at no cost. You only pay if you want more ads, premium placement, or boost features.",
+                },
+                {
+                  q: "How quickly will I get replies?",
+                  a: "Most advertisers receive their first reply within 24 hours. Our boost system automatically increases your ad's visibility if it's not getting traction.",
+                },
+                {
+                  q: "Is it safe to use ReachRipple?",
+                  a: "Absolutely. We require email verification for all accounts, offer one-tap user reporting, and our moderation team reviews flagged content within hours. Your personal data is never shared.",
+                },
+                {
+                  q: "How do boosts work?",
+                  a: "Boosts push your ad to the top of search results and category pages for a set period. You can purchase boosts individually or get automatic discounts with Standard plan and above.",
+                },
+                {
+                  q: "Can I manage multiple ads?",
+                  a: "The Free plan allows 1 active ad. Standard supports 3, Prime supports 5, and Spotlight gives you up to 10 active ads simultaneously.",
+                },
+                {
+                  q: "What categories can I post in?",
+                  a: "We support Escorts, Massage & Wellness, Dating & Personals, Jobs & Services, Entertainment, Alternative Lifestyle, Buy & Sell, Vehicles, Property, and Adult Services.",
+                },
+              ].map((item, i) => (
+                <details
+                  key={i}
+                  className="group bg-white dark:bg-zinc-800 rounded-xl border border-zinc-100 dark:border-zinc-700 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <summary className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none select-none">
+                    <span className="text-sm font-semibold text-zinc-900 dark:text-white">{item.q}</span>
+                    <svg className="w-5 h-5 text-zinc-400 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="px-5 pb-4 text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                    {item.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Mobile Bottom Bar */}
         <nav className="fixed left-1/2 -translate-x-1/2 bottom-4 w-[min(400px,calc(100%-32px))]
                         rounded-2xl bg-white/95 dark:bg-zinc-900/95 p-1.5 shadow-2xl shadow-black/15 backdrop-blur-xl border border-zinc-200/80 dark:border-zinc-700/80

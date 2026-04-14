@@ -428,7 +428,6 @@ export default function MainHomePage() {
             >
               <span>+</span> <span className="hidden sm:inline">Post</span> Ad
             </Link>
-            </Link>
           </div>
         </div>
       </header>

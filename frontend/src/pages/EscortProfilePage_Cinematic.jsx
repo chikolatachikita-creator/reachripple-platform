@@ -224,11 +224,22 @@ const EscortProfilePage = () => {
   // Cinema Mode: Tap handler disabled - content always visible
   const handleHeroTap = () => {};
 
-  // Show title immediately (no typewriter delay)
+  // Typewriter animation - reveal title one character at a time
   useEffect(() => {
     if (!profile?.title) return;
-    setDisplayedTitle(profile.title);
-    setTitleReady(true);
+    setDisplayedTitle('');
+    setTitleReady(false);
+    let i = 0;
+    const chars = profile.title;
+    const interval = setInterval(() => {
+      i++;
+      setDisplayedTitle(chars.slice(0, i));
+      if (i >= chars.length) {
+        clearInterval(interval);
+        setTitleReady(true);
+      }
+    }, 45);
+    return () => clearInterval(interval);
   }, [profile?.title]);
 
   // Keyboard nav for lightbox

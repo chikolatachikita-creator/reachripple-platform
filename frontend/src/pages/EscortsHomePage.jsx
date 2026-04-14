@@ -255,14 +255,14 @@ export default function ReachRippleHomePage() {
               </svg>
               Browse Profiles
             </Link>
-            <Link
-              to="/create-ad"
+            <button
+              onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
               className="inline-flex items-center gap-2 px-7 py-3 rounded-xl text-white font-bold text-base
                          bg-white/10 backdrop-blur-sm border border-white/30
-                         hover:bg-white/20 active:scale-[0.97] transition-all"
+                         hover:bg-white/20 active:scale-[0.97] transition-all cursor-pointer"
             >
               <span className="text-lg">+</span> Advertise Now
-            </Link>
+            </button>
           </div>
         </div>
       </section>
@@ -675,14 +675,14 @@ export default function ReachRippleHomePage() {
         >
           Browse All
         </Link>
-        <Link
-          to="/create-ad"
+        <button
+          onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
           className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm
                      bg-zinc-50 text-zinc-700 hover:bg-zinc-100
-                     active:scale-95 transition-all flex items-center justify-center gap-1.5"
+                     active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
         >
           <span>+</span> Post
-        </Link>
+        </button>
       </nav>
 
       {/* ===================================================== */}

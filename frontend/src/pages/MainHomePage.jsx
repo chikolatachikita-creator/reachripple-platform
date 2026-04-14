@@ -422,14 +422,14 @@ export default function MainHomePage() {
                 </Link>
               </>
             )}
-            <Link
-              to="/create-ad"
+            <button
+              onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
               className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl
                          bg-gradient-to-r from-orange-500 to-pink-600 text-white font-semibold text-xs sm:text-sm
-                         shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap"
+                         shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap cursor-pointer"
             >
               + Post Ad
-            </Link>
+            </button>
           </div>
         </div>
       </header>
@@ -462,14 +462,14 @@ export default function MainHomePage() {
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start">
-                  <Link
-                    to="/create-ad"
+                  <button
+                    onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl
                                bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold text-base
-                               shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                               shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                   >
                     <span>⚡</span> Post Your Ad in 60 Seconds
-                  </Link>
+                  </button>
                   <button
                     onClick={() => document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl
@@ -591,13 +591,13 @@ export default function MainHomePage() {
             <p className="mt-4 text-base sm:text-lg text-white/90 max-w-xl mx-auto leading-relaxed">
               We're promoting early users heavily. Your ad will appear at the top of listings for maximum visibility.
             </p>
-            <Link
-              to="/create-ad"
+            <button
+              onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
               className="mt-8 inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-zinc-900 font-bold text-base
-                         shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all"
+                         shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
             >
               <span>🔥</span> Post Free Ad Now
-            </Link>
+            </button>
           </div>
         </section>
 
@@ -717,14 +717,14 @@ export default function MainHomePage() {
             <p className="mt-4 text-base text-white/60 max-w-lg mx-auto">
               Don't miss your chance to get featured listings for free. Start posting now.
             </p>
-            <Link
-              to="/create-ad"
+            <button
+              onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
               className="mt-8 inline-flex items-center gap-2 px-10 py-4 rounded-xl
                          bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold text-base
-                         shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                         shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
             >
               <span>🚀</span> Post Your Ad Now
-            </Link>
+            </button>
           </div>
         </section>
 
@@ -773,14 +773,14 @@ export default function MainHomePage() {
             </svg>
             Search
           </a>
-          <Link
-            to="/create-ad"
+          <button
+            onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
             className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm
                        bg-gradient-to-r from-orange-500 to-pink-600 text-white shadow-lg shadow-orange-500/25
-                       active:scale-95 transition-all flex items-center justify-center gap-1.5"
+                       active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
           >
             <span>+</span> Post
-          </Link>
+          </button>
           <Link
             to="/saved"
             className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm

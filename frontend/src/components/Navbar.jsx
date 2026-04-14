@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import NotificationCenter from "./NotificationCenter";
 import { useAuth } from "../context/AuthContext";
@@ -18,6 +18,7 @@ import { useAuth } from "../context/AuthContext";
  */
 export default function Navbar({ showSaved = true }) {
   const { isLoggedIn, user, isAdmin, logout } = useAuth();
+  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 
@@ -135,12 +136,12 @@ export default function Navbar({ showSaved = true }) {
               </Link>
 
               {/* Post an Ad */}
-              <Link
-                to="/create-ad"
-                className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-white shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 hover:brightness-110 transition-all whitespace-nowrap"
+              <button
+                onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
+                className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-white shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 hover:brightness-110 transition-all whitespace-nowrap cursor-pointer"
               >
                 + Post Ad
-              </Link>
+              </button>
             </>
           )}
         </div>
@@ -232,9 +233,9 @@ export default function Navbar({ showSaved = true }) {
                     <Link to="/signup" onClick={() => setMobileMenuOpen(false)} className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:brightness-110 transition-all">
                       Sign Up
                     </Link>
-                    <Link to="/create-ad" onClick={() => setMobileMenuOpen(false)} className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 text-white hover:brightness-110 transition-all">
+                    <button onClick={() => { setMobileMenuOpen(false); navigate(isLoggedIn ? '/create-ad' : '/login'); }} className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 text-white hover:brightness-110 transition-all cursor-pointer">
                       Post an Ad
-                    </Link>
+                    </button>
                   </div>
                 </>
               )}

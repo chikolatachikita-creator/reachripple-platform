@@ -205,7 +205,7 @@ export default function ReachRippleHomePage() {
   );
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white text-zinc-800 pb-20 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
+    <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white text-zinc-800 pb-24 sm:pb-20 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
       {/* ===================================================== */}
       {/* NAVBAR - Using shared component */}
       {/* ===================================================== */}
@@ -214,27 +214,27 @@ export default function ReachRippleHomePage() {
       {/* ===================================================== */}
       {/* HERO SECTION - Premium design with animated background */}
       {/* ===================================================== */}
-      <section className="relative w-full min-h-[600px] overflow-hidden">
+      <section className="relative w-full min-h-[480px] sm:min-h-[550px] md:min-h-[600px] overflow-hidden">
         <AnimatedHeroBackground />
 
-        <div className="relative z-40 flex flex-col items-center justify-center min-h-[600px] text-center px-4 py-8 md:py-12">
+        <div className="relative z-40 flex flex-col items-center justify-center min-h-[480px] sm:min-h-[550px] md:min-h-[600px] text-center px-4 py-6 sm:py-8 md:py-12">
           {/* Pill badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-xs font-medium mb-6">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
             500+ Verified Profiles Online
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.2] drop-shadow-lg">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight leading-[1.2] drop-shadow-lg">
             Find Your Perfect
           </h1>
           
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mt-2 drop-shadow-lg">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mt-2 drop-shadow-lg">
             <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
               Desired Fantasy Companion
             </span>
           </h2>
           
-          <p className="mt-6 text-white/90 text-lg sm:text-xl md:text-2xl max-w-2xl px-2 leading-relaxed font-semibold">
+          <p className="mt-4 sm:mt-6 text-white/90 text-base sm:text-lg md:text-xl lg:text-2xl max-w-2xl px-2 leading-relaxed font-semibold">
             Not just any companion. <span className="text-pink-300">Your perfect one.</span>
           </p>
           
@@ -243,7 +243,7 @@ export default function ReachRippleHomePage() {
           </p>
           
           {/* Quick action buttons */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <Link
               to="/escort/gb"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-xl text-white font-bold text-base
@@ -270,7 +270,7 @@ export default function ReachRippleHomePage() {
       {/* ===================================================== */}
       {/* SEARCH BAR - Premium search form with all filters */}
       {/* ===================================================== */}
-      <section className="relative z-[45] -mt-12 sm:-mt-16 md:-mt-20 px-4 sm:px-6 mb-12">
+      <section className="relative z-[45] -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-20 px-4 sm:px-6 mb-8 sm:mb-12">
         <div className="max-w-5xl mx-auto">
           <HeroSearchBar
             categorySlug="escort"
@@ -655,7 +655,7 @@ export default function ReachRippleHomePage() {
       {/* ===================================================== */}
       <nav className="fixed left-1/2 -translate-x-1/2 bottom-4 w-[min(400px,calc(100%-32px))]
                       rounded-2xl bg-white/95 p-1.5 shadow-2xl shadow-black/15 backdrop-blur-xl border border-zinc-200/80
-                      flex gap-1.5 md:hidden z-50">
+                      flex gap-1.5 md:hidden z-50 safe-area-bottom mobile-bottom-bar">
         <Link
           to="/escort/gb"
           className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm

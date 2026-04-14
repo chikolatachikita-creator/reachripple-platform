@@ -39,7 +39,7 @@ export default function Navbar({ showSaved = true }) {
           {/* Mobile menu toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="sm:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="sm:hidden p-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors touch-target flex items-center justify-center"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -93,7 +93,7 @@ export default function Navbar({ showSaved = true }) {
               {/* Logout */}
               <button
                 onClick={logout}
-                className="px-4 py-2 rounded-xl text-sm font-semibold border border-red-200 text-red-700 hover:bg-red-50 transition-colors dark:border-red-800 dark:text-red-400 dark:hover:bg-red-900/30"
+                className="hidden sm:inline-flex px-4 py-2 rounded-xl text-sm font-semibold border border-red-200 text-red-700 hover:bg-red-50 transition-colors dark:border-red-800 dark:text-red-400 dark:hover:bg-red-900/30"
               >
                 Logout
               </button>
@@ -121,7 +121,7 @@ export default function Navbar({ showSaved = true }) {
               {/* Login */}
               <Link
                 to="/login"
-                className="px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+                className="hidden sm:inline-flex px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
               >
                 Log in
               </Link>
@@ -129,7 +129,7 @@ export default function Navbar({ showSaved = true }) {
               {/* Sign Up */}
               <Link
                 to="/signup"
-                className="px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:brightness-110 transition-all shadow-sm"
+                className="hidden sm:inline-flex px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:brightness-110 transition-all shadow-sm"
               >
                 Sign Up
               </Link>
@@ -137,7 +137,7 @@ export default function Navbar({ showSaved = true }) {
               {/* Post an Ad */}
               <Link
                 to="/create-ad"
-                className="px-5 py-2 rounded-xl text-white font-semibold shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 hover:brightness-110 transition-all"
+                className="hidden sm:inline-flex px-5 py-2 rounded-xl text-white font-semibold shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 hover:brightness-110 transition-all"
               >
                 Post an Ad
               </Link>
@@ -155,7 +155,7 @@ export default function Navbar({ showSaved = true }) {
             onClick={() => setMobileMenuOpen(false)}
           />
           {/* Panel */}
-          <div className="sm:hidden fixed top-16 right-0 w-72 max-h-[calc(100vh-4rem)] bg-white dark:bg-slate-900 shadow-2xl z-50 border-l border-slate-200 dark:border-slate-700 overflow-y-auto animate-slide-in-right">
+          <div className="sm:hidden fixed top-16 right-0 w-[min(80vw,320px)] max-h-[calc(100vh-4rem)] bg-white dark:bg-slate-900 shadow-2xl z-50 border-l border-slate-200 dark:border-slate-700 overflow-y-auto animate-slide-in-right safe-area-right">
             <div className="p-4 space-y-1">
               {isLoggedIn ? (
                 <>

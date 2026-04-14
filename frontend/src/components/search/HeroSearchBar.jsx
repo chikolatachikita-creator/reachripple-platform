@@ -346,15 +346,15 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
                 {/* Search Button */}
                 <button
                     onClick={handleSearch}
-                    className="h-14 px-8 rounded-2xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-lg shadow-lg shadow-pink-500/30 hover:shadow-pink-500/40 active:scale-95 transition-all flex items-center justify-center gap-2 min-w-[140px]"
+                    className="h-14 px-6 sm:px-8 rounded-2xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-base sm:text-lg shadow-lg shadow-pink-500/30 hover:shadow-pink-500/40 active:scale-95 transition-all flex items-center justify-center gap-2 min-w-0 sm:min-w-[140px] w-full lg:w-auto"
                 >
-                    <Search size={22} strokeWidth={2.5} />
+                    <Search size={20} strokeWidth={2.5} />
                     Search
                 </button>
             </div>
 
             {/* Bottom Row: Filters (Distance, Age, Etc) */}
-            <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 flex flex-wrap items-center gap-4 text-sm text-zinc-600 dark:text-zinc-400">
+            <div className="mt-3 sm:mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 flex flex-wrap items-center gap-2 sm:gap-4 text-sm text-zinc-600 dark:text-zinc-400">
                 
                 {/* Distance Slider */}
                 <div className="flex items-center gap-3 bg-zinc-50 dark:bg-black/20 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-700">
@@ -385,7 +385,7 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
 
             {/* Advanced Filters Panel */}
             {showAdvanced && (
-                <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3 animate-in fade-in slide-in-from-top-2">
+                <div className="mt-3 sm:mt-4 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 animate-in fade-in slide-in-from-top-2">
                     <select 
                         value={gender} 
                         onChange={e => setGender(e.target.value)}

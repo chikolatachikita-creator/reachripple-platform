@@ -146,11 +146,11 @@ function AdCard({
     return `${base} hover:-translate-y-1 hover:shadow-xl ${ad.highlight ? "ring-2 ring-pink-200 shadow-pink-100" : ""}`;
   };
 
-  // Image height based on variant
+  // Image height based on variant - responsive for mobile
   const getImageHeight = () => {
-    if (isVip) return 'h-56'; // Bigger for VIP
-    if (isPopular) return 'h-52';
-    return 'h-48'; // Standard
+    if (isVip) return 'h-44 sm:h-52 md:h-56'; // Bigger for VIP
+    if (isPopular) return 'h-40 sm:h-48 md:h-52';
+    return 'h-36 sm:h-44 md:h-48'; // Standard
   };
 
   // Image classes based on variant

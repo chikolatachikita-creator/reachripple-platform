@@ -436,7 +436,7 @@ function CreateAdPageLuxury() {
           {/* ===== STEP 0: FEATURE SELECTION ===== */}
           {currentStep === 0 && (
             <div className="space-y-6 animate-fade-in">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-4 sm:p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-white mb-2">Choose Your Profile Features</h2>
                 <p className="text-white/60 mb-8">Select which advanced features from EscortProfilePage you'd like to include in your profile:</p>
                 
@@ -480,7 +480,7 @@ function CreateAdPageLuxury() {
           {/* ===== STEP 1: TITLE & DESCRIPTION ===== */}
           {currentStep === 1 && (
             <div className="space-y-6 animate-fade-in">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-4 sm:p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-white mb-6">Your Profile Title</h2>
                 
                 <div className="space-y-4">
@@ -558,7 +558,7 @@ function CreateAdPageLuxury() {
           {currentStep === 2 && (
             <div className="space-y-6 animate-fade-in">
               {!enabledFeatures.profileFields && !enabledFeatures.languages && !enabledFeatures.serviceFor ? (
-                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-4 sm:p-6 md:p-8">
                   <h2 className="text-2xl font-bold text-white mb-6">Profile Details</h2>
                   <p className="text-white/60 mb-4">You didn't enable any profile detail features.</p>
                   <button
@@ -570,7 +570,7 @@ function CreateAdPageLuxury() {
                   </button>
                 </div>
               ) : (
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-4 sm:p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-white mb-6">Profile Details</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -769,7 +769,7 @@ function CreateAdPageLuxury() {
           {/* ===== STEP 3: SERVICES & PRICING ===== */}
           {currentStep === 3 && (
             <div className="space-y-6 animate-fade-in">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-4 sm:p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-white mb-6">Services & Pricing</h2>
                 
                 {/* Services - always visible */}
@@ -861,7 +861,7 @@ function CreateAdPageLuxury() {
           {currentStep === 4 && (
             <div className="space-y-6 animate-fade-in">
               {/* Photos */}
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-4 sm:p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-white mb-6">Photos & Videos</h2>
                 
                 {/* Photo Gallery */}
@@ -891,7 +891,7 @@ function CreateAdPageLuxury() {
                     </div>
                   )}
 
-                  <label className="flex items-center justify-center w-full p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-pink-500/50 transition-colors cursor-pointer">
+                  <label className="flex items-center justify-center w-full p-4 sm:p-6 md:p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-pink-500/50 transition-colors cursor-pointer">
                     <div className="text-center">
                       <Camera className="w-8 h-8 text-pink-400 mx-auto mb-2" />
                       <p className="text-white/70">Drag photos here or click to browse</p>
@@ -930,7 +930,7 @@ function CreateAdPageLuxury() {
                     </div>
                   )}
 
-                  <label className="flex items-center justify-center w-full p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-pink-500/50 transition-colors cursor-pointer">
+                  <label className="flex items-center justify-center w-full p-4 sm:p-6 md:p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-pink-500/50 transition-colors cursor-pointer">
                     <div className="text-center">
                       <Video className="w-8 h-8 text-pink-400 mx-auto mb-2" />
                       <p className="text-white/70">Drag video here or click to browse</p>
@@ -947,7 +947,7 @@ function CreateAdPageLuxury() {
               </div>
 
               {/* Contact Info */}
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-4 sm:p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
                 
                 <div className="space-y-4">

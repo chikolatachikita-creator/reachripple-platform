@@ -405,28 +405,29 @@ export default function MainHomePage() {
                 </Link>
                 <button
                   onClick={logout}
-                  className="px-4 py-2 rounded-xl text-sm font-semibold text-zinc-700 hover:bg-zinc-100 transition-all"
+                  className="hidden sm:flex px-4 py-2 rounded-xl text-sm font-semibold text-zinc-700 hover:bg-zinc-100 transition-all"
                 >
                   Logout
                 </button>
               </>
             ) : (
               <>
-                <Link to="/login" className="px-4 py-2 rounded-xl text-sm font-semibold text-zinc-700 hover:bg-zinc-100 transition-all">
+                <Link to="/login" className="hidden sm:flex px-4 py-2 rounded-xl text-sm font-semibold text-zinc-700 hover:bg-zinc-100 transition-all">
                   Login
                 </Link>
-                <Link to="/signup" className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                <Link to="/signup" className="hidden sm:flex px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all">
                   Sign Up
                 </Link>
               </>
             )}
             <Link
               to="/create-ad"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl
                          bg-gradient-to-r from-orange-500 to-pink-600 text-white font-semibold text-sm
                          shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
-              <span>+</span> Post Ad
+              <span>+</span> <span className="hidden sm:inline">Post</span> Ad
+            </Link>
             </Link>
           </div>
         </div>
@@ -443,7 +444,7 @@ export default function MainHomePage() {
           <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
 
-          <div className="relative max-w-6xl mx-auto px-4 py-12 md:py-20">
+          <div className="relative max-w-6xl mx-auto px-4 py-10 md:py-20">
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
               {/* Left: Title + Search */}
               <div className="text-center lg:text-left">
@@ -452,7 +453,7 @@ export default function MainHomePage() {
                   120,000+ active listings
                 </div>
                 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
                   Welcome to
                   <span className="block">
                     <span className="text-pink-400">Reach</span><span className="bg-gradient-to-r from-purple-400 to-blue-600 bg-clip-text text-transparent">Ripple</span>
@@ -464,8 +465,8 @@ export default function MainHomePage() {
                 </p>
 
                 {/* Search Card */}
-                <div className={`mt-8 bg-white rounded-2xl p-5 shadow-2xl shadow-black/20 border border-white/20 transition-all duration-300 ${searchFocused ? 'ring-2 ring-orange-400/50 shadow-orange-500/20' : ''}`}>
-                  <form onSubmit={handleSearch} className="grid gap-4 md:grid-cols-[1fr_1fr_auto]">
+                <div className={`mt-6 sm:mt-8 bg-white rounded-2xl p-4 sm:p-5 shadow-2xl shadow-black/20 border border-white/20 transition-all duration-300 ${searchFocused ? 'ring-2 ring-orange-400/50 shadow-orange-500/20' : ''}`}>
+                  <form onSubmit={handleSearch} className="grid gap-3 sm:gap-4 md:grid-cols-[1fr_1fr_auto]">
                     <div>
                       <label htmlFor="cat" className="block text-xs font-bold text-zinc-600 tracking-wide mb-2">
                         Pick a category
@@ -605,22 +606,22 @@ export default function MainHomePage() {
         </section>
 
         {/* All Categories Section */}
-        <section className="py-10 pb-32 md:pb-16">
+        <section className="py-8 sm:py-10 pb-28 sm:pb-32 md:pb-16">
           <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-xl md:text-2xl font-bold text-zinc-900 mb-2">Browse Categories</h2>
-            <p className="text-sm text-zinc-500 mb-6">Discover listings across all our categories</p>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900 mb-2">Browse Categories</h2>
+            <p className="text-xs sm:text-sm text-zinc-500 mb-4 sm:mb-6">Discover listings across all our categories</p>
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {PLATFORM_CATEGORIES.map((cat) => (
                 <Link
                   key={cat.slug}
                   to={cat.slug === "escorts" ? "/escorts" : `/category/${cat.slug}`}
-                  className="relative overflow-hidden rounded-2xl bg-white border border-zinc-200 p-6
-                              hover:shadow-lg hover:border-zinc-300 hover:scale-[1.02] active:scale-[0.98] transition-all group"
+                  className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-white border border-zinc-200 p-4 sm:p-6
+                              hover:shadow-lg hover:border-zinc-300 hover:scale-[1.01] sm:hover:scale-[1.02] active:scale-[0.98] transition-all group"
                 >
                   <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${cat.bgGradient}`} />
                   <div className="relative z-10 pl-2">
-                    <h3 className="text-lg font-bold text-zinc-900 mb-1 group-hover:text-pink-600 transition-colors">{cat.name}</h3>
-                    <p className="text-sm text-zinc-500">{cat.description}</p>
+                    <h3 className="text-base sm:text-lg font-bold text-zinc-900 mb-0.5 sm:mb-1 group-hover:text-pink-600 transition-colors">{cat.name}</h3>
+                    <p className="text-xs sm:text-sm text-zinc-500 line-clamp-2">{cat.description}</p>
                     {cat.monetized && (
                       <span className="mt-3 inline-block text-xs bg-pink-50 text-pink-600 border border-pink-100 px-2 py-0.5 rounded-full">
                         Premium
@@ -668,8 +669,8 @@ export default function MainHomePage() {
 
         {/* Mobile Bottom Bar */}
         <nav className="fixed left-1/2 -translate-x-1/2 bottom-4 w-[min(400px,calc(100%-32px))]
-                        rounded-2xl bg-white/90 p-1.5 shadow-2xl shadow-black/15 backdrop-blur-xl border border-zinc-200/80
-                        flex gap-1.5 md:hidden z-50">
+                        rounded-2xl bg-white/95 p-1.5 shadow-2xl shadow-black/15 backdrop-blur-xl border border-zinc-200/80
+                        flex gap-1.5 md:hidden z-50 safe-area-bottom mobile-bottom-bar">
           <a
             href="#search"
             className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm

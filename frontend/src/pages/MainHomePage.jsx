@@ -407,9 +407,14 @@ export default function MainHomePage() {
                 </button>
               </>
             ) : (
-              <Link to="/login" className="px-4 py-2 rounded-xl text-sm font-semibold text-zinc-700 hover:bg-zinc-100 transition-all">
-                Login
-              </Link>
+              <>
+                <Link to="/login" className="px-4 py-2 rounded-xl text-sm font-semibold text-zinc-700 hover:bg-zinc-100 transition-all">
+                  Login
+                </Link>
+                <Link to="/signup" className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                  Sign Up
+                </Link>
+              </>
             )}
             <Link
               to="/create-ad"

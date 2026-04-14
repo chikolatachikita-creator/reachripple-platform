@@ -112,7 +112,26 @@ export default function UserAnalyticsPage() {
       >
         <div className="max-w-5xl mx-auto">
           {/* Header */}
-          <h1 className="text-2xl font-bold text-zinc-900 mb-6">My Analytics</h1>
+          <div className="flex items-center justify-between mb-6">
+            <h1 className="text-2xl font-bold text-zinc-900">My Analytics</h1>
+            <button
+              onClick={async () => {
+                try {
+                  const res = await api.get("/analytics/export?days=30", { responseType: "blob" });
+                  const url = window.URL.createObjectURL(new Blob([res.data]));
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = "analytics-30d.csv";
+                  a.click();
+                  window.URL.revokeObjectURL(url);
+                } catch { showError("Failed to export CSV"); }
+              }}
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-zinc-700 bg-white border border-zinc-200 rounded-xl hover:bg-zinc-50 transition-all"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3M3 17v3a2 2 0 002 2h14a2 2 0 002-2v-3" /></svg>
+              Export CSV
+            </button>
+          </div>
 
           {/* Stats Row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -149,6 +168,7 @@ export default function UserAnalyticsPage() {
                         <img
                           src={getImageUrl(ad.image)}
                           alt=""
+                          loading="lazy"
                           className="w-10 h-10 rounded-lg object-cover flex-shrink-0"
                         />
                       ) : (

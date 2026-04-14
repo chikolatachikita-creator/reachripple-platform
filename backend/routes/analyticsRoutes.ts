@@ -173,4 +173,55 @@ router.get("/dashboard", auth, async (req: AuthRequest, res: Response) => {
   }
 });
 
+// ── GET /api/analytics/export — CSV export of analytics data ──
+router.get("/export", auth, async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.userId;
+    if (!userId) return res.status(401).json({ error: "Unauthorized" });
+
+    const days = Math.min(parseInt(req.query.days as string) || 30, 90);
+    const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+
+    const views = await ProfileView.aggregate([
+      {
+        $match: {
+          advertiserId: new mongoose.Types.ObjectId(userId),
+          createdAt: { $gte: since },
+        },
+      },
+      {
+        $lookup: {
+          from: "ads",
+          localField: "adId",
+          foreignField: "_id",
+          as: "ad",
+        },
+      },
+      { $unwind: { path: "$ad", preserveNullAndEmptyArrays: true } },
+      {
+        $project: {
+          date: { $dateToString: { format: "%Y-%m-%d %H:%M", date: "$createdAt" } },
+          adTitle: { $ifNull: ["$ad.title", "Deleted Ad"] },
+          referrer: { $ifNull: ["$referrer", ""] },
+        },
+      },
+      { $sort: { date: -1 } },
+    ]);
+
+    const header = "Date,Ad Title,Referrer\n";
+    const rows = views.map((v: any) => {
+      const title = String(v.adTitle).replace(/"/g, '""');
+      const ref = String(v.referrer).replace(/"/g, '""');
+      return `${v.date},"${title}","${ref}"`;
+    }).join("\n");
+
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", `attachment; filename=analytics-${days}d.csv`);
+    return res.send(header + rows);
+  } catch (err) {
+    logger.error("Analytics CSV export error:", err);
+    return res.status(500).json({ error: "Server error" });
+  }
+});
+
 export default router;

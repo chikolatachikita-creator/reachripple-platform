@@ -198,6 +198,18 @@ router.post('/purchase', auth, async (req: AuthRequest, res: Response) => {
         error: 'Only approved ads can be boosted',
       });
     }
+
+    // Idempotency: prevent duplicate purchases with same paymentReference
+    if (paymentReference) {
+      const existing = await BoostPurchase.findOne({ paymentReference });
+      if (existing) {
+        return res.status(409).json({
+          success: false,
+          error: 'This payment has already been processed',
+          purchaseId: existing._id,
+        });
+      }
+    }
     
     // Calculate price
     const location = ad.location || ad.locationSlug;

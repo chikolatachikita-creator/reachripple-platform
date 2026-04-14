@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useParams, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider, useAuth } from "./context/AuthContext";
@@ -11,60 +11,62 @@ import ScrollToTop from "./components/ScrollToTop";
 import AgeGateModal from "./components/trust/AgeGateModal";
 // import SupportChatWidget from "./components/SupportChatWidget"; // Removed: support chat widget deleted
 
-// Public pages
+// Critical public pages (eager load for fast first paint)
 import MainHomePage from "./pages/MainHomePage.jsx";
 import EscortsHomePage from "./pages/EscortsHomePage.jsx";
-import SearchResultsPage from "./pages/SearchResultsPage.jsx";
-import EscortProfilePage from "./pages/EscortProfilePage_Cinematic.jsx";
-import SavedProfilesPage from "./pages/SavedProfilesPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
-import SignupPage from "./pages/SignupPage.jsx";
-import AdminLoginPage from "./pages/AdminLoginPage.tsx";
-import OAuthCallbackPage from "./pages/OAuthCallbackPage.tsx";
-import AgencyPublisherPage from "./pages/AgencyPublisherPage.jsx";
-
-// User pages
-import UserDashboardPage from "./pages/UserDashboardPage.jsx";
-import CreateAdPageLuxury from "./pages/CreateAdPage_Luxury.jsx";
-import CategorySelectPage from "./pages/CategorySelectPage.jsx";
-import CreateAdCategoryPage from "./pages/CreateAdCategoryPage.jsx";
-import EditAdPageLuxury from "./pages/EditAdPage_Luxury.jsx";
-import UserProfilePage from "./pages/UserProfilePage.jsx";
-import MyAdsPage from "./pages/MyAdsPage.jsx";
-import HelpPage from "./pages/HelpPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
-// import ChatPage from "./pages/ChatPage.jsx"; // Removed: messaging via SMS
-// import BuyCreditsPage from "./pages/BuyCreditsPage.tsx"; // Removed: credits system replaced with direct pricing
 
-// Admin pages
-import AdminDashboardPage from "./pages/AdminDashboardPage.tsx";
-import AdminUsersPage from "./pages/AdminUsersPage.tsx";
-import AdminAdsPage from "./pages/AdminAdsPage.tsx";
-import AdminReportsPage from "./pages/AdminReportsPage.tsx";
-import AdminSettingsPage from "./pages/AdminSettingsPage.tsx";
-import AdminAnalyticsPage from "./pages/AdminAnalyticsPage.tsx";
-import AdminModerationPage from "./pages/AdminModerationPage.tsx";
-import AdminRevenuePage from "./pages/AdminRevenuePage.tsx";
-import AdminNetworkPage from "./pages/AdminNetworkPage.tsx";
-import SafetyPage from "./pages/SafetyPage.jsx";
-import ContactPage from "./pages/ContactPage.jsx";
-import TermsPage from "./pages/TermsPage.jsx";
-import PrivacyPage from "./pages/PrivacyPage.jsx";
-import CookiePolicyPage from "./pages/CookiePolicyPage.jsx";
-import ModernSlaveryPage from "./pages/ModernSlaveryPage.jsx";
-import LawEnforcementPage from "./pages/LawEnforcementPage.jsx";
-import OnlineSafetyPage from "./pages/OnlineSafetyPage.jsx";
-import VerifyEmailPage from "./pages/VerifyEmailPage.jsx";
-import ResetPasswordPage from "./pages/ResetPasswordPage.jsx";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage.jsx";
-import CategoryPage from "./pages/CategoryPage.jsx";
-import GrowthDashboardPage from "./pages/GrowthDashboardPage.jsx";
-import TierSelectionPage from "./pages/TierSelectionPage.jsx";
-import UserAnalyticsPage from "./pages/UserAnalyticsPage.jsx";
-import VerificationPage from "./pages/VerificationPage.jsx";
+// Lazy-loaded public pages
+const SearchResultsPage = React.lazy(() => import("./pages/SearchResultsPage.jsx"));
+const EscortProfilePage = React.lazy(() => import("./pages/EscortProfilePage_Cinematic.jsx"));
+const SavedProfilesPage = React.lazy(() => import("./pages/SavedProfilesPage.jsx"));
+const SignupPage = React.lazy(() => import("./pages/SignupPage.jsx"));
+const AdminLoginPage = React.lazy(() => import("./pages/AdminLoginPage.tsx"));
+const OAuthCallbackPage = React.lazy(() => import("./pages/OAuthCallbackPage.tsx"));
+const AgencyPublisherPage = React.lazy(() => import("./pages/AgencyPublisherPage.jsx"));
+
+// Lazy-loaded user pages
+const UserDashboardPage = React.lazy(() => import("./pages/UserDashboardPage.jsx"));
+const CreateAdPageLuxury = React.lazy(() => import("./pages/CreateAdPage_Luxury.jsx"));
+const CategorySelectPage = React.lazy(() => import("./pages/CategorySelectPage.jsx"));
+const CreateAdCategoryPage = React.lazy(() => import("./pages/CreateAdCategoryPage.jsx"));
+const EditAdPageLuxury = React.lazy(() => import("./pages/EditAdPage_Luxury.jsx"));
+const UserProfilePage = React.lazy(() => import("./pages/UserProfilePage.jsx"));
+const MyAdsPage = React.lazy(() => import("./pages/MyAdsPage.jsx"));
+const HelpPage = React.lazy(() => import("./pages/HelpPage.jsx"));
+
+// Lazy-loaded admin pages
+const AdminDashboardPage = React.lazy(() => import("./pages/AdminDashboardPage.tsx"));
+const AdminUsersPage = React.lazy(() => import("./pages/AdminUsersPage.tsx"));
+const AdminAdsPage = React.lazy(() => import("./pages/AdminAdsPage.tsx"));
+const AdminReportsPage = React.lazy(() => import("./pages/AdminReportsPage.tsx"));
+const AdminSettingsPage = React.lazy(() => import("./pages/AdminSettingsPage.tsx"));
+const AdminAnalyticsPage = React.lazy(() => import("./pages/AdminAnalyticsPage.tsx"));
+const AdminModerationPage = React.lazy(() => import("./pages/AdminModerationPage.tsx"));
+const AdminRevenuePage = React.lazy(() => import("./pages/AdminRevenuePage.tsx"));
+const AdminNetworkPage = React.lazy(() => import("./pages/AdminNetworkPage.tsx"));
+
+// Lazy-loaded static pages
+const SafetyPage = React.lazy(() => import("./pages/SafetyPage.jsx"));
+const ContactPage = React.lazy(() => import("./pages/ContactPage.jsx"));
+const TermsPage = React.lazy(() => import("./pages/TermsPage.jsx"));
+const PrivacyPage = React.lazy(() => import("./pages/PrivacyPage.jsx"));
+const CookiePolicyPage = React.lazy(() => import("./pages/CookiePolicyPage.jsx"));
+const ModernSlaveryPage = React.lazy(() => import("./pages/ModernSlaveryPage.jsx"));
+const LawEnforcementPage = React.lazy(() => import("./pages/LawEnforcementPage.jsx"));
+const OnlineSafetyPage = React.lazy(() => import("./pages/OnlineSafetyPage.jsx"));
+const VerifyEmailPage = React.lazy(() => import("./pages/VerifyEmailPage.jsx"));
+const ResetPasswordPage = React.lazy(() => import("./pages/ResetPasswordPage.jsx"));
+const ForgotPasswordPage = React.lazy(() => import("./pages/ForgotPasswordPage.jsx"));
+const CategoryPage = React.lazy(() => import("./pages/CategoryPage.jsx"));
+const GrowthDashboardPage = React.lazy(() => import("./pages/GrowthDashboardPage.jsx"));
+const TierSelectionPage = React.lazy(() => import("./pages/TierSelectionPage.jsx"));
+const UserAnalyticsPage = React.lazy(() => import("./pages/UserAnalyticsPage.jsx"));
+const VerificationPage = React.lazy(() => import("./pages/VerificationPage.jsx"));
 
 // Layout
-import AdminLayout from "./layouts/AdminLayout.tsx";
+const AdminLayout = React.lazy(() => import("./layouts/AdminLayout.tsx"));
 
 // ===== VIVASTREET-STYLE ROUTING (Option A: /:categorySlug/:locationSlug) =====
 // Legacy route redirect component (preserves query string)
@@ -138,6 +140,7 @@ export default function App() {
                   <SkipLink />
                   <ScrollToTop />
                   <main id="main-content">
+                  <Suspense fallback={<AuthLoadingSpinner />}>
                   <Routes>
 
             {/* PUBLIC ROUTES */}
@@ -271,6 +274,7 @@ export default function App() {
           {/* 404 CATCH-ALL ROUTE */}
           <Route path="*" element={<NotFoundPage />} />
               </Routes>
+              </Suspense>
               </main>
               </ToastProviderGlobal>
           </AuthProvider>

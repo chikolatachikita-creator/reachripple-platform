@@ -116,6 +116,7 @@ export default function FeaturedProfilesCarousel({ profiles = [], autoPlayInterv
         <img
           src={mainImage}
           alt={profile.title || 'Featured profile'}
+          loading="lazy"
           className="w-full h-full object-cover animate-fade-in"
         />
 

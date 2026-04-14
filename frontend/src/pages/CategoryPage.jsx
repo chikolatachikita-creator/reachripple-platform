@@ -136,6 +136,7 @@ export default function CategoryPage() {
                     <img
                       src={getAssetUrl(ad.images[0])}
                       alt={ad.title}
+                      loading="lazy"
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (

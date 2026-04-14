@@ -302,6 +302,7 @@ export default function MyAdsPage() {
                       <img
                         src={getImageUrl(ad.images[0])}
                         alt={ad.title}
+                        loading="lazy"
                         className="w-full h-full object-cover"
                       />
                     ) : (

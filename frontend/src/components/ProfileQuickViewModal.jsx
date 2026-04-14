@@ -44,6 +44,7 @@ export default function ProfileQuickViewModal({ profile, isOpen, onClose }) {
             <img
               src={currentImage}
               alt={`${profile.title} - ${imageIndex + 1}`}
+              loading="lazy"
               className="w-full h-full object-cover"
             />
             

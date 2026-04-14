@@ -548,7 +548,7 @@ const EscortProfilePage = () => {
                   <div className="relative">
                     <div className="w-16 h-16 rounded-2xl overflow-hidden ring-2 ring-rose-500/50">
                       {profile.gallery?.[0] ? (
-                        <img src={profile.gallery[0].src} alt="" className="w-full h-full object-cover" />
+                        <img src={profile.gallery[0].src} alt="" loading="lazy" className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-rose-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl">
                           {profile.title?.charAt(0)}
@@ -641,7 +641,7 @@ const EscortProfilePage = () => {
                   </>
                 ) : (
                   <>
-                    <img src={item.src} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={item.src} alt="" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </>
                 )}
@@ -933,7 +933,7 @@ const EscortProfilePage = () => {
                   <div className="relative">
                     <div className="w-16 h-16 rounded-2xl overflow-hidden ring-2 ring-rose-500/30">
                       {profile.gallery?.[0] ? (
-                        <img src={profile.gallery[0].src} alt="" className="w-full h-full object-cover" />
+                        <img src={profile.gallery[0].src} alt="" loading="lazy" className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-rose-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl">
                           {profile.title?.charAt(0)}
@@ -1049,6 +1049,7 @@ const EscortProfilePage = () => {
                     <img 
                       src={similar.images?.[0] ? getImageUrl(similar.images[0]) : similar.gallery?.[0]?.src || '/placeholder-profile.jpg'}
                       alt={similar.title}
+                      loading="lazy"
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

@@ -5,6 +5,7 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import helmet from "helmet";
+import mongoSanitize from "express-mongo-sanitize";
 import path from "path";
 import rateLimit from "express-rate-limit";
 import http from "http";
@@ -168,6 +169,9 @@ app.use(cors(corsOptions));
 // Body parser
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+// SECURITY: Sanitize user input to prevent NoSQL injection
+app.use(mongoSanitize());
 
 // SECURITY: Cookie parser for session management
 app.use(cookieParser());

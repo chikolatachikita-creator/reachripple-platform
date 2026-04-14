@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+import ThemeToggle from "../components/ThemeToggle";
 import { useAuth } from "../context/AuthContext";
 import { PLATFORM_CATEGORIES } from "../config/categories";
 
@@ -394,39 +395,40 @@ export default function MainHomePage() {
             </div>
           </Link>
           
-          <div className="flex items-center gap-2 flex-nowrap">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-nowrap">
+            <ThemeToggle />
             <Link to="/saved" className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-all whitespace-nowrap">
               <span>⭐</span> Saved
             </Link>
             {isLoggedIn ? (
               <>
-                <Link to="/my-ads" className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-all whitespace-nowrap">
+                <Link to="/my-ads" className="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-all whitespace-nowrap">
                   My Ads
                 </Link>
                 <button
                   onClick={logout}
-                  className="hidden sm:inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-zinc-700 border border-zinc-200 hover:bg-zinc-100 transition-all whitespace-nowrap"
+                  className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-zinc-700 border border-zinc-200 hover:bg-zinc-100 transition-all whitespace-nowrap"
                 >
                   Logout
                 </button>
               </>
             ) : (
               <>
-                <Link to="/login" className="hidden sm:inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-zinc-700 border border-zinc-200 hover:bg-zinc-100 transition-all whitespace-nowrap">
+                <Link to="/login" className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-zinc-700 border border-zinc-200 hover:bg-zinc-100 transition-all whitespace-nowrap">
                   Login
                 </Link>
-                <Link to="/signup" className="hidden sm:inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap">
+                <Link to="/signup" className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap">
                   Sign Up
                 </Link>
               </>
             )}
             <Link
               to="/create-ad"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl
-                         bg-gradient-to-r from-orange-500 to-pink-600 text-white font-semibold text-sm
+              className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl
+                         bg-gradient-to-r from-orange-500 to-pink-600 text-white font-semibold text-xs sm:text-sm
                          shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap"
             >
-              <span>+</span> <span className="hidden sm:inline">Post</span> Ad
+              + Post Ad
             </Link>
           </div>
         </div>

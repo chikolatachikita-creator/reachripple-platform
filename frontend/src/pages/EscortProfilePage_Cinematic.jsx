@@ -686,19 +686,21 @@ const EscortProfilePage = () => {
                   <p className="text-gray-700 leading-relaxed text-sm sm:text-base lg:text-lg" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(profile.description || 'Contact me to learn more about my services and personality! I look forward to meeting you.', { ALLOWED_TAGS: ['br', 'p', 'strong', 'em'] }) }} />
                 </div>
                 
-                {/* Profile Stats Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-4">
+                {/* Profile Stats List */}
+                <div className="divide-y divide-gray-100">
                   {[
-                    { label: 'Age', value: profile.age || '—', icon: '📅', color: 'from-rose-500 to-pink-600' },
-                    { label: 'Type', value: profile.profileFields?.type || 'Independent', icon: profile.profileFields?.type === 'Agency' ? '🏢' : '👤', color: profile.profileFields?.type === 'Agency' ? 'from-sky-500 to-blue-600' : 'from-pink-500 to-rose-600' },
-                    { label: 'Height', value: profile.profileFields?.height || "5'7\"", icon: '📏', color: 'from-purple-500 to-indigo-600' },
-                    { label: 'Ethnicity', value: profile.profileFields?.ethnicity || profile.ethnicity || '—', icon: '🌍', color: 'from-emerald-500 to-teal-600' },
-                    { label: 'Languages', value: profile.profileFields?.languages?.join(', ') || 'English', icon: '💬', color: 'from-amber-500 to-orange-600' },
+                    { label: 'Age', value: profile.age || '—', icon: '📅' },
+                    { label: 'Type', value: profile.profileFields?.type || 'Independent', icon: profile.profileFields?.type === 'Agency' ? '🏢' : '👤' },
+                    { label: 'Height', value: profile.profileFields?.height || "5'7\"", icon: '📏' },
+                    { label: 'Ethnicity', value: profile.profileFields?.ethnicity || profile.ethnicity || '—', icon: '🌍' },
+                    { label: 'Languages', value: profile.profileFields?.languages?.join(', ') || 'English', icon: '💬' },
                   ].map((stat, i) => (
-                    <div key={i} className="stat-card group">
-                      <span className={`stat-icon bg-gradient-to-br ${stat.color} text-white`}>{stat.icon}</span>
-                      <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">{stat.label}</p>
-                      <p className="font-bold text-gray-800 text-sm truncate">{stat.value}</p>
+                    <div key={i} className="flex items-center justify-between py-3">
+                      <span className="flex items-center gap-2.5 text-sm text-gray-500">
+                        <span className="text-base">{stat.icon}</span>
+                        {stat.label}
+                      </span>
+                      <span className="font-semibold text-gray-800 text-sm">{stat.value}</span>
                     </div>
                   ))}
                 </div>

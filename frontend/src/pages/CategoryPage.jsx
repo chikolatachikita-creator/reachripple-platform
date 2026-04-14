@@ -20,6 +20,8 @@ export default function CategoryPage() {
   const [selectedSub, setSelectedSub] = useState("All");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [sortBy, setSortBy] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (!category) return;
@@ -32,6 +34,12 @@ export default function CategoryPage() {
     if (selectedSub !== "All") {
       params.subcategory = selectedSub;
     }
+    if (sortBy) {
+      params.sortBy = sortBy;
+    }
+    if (searchQuery.trim()) {
+      params.search = searchQuery.trim();
+    }
     api.get("/ads", { params })
       .then((res) => {
         setListings(res.data.ads || []);
@@ -39,7 +47,7 @@ export default function CategoryPage() {
       })
       .catch(() => setListings([]))
       .finally(() => setLoading(false));
-  }, [category, selectedSub, page]);
+  }, [category, selectedSub, page, sortBy, searchQuery]);
 
   if (!category) {
     return (
@@ -61,6 +69,15 @@ export default function CategoryPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Breadcrumbs */}
+      <nav className="max-w-7xl mx-auto px-4 py-3 text-sm" aria-label="Breadcrumb">
+        <ol className="flex items-center gap-2 text-zinc-500">
+          <li><Link to="/" className="hover:text-zinc-800 transition-colors">Home</Link></li>
+          <li className="text-zinc-300">/</li>
+          <li className="text-zinc-800 font-medium">{category.name}</li>
+        </ol>
+      </nav>
+
       {/* Hero Section */}
       <div className={`bg-gradient-to-r ${category.bgGradient} text-white`}>
         <div className="max-w-7xl mx-auto px-4 py-16">
@@ -96,6 +113,32 @@ export default function CategoryPage() {
               {sub}
             </button>
           ))}
+        </div>
+
+        {/* Search & Sort Bar */}
+        <div className="flex flex-col sm:flex-row gap-3 mt-4">
+          <div className="relative flex-1">
+            <input
+              type="text"
+              placeholder={`Search ${category.name}...`}
+              value={searchQuery}
+              onChange={(e) => { setSearchQuery(e.target.value); setPage(1); }}
+              className="w-full h-10 border border-gray-200 rounded-xl pl-9 pr-4 text-sm outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100 bg-white"
+            />
+            <svg className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <select
+            value={sortBy}
+            onChange={(e) => { setSortBy(e.target.value); setPage(1); }}
+            className="h-10 border border-gray-200 rounded-xl px-3 text-sm outline-none focus:border-pink-400 bg-white cursor-pointer"
+          >
+            <option value="">Sort: Default</option>
+            <option value="newest">Newest First</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+          </select>
         </div>
       </div>
 

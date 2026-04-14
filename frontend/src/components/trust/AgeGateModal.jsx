@@ -1,7 +1,15 @@
 // src/components/trust/AgeGateModal.jsx
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const AGE_GATE_KEY = "rr_age_verified";
+
+// Routes that contain adult content and require age verification
+const ADULT_PATHS = [
+  "/escorts", "/escort/", "/profile/",
+  "/category/massage", "/category/dating",
+  "/category/alternative", "/category/entertainment",
+];
 
 /**
  * Check if user has verified age — used by the gate and by page guards.
@@ -12,21 +20,31 @@ export function isAgeVerified() {
 
 /**
  * AgeGateModal — Full-screen age verification splash.
- * Blocks entire app until user confirms 18+.
+ * Only shown on adult-content routes (escorts, massage, dating, alternative, entertainment).
+ * General categories (jobs, vehicles, property, pets, buy-sell, community) are not gated.
  * Stores consent in localStorage so it persists across sessions.
  */
 export default function AgeGateModal() {
   const [visible, setVisible] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    if (!isAgeVerified()) {
+    if (isAgeVerified()) {
+      setVisible(false);
+      return;
+    }
+    const isAdultRoute = ADULT_PATHS.some((p) => location.pathname.startsWith(p));
+    if (isAdultRoute) {
       setVisible(true);
       document.body.style.overflow = "hidden";
+    } else {
+      setVisible(false);
+      document.body.style.overflow = "";
     }
     return () => {
       document.body.style.overflow = "";
     };
-  }, []);
+  }, [location.pathname]);
 
   const handleConfirm = () => {
     localStorage.setItem(AGE_GATE_KEY, "true");

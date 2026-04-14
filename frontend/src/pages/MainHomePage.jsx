@@ -337,10 +337,6 @@ export default function MainHomePage() {
     const ESCORT_SLUGS = new Set([
       "escorts", "trans-escorts", "gay-escorts",
     ]);
-    // Non-escort categories route to /category/:slug
-    const CATEGORY_SLUGS = new Set([
-      "massage", "dating", "jobs", "entertainment", "alternative",
-    ]);
 
     const location = region || "gb";
 
@@ -349,25 +345,33 @@ export default function MainHomePage() {
         navigate(`/escort/${location}`);
         return;
       }
-      if (CATEGORY_SLUGS.has(category)) {
-        navigate(`/category/${category}`);
+      // Check if it's a known PLATFORM_CATEGORIES slug
+      const platformCat = PLATFORM_CATEGORIES.find((c) => c.slug === category);
+      if (platformCat) {
+        if (platformCat.slug === "escorts") {
+          navigate(`/escort/${location}`);
+        } else {
+          navigate(`/category/${platformCat.slug}`);
+        }
         return;
       }
       // Subcategory slugs — find which parent they belong to
       for (const cat of CATEGORIES) {
         const sub = cat.subs.find((s) => s.slug === category);
         if (sub) {
-          if (cat.id === "adult-services") {
+          if (cat.id === "free-personals") {
             navigate(`/escort/${location}`);
           } else {
-            navigate(`/category/${cat.id}`);
+            // Map the parent CATEGORIES id to matching PLATFORM_CATEGORIES slug
+            const mapped = PLATFORM_CATEGORIES.find((c) => c.slug === cat.id);
+            navigate(`/category/${mapped ? mapped.slug : cat.id}`);
           }
           return;
         }
       }
     }
 
-    // Default: go to escort search with selected region
+    // Default: go to escorts search with selected region
     navigate(`/escort/${location}`);
   };
 
@@ -610,19 +614,20 @@ export default function MainHomePage() {
                 <Link
                   key={cat.slug}
                   to={cat.slug === "escorts" ? "/escorts" : `/category/${cat.slug}`}
-                  className={`relative overflow-hidden rounded-2xl bg-gradient-to-r ${cat.bgGradient} p-6 text-white
-                              hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all group`}
+                  className="relative overflow-hidden rounded-2xl bg-white border border-zinc-200 p-6
+                              hover:shadow-lg hover:border-zinc-300 hover:scale-[1.02] active:scale-[0.98] transition-all group"
                 >
-                  <div className="relative z-10">
-                    <h3 className="text-lg font-bold mb-1">{cat.name}</h3>
-                    <p className="text-sm opacity-80">{cat.description}</p>
+                  <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${cat.bgGradient}`} />
+                  <div className="relative z-10 pl-2">
+                    <h3 className="text-lg font-bold text-zinc-900 mb-1 group-hover:text-pink-600 transition-colors">{cat.name}</h3>
+                    <p className="text-sm text-zinc-500">{cat.description}</p>
                     {cat.monetized && (
-                      <span className="mt-3 inline-block text-xs bg-white/20 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                      <span className="mt-3 inline-block text-xs bg-pink-50 text-pink-600 border border-pink-100 px-2 py-0.5 rounded-full">
                         Premium
                       </span>
                     )}
                   </div>
-                  <div className="absolute right-4 bottom-4 text-4xl opacity-20 group-hover:opacity-40 transition-opacity font-bold">
+                  <div className="absolute right-4 bottom-4 text-2xl text-zinc-200 group-hover:text-zinc-400 transition-colors font-bold">
                     →
                   </div>
                 </Link>

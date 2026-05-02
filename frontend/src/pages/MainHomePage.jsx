@@ -436,6 +436,62 @@ export default function MainHomePage() {
       </header>
 
       <main className="relative">
+        {/* ===== BROWSE CATEGORIES ===== */}
+        <section id="categories" className="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700 sticky top-[65px] z-30">
+          <div className="max-w-6xl mx-auto px-4">
+            {/* Category Tabs */}
+            <div className="overflow-x-auto hide-scrollbar -mx-4 px-4">
+              <div className="flex gap-0 border-b border-zinc-200 dark:border-zinc-700 min-w-max">
+                {CATEGORIES.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onMouseEnter={() => setActiveTab(cat.id)}
+                    onClick={() => setActiveTab(activeTab === cat.id ? null : cat.id)}
+                    className={`relative px-4 py-3 text-sm font-semibold whitespace-nowrap transition-all cursor-pointer
+                      ${activeTab === cat.id
+                        ? "text-pink-600 dark:text-pink-400"
+                        : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200"
+                      }`}
+                  >
+                    <span className="flex items-center gap-1.5">
+                      <span>{cat.icon}</span>
+                      <span>{cat.title}</span>
+                    </span>
+                    {activeTab === cat.id && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-t" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Subcategories Panel */}
+            {activeTab && (() => {
+              const activeCat = CATEGORIES.find((c) => c.id === activeTab);
+              if (!activeCat) return null;
+              const subs = activeCat.subs;
+              return (
+                <div className="bg-white dark:bg-zinc-800 border-x border-b border-zinc-200 dark:border-zinc-700 p-5 sm:p-6 animate-in fade-in duration-200">
+                  <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider mb-4">
+                    {activeCat.title}
+                  </h3>
+                  <div className={`grid gap-x-8 gap-y-2 grid-cols-1 sm:grid-cols-2 ${subs.length > 8 ? 'md:grid-cols-4' : subs.length > 4 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+                    {subs.map((sub) => (
+                      <Link
+                        key={sub.slug}
+                        to={sub.link || (activeCat.id === "free-personals" ? `/escorts` : `/category/${activeCat.id}`)}
+                        className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-pink-600 dark:hover:text-pink-400 transition-colors py-1"
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+        </section>
+
         {/* ===== HERO SECTION ===== */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900" />
@@ -674,75 +730,6 @@ export default function MainHomePage() {
                 ))}
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* ===== BROWSE CATEGORIES ===== */}
-        <section id="categories" className="py-8 sm:py-10 bg-zinc-50 dark:bg-zinc-900 scroll-mt-20 pb-10 sm:pb-12 md:pb-10">
-          <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900 dark:text-white mb-2">Browse Categories</h2>
-            <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mb-4 sm:mb-6">Discover listings across all our categories</p>
-
-            {/* Category Tabs */}
-            <div className="overflow-x-auto hide-scrollbar -mx-4 px-4">
-              <div className="flex gap-0 border-b border-zinc-200 dark:border-zinc-700 min-w-max">
-                {CATEGORIES.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onMouseEnter={() => setActiveTab(cat.id)}
-                    onClick={() => setActiveTab(activeTab === cat.id ? null : cat.id)}
-                    className={`relative px-4 py-3 text-sm font-semibold whitespace-nowrap transition-all cursor-pointer
-                      ${activeTab === cat.id
-                        ? "text-pink-600 dark:text-pink-400"
-                        : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200"
-                      }`}
-                  >
-                    <span className="flex items-center gap-1.5">
-                      <span>{cat.icon}</span>
-                      <span>{cat.title}</span>
-                    </span>
-                    {activeTab === cat.id && (
-                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-t" />
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Subcategories Panel */}
-            {activeTab && (() => {
-              const activeCat = CATEGORIES.find((c) => c.id === activeTab);
-              if (!activeCat) return null;
-
-              // Group subcategories into columns for multi-column layout
-              const subs = activeCat.subs;
-
-              return (
-                <div className="mt-0 bg-white dark:bg-zinc-800 border border-t-0 border-zinc-200 dark:border-zinc-700 rounded-b-xl p-5 sm:p-6 animate-in fade-in duration-200">
-                  <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider mb-4">
-                    {activeCat.title}
-                  </h3>
-                  <div className={`grid gap-x-8 gap-y-2 grid-cols-1 sm:grid-cols-2 ${subs.length > 8 ? 'md:grid-cols-4' : subs.length > 4 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
-                    {subs.map((sub) => (
-                      <Link
-                        key={sub.slug}
-                        to={sub.link || (activeCat.id === "free-personals" ? `/escorts` : `/category/${activeCat.id}`)}
-                        className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-pink-600 dark:hover:text-pink-400 transition-colors py-1"
-                      >
-                        {sub.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              );
-            })()}
-
-            {/* Collapsed state hint */}
-            {!activeTab && (
-              <div className="mt-4 text-center py-8 bg-white dark:bg-zinc-800 border border-t-0 border-zinc-200 dark:border-zinc-700 rounded-b-xl">
-                <p className="text-sm text-zinc-400 dark:text-zinc-500">Select a category above to browse subcategories</p>
-              </div>
-            )}
           </div>
         </section>
 

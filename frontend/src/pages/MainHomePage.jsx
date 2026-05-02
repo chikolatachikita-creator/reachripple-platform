@@ -437,11 +437,15 @@ export default function MainHomePage() {
 
       <main className="relative">
         {/* ===== BROWSE CATEGORIES ===== */}
-        <section id="categories" className="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700 sticky top-[65px] z-30">
+        <section
+          id="categories"
+          className="relative bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700 sticky top-[65px] z-30"
+          onMouseLeave={() => setActiveTab(null)}
+        >
           <div className="max-w-6xl mx-auto px-4">
             {/* Category Tabs */}
             <div className="overflow-x-auto hide-scrollbar -mx-4 px-4">
-              <div className="flex gap-0 border-b border-zinc-200 dark:border-zinc-700 min-w-max">
+              <div className="flex gap-0 min-w-max">
                 {CATEGORIES.map((cat) => (
                   <button
                     key={cat.id}
@@ -464,32 +468,38 @@ export default function MainHomePage() {
                 ))}
               </div>
             </div>
+          </div>
 
-            {/* Subcategories Panel */}
-            {activeTab && (() => {
-              const activeCat = CATEGORIES.find((c) => c.id === activeTab);
-              if (!activeCat) return null;
-              const subs = activeCat.subs;
-              return (
-                <div className="bg-white dark:bg-zinc-800 border-x border-b border-zinc-200 dark:border-zinc-700 p-5 sm:p-6 animate-in fade-in duration-200">
-                  <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider mb-4">
-                    {activeCat.title}
+          {/* Subcategories Dropdown — absolutely positioned overlay so it doesn't push content */}
+          {activeTab && (() => {
+            const activeCat = CATEGORIES.find((c) => c.id === activeTab);
+            if (!activeCat) return null;
+            const subs = activeCat.subs;
+            const isPersonals = activeCat.id === "free-personals";
+            return (
+              <div className="absolute left-0 right-0 top-full bg-white dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 shadow-xl z-40">
+                <div className="max-w-6xl mx-auto px-4 py-5 sm:py-6">
+                  <h3 className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-3">
+                    {activeCat.icon} {activeCat.title}
                   </h3>
-                  <div className={`grid gap-x-8 gap-y-2 grid-cols-1 sm:grid-cols-2 ${subs.length > 8 ? 'md:grid-cols-4' : subs.length > 4 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+                  <div className={`grid gap-x-8 gap-y-1.5 grid-cols-1 sm:grid-cols-2 ${subs.length > 8 ? 'md:grid-cols-4' : subs.length > 4 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
                     {subs.map((sub) => (
                       <Link
                         key={sub.slug}
-                        to={sub.link || (activeCat.id === "free-personals" ? `/escorts` : `/category/${activeCat.id}`)}
-                        className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-pink-600 dark:hover:text-pink-400 transition-colors py-1"
+                        to={sub.link || (isPersonals ? `/escorts` : `/category/${activeCat.id}`)}
+                        onClick={() => setActiveTab(null)}
+                        className="text-sm text-zinc-700 dark:text-zinc-300 hover:text-pink-600 dark:hover:text-pink-400 transition-colors py-1 flex items-center gap-1.5 group"
                       >
+                        <span className="text-zinc-300 dark:text-zinc-600 group-hover:text-pink-400 transition-colors">›</span>
                         {sub.name}
+                        {sub.popular && <span className="ml-auto text-[10px] font-bold text-orange-500 bg-orange-50 dark:bg-orange-900/30 px-1.5 py-0.5 rounded">HOT</span>}
                       </Link>
                     ))}
                   </div>
                 </div>
-              );
-            })()}
-          </div>
+              </div>
+            );
+          })()}
         </section>
 
         {/* ===== HERO SECTION ===== */}

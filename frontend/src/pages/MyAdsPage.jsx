@@ -319,7 +319,7 @@ export default function MyAdsPage() {
                     <Link to={`/profile/${ad._id}`} className="font-semibold text-zinc-900 dark:text-white hover:text-pink-600 dark:hover:text-pink-400 transition-colors line-clamp-1">
                       {ad.title}
                     </Link>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">{ad.location} • £{ad.price}/hr</p>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400">{ad.location} • £{ad.price}{String(ad.category || '').toLowerCase() === 'escorts' ? '/hr' : ''}</p>
                     {ad.category && ad.category !== "Escorts" && (
                       <span className="inline-block mt-1 text-[10px] font-medium px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full">
                         {ad.category}

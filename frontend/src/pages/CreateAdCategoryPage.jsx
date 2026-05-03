@@ -287,7 +287,7 @@ export default function CreateAdCategoryPage() {
       setTimeout(() => navigate("/my-ads?created=1"), 1500);
     } catch (err) {
       console.error("Submit error:", err);
-      showToast(err.response?.data?.message || "Failed to create ad", "error");
+      showToast(err.response?.data?.error || err.response?.data?.message || "Failed to create ad", "error");
     } finally {
       setLoading(false);
     }

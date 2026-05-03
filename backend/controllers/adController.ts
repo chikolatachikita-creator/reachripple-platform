@@ -644,6 +644,16 @@ export const createAd = async (req: Request, res: Response) => {
   try {
     const userId = (req as any).userId;
     
+    // ===== EARLY VALIDATION (required fields) =====
+    const missingFields: string[] = [];
+    if (!req.body.title || !String(req.body.title).trim()) missingFields.push("title");
+    if (!req.body.description || !String(req.body.description).trim()) missingFields.push("description");
+    if (!req.body.category || !String(req.body.category).trim()) missingFields.push("category");
+    if (!req.body.location || !String(req.body.location).trim()) missingFields.push("location");
+    if (missingFields.length > 0) {
+      return res.status(400).json({ error: `Missing required fields: ${missingFields.join(", ")}` });
+    }
+
     // ===== POSTING LIMIT CHECK (account-type-aware) =====
     const limitCheck = await checkAdCreationAllowed(new mongoose.Types.ObjectId(userId));
     if (!limitCheck.allowed) {
@@ -753,14 +763,28 @@ export const createAd = async (req: Request, res: Response) => {
       userId,
       price, // Ensure price is set
       status: "pending", // New ads are always pending
-      // Inject normalized location fields
-      outcode: locationData.outcode,
-      district: locationData.district,
-      districtSlug: locationData.districtSlug,
-      locationSlug: locationData.locationSlug || slugify(req.body.location || "gb"),
-      categorySlug: slugify(req.body.category || "escorts"),
     };
-    
+
+    // Sanitize numeric fields — empty strings cause Mongoose CastErrors
+    if (adData.age !== undefined) {
+      const parsedAge = parseInt(adData.age, 10);
+      if (isNaN(parsedAge) || parsedAge < 18) {
+        delete adData.age;
+      } else {
+        adData.age = parsedAge;
+      }
+    }
+
+    // Remove non-schema fields
+    delete adData.agreeToTerms;
+
+    // Inject normalized location fields
+    adData.outcode = locationData.outcode;
+    adData.district = locationData.district;
+    adData.districtSlug = locationData.districtSlug;
+    adData.locationSlug = locationData.locationSlug || slugify(req.body.location || "gb");
+    adData.categorySlug = slugify(req.body.category || "escorts");
+
     // AUTO-GEOCODE: If postcode provided, fetch lat/lng from postcodes.io
     if (req.body?.postcode) {
       const g = await geocodePostcode(req.body.postcode);
@@ -830,6 +854,13 @@ export const createAd = async (req: Request, res: Response) => {
     return res.status(201).json(ad);
   } catch (err: any) {
     logger.error(err);
+    // Return 400 for validation/cast errors so the client sees a meaningful response
+    if (err.name === "ValidationError" || err.name === "CastError") {
+      const message = err.name === "ValidationError"
+        ? Object.values(err.errors).map((e: any) => e.message).join(", ")
+        : `Invalid value for field: ${err.path}`;
+      return res.status(400).json({ error: message });
+    }
     return res.status(500).json({ error: "Server error" });
   }
 };

@@ -337,7 +337,7 @@ function AdCard({
           {ad.title}
         </h3>
         <p className="text-xs text-slate-500 line-clamp-1 mt-1">
-          {ad.location} {ad.price ? `• £${ad.price}/hr` : ""}
+          {ad.location} {ad.price ? `• £${ad.price}${ad.category === 'escorts' || ad.category === 'Escorts' ? '/hr' : ''}` : ""}
         </p>
         <p className="text-[11px] text-purple-600 mt-1">{ad.category}</p>
         

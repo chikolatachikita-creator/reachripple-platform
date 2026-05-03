@@ -507,7 +507,9 @@ const EscortProfilePage = () => {
                   <span className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-rose-300 via-purple-300 to-rose-300 bg-clip-text text-transparent">
                     £{profile.price || profile.pricing?.price_1hour || '—'}
                   </span>
-                  <span className="text-white/50 text-xs sm:text-sm">/hour</span>
+                  {(profile.category === 'escorts' || profile.category === 'Escorts') && (
+                    <span className="text-white/50 text-xs sm:text-sm">/hour</span>
+                  )}
                 </div>
               </div>
               

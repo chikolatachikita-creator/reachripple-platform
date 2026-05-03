@@ -21,6 +21,7 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 const SearchResultsPage = React.lazy(() => import("./pages/SearchResultsPage.jsx"));
 const EscortProfilePage = React.lazy(() => import("./pages/EscortProfilePage_Cinematic.jsx"));
 const SavedProfilesPage = React.lazy(() => import("./pages/SavedProfilesPage.jsx"));
+const NotificationsPage = React.lazy(() => import("./pages/NotificationsPage.jsx"));
 const SignupPage = React.lazy(() => import("./pages/SignupPage.jsx"));
 const AdminLoginPage = React.lazy(() => import("./pages/AdminLoginPage.tsx"));
 const OAuthCallbackPage = React.lazy(() => import("./pages/OAuthCallbackPage.tsx"));
@@ -175,6 +176,7 @@ export default function App() {
             <Route path="/personals/:location" element={<LegacyCategoryRedirect categorySlug="personals" />} />
             
           <Route path="/saved" element={<RequireAuth><SavedProfilesPage /></RequireAuth>} />
+          <Route path="/notifications" element={<RequireAuth><NotificationsPage /></RequireAuth>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/auth/:provider/callback" element={<OAuthCallbackPage />} />
           <Route path="/admin/login" element={<AdminLoginPage />} />

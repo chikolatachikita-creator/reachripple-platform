@@ -311,6 +311,16 @@ const EscortProfilePage = () => {
   const allServices = profile.selectedServices || [];
   const faqItems = buildFaqItems(profile);
   const memberSince = profile.createdAt ? new Date(profile.createdAt).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }) : 'Jan 2025';
+  const normalizedCategory = String(profile.category || '').trim().toLowerCase();
+  const isEscortCategory = normalizedCategory === 'escort' || normalizedCategory === 'escorts';
+  const categorySlug = String(profile.category || 'escorts')
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, ' ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  const dynamicPrice = Object.values(profile.pricing || {}).find((value) => Boolean(value));
+  const primaryPrice = profile.price || profile.pricing?.price_1hour || profile.pricing?.price_fixed || dynamicPrice || '—';
 
   // ─── Render ───
 
@@ -411,9 +421,11 @@ const EscortProfilePage = () => {
               </span>
             )}
             {/* Independent / Agency badge */}
-            <span className={profile.profileFields?.type === 'Agency' ? 'badge-agency' : 'badge-independent'}>
-              {profile.profileFields?.type === 'Agency' ? '🏢' : '👤'} {profile.profileFields?.type || 'Independent'}
-            </span>
+            {isEscortCategory && (
+              <span className={profile.profileFields?.type === 'Agency' ? 'badge-agency' : 'badge-independent'}>
+                {profile.profileFields?.type === 'Agency' ? '🏢' : '👤'} {profile.profileFields?.type || 'Independent'}
+              </span>
+            )}
           </div>
           
           {/* Gallery Navigation */}
@@ -451,7 +463,7 @@ const EscortProfilePage = () => {
                 
                 {/* Location & Age */}
                 <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-white/80">
-                  {profile.category && profile.category !== 'Escorts' && (
+                  {profile.category && !isEscortCategory && (
                     <span className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 bg-white/20 text-white rounded-full">
                       {profile.category}
                     </span>
@@ -462,7 +474,7 @@ const EscortProfilePage = () => {
                       <span className="font-medium">{profile.location}</span>
                     </span>
                   )}
-                  {profile.age && (
+                  {isEscortCategory && profile.age && (
                     <span className="flex items-center gap-1.5 text-sm sm:text-base">
                       <span className="w-1 h-1 rounded-full bg-rose-400" />
                       <span className="font-medium">{profile.age} years</span>
@@ -487,10 +499,10 @@ const EscortProfilePage = () => {
                 
                 {/* Independent / Agency */}
                 <div className="stat-chip">
-                  {profile.profileFields?.type === 'Agency'
+                  {isEscortCategory && profile.profileFields?.type === 'Agency'
                     ? <Icons.Building className="w-3 h-3 sm:w-4 sm:h-4 text-sky-400" />
                     : <Icons.Shield className="w-3 h-3 sm:w-4 sm:h-4 text-pink-400" />}
-                  <span className="text-white/90 text-xs sm:text-sm">{profile.profileFields?.type || 'Independent'}</span>
+                  <span className="text-white/90 text-xs sm:text-sm">{isEscortCategory ? (profile.profileFields?.type || 'Independent') : (profile.category || 'Listing')}</span>
                 </div>
 
                 {/* Member Since - hide on mobile */}
@@ -505,9 +517,9 @@ const EscortProfilePage = () => {
                 <div className="inline-flex items-baseline gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-4 rounded-xl sm:rounded-2xl glass-card">
                   <span className="text-white/60 text-xs sm:text-sm font-medium">From</span>
                   <span className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-rose-300 via-purple-300 to-rose-300 bg-clip-text text-transparent">
-                    £{profile.price || profile.pricing?.price_1hour || '—'}
+                    £{primaryPrice}
                   </span>
-                  {(profile.category === 'escorts' || profile.category === 'Escorts') && (
+                  {isEscortCategory && (
                     <span className="text-white/50 text-xs sm:text-sm">/hour</span>
                   )}
                 </div>
@@ -592,8 +604,8 @@ const EscortProfilePage = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/10">
                   <div className="text-center">
-                    <p className="text-2xl font-black text-white">{profile.age || '—'}</p>
-                    <p className="text-xs text-white/50">Age</p>
+                    <p className="text-2xl font-black text-white">{isEscortCategory ? (profile.age || '—') : `£${primaryPrice}`}</p>
+                    <p className="text-xs text-white/50">{isEscortCategory ? 'Age' : 'Price'}</p>
                   </div>
                   <div className="text-center">
                     <p className="text-2xl font-black text-white">{viewCount}</p>
@@ -681,15 +693,15 @@ const EscortProfilePage = () => {
               <section className="content-card animate-fadeIn">
                 <h2 className="section-title">
                   <span className="section-icon from-rose-500 to-pink-600">✨</span>
-                  About Me
+                  {isEscortCategory ? 'About Me' : 'Listing Details'}
                 </h2>
                 
                 <div className="prose max-w-none">
-                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base lg:text-lg" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(profile.description || 'Contact me to learn more about my services and personality! I look forward to meeting you.', { ALLOWED_TAGS: ['br', 'p', 'strong', 'em'] }) }} />
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base lg:text-lg" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(profile.description || 'Contact me to learn more about this listing and arrange details.', { ALLOWED_TAGS: ['br', 'p', 'strong', 'em'] }) }} />
                 </div>
                 
                 {/* Profile Stats List */}
-                <div className="mt-5 divide-y divide-gray-100">
+                {isEscortCategory && <div className="mt-5 divide-y divide-gray-100">
                   {[
                     { label: 'Age', value: profile.age || '—', icon: '📅' },
                     { label: 'Type', value: profile.profileFields?.type || 'Independent', icon: profile.profileFields?.type === 'Agency' ? '🏢' : '👤' },
@@ -705,10 +717,10 @@ const EscortProfilePage = () => {
                       <span className="font-semibold text-gray-800 text-sm">{stat.value}</span>
                     </div>
                   ))}
-                </div>
+                </div>}
 
                 {/* Services */}
-                <div className="mt-6 pt-6 border-t border-gray-200">
+                {isEscortCategory && <div className="mt-6 pt-6 border-t border-gray-200">
                   <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
                     💫 Services
                     {allServices.length > 0 && <span className="ml-auto text-xs font-normal text-gray-500 bg-gray-100 px-2.5 py-0.5 rounded-full">{allServices.length}</span>}
@@ -728,10 +740,10 @@ const EscortProfilePage = () => {
                   ) : (
                     <p className="text-sm text-gray-400">Contact me to discuss services</p>
                   )}
-                </div>
+                </div>}
                 
                 {/* Incall / Outcall */}
-                <div className="mt-6 pt-6 border-t border-gray-200">
+                {isEscortCategory && <div className="mt-6 pt-6 border-t border-gray-200">
                   <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
                     <Icons.MapPin className="w-4 h-4 text-rose-500" />
                     Service Locations
@@ -780,11 +792,11 @@ const EscortProfilePage = () => {
                       Travel radius: {profile.profileFields.travelRadius}
                     </p>
                   )}
-                </div>
+                </div>}
               </section>
 
               {/* CATEGORY-SPECIFIC DETAILS (non-escort categories) */}
-              {profile.categoryFields && Object.keys(profile.categoryFields).length > 0 && (
+              {!isEscortCategory && profile.categoryFields && Object.keys(profile.categoryFields).length > 0 && (
                 <section className="content-card animate-fadeIn" style={{ animationDelay: '0.15s' }}>
                   <h2 className="section-title">
                     <span className="section-icon from-blue-500 to-indigo-600">📋</span>
@@ -822,7 +834,7 @@ const EscortProfilePage = () => {
               <section className="content-card animate-fadeIn" style={{ animationDelay: '0.2s' }}>
                 <h2 className="section-title">
                   <span className="section-icon from-amber-500 to-orange-600">💎</span>
-                  Rates & Packages
+                  {isEscortCategory ? 'Rates & Packages' : 'Pricing'}
                 </h2>
                 
                 {profile.pricing ? (
@@ -885,7 +897,7 @@ const EscortProfilePage = () => {
               </section>
               
               {/* FAQ ACCORDION */}
-              <section className="content-card animate-fadeIn" style={{ animationDelay: '0.4s' }}>
+              {isEscortCategory && <section className="content-card animate-fadeIn" style={{ animationDelay: '0.4s' }}>
                 <h2 className="section-title">
                   <span className="section-icon from-blue-500 to-cyan-600">❓</span>
                   Frequently Asked Questions
@@ -926,7 +938,7 @@ const EscortProfilePage = () => {
                     <span><strong>Still have questions?</strong> Don't hesitate to reach out - I'm happy to chat!</span>
                   </p>
                 </div>
-              </section>
+              </section>}
             </div>
 
             {/* Right Column - Sidebar (Hidden on mobile - uses floating CTA instead) */}
@@ -965,13 +977,13 @@ const EscortProfilePage = () => {
                       }`} />
                       {onlineStatus.label}
                     </p>
-                    <span className={`inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full text-xs font-semibold ${
+                    {isEscortCategory && <span className={`inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full text-xs font-semibold ${
                       profile.profileFields?.type === 'Agency'
                         ? 'bg-sky-100 text-sky-700 border border-sky-200'
                         : 'bg-pink-100 text-pink-700 border border-pink-200'
                     }`}>
                       {profile.profileFields?.type === 'Agency' ? '🏢' : '👤'} {profile.profileFields?.type || 'Independent'}
-                    </span>
+                    </span>}
                   </div>
                 </div>
                 
@@ -1037,9 +1049,9 @@ const EscortProfilePage = () => {
           <div className="max-w-7xl mx-auto px-1 sm:px-4">
             <div className="text-center mb-1.5 sm:mb-8">
               <h2 className="text-xs sm:text-2xl font-black text-gray-800 mb-0 sm:mb-2">
-                You Might Also Like
+                {isEscortCategory ? 'You Might Also Like' : 'More Listings You May Like'}
               </h2>
-              <p className="text-2xs sm:text-sm text-gray-500 hidden sm:block">Discover more profiles in {profile.location}</p>
+              <p className="text-2xs sm:text-sm text-gray-500 hidden sm:block">{isEscortCategory ? `Discover more profiles in ${profile.location}` : `Discover more listings in ${profile.location}`}</p>
             </div>
             
             <div className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-4 gap-1 sm:gap-4 md:gap-6">
@@ -1078,7 +1090,7 @@ const EscortProfilePage = () => {
                     <div className="hidden sm:flex items-center gap-2 text-white/80 text-sm">
                       <Icons.MapPin className="w-3.5 h-3.5" />
                       <span className="truncate">{similar.location}</span>
-                      {similar.age && (
+                      {isEscortCategory && similar.age && (
                         <span className="text-white/60">• {similar.age}</span>
                       )}
                     </div>
@@ -1098,10 +1110,10 @@ const EscortProfilePage = () => {
             {/* View More Link */}
             <div className="text-center mt-2 sm:mt-8">
               <Link 
-                to={`/escort/${profile.location?.toLowerCase().replace(/\s+/g, '-') || 'gb'}`}
+                to={isEscortCategory ? `/escort/${profile.location?.toLowerCase().replace(/\s+/g, '-') || 'gb'}` : `/category/${categorySlug || 'buy-sell'}`}
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-rose-500 to-purple-600 text-white font-bold hover:shadow-lg hover:shadow-rose-500/25 transition-all hover:-translate-y-0.5"
               >
-                View All in {profile.location}
+                {isEscortCategory ? `View All in ${profile.location}` : `View More ${profile.category || 'Listings'}`}
                 <Icons.ChevronRight className="w-5 h-5" />
               </Link>
             </div>

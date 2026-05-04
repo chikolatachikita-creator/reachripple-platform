@@ -133,15 +133,32 @@ export default function NotificationsPage() {
             {loading ? (
               <div className="p-10 text-center text-slate-500 dark:text-slate-400">Loading notifications...</div>
             ) : visibleNotifications.length === 0 ? (
-              <div className="p-10 text-center">
-                <p className="text-slate-700 dark:text-slate-300 font-semibold">No notifications yet</p>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">When activity happens on your account, it will appear here.</p>
-                <Link
-                  to="/dashboard"
-                  className="inline-flex mt-5 px-4 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-violet-700 text-white font-semibold hover:brightness-110 transition-all"
-                >
-                  Back to Dashboard
-                </Link>
+              <div className="p-12 sm:p-16 text-center">
+                <div className="relative w-24 h-24 mx-auto mb-6">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 animate-pulse" />
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <span className="text-5xl animate-[wiggle_1.5s_ease-in-out_infinite]" style={{ display: 'inline-block', transformOrigin: 'top center' }}>🔔</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-black text-slate-800 dark:text-white mb-2">You're all caught up!</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto leading-relaxed">
+                  No new notifications right now. We'll let you know when something interesting happens — saves, messages, or status updates on your ads.
+                </p>
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                  <Link
+                    to="/dashboard"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-violet-700 text-white text-sm font-bold shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                  >
+                    Back to Dashboard
+                  </Link>
+                  <Link
+                    to="/create-ad"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all"
+                  >
+                    + Post a new ad
+                  </Link>
+                </div>
+                <style>{`@keyframes wiggle { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }`}</style>
               </div>
             ) : (
               visibleNotifications.map((item) => {

@@ -348,44 +348,60 @@ export default function UserDashboardPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-zinc-100 dark:divide-zinc-700/50">
-                  {ads.slice(0, 5).map((ad) => (
-                    <tr key={ad._id} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-700/30 transition-colors">
-                      <td className="px-5 py-4">
-                        <Link to={`/profile/${ad._id}`} className="text-zinc-900 dark:text-white hover:text-pink-600 dark:hover:text-pink-400 font-semibold transition-colors line-clamp-1">
-                          {ad.title}
-                        </Link>
-                      </td>
-                      <td className="px-5 py-4 text-zinc-600 dark:text-zinc-400 text-sm hidden sm:table-cell">{ad.category}</td>
-                      <td className="px-5 py-4 text-zinc-600 dark:text-zinc-400 text-sm hidden md:table-cell">{ad.location}</td>
-                      <td className="px-5 py-4">
-                        <span className="font-semibold text-zinc-900 dark:text-white">£{ad.price}</span>
-                      </td>
-                      <td className="px-5 py-4"><StatusPill status={ad.status} /></td>
-                      <td className="px-5 py-4">
-                        <div className="flex items-center gap-2">
-                          <Link 
-                            to={`/edit-ad/${ad._id}`} 
-                            className="p-2 rounded-lg text-zinc-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
-                            title="Edit"
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                            </svg>
-                          </Link>
-                          <Link 
-                            to={`/profile/${ad._id}`} 
-                            className="p-2 rounded-lg text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors"
-                            title="View"
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                  {ads.slice(0, 5).map((ad) => {
+                    const ADULT = new Set(['escorts','escort','trans-escorts','gay-escorts','adult-entertainment','adult-dating','free-personals']);
+                    const slug = (ad.categorySlug || '').toLowerCase();
+                    const detailLink = ADULT.has(slug) ? `/profile/${ad._id}` : `/listing/${ad._id}`;
+                    const thumb = ad.images?.[0];
+                    const ICON_BY_SLUG = { vehicles: "🚗", property: "🏠", "buy-sell": "🛒", jobs: "💼", services: "🔧", community: "🤝", pets: "🐾", farming: "🌾", escorts: "💋" };
+                    return (
+                      <tr key={ad._id} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-700/30 transition-colors">
+                        <td className="px-5 py-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 flex items-center justify-center flex-shrink-0">
+                              {thumb ? (
+                                <img src={thumb.startsWith('http') ? thumb : `${process.env.REACT_APP_API_URL || ''}${thumb}`} alt={ad.title} loading="lazy" className="w-full h-full object-cover" />
+                              ) : (
+                                <span className="text-2xl opacity-60">{ICON_BY_SLUG[slug] || "📦"}</span>
+                              )}
+                            </div>
+                            <Link to={detailLink} className="text-zinc-900 dark:text-white hover:text-pink-600 dark:hover:text-pink-400 font-semibold transition-colors line-clamp-1">
+                              {ad.title}
+                            </Link>
+                          </div>
+                        </td>
+                        <td className="px-5 py-4 text-zinc-600 dark:text-zinc-400 text-sm hidden sm:table-cell">{ad.category}</td>
+                        <td className="px-5 py-4 text-zinc-600 dark:text-zinc-400 text-sm hidden md:table-cell">{ad.location}</td>
+                        <td className="px-5 py-4">
+                          <span className="font-semibold text-zinc-900 dark:text-white">£{ad.price}</span>
+                        </td>
+                        <td className="px-5 py-4"><StatusPill status={ad.status} /></td>
+                        <td className="px-5 py-4">
+                          <div className="flex items-center gap-2">
+                            <Link 
+                              to={`/edit-ad/${ad._id}`} 
+                              className="p-2 rounded-lg text-zinc-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                              title="Edit"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                              </svg>
+                            </Link>
+                            <Link 
+                              to={detailLink} 
+                              className="p-2 rounded-lg text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors"
+                              title="View"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                              </svg>
+                            </Link>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
               {ads.length > 5 && (

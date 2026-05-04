@@ -9,6 +9,7 @@ import {
 } from "../utils/jwt";
 import { sendVerificationEmail, sendPasswordResetEmail, sendWelcomeEmail } from "../services/emailService";
 import { securityConfig, validatePassword } from "../config/security";
+import { processUploadedFiles } from "../services/uploadService";
 import logger from "../utils/logger";
 
 // Helper to sanitize user object for response (never expose password)
@@ -20,6 +21,8 @@ const sanitizeUser = (user: any) => ({
   status: user.status,
   isVerified: user.isVerified,
   phone: user.phone,
+  bio: user.bio,
+  avatarUrl: user.avatarUrl,
   createdAt: user.createdAt,
   updatedAt: user.updatedAt,
 });
@@ -620,6 +623,31 @@ export const deleteAccount = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     logger.error("Account deletion error:", err);
+    return res.status(500).json({ error: "Server error" });
+  }
+};
+
+// UPLOAD AVATAR
+export const uploadAvatar = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).userId;
+    const file = (req as any).file as Express.Multer.File | undefined;
+    if (!file) return res.status(400).json({ error: "No image uploaded" });
+
+    const urls = await processUploadedFiles([file], "avatars");
+    const avatarUrl = urls[0];
+    if (!avatarUrl) return res.status(500).json({ error: "Upload failed" });
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { avatarUrl },
+      { new: true }
+    ).select("-password");
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    return res.json({ avatarUrl, user });
+  } catch (err: any) {
+    logger.error("Avatar upload error:", err);
     return res.status(500).json({ error: "Server error" });
   }
 };

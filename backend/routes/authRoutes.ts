@@ -1,4 +1,5 @@
 import { Router } from "express";
+import multer from "multer";
 import { 
   register, 
   login, 
@@ -12,11 +13,13 @@ import {
   resetPassword,
   logout,
   exportUserData,
-  deleteAccount
+  deleteAccount,
+  uploadAvatar
 } from "../controllers/authController";
 import { googleCallback, githubCallback, getOAuthConfig } from "../controllers/oauthController";
 import auth from "../middleware/auth";
 import { validateBody } from "../middleware/validate";
+import { getAdStorage } from "../services/uploadService";
 import { 
   registerSchema, 
   loginSchema, 
@@ -28,6 +31,18 @@ import {
 } from "../validators/schemas";
 
 const router = Router();
+
+const AVATAR_MIME = ['image/jpeg', 'image/png', 'image/webp'];
+const avatarUpload = multer({
+  storage: getAdStorage(),
+  limits: { fileSize: 5 * 1024 * 1024, files: 1 },
+  fileFilter: (_req, file, cb) => {
+    if (!AVATAR_MIME.includes(file.mimetype)) {
+      return cb(new Error("Only JPEG, PNG or WebP images are allowed"));
+    }
+    cb(null, true);
+  },
+});
 
 // OAuth routes (public)
 router.get("/oauth/config", getOAuthConfig);
@@ -47,6 +62,7 @@ router.get("/me", auth, getMe);
 router.post("/logout", auth, logout);
 router.put("/profile", auth, validateBody(updateProfileSchema), updateProfile);
 router.put("/password", auth, validateBody(changePasswordSchema), changePassword);
+router.post("/avatar", auth, avatarUpload.single("avatar"), uploadAvatar);
 router.post("/resend-verification", auth, resendVerification);
 router.get("/data-export", auth, exportUserData);
 router.delete("/account", auth, deleteAccount);

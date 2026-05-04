@@ -75,7 +75,21 @@ export const updateProfileSchema = z.object({
     .string()
     .regex(/^[0-9+\s-]{10,15}$/, "Invalid phone number format")
     .optional()
-    .nullable(),
+    .nullable()
+    .or(z.literal("")),
+  bio: z
+    .string()
+    .max(500, "Bio must be less than 500 characters")
+    .optional()
+    .nullable()
+    .or(z.literal("")),
+  avatarUrl: z
+    .string()
+    .url("Invalid avatar URL")
+    .max(2048)
+    .optional()
+    .nullable()
+    .or(z.literal("")),
 });
 
 // ============ AD SCHEMAS ============

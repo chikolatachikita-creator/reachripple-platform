@@ -17,6 +17,10 @@ export default function UserProfilePage() {
   // Profile form
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [bio, setBio] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
 
   // Password form
   const [currentPassword, setCurrentPassword] = useState("");
@@ -43,6 +47,9 @@ export default function UserProfilePage() {
       setUser(res.data.user);
       setName(res.data.user.name || "");
       setEmail(res.data.user.email || "");
+      setPhone(res.data.user.phone || "");
+      setBio(res.data.user.bio || "");
+      setAvatarUrl(res.data.user.avatarUrl || "");
     } catch (err) {
       showError("Failed to load user profile");
       if (err.response?.status === 401) {
@@ -104,13 +111,45 @@ export default function UserProfilePage() {
     }
   };
 
+  const handleAvatarUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const allowed = ["image/jpeg", "image/png", "image/webp"];
+    if (!allowed.includes(file.type)) {
+      showError("Only JPEG, PNG or WebP images are allowed");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      showError("Image must be under 5 MB");
+      return;
+    }
+    setUploadingAvatar(true);
+    try {
+      const fd = new FormData();
+      fd.append("avatar", file);
+      const res = await client.post("/auth/avatar", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setAvatarUrl(res.data.avatarUrl || "");
+      if (res.data.user) setUser(res.data.user);
+      showSuccess("Profile photo updated");
+    } catch (err) {
+      showError(err.response?.data?.error || "Upload failed");
+    } finally {
+      setUploadingAvatar(false);
+    }
+  };
+
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
     setMessage({ type: "", text: "" });
     setSaving(true);
 
     try {
-      const res = await client.put("/auth/profile", { name, email });
+      const payload = { name, email };
+      if (phone !== undefined) payload.phone = phone.trim();
+      if (bio !== undefined) payload.bio = bio;
+      const res = await client.put("/auth/profile", payload);
       setUser(res.data.user);
       setMessage({ type: "success", text: "Profile updated successfully!" });
       showSuccess("Profile updated successfully!");
@@ -313,6 +352,41 @@ export default function UserProfilePage() {
           <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
             <h2 className="text-xl font-semibold text-gray-800 mb-6">Profile Information</h2>
             <form onSubmit={handleProfileUpdate} className="space-y-6">
+              {/* Avatar upload */}
+              <div className="flex items-center gap-5">
+                <div className="relative w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-pink-100 to-purple-100 border border-gray-200 flex-shrink-0">
+                  {avatarUrl ? (
+                    <img
+                      src={avatarUrl.startsWith("http") ? avatarUrl : `${process.env.REACT_APP_API_URL || ""}${avatarUrl}`}
+                      alt="Profile avatar"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-3xl font-semibold text-purple-500">
+                      {(name || email || "U").trim().charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  {uploadingAvatar && (
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                      <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <label className="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer transition">
+                    {avatarUrl ? "Change photo" : "Upload photo"}
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      className="hidden"
+                      onChange={handleAvatarUpload}
+                      disabled={uploadingAvatar}
+                    />
+                  </label>
+                  <p className="text-xs text-gray-500 mt-1.5">JPEG, PNG or WebP. Max 5 MB.</p>
+                </div>
+              </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Display Name
@@ -339,7 +413,38 @@ export default function UserProfilePage() {
                   required
                 />
               </div>
-              <div className="pt-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Phone Number <span className="text-gray-400 font-normal">(optional)</span>
+                </label>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-transparent"
+                  placeholder="+44 7700 900000"
+                />
+                <p className="text-xs text-gray-500 mt-1.5">Format: +44 followed by 10 digits.</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Bio <span className="text-gray-400 font-normal">(optional)</span>
+                </label>
+                <textarea
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value.slice(0, 500))}
+                  rows={4}
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-transparent resize-none"
+                  placeholder="Tell others a little about yourself..."
+                  maxLength={500}
+                />
+                <div className="flex justify-end mt-1">
+                  <span className={`text-xs ${bio.length >= 480 ? "text-amber-600" : "text-gray-400"}`}>
+                    {bio.length}/500
+                  </span>
+                </div>
+              </div>
+              <div className="sticky bottom-0 -mx-6 px-6 py-4 bg-white/95 backdrop-blur border-t border-gray-100 flex justify-end">
                 <button
                   type="submit"
                   disabled={saving}

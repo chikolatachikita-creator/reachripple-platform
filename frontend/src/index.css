@@ -78,19 +78,20 @@
    Native <option> elements ignore bg-white/10 (transparent),
    so the browser renders a white popup. Force solid dark bg.
    ===================================================== */
-select {
-  background-color: #1e293b !important; /* slate-800 */
-  color: #f1f5f9;                       /* slate-100 */
-}
+select,
 select option {
-  background-color: #1e293b;
-  color: #f1f5f9;
+  background-color: #1e293b !important; /* slate-800 */
+  color: #ffffff !important;
 }
 select option:hover,
 select option:focus,
 select option:checked {
-  background-color: #334155; /* slate-700 */
-  color: #ffffff;
+  background-color: #334155 !important; /* slate-700 */
+  color: #ffffff !important;
+}
+/* Ensure select trigger renders white text even if Tailwind text-* utilities are applied */
+select * {
+  color: #ffffff !important;
 }
 
 /* =====================================================

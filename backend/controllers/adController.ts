@@ -723,10 +723,20 @@ export const createAd = async (req: Request, res: Response) => {
     const imageFiles = uploadedFiles?.images || [];
     const videoFiles = uploadedFiles?.videos || [];
     
-    const images = await processUploadedFiles(imageFiles, "uploads/images");
-    
-    // Get uploaded video file paths
-    const videoPaths = await processUploadedFiles(videoFiles, "uploads/videos");
+    let images: string[] = [];
+    let videoPaths: string[] = [];
+    try {
+      images = await processUploadedFiles(imageFiles, "uploads/images");
+      videoPaths = await processUploadedFiles(videoFiles, "uploads/videos");
+    } catch (uploadErr: any) {
+      logger.error("Media upload failed during ad creation:", {
+        message: uploadErr?.message,
+        stack: uploadErr?.stack,
+      });
+      return res.status(500).json({
+        error: `Image upload failed: ${uploadErr?.message || "unknown error"}. Please try again with smaller files or different images.`,
+      });
+    }
     const videos = videoPaths.map((url) => ({
       url,
       uploadedAt: new Date(),
@@ -791,21 +801,27 @@ export const createAd = async (req: Request, res: Response) => {
 
     // AUTO-GEOCODE: If postcode provided, fetch lat/lng from postcodes.io
     if (req.body?.postcode) {
-      const g = await geocodePostcode(req.body.postcode);
+      try {
+        const g = await geocodePostcode(req.body.postcode);
 
-      if (g) {
-        adData.postcode = normalizePostcode(req.body.postcode);
-        adData.outcode = g.outcode;
-        adData.district = g.district;
-        adData.locationSlug = slugifyLocation({ outcode: g.outcode, district: g.district });
+        if (g) {
+          adData.postcode = normalizePostcode(req.body.postcode);
+          adData.outcode = g.outcode;
+          adData.district = g.district;
+          adData.locationSlug = slugifyLocation({ outcode: g.outcode, district: g.district });
 
-        // GeoJSON uses [lng, lat]
-        adData.geo = { type: "Point", coordinates: [g.lng, g.lat] };
-        adData.geoUpdatedAt = new Date();
-        adData.geoSource = "postcodes.io";
-      } else {
-        // Still store normalized postcode even if geocode failed
-        adData.postcode = normalizePostcode(req.body.postcode);
+          // GeoJSON uses [lng, lat]
+          adData.geo = { type: "Point", coordinates: [g.lng, g.lat] };
+          adData.geoUpdatedAt = new Date();
+          adData.geoSource = "postcodes.io";
+        } else {
+          // Still store normalized postcode even if geocode failed
+          adData.postcode = normalizePostcode(req.body.postcode);
+        }
+      } catch (geoErr: any) {
+        // Geocoding is non-essential — log and continue without coordinates
+        logger.error("Geocoding failed (non-fatal):", geoErr?.message);
+        try { adData.postcode = normalizePostcode(req.body.postcode); } catch {}
       }
     }
     
@@ -857,7 +873,13 @@ export const createAd = async (req: Request, res: Response) => {
     
     return res.status(201).json(ad);
   } catch (err: any) {
-    logger.error(err);
+    // Verbose logging — the previous generic "Server error" hid the real cause.
+    logger.error("createAd failed:", {
+      message: err?.message,
+      name: err?.name,
+      code: err?.code,
+      stack: err?.stack,
+    });
     // Return 400 for validation/cast errors so the client sees a meaningful response
     if (err.name === "ValidationError" || err.name === "CastError") {
       const message = err.name === "ValidationError"
@@ -865,7 +887,16 @@ export const createAd = async (req: Request, res: Response) => {
         : `Invalid value for field: ${err.path}`;
       return res.status(400).json({ error: message });
     }
-    return res.status(500).json({ error: "Server error" });
+    // Duplicate key
+    if (err.code === 11000) {
+      return res.status(409).json({ error: "Duplicate value for unique field" });
+    }
+    // Surface the underlying message so users / support can act on it instead
+    // of a useless generic "Server error".
+    const safeMessage = typeof err?.message === "string" && err.message.length < 300
+      ? err.message
+      : "Server error";
+    return res.status(500).json({ error: safeMessage });
   }
 };
 

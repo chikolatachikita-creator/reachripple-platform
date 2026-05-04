@@ -451,14 +451,50 @@ export default function CreateAdCategoryPage() {
             </div>
           </div>
         </div>
-        {/* Progress bar */}
+        {/* Stepper */}
         <div className="max-w-5xl mx-auto px-4 pb-4">
-          <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-            <div
-              className={`h-full bg-gradient-to-r ${gradientBar} transition-all`}
-              style={{ width: `${(currentStep / totalSteps) * 100}%` }}
-            />
-          </div>
+          {(() => {
+            const stepLabels = hasStep2
+              ? ["Details", "Pricing", "Photos & Contact"]
+              : ["Details", "Photos & Contact"];
+            return (
+              <div className="flex items-center w-full">
+                {stepLabels.map((label, i) => {
+                  const stepNum = i + 1;
+                  const isDone = stepNum < currentStep;
+                  const isCurrent = stepNum === currentStep;
+                  return (
+                    <React.Fragment key={label}>
+                      <div className="flex flex-col items-center min-w-0">
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold transition-all duration-300 ${
+                            isDone
+                              ? `bg-gradient-to-r ${gradientBar} text-white shadow-md`
+                              : isCurrent
+                                ? `bg-gradient-to-r ${gradientBar} text-white ring-4 ring-white/20 scale-110`
+                                : "bg-white/10 text-white/50"
+                          }`}
+                        >
+                          {isDone ? "\u2713" : stepNum}
+                        </div>
+                        <span className={`mt-1.5 text-[11px] font-medium truncate max-w-[80px] sm:max-w-none ${isCurrent ? "text-white" : "text-white/50"}`}>
+                          {label}
+                        </span>
+                      </div>
+                      {i < stepLabels.length - 1 && (
+                        <div className="flex-1 h-0.5 mx-2 -mt-5 bg-white/10 overflow-hidden rounded">
+                          <div
+                            className={`h-full bg-gradient-to-r ${gradientBar} transition-all duration-500`}
+                            style={{ width: stepNum < currentStep ? "100%" : "0%" }}
+                          />
+                        </div>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+            );
+          })()}
         </div>
       </header>
 
@@ -470,7 +506,7 @@ export default function CreateAdCategoryPage() {
           {currentStep === 1 && (
             <div className="space-y-6 animate-fade-in">
               {/* Title & Description */}
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-purple-500/10">
                 <h2 className="text-2xl font-bold text-white mb-6">Ad Details</h2>
 
                 <div className="space-y-4">
@@ -520,7 +556,7 @@ export default function CreateAdCategoryPage() {
 
               {/* Category-specific fields */}
               {config.fields && config.fields.length > 0 && (
-                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-purple-500/10">
                   <h2 className="text-2xl font-bold text-white mb-6">
                     {config.name} Details
                   </h2>
@@ -535,7 +571,7 @@ export default function CreateAdCategoryPage() {
           {/* ===== STEP 2: SERVICES & PRICING (conditional) ===== */}
           {currentStep === 2 && hasStep2 && (
             <div className="space-y-6 animate-fade-in">
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-purple-500/10">
                 <h2 className="text-2xl font-bold text-white mb-6">
                   {hasServices && hasPricing
                     ? "Services & Pricing"
@@ -606,8 +642,14 @@ export default function CreateAdCategoryPage() {
           {currentStep === mediaStep && (
             <div className="space-y-6 animate-fade-in">
               {/* Photos */}
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
-                <h2 className="text-2xl font-bold text-white mb-6">Photos & Videos</h2>
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-purple-500/10">
+                <h2 className="text-2xl font-bold text-white mb-3">Photos & Videos</h2>
+                <div className="mb-5 flex items-start gap-2 px-3 py-2.5 rounded-lg bg-amber-500/10 border border-amber-500/30">
+                  <span className="text-amber-300 text-sm">💡</span>
+                  <p className="text-xs text-amber-100">
+                    <span className="font-semibold">Tip:</span> Listings with 3+ photos get up to <span className="font-semibold">2× more replies</span>. The first image becomes your cover photo.
+                  </p>
+                </div>
 
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-white/80 mb-4">
@@ -681,7 +723,7 @@ export default function CreateAdCategoryPage() {
               </div>
 
               {/* Contact */}
-              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-purple-500/10">
                 <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
                 <div className="space-y-4">
                   {(config.contactFields || ["phone", "email"]).includes("phone") && (

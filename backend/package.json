@@ -10,6 +10,7 @@
     "seed:admin": "ts-node scripts/seedAdmin.ts",
     "seed:tiers": "ts-node scripts/seedTierPlans.ts",
     "seed:bots": "ts-node scripts/seedBotListings.ts",
+    "seed:all": "ts-node scripts/seedAllCategories.ts",
     "test": "jest --runInBand",
     "test:watch": "jest --watch --runInBand",
     "test:coverage": "jest --coverage --runInBand",

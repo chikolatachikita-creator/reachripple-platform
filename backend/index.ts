@@ -36,6 +36,7 @@ import analyticsRoutes from "./routes/analyticsRoutes";
 // Admin routes
 import adminStats from "./src/routes/adminStats";
 import adminAds from "./src/routes/adminAds";
+import adminSeed from "./src/routes/adminSeed";
 import adminUsers from "./src/routes/adminUsers";
 import adminReports from "./src/routes/adminReports";
 import adminRevenue from "./src/routes/adminRevenue";
@@ -256,6 +257,7 @@ app.use("/api/admin/logs", auth, adminCheck, adminLogs);
 app.use("/api/admin/analytics", auth, adminCheck, adminAnalytics);
 app.use("/api/admin/moderation", auth, adminCheck, adminModeration);
 app.use("/api/admin/network", auth, adminCheck, adminNetwork);
+app.use("/api/admin/seed", auth, adminCheck, adminSeed);
 
 // ============ ERROR HANDLING ============
 // Central error handler — catches all thrown/next(err) errors

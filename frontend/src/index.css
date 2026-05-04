@@ -74,6 +74,26 @@
 }
 
 /* =====================================================
+   Dark select / option fix
+   Native <option> elements ignore bg-white/10 (transparent),
+   so the browser renders a white popup. Force solid dark bg.
+   ===================================================== */
+select {
+  background-color: #1e293b !important; /* slate-800 */
+  color: #f1f5f9;                       /* slate-100 */
+}
+select option {
+  background-color: #1e293b;
+  color: #f1f5f9;
+}
+select option:hover,
+select option:focus,
+select option:checked {
+  background-color: #334155; /* slate-700 */
+  color: #ffffff;
+}
+
+/* =====================================================
    Scrollbar hiding utility
    ===================================================== */
 .hide-scrollbar {

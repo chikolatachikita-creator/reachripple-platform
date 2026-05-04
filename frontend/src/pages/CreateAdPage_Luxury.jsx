@@ -3,12 +3,13 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, Link } from "react-router-dom";
 import { 
-  ArrowLeft, ArrowRight, Check, X, Camera, Video, AlertCircle
+  ArrowLeft, ArrowRight, Check, X, Camera, Video, AlertCircle, Crop as CropIcon, Star
 } from "lucide-react";
 import api from "../api/client";
 import { sanitizeText, sanitizeHtml } from "../utils/security";
 import { useToastContext } from "../context/ToastContextGlobal";
 import ThemeToggle from "../components/ThemeToggle";
+import ImageEditorModal from "../components/ImageEditorModal";
 
 function CreateAdPageLuxury() {
   const navigate = useNavigate();
@@ -242,6 +243,38 @@ function CreateAdPageLuxury() {
 
   const handleRemoveImage = (index) => {
     setImages(prev => prev.filter((_, i) => i !== index));
+  };
+
+  // Image-editor modal state — { index, src, filename }
+  const [editingImage, setEditingImage] = useState(null);
+
+  const handleEditImage = (idx) => {
+    const img = images[idx];
+    if (!img) return;
+    setEditingImage({
+      index: idx,
+      src: img.preview,
+      filename: img.file?.name || `photo-${idx + 1}.jpg`,
+    });
+  };
+
+  const handleEditorSave = ({ file, preview }) => {
+    if (!editingImage) return;
+    setImages((prev) =>
+      prev.map((it, i) => (i === editingImage.index ? { file, preview } : it))
+    );
+    setEditingImage(null);
+  };
+
+  const handleSetMain = (idx) => {
+    if (idx === 0) return;
+    setImages((prev) => {
+      const next = [...prev];
+      const [picked] = next.splice(idx, 1);
+      next.unshift(picked);
+      return next;
+    });
+    showToast("Main photo updated");
   };
 
   const handleVideoUpload = (e) => {
@@ -868,26 +901,56 @@ function CreateAdPageLuxury() {
                 
                 {/* Photo Gallery */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-white/80 mb-4">
+                  <label className="block text-sm font-medium text-white/80 mb-2">
                     Upload Photos (minimum 1)
                   </label>
+                  <p className="text-xs text-white/50 mb-3">
+                    The first photo is your main cover. Hover any photo to crop, rotate, set as main, or remove.
+                  </p>
                   
                   {images.length > 0 && (
                     <div className="grid grid-cols-3 md:grid-cols-4 gap-3 mb-4">
                       {images.map((img, idx) => (
-                        <div key={idx} className="relative group">
-                          <img 
-                            src={img.preview} 
+                        <div key={idx} className={`relative group rounded-lg overflow-hidden border-2 ${idx === 0 ? "border-pink-500 shadow-lg shadow-pink-500/30" : "border-transparent"}`}>
+                          <img
+                            src={img.preview}
                             alt={`Upload ${idx + 1}`}
-                            className="w-full aspect-square object-cover rounded-lg"
+                            className="w-full aspect-square object-cover"
                           />
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveImage(idx)}
-                            className="absolute top-2 right-2 p-1 bg-red-500 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
-                          >
-                            <X className="w-4 h-4 text-white" />
-                          </button>
+                          {idx === 0 && (
+                            <span className="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded bg-pink-500 text-white shadow flex items-center gap-1">
+                              <Star className="w-3 h-3 fill-white" /> Main
+                            </span>
+                          )}
+                          {/* Action overlay */}
+                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => handleEditImage(idx)}
+                              title="Crop or rotate"
+                              className="p-2 bg-white/90 hover:bg-white rounded-lg text-zinc-900"
+                            >
+                              <CropIcon className="w-4 h-4" />
+                            </button>
+                            {idx !== 0 && (
+                              <button
+                                type="button"
+                                onClick={() => handleSetMain(idx)}
+                                title="Set as main photo"
+                                className="p-2 bg-white/90 hover:bg-white rounded-lg text-pink-600"
+                              >
+                                <Star className="w-4 h-4" />
+                              </button>
+                            )}
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveImage(idx)}
+                              title="Remove"
+                              className="p-2 bg-red-500 hover:bg-red-600 rounded-lg text-white"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -1052,6 +1115,15 @@ function CreateAdPageLuxury() {
           animation: fade-in 0.3s ease-out;
         }
       `}</style>
+
+      {editingImage && (
+        <ImageEditorModal
+          src={editingImage.src}
+          filename={editingImage.filename}
+          onCancel={() => setEditingImage(null)}
+          onSave={handleEditorSave}
+        />
+      )}
     </div>
   );
 }

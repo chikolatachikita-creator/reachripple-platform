@@ -116,13 +116,23 @@ export default function ListingProfilePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  // Escort/adult categories that must never appear in similar listings on non-escort pages
+  const ADULT_CATEGORIES = new Set([
+    'escorts', 'escort', 'trans-escorts', 'gay-escorts',
+    'adult-entertainment', 'adult-dating', 'free-personals',
+  ]);
+
   // Fetch similar listings
   useEffect(() => {
     if (!profile?._id) return;
-    api.get('/ads', { params: { limit: 8, status: 'approved' } })
+    api.get('/ads', { params: { limit: 20, status: 'approved' } })
       .then(({ data }) => {
         const all = data.ads || data || [];
-        setSimilarListings(all.filter(a => a._id !== id).slice(0, 4));
+        const filtered = all.filter(a =>
+          a._id !== id &&
+          !ADULT_CATEGORIES.has((a.category || '').toLowerCase().trim())
+        );
+        setSimilarListings(filtered.slice(0, 4));
       })
       .catch(() => {});
   }, [profile?._id, id]);

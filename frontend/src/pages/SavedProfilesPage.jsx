@@ -12,6 +12,23 @@ export default function SavedProfilesPage() {
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(true);
   const [fadeIn, setFadeIn] = useState(false);
+  const [sortBy, setSortBy] = useState("recent");
+
+  // Sort ads based on selected sort option
+  const sortedAds = React.useMemo(() => {
+    const arr = [...ads];
+    switch (sortBy) {
+      case "price-asc":
+        return arr.sort((a, b) => (a.price || 0) - (b.price || 0));
+      case "price-desc":
+        return arr.sort((a, b) => (b.price || 0) - (a.price || 0));
+      case "title":
+        return arr.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+      case "recent":
+      default:
+        return arr.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+    }
+  }, [ads, sortBy]);
 
   useEffect(() => {
     requestAnimationFrame(() => setFadeIn(true));
@@ -63,7 +80,7 @@ export default function SavedProfilesPage() {
       setSavedProfiles(savedProfiles.filter((sp) => 
         (typeof sp === 'string' ? sp : sp.adId?._id || sp.adId) !== id
       ));
-      showSuccess("Removed from saved profiles");
+      showSuccess("Removed from saved listings");
     } catch (err) {
       // Fallback to localStorage removal
       const userId = localStorage.getItem("userId");
@@ -72,7 +89,7 @@ export default function SavedProfilesPage() {
       const updated = stored.filter((pid) => pid !== id);
       localStorage.setItem(key, JSON.stringify(updated));
       setAds(ads.filter((ad) => ad._id !== id));
-      showSuccess("Removed from saved profiles");
+      showSuccess("Removed from saved listings");
     }
   };
 
@@ -124,7 +141,7 @@ export default function SavedProfilesPage() {
 
   return (
     <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0 translate-y-2"}`}>
-      <Helmet><title>Saved Profiles | ReachRipple</title></Helmet>
+      <Helmet><title>Saved Listings | ReachRipple</title></Helmet>
       {/* Modern Navbar */}
       <nav className="w-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl sticky top-0 z-50 border-b border-zinc-100 dark:border-zinc-800">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -132,7 +149,7 @@ export default function SavedProfilesPage() {
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <div className="hidden sm:block">
               <div className="text-sm font-bold leading-tight"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></div>
-              <div className="text-[11px] text-zinc-400 dark:text-zinc-500 leading-tight">Saved Profiles</div>
+              <div className="text-[11px] text-zinc-400 dark:text-zinc-500 leading-tight">Saved Listings</div>
             </div>
           </Link>
           <div className="flex items-center gap-3">
@@ -145,7 +162,7 @@ export default function SavedProfilesPage() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              Browse Profiles
+              Browse Listings
             </Link>
             <ThemeToggle />
           </div>
@@ -154,18 +171,34 @@ export default function SavedProfilesPage() {
 
       <div className="max-w-6xl mx-auto px-4 py-10">
         {/* Header section */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
+        <div className="mb-8 flex items-end justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-lg shadow-pink-500/20">
               <span className="text-white text-xl">⭐</span>
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">Saved Profiles</h1>
+              <h1 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">Saved Listings</h1>
               <p className="text-zinc-500 dark:text-zinc-400 text-sm">
-                {ads.length} profile{ads.length !== 1 ? "s" : ""} saved
+                {ads.length} listing{ads.length !== 1 ? "s" : ""} saved
               </p>
             </div>
           </div>
+          {ads.length > 0 && (
+            <div className="flex items-center gap-2">
+              <label htmlFor="sort" className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide">Sort</label>
+              <select
+                id="sort"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="h-10 px-3 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm font-medium text-zinc-900 dark:text-white outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100 dark:focus:ring-pink-900 cursor-pointer"
+              >
+                <option value="recent">Recently saved</option>
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+                <option value="title">Title A–Z</option>
+              </select>
+            </div>
+          )}
         </div>
 
         {ads.length === 0 ? (
@@ -174,9 +207,9 @@ export default function SavedProfilesPage() {
             <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-zinc-100 to-zinc-50 flex items-center justify-center mx-auto mb-6">
               <span className="text-4xl">💝</span>
             </div>
-            <h2 className="text-xl font-bold text-zinc-800 dark:text-white mb-2">No Saved Profiles Yet</h2>
+            <h2 className="text-xl font-bold text-zinc-800 dark:text-white mb-2">No Saved Listings Yet</h2>
             <p className="text-zinc-500 dark:text-zinc-400 mb-8 max-w-md mx-auto leading-relaxed">
-              Start saving profiles you like to keep track of your favorites and compare them later
+              Start saving listings you like to keep track of your favorites and compare them later
             </p>
             <Link
               to="/search"
@@ -188,13 +221,13 @@ export default function SavedProfilesPage() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              Browse Profiles
+              Browse Listings
             </Link>
           </div>
         ) : (
-          /* Saved profiles grid */
+          /* Saved listings grid */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {ads.map((ad, index) => (
+            {sortedAds.map((ad, index) => (
               <div 
                 key={ad._id} 
                 className="group relative bg-white dark:bg-zinc-800/60 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] 
@@ -204,13 +237,13 @@ export default function SavedProfilesPage() {
               >
                 <AdCard ad={ad} />
                 
-                {/* Remove button - Modern floating design */}
+                {/* Remove button - always visible */}
                 <button
                   onClick={() => removeSaved(ad._id)}
-                  className="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur-sm text-zinc-500 
-                             hover:bg-red-500 hover:text-white rounded-xl shadow-lg border border-white/50
-                             flex items-center justify-center transition-all duration-200
-                             opacity-0 group-hover:opacity-100 hover:scale-110"
+                  className="absolute top-3 right-3 w-9 h-9 bg-white/95 backdrop-blur-sm text-zinc-600 
+                             hover:bg-red-500 hover:text-white rounded-xl shadow-lg border border-zinc-100
+                             flex items-center justify-center transition-all duration-200 z-10
+                             hover:scale-110"
                   title="Remove from saved"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

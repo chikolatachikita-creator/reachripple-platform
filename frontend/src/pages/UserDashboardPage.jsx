@@ -468,7 +468,7 @@ export default function UserDashboardPage() {
               </svg>
             </div>
             <div>
-              <h3 className="font-bold text-zinc-900">Saved Profiles</h3>
+              <h3 className="font-bold text-zinc-900">Saved Listings</h3>
               <p className="text-sm text-zinc-500">View favorites</p>
             </div>
           </Link>

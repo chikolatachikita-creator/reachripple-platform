@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getCategoryBySlug } from "../config/categories";
+import { PLATFORM_CATEGORIES } from "../config/categories";
 import { getAssetUrl } from "../config/api";
 import * as LucideIcons from "lucide-react";
 import Footer from "../components/Footer";
@@ -229,6 +230,31 @@ export default function CategoryPage() {
             )}
           </>
         )}
+      </div>
+
+      {/* Browse Other Categories */}
+      <div className="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
+        <div className="max-w-7xl mx-auto px-4 py-10">
+          <h2 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white mb-1">Browse other categories</h2>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">Discover more on Reach Ripple</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {PLATFORM_CATEGORIES.filter((c) => c.slug !== category.slug && !c.monetized).slice(0, 12).map((c) => {
+              const Icon = LucideIcons[c.icon] || LucideIcons.Circle;
+              return (
+                <Link
+                  key={c.slug}
+                  to={`/category/${c.slug}`}
+                  className="group flex flex-col items-center gap-2 p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-pink-300 dark:hover:border-pink-700 hover:shadow-md hover:-translate-y-0.5 transition-all text-center"
+                >
+                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${c.bgGradient} flex items-center justify-center text-white group-hover:scale-110 transition-transform`}>
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 line-clamp-2">{c.name}</span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       <Footer />

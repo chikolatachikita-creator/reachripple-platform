@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../api/auth";
+import client from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { validators } from "../utils/formValidation";
 import { LoadingButton } from "../components/ui/LoadingButton";
@@ -19,6 +20,13 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
+
+  // Post-signup verify-email screen
+  const [signupSuccess, setSignupSuccess] = useState(false);
+  const [signupEmail, setSignupEmail] = useState("");
+  const [resendCooldown, setResendCooldown] = useState(0);
+  const [resending, setResending] = useState(false);
+  const [resendMessage, setResendMessage] = useState("");
   
   // Inline validation state
   const [touched, setTouched] = useState({ name: false, email: false, password: false, passwordConfirm: false });
@@ -161,12 +169,14 @@ export default function SignupPage() {
         localStorage.setItem("userName", String(user.name || ""));
         localStorage.setItem("userEmail", String(user.email));
         localStorage.setItem("userRole", String(user.role || "user"));
-        
+
         // Update AuthContext state
         authLogin(user);
-        
-        // Navigate without full page reload
-        navigate("/");
+
+        // Show verify-email screen instead of navigating away.
+        setSignupEmail(user.email);
+        setSignupSuccess(true);
+        setResendCooldown(60);
       }
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
@@ -174,6 +184,85 @@ export default function SignupPage() {
       setLoading(false);
     }
   };
+
+  // Resend cooldown ticker
+  useEffect(() => {
+    if (resendCooldown <= 0) return undefined;
+    const t = setTimeout(() => setResendCooldown((s) => s - 1), 1000);
+    return () => clearTimeout(t);
+  }, [resendCooldown]);
+
+  const handleResend = async () => {
+    if (resending || resendCooldown > 0) return;
+    setResending(true);
+    setResendMessage("");
+    try {
+      await client.post("/auth/resend-verification");
+      setResendMessage("Verification email sent! Check your inbox.");
+      setResendCooldown(60);
+    } catch (err) {
+      setResendMessage(err.response?.data?.message || "Failed to resend. Try again shortly.");
+    } finally {
+      setResending(false);
+    }
+  };
+
+  if (signupSuccess) {
+    return (
+      <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 flex items-center justify-center px-5 py-8 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
+        <Helmet><title>Verify your email | ReachRipple</title></Helmet>
+        <div className="w-full max-w-md bg-white dark:bg-zinc-900 rounded-2xl shadow-xl border border-zinc-100 dark:border-zinc-800 p-8 text-center">
+          <div className="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/40 dark:to-purple-900/40 flex items-center justify-center mb-5">
+            <svg className="w-10 h-10 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Check your email</h1>
+          <p className="mt-3 text-zinc-600 dark:text-zinc-400">
+            We've sent a verification link to{" "}
+            <span className="font-medium text-zinc-900 dark:text-white">{signupEmail}</span>.
+          </p>
+          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-500">
+            Click the link in the email to verify your account. Don't see it? Check your spam folder.
+          </p>
+
+          {resendMessage && (
+            <p className={`mt-4 text-sm ${resendMessage.startsWith("Verification") ? "text-green-600" : "text-red-600"}`}>
+              {resendMessage}
+            </p>
+          )}
+
+          <button
+            type="button"
+            onClick={handleResend}
+            disabled={resending || resendCooldown > 0}
+            className="mt-6 w-full h-12 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 font-medium hover:bg-zinc-50 dark:hover:bg-zinc-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {resending
+              ? "Sending..."
+              : resendCooldown > 0
+                ? `Resend email in ${resendCooldown}s`
+                : "Resend verification email"}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+            className="mt-3 w-full h-12 rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 text-white font-semibold hover:brightness-110 transition shadow-md"
+          >
+            Continue to homepage
+          </button>
+
+          <p className="mt-5 text-xs text-zinc-500 dark:text-zinc-500">
+            Wrong email?{" "}
+            <Link to="/login" className="text-orange-600 hover:text-orange-700 font-medium">
+              Sign in with a different account
+            </Link>
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 flex transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0"}`}>

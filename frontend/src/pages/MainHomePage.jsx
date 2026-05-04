@@ -329,8 +329,28 @@ export default function MainHomePage() {
   const [searchFocused, setSearchFocused] = useState(false);
   const [activeTab, setActiveTab] = useState(null);
 
+  // Latest listings + live stats
+  const [latestListings, setLatestListings] = useState([]);
+  const [liveStats, setLiveStats] = useState({ totalAds: 0, postedThisWeek: 0 });
+
   useEffect(() => {
     requestAnimationFrame(() => setFadeIn(true));
+    // Fetch latest 8 non-adult listings + counts
+    import("../api/client").then(({ default: api }) => {
+      api.get("/ads", { params: { limit: 12, sortBy: "newest" } })
+        .then((res) => {
+          const ADULT = new Set(["escorts","escort","trans-escorts","gay-escorts","adult-entertainment","adult-dating","free-personals"]);
+          const filtered = (res.data.ads || [])
+            .filter((a) => !ADULT.has((a.categorySlug || "").toLowerCase().trim()))
+            .slice(0, 8);
+          setLatestListings(filtered);
+          const total = res.data.total || res.data.totalAds || filtered.length;
+          const oneWeekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+          const week = (res.data.ads || []).filter((a) => new Date(a.createdAt).getTime() > oneWeekAgo).length;
+          setLiveStats({ totalAds: total, postedThisWeek: week });
+        })
+        .catch(() => {});
+    });
   }, []);
 
   // Handle search form submission
@@ -444,8 +464,9 @@ export default function MainHomePage() {
         >
           <div className="max-w-6xl mx-auto px-4">
             {/* Category Tabs */}
-            <div className="overflow-x-auto hide-scrollbar -mx-4 px-4">
-              <div className="flex gap-0 min-w-max">
+            <div className="relative">
+              <div className="overflow-x-auto hide-scrollbar -mx-4 px-4">
+                <div className="flex gap-0 min-w-max">
                 {CATEGORIES.map((cat) => (
                   <button
                     key={cat.id}
@@ -466,7 +487,10 @@ export default function MainHomePage() {
                     )}
                   </button>
                 ))}
+                </div>
               </div>
+              {/* Right-edge fade indicator */}
+              <div className="pointer-events-none absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-white dark:from-zinc-900 to-transparent" />
             </div>
           </div>
 
@@ -639,6 +663,75 @@ export default function MainHomePage() {
             </div>
           </div>
         </section>
+
+        {/* ===== LIVE STATS ===== */}
+        {liveStats.totalAds > 0 && (
+          <section className="bg-gradient-to-r from-orange-50 via-pink-50 to-purple-50 dark:from-orange-950/20 dark:via-pink-950/20 dark:to-purple-950/20 border-b border-zinc-100 dark:border-zinc-800">
+            <div className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-lg">📊</span>
+                <span className="text-zinc-700 dark:text-zinc-300">
+                  <span className="font-black text-pink-600 dark:text-pink-400">{liveStats.totalAds.toLocaleString()}</span> live listings
+                </span>
+              </div>
+              {liveStats.postedThisWeek > 0 && (
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">✨</span>
+                  <span className="text-zinc-700 dark:text-zinc-300">
+                    <span className="font-black text-purple-600 dark:text-purple-400">{liveStats.postedThisWeek.toLocaleString()}</span> posted this week
+                  </span>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* ===== LATEST LISTINGS ===== */}
+        {latestListings.length > 0 && (
+          <section className="py-10 sm:py-14 bg-white dark:bg-zinc-950">
+            <div className="max-w-6xl mx-auto px-4">
+              <div className="flex items-end justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">Latest Listings</h2>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Fresh listings from across the platform</p>
+                </div>
+                <Link to="/search" className="hidden sm:inline-block text-sm font-semibold text-pink-600 dark:text-pink-400 hover:underline">View all →</Link>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                {latestListings.map((ad) => {
+                  const ICON_BY_SLUG = { vehicles:"🚗", property:"🏠", "buy-sell":"🛒", jobs:"💼", services:"🔧", community:"🤝", pets:"🐾", farming:"🌾" };
+                  const slug = (ad.categorySlug || "").toLowerCase();
+                  const img = ad.images?.[0];
+                  return (
+                    <Link
+                      key={ad._id}
+                      to={`/listing/${ad._id}`}
+                      className="group rounded-2xl overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                    >
+                      <div className="relative aspect-[4/3] bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 flex items-center justify-center overflow-hidden">
+                        {img ? (
+                          <img src={img.startsWith("http") ? img : `${process.env.REACT_APP_API_URL || ""}${img}`} alt={ad.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                        ) : (
+                          <span className="text-5xl opacity-50">{ICON_BY_SLUG[slug] || "📦"}</span>
+                        )}
+                        <span className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-full bg-black/60 text-white backdrop-blur-sm">{ad.category}</span>
+                      </div>
+                      <div className="p-3">
+                        <h3 className="text-sm font-semibold text-zinc-900 dark:text-white line-clamp-2 mb-1">{ad.title}</h3>
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-zinc-500 dark:text-zinc-400 truncate">{ad.location}</span>
+                          {ad.price > 0 && (
+                            <span className="font-bold text-pink-600 dark:text-pink-400 ml-2 whitespace-nowrap">£{Number(ad.price).toLocaleString()}</span>
+                          )}
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ===== VALUE SECTION — Why Choose Us ===== */}
         <section className="py-12 sm:py-16 bg-zinc-50 dark:bg-zinc-900">

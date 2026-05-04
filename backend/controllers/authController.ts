@@ -225,7 +225,7 @@ export const getMe = async (req: Request, res: Response) => {
 export const updateProfile = async (req: Request, res: Response) => {
   try {
     const userId = (req as any).userId;
-    const { name, email } = req.body as { name?: string; email?: string };
+    const { name, email, phone, bio, avatarUrl } = req.body as { name?: string; email?: string; phone?: string; bio?: string; avatarUrl?: string };
 
     if (!name || !email) {
       return res.status(400).json({ message: "Name and email are required" });
@@ -241,9 +241,14 @@ export const updateProfile = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Unable to update profile. Please try again." });
     }
 
+    const update: Record<string, unknown> = { name, email: normalisedEmail };
+    if (typeof phone === "string") update.phone = phone.trim();
+    if (typeof bio === "string") update.bio = bio.slice(0, 500);
+    if (typeof avatarUrl === "string") update.avatarUrl = avatarUrl;
+
     const user = await User.findByIdAndUpdate(
       userId,
-      { name, email: normalisedEmail },
+      update,
       { new: true }
     ).select("-password");
 

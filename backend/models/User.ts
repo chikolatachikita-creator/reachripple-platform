@@ -19,6 +19,7 @@ export interface UserDocument extends Document {
   passwordResetToken?: string;
   passwordResetExpires?: Date;
   phone?: string;
+  bio?: string;
   lastLogin?: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -100,6 +101,7 @@ const UserSchema = new Schema<UserDocument>(
     passwordResetToken: { type: String, select: false },
     passwordResetExpires: { type: Date, select: false },
     phone: { type: String, trim: true },
+    bio: { type: String, trim: true, maxlength: 500 },
     lastLogin: { type: Date },
     
     // ===== ACCOUNT TYPE (Independent vs Agency) =====

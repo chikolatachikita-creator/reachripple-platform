@@ -294,11 +294,30 @@ export async function checkTierPurchaseAllowed(
 
 /**
  * Check if user can create more ads (account-type & plan aware)
+ * Limits ONLY apply to monetised/adult categories (escorts, adult-entertainment, etc).
+ * Free community categories (vehicles, jobs, buy-sell, etc.) are unlimited.
  * Independent free: 1, basic: 3, premium: 5
  * Agency free: 10, basic: 50, premium: 150
  */
+const LIMITED_CATEGORY_SLUGS = new Set([
+  'escorts', 'escort', 'trans-escorts', 'gay-escorts',
+  'adult-entertainment', 'adult-dating', 'free-personals',
+]);
+const LIMITED_CATEGORY_NAMES = new Set([
+  'escorts', 'trans escorts', 'gay escorts',
+  'adult entertainment', 'adult dating', 'free personals',
+]);
+
+function isLimitedCategory(category?: string, categorySlug?: string): boolean {
+  if (categorySlug && LIMITED_CATEGORY_SLUGS.has(categorySlug.toLowerCase().trim())) return true;
+  if (category && LIMITED_CATEGORY_NAMES.has(category.toLowerCase().trim())) return true;
+  return false;
+}
+
 export async function checkAdCreationAllowed(
-  userId: Types.ObjectId
+  userId: Types.ObjectId,
+  category?: string,
+  categorySlug?: string
 ): Promise<{ allowed: boolean; reason?: string; currentCount?: number; maxAllowed?: number }> {
   // Fetch user to determine account type and plan
   const user = await User.findById(userId).select('accountType postingPlan').lean();
@@ -307,17 +326,30 @@ export async function checkAdCreationAllowed(
   
   const limits = POSTING_LIMITS[accountType]?.[postingPlan] 
     || POSTING_LIMITS.independent.free;
-  
+
+  // Limits only enforced for monetised/adult categories.
+  // For free community categories (vehicles, jobs, buy-sell, etc.) skip the check entirely.
+  if (category !== undefined || categorySlug !== undefined) {
+    if (!isLimitedCategory(category, categorySlug)) {
+      return { allowed: true, currentCount: 0, maxAllowed: Number.MAX_SAFE_INTEGER };
+    }
+  }
+
+  // Count only ads in limited (adult/escort) categories
   const activeAds = await Ad.countDocuments({
     userId,
     isDeleted: { $ne: true },
     status: { $ne: 'rejected' },
+    $or: [
+      { categorySlug: { $in: Array.from(LIMITED_CATEGORY_SLUGS) } },
+      { category: { $in: Array.from(LIMITED_CATEGORY_NAMES).map(n => new RegExp(`^${n}$`, 'i')) } },
+    ],
   });
   
   if (activeAds >= limits.maxActiveAds) {
     return {
       allowed: false,
-      reason: `Maximum ${limits.maxActiveAds} active ads for ${accountType} ${postingPlan} plan. Upgrade your plan to post more.`,
+      reason: `Maximum ${limits.maxActiveAds} active escort/adult listings for ${accountType} ${postingPlan} plan. Upgrade to post more. Other categories remain unlimited.`,
       currentCount: activeAds,
       maxAllowed: limits.maxActiveAds,
     };

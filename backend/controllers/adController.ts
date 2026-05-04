@@ -654,8 +654,12 @@ export const createAd = async (req: Request, res: Response) => {
       return res.status(400).json({ error: `Missing required fields: ${missingFields.join(", ")}` });
     }
 
-    // ===== POSTING LIMIT CHECK (account-type-aware) =====
-    const limitCheck = await checkAdCreationAllowed(new mongoose.Types.ObjectId(userId));
+    // ===== POSTING LIMIT CHECK (only enforced for adult/escort categories) =====
+    const limitCheck = await checkAdCreationAllowed(
+      new mongoose.Types.ObjectId(userId),
+      req.body.category,
+      req.body.categorySlug,
+    );
     if (!limitCheck.allowed) {
       return res.status(403).json({ 
         error: limitCheck.reason,

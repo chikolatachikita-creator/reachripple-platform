@@ -368,7 +368,12 @@ export default function MainHomePage() {
       }
     }
 
-    // If keyword only (no category), go to escort/gb with the query
+    // If keyword only (no category), use the general search page (NOT escort)
+    if (keyword.trim()) {
+      navigate(`/search?q=${encodeURIComponent(keyword.trim())}`);
+      return;
+    }
+    // Nothing entered — fall back to all-listings escort view
     navigate(`/escort/${location}${qs}`);
   };
 

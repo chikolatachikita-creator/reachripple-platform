@@ -190,11 +190,16 @@ function AdCard({
     return base;
   };
 
+  // Adult/escort categories use /profile/:id (escort profile UI), everything else uses /listing/:id (classifieds UI)
+  const ADULT_CATS = new Set(['escorts','escort','trans-escorts','gay-escorts','adult-entertainment','adult-dating','free-personals']);
+  const _adSlug = String(ad.categorySlug || '').toLowerCase().trim();
+  const _profileLink = ADULT_CATS.has(_adSlug) ? `/profile/${ad._id}` : `/listing/${ad._id}`;
+
   // Card content
   const cardContent = (
     <>
       <Link
-        to={`/profile/${ad._id}`}
+        to={_profileLink}
         className={getContainerClasses()}
       >
         {/* Quick View Button (Top-Right) */}

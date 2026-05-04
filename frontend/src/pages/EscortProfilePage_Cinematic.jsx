@@ -312,7 +312,16 @@ const EscortProfilePage = () => {
   const faqItems = buildFaqItems(profile);
   const memberSince = profile.createdAt ? new Date(profile.createdAt).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }) : 'Jan 2025';
   const normalizedCategory = String(profile.category || '').trim().toLowerCase();
-  const isEscortCategory = normalizedCategory === 'escort' || normalizedCategory === 'escorts';
+  const isEscortCategory = normalizedCategory === 'escort' || normalizedCategory === 'escorts'
+    || normalizedCategory === 'trans-escorts' || normalizedCategory === 'gay-escorts'
+    || normalizedCategory === 'adult-entertainment' || normalizedCategory === 'adult-dating'
+    || normalizedCategory === 'free-personals';
+
+  // Redirect non-escort listings to the clean listing profile page
+  if (!isEscortCategory) {
+    navigate(`/listing/${id}`, { replace: true });
+    return null;
+  }
   const categorySlug = String(profile.category || 'escorts')
     .trim()
     .toLowerCase()

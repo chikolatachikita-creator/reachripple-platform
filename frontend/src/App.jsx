@@ -20,6 +20,7 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 // Lazy-loaded public pages
 const SearchResultsPage = React.lazy(() => import("./pages/SearchResultsPage.jsx"));
 const EscortProfilePage = React.lazy(() => import("./pages/EscortProfilePage_Cinematic.jsx"));
+const ListingProfilePage = React.lazy(() => import("./pages/ListingProfilePage.jsx"));
 const SavedProfilesPage = React.lazy(() => import("./pages/SavedProfilesPage.jsx"));
 const NotificationsPage = React.lazy(() => import("./pages/NotificationsPage.jsx"));
 const SignupPage = React.lazy(() => import("./pages/SignupPage.jsx"));
@@ -81,11 +82,14 @@ function LegacyCategoryRedirect({ categorySlug }) {
 }
 
 
-// Legacy /search route redirect component (preserves query string)
+// Legacy /search route redirect component — routes to escort or shows all listings
 function LegacySearchRedirect() {
   const loc = useLocation();
-  const query = loc.search || "";
-  return <Navigate to={`/escort/gb${query}`} replace />;
+  const params = new URLSearchParams(loc.search);
+  const q = params.get('q') || params.get('query') || '';
+  // If keyword present, go to escort/gb with the query (general search)
+  // Future: implement a proper /search page
+  return <Navigate to={`/escort/gb${loc.search}`} replace />;
 }
 
 // Redirect /ads/:id → /profile/:id (single canonical profile page)
@@ -161,6 +165,7 @@ export default function App() {
             <Route path="/search" element={<LegacySearchRedirect />} />
             
             <Route path="/profile/:id" element={<EscortProfilePage />} />
+            <Route path="/listing/:id" element={<ListingProfilePage />} />
             <Route path="/ads/:id" element={<AdsRedirect />} />
             <Route path="/publisher/:userId" element={<AgencyPublisherPage />} />
             

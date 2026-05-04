@@ -7,6 +7,34 @@ import { getAssetUrl } from "../config/api";
 
 const getImageUrl = (path) => getAssetUrl(path);
 
+// Category-aware placeholder metadata
+const PLACEHOLDER_META = {
+  'escorts':            { icon: '💝', color: 'from-rose-400 to-pink-500' },
+  'adult-entertainment':{ icon: '🔞', color: 'from-pink-500 to-purple-500' },
+  'trans-escorts':      { icon: '💜', color: 'from-purple-400 to-violet-500' },
+  'gay-escorts':        { icon: '🌈', color: 'from-pink-400 to-rose-500' },
+  'adult-dating':       { icon: '💘', color: 'from-red-400 to-rose-500' },
+  'buy-sell':           { icon: '🛒', color: 'from-blue-400 to-cyan-500' },
+  'vehicles':           { icon: '🚗', color: 'from-slate-500 to-zinc-600' },
+  'cars':               { icon: '🚗', color: 'from-slate-500 to-zinc-600' },
+  'property':           { icon: '🏠', color: 'from-emerald-400 to-teal-500' },
+  'jobs':               { icon: '💼', color: 'from-violet-400 to-purple-500' },
+  'services':           { icon: '🔧', color: 'from-orange-400 to-amber-500' },
+  'community':          { icon: '🤝', color: 'from-pink-400 to-rose-400' },
+  'farming':            { icon: '🚜', color: 'from-green-400 to-lime-500' },
+  'electronics':        { icon: '💻', color: 'from-blue-500 to-indigo-600' },
+  'furniture':          { icon: '🛋️', color: 'from-amber-400 to-yellow-500' },
+  'fashion':            { icon: '👗', color: 'from-pink-400 to-fuchsia-500' },
+  'sports':             { icon: '⚽', color: 'from-green-400 to-emerald-500' },
+  'default':            { icon: '📦', color: 'from-zinc-300 to-zinc-400' },
+};
+
+function getPlaceholderMeta(category) {
+  if (!category) return PLACEHOLDER_META.default;
+  const slug = String(category).toLowerCase().replace(/[\s_&]+/g, '-');
+  return PLACEHOLDER_META[slug] || PLACEHOLDER_META.default;
+}
+
 /**
  * Crown SVG icon for VIP badge
  */
@@ -189,9 +217,9 @@ function AdCard({
         </button>
 
         {/* Image */}
-        <div className={`${getImageHeight()} bg-gradient-to-br from-pink-200 to-purple-300 relative overflow-hidden`}>
+        <div className={`${getImageHeight()} relative overflow-hidden`}>
           {/* Placeholder skeleton */}
-          {!imageLoaded && (
+          {!imageLoaded && imageUrl && (
             <div className="absolute inset-0 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 animate-pulse" />
           )}
 
@@ -208,7 +236,18 @@ function AdCard({
             style={{ opacity: imageLoaded ? 1 : 0.7 }}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
-        ) : null}
+        ) : (
+          /* Category-aware placeholder — no image uploaded */
+          (() => {
+            const pm = getPlaceholderMeta(ad.category);
+            return (
+              <div className={`w-full h-full bg-gradient-to-br ${pm.color} flex flex-col items-center justify-center gap-1 select-none`}>
+                <span className="text-3xl sm:text-4xl">{pm.icon}</span>
+                <span className="text-white/70 text-[10px] font-semibold uppercase tracking-wide">{ad.category || 'Listing'}</span>
+              </div>
+            );
+          })()
+        )}
 
         {/* Adult Content Overlay */}
         {shouldBlur && imageLoaded && (

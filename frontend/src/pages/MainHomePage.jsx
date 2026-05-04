@@ -323,6 +323,7 @@ export default function MainHomePage() {
   const [fadeIn, setFadeIn] = useState(false);
 
   const [category, setCategory] = useState("");
+  const [keyword, setKeyword] = useState("");
   const { isLoggedIn, logout } = useAuth();
   const [region, setRegion] = useState("gb");
   const [searchFocused, setSearchFocused] = useState(false);
@@ -335,46 +336,40 @@ export default function MainHomePage() {
   // Handle search form submission
   const handleSearch = (e) => {
     e.preventDefault();
-    // Map category slugs to their target routes
-    const ESCORT_SLUGS = new Set([
-      "escorts", "trans-escorts", "gay-escorts",
-    ]);
-
+    const ESCORT_SLUGS = new Set(["escorts", "trans-escorts", "gay-escorts"]);
     const location = region || "gb";
+    const qs = keyword.trim() ? `?q=${encodeURIComponent(keyword.trim())}` : ``;
 
     if (category) {
       if (ESCORT_SLUGS.has(category)) {
-        navigate(`/escort/${location}`);
+        navigate(`/escort/${location}${qs}`);
         return;
       }
-      // Check if it's a known PLATFORM_CATEGORIES slug
       const platformCat = PLATFORM_CATEGORIES.find((c) => c.slug === category);
       if (platformCat) {
         if (platformCat.slug === "escorts") {
-          navigate(`/escort/${location}`);
+          navigate(`/escort/${location}${qs}`);
         } else {
-          navigate(`/category/${platformCat.slug}`);
+          navigate(`/category/${platformCat.slug}${qs}`);
         }
         return;
       }
-      // Subcategory slugs — find which parent they belong to
       for (const cat of CATEGORIES) {
         const sub = cat.subs.find((s) => s.slug === category);
         if (sub) {
           if (cat.id === "free-personals") {
-            navigate(`/escort/${location}`);
+            navigate(`/escort/${location}${qs}`);
           } else {
-            // Map the parent CATEGORIES id to matching PLATFORM_CATEGORIES slug
             const mapped = PLATFORM_CATEGORIES.find((c) => c.slug === cat.id);
-            navigate(`/category/${mapped ? mapped.slug : cat.id}`);
+            navigate(`/category/${mapped ? mapped.slug : cat.id}${qs}`);
           }
           return;
         }
       }
     }
 
-    // Default: go to escorts search with selected region
-    navigate(`/escort/${location}`);
+    // If keyword only (no category), go to escort/gb with the query
+    navigate(`/escort/${location}${qs}`);
   };
 
   // Build category options for select
@@ -553,6 +548,25 @@ export default function MainHomePage() {
                 <div className={`bg-white dark:bg-zinc-800 rounded-2xl p-5 sm:p-6 shadow-2xl shadow-black/20 border border-white/20 dark:border-zinc-700 transition-all duration-300 ${searchFocused ? 'ring-2 ring-orange-400/50 shadow-orange-500/20' : ''}`}>
                   <h2 className="text-lg font-bold text-zinc-900 dark:text-white mb-4">Find what you need</h2>
                   <form onSubmit={handleSearch} className="grid gap-4">
+                    {/* Keyword input */}
+                    <div>
+                      <label htmlFor="kw" className="block text-xs font-bold text-zinc-600 dark:text-zinc-400 tracking-wide mb-2">What are you looking for?</label>
+                      <div className="relative">
+                        <input
+                          id="kw"
+                          type="text"
+                          placeholder="e.g. PS5, plumber, room to rent…"
+                          value={keyword}
+                          onChange={(e) => setKeyword(e.target.value)}
+                          onFocus={() => setSearchFocused(true)}
+                          onBlur={() => setSearchFocused(false)}
+                          className="w-full h-12 border border-zinc-200 dark:border-zinc-600 rounded-xl pl-10 pr-4 text-sm font-medium text-zinc-900 dark:text-white outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 dark:focus:ring-orange-900 bg-zinc-50 dark:bg-zinc-700 hover:bg-white dark:hover:bg-zinc-600 transition-all"
+                        />
+                        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                      </div>
+                    </div>
                     <div>
                       <label htmlFor="cat" className="block text-xs font-bold text-zinc-600 dark:text-zinc-400 tracking-wide mb-2">Category</label>
                       <select

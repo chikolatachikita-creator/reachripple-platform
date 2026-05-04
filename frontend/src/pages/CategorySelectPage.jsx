@@ -17,6 +17,11 @@ const CATEGORY_ICONS = {
   property: "🏠",
   pets: "🐾",
   community: "🤝",
+  services: "🔧",
+  domestic: "🧹",
+  classes: "📚",
+  holidays: "✈️",
+  farming: "🌾",
 };
 
 export default function CategorySelectPage() {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { getAdminAds, AdminAd, updateAdStatus, deleteAdminAd } from "../api/admin";
+import { getAdminAds, AdminAd, updateAdStatus, deleteAdminAd, setAdTier, removeAdBoost, PlacementTier } from "../api/admin";
 import { getAssetUrl } from "../config/api";
 import { useConfirmModal } from "../components/ConfirmModal";
 import { useToastContext } from "../context/ToastContextGlobal";
@@ -21,6 +21,10 @@ export default function AdminAdsPage() {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [previewAd, setPreviewAd] = useState<AdminAd | null>(null);
+  const [boostingAd, setBoostingAd] = useState<AdminAd | null>(null);
+  const [boostTier, setBoostTier] = useState<PlacementTier>("FEATURED");
+  const [boostDays, setBoostDays] = useState<number>(7);
+  const [boostSubmitting, setBoostSubmitting] = useState(false);
   const limit = 10;
 
   useEffect(() => {
@@ -121,6 +125,66 @@ export default function AdminAdsPage() {
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  };
+
+  const openBoostModal = (ad: AdminAd) => {
+    setBoostingAd(ad);
+    setBoostTier((ad.tier as PlacementTier) || "FEATURED");
+    setBoostDays(7);
+  };
+
+  const handleApplyBoost = async () => {
+    if (!boostingAd) return;
+    setBoostSubmitting(true);
+    try {
+      const { ad: updated } = await setAdTier(boostingAd._id, boostTier, boostDays);
+      setAds(prev => prev.map(a => a._id === updated._id ? { ...a, ...updated } : a));
+      showSuccess(`Boosted to ${boostTier} for ${boostDays} day(s)`);
+      setBoostingAd(null);
+    } catch (err: any) {
+      showError(err?.response?.data?.error || "Failed to boost ad");
+    } finally {
+      setBoostSubmitting(false);
+    }
+  };
+
+  const handleRemoveBoost = async () => {
+    if (!boostingAd) return;
+    setBoostSubmitting(true);
+    try {
+      const { ad: updated } = await removeAdBoost(boostingAd._id);
+      setAds(prev => prev.map(a => a._id === updated._id ? { ...a, ...updated } : a));
+      showSuccess("Boost removed");
+      setBoostingAd(null);
+    } catch (err: any) {
+      showError(err?.response?.data?.error || "Failed to remove boost");
+    } finally {
+      setBoostSubmitting(false);
+    }
+  };
+
+  const tierBadge = (ad: AdminAd) => {
+    const tier = ad.tier;
+    if (!tier || tier === "STANDARD") return null;
+    const styles: Record<string, string> = {
+      FEATURED: "bg-amber-100 text-amber-800 border-amber-300",
+      PRIORITY_PLUS: "bg-purple-100 text-purple-800 border-purple-300",
+      PRIORITY: "bg-blue-100 text-blue-800 border-blue-300",
+    };
+    const labels: Record<string, string> = {
+      FEATURED: "⭐ Featured",
+      PRIORITY_PLUS: "🚀 Priority+",
+      PRIORITY: "↑ Priority",
+    };
+    const expired = ad.tierUntil && new Date(ad.tierUntil) < new Date();
+    return (
+      <span
+        className={`ml-2 inline-block px-2 py-0.5 text-[10px] font-semibold rounded border ${styles[tier]} ${expired ? "opacity-50 line-through" : ""}`}
+        title={ad.tierUntil ? `Until ${new Date(ad.tierUntil).toLocaleString()}` : undefined}
+      >
+        {labels[tier]}
+      </span>
+    );
   };
 
   const getStatusBadge = (status: string) => {
@@ -241,7 +305,10 @@ export default function AdminAdsPage() {
                       )}
                     </td>
                     <td className="px-6 py-4">
-                      <div className="font-medium text-purple-700 text-sm">{ad.title}</div>
+                      <div className="font-medium text-purple-700 text-sm">
+                        {ad.title}
+                        {tierBadge(ad)}
+                      </div>
                       {ad.images && ad.images.length > 0 && (
                         <div className="text-xs text-gray-500">{ad.images.length} image(s)</div>
                       )}
@@ -255,6 +322,15 @@ export default function AdminAdsPage() {
                       <button onClick={() => setPreviewAd(ad)} className="text-blue-500 text-sm mr-2 hover:underline font-medium">
                         View Details
                       </button>
+                      {ad.status === "approved" && (
+                        <button
+                          onClick={() => openBoostModal(ad)}
+                          className="text-amber-600 text-sm mr-2 hover:underline font-medium"
+                          title="Promote this listing to a higher placement tier"
+                        >
+                          {ad.tier && ad.tier !== "STANDARD" ? "Re-boost" : "Boost"}
+                        </button>
+                      )}
                       {ad.status === "pending" && (
                         <>
                           <button
@@ -448,6 +524,127 @@ export default function AdminAdsPage() {
                   >
                     Delete
                   </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* BOOST MODAL */}
+      {boostingAd && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-scale-in">
+            <div className="flex items-center justify-between p-6 border-b border-gray-100">
+              <div>
+                <h2 className="text-xl font-bold text-gray-900">Boost Listing</h2>
+                <div className="text-sm text-gray-500 truncate max-w-xs">{boostingAd.title}</div>
+              </div>
+              <button
+                onClick={() => setBoostingAd(null)}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500"
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-6 space-y-5">
+              {boostingAd.tier && boostingAd.tier !== "STANDARD" && (
+                <div className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm text-amber-900">
+                  Currently <strong>{boostingAd.tier}</strong>
+                  {boostingAd.tierUntil && (
+                    <> until {new Date(boostingAd.tierUntil).toLocaleString()}</>
+                  )}
+                </div>
+              )}
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-700 uppercase mb-2">
+                  Placement Tier
+                </label>
+                <div className="grid grid-cols-1 gap-2">
+                  {([
+                    { key: "FEATURED", label: "⭐ Featured", desc: "Top of carousel — maximum visibility" },
+                    { key: "PRIORITY_PLUS", label: "🚀 Priority Plus", desc: "Above standard & priority" },
+                    { key: "PRIORITY", label: "↑ Priority", desc: "Above standard listings" },
+                    { key: "STANDARD", label: "Standard", desc: "Normal placement (removes boost)" },
+                  ] as { key: PlacementTier; label: string; desc: string }[]).map(opt => (
+                    <button
+                      key={opt.key}
+                      type="button"
+                      onClick={() => setBoostTier(opt.key)}
+                      className={`text-left px-3 py-2 rounded-lg border transition-colors ${
+                        boostTier === opt.key
+                          ? "border-purple-500 bg-purple-50 ring-2 ring-purple-200"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}
+                    >
+                      <div className="text-sm font-semibold text-gray-900">{opt.label}</div>
+                      <div className="text-xs text-gray-500">{opt.desc}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {boostTier !== "STANDARD" && (
+                <div>
+                  <label htmlFor="boost-days" className="block text-xs font-semibold text-gray-700 uppercase mb-2">
+                    Duration (days)
+                  </label>
+                  <div className="flex gap-2">
+                    {[1, 3, 7, 14, 30].map(d => (
+                      <button
+                        key={d}
+                        type="button"
+                        onClick={() => setBoostDays(d)}
+                        className={`flex-1 px-2 py-2 rounded-lg border text-sm font-medium transition-colors ${
+                          boostDays === d
+                            ? "border-purple-500 bg-purple-50 text-purple-700"
+                            : "border-gray-200 text-gray-700 hover:border-gray-300"
+                        }`}
+                      >
+                        {d}
+                      </button>
+                    ))}
+                  </div>
+                  <input
+                    id="boost-days"
+                    type="number"
+                    min={1}
+                    max={365}
+                    value={boostDays}
+                    onChange={(e) => setBoostDays(Math.max(1, Math.min(365, Number(e.target.value) || 1)))}
+                    className="mt-2 border border-gray-300 p-2 rounded-lg w-full text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center justify-between gap-3 p-6 border-t border-gray-100 bg-gray-50">
+              {boostingAd.tier && boostingAd.tier !== "STANDARD" ? (
+                <button
+                  onClick={handleRemoveBoost}
+                  disabled={boostSubmitting}
+                  className="px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg font-medium border border-red-200 disabled:opacity-50"
+                >
+                  Remove boost
+                </button>
+              ) : <span />}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setBoostingAd(null)}
+                  disabled={boostSubmitting}
+                  className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg font-medium disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleApplyBoost}
+                  disabled={boostSubmitting}
+                  className="px-5 py-2 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700 font-medium shadow-sm disabled:opacity-50"
+                >
+                  {boostSubmitting ? "Applying..." : boostTier === "STANDARD" ? "Set to Standard" : `Apply (${boostDays}d)`}
+                </button>
               </div>
             </div>
           </div>

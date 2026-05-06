@@ -199,6 +199,10 @@ router.post("/:id/boost", async (req, res) => {
     const days = Number(req.body.days || 1);
     const boostedUntil = new Date(Date.now() + days * 24 * 60 * 60 * 1000);
 
+    const previous = await Ad.findById(req.params.id).select("isBoosted boostedUntil title");
+    if (!previous) return res.status(404).json({ error: "Ad not found" });
+    const prev = previous as any;
+
     const updated = await Ad.findByIdAndUpdate(
       req.params.id,
       { isBoosted: true, boostedUntil },
@@ -206,6 +210,19 @@ router.post("/:id/boost", async (req, res) => {
     );
 
     if (!updated) return res.status(404).json({ error: "Ad not found" });
+
+    await AdminLog.logAction({
+      adminId: (req as any).userId,
+      adminEmail: (req as any).userEmail || "admin",
+      action: "AD_BOOST",
+      targetType: "ad",
+      targetId: updated._id,
+      description: `Boosted ad "${updated.title}" for ${days} day(s)`,
+      previousValue: { isBoosted: prev.isBoosted, boostedUntil: prev.boostedUntil },
+      newValue: { isBoosted: true, boostedUntil },
+      ip: req.ip,
+      userAgent: req.headers["user-agent"],
+    });
 
     res.json({ message: `Ad boosted for ${days} day(s)`, ad: updated });
   } catch (err) {
@@ -217,13 +234,30 @@ router.post("/:id/boost", async (req, res) => {
 // REMOVE BOOST - DELETE /api/admin/ads/:id/boost
 router.delete("/:id/boost", async (req, res) => {
   try {
+    const previous = await Ad.findById(req.params.id).select("isBoosted boostedUntil tier tierUntil title");
+    if (!previous) return res.status(404).json({ error: "Ad not found" });
+    const prev = previous as any;
+
     const updated = await Ad.findByIdAndUpdate(
       req.params.id,
-      { isBoosted: false, boostedUntil: null },
+      { isBoosted: false, boostedUntil: null, tier: "STANDARD", tierUntil: null },
       { new: true }
     );
 
     if (!updated) return res.status(404).json({ error: "Ad not found" });
+
+    await AdminLog.logAction({
+      adminId: (req as any).userId,
+      adminEmail: (req as any).userEmail || "admin",
+      action: "AD_BOOST",
+      targetType: "ad",
+      targetId: updated._id,
+      description: `Removed boost from ad "${updated.title}"`,
+      previousValue: { isBoosted: prev.isBoosted, boostedUntil: prev.boostedUntil, tier: previous.tier, tierUntil: previous.tierUntil },
+      newValue: { isBoosted: false, boostedUntil: null, tier: "STANDARD", tierUntil: null },
+      ip: req.ip,
+      userAgent: req.headers["user-agent"],
+    });
 
     res.json({ message: "Boost removed", ad: updated });
   } catch (err) {
@@ -242,7 +276,10 @@ router.post("/:id/tier", async (req, res) => {
     if (!validTiers.includes(tier)) {
       return res.status(400).json({ error: `Invalid tier. Must be one of: ${validTiers.join(", ")}` });
     }
-    
+
+    const previous = await Ad.findById(req.params.id).select("tier tierUntil title");
+    if (!previous) return res.status(404).json({ error: "Ad not found" });
+
     const tierUntil = tier === "STANDARD" ? null : new Date(Date.now() + days * 24 * 60 * 60 * 1000);
 
     const updated = await Ad.findByIdAndUpdate(
@@ -252,6 +289,19 @@ router.post("/:id/tier", async (req, res) => {
     );
 
     if (!updated) return res.status(404).json({ error: "Ad not found" });
+
+    await AdminLog.logAction({
+      adminId: (req as any).userId,
+      adminEmail: (req as any).userEmail || "admin",
+      action: "AD_TIER_CHANGE",
+      targetType: "ad",
+      targetId: updated._id,
+      description: `Set ad "${updated.title}" tier to ${tier}${tier === "STANDARD" ? "" : ` for ${days} day(s)`}`,
+      previousValue: { tier: previous.tier, tierUntil: previous.tierUntil },
+      newValue: { tier, tierUntil },
+      ip: req.ip,
+      userAgent: req.headers["user-agent"],
+    });
 
     res.json({ message: `Ad set to ${tier} for ${days} day(s)`, ad: updated });
   } catch (err) {

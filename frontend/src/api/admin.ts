@@ -52,9 +52,15 @@ export interface AdminAd {
   userId?: { _id: string; name: string; email: string } | string;
   phone?: string;
   email?: string;
+  tier?: "FEATURED" | "PRIORITY_PLUS" | "PRIORITY" | "STANDARD";
+  tierUntil?: string | null;
+  isBoosted?: boolean;
+  boostedUntil?: string | null;
   createdAt: string;
   updatedAt: string;
 }
+
+export type PlacementTier = "FEATURED" | "PRIORITY_PLUS" | "PRIORITY" | "STANDARD";
 
 export interface GetAdminAdsResponse {
   ads: AdminAd[];
@@ -82,6 +88,38 @@ export const updateAdStatus = async (
 
 export const deleteAdminAd = async (id: string): Promise<void> => {
   await api.delete(`/admin/ads/${id}`);
+};
+
+export const setAdTier = async (
+  id: string,
+  tier: PlacementTier,
+  days: number = 7
+): Promise<{ message: string; ad: AdminAd }> => {
+  const res = await api.post<{ message: string; ad: AdminAd }>(
+    `/admin/ads/${id}/tier`,
+    { tier, days }
+  );
+  return res.data;
+};
+
+export const boostAd = async (
+  id: string,
+  days: number = 1
+): Promise<{ message: string; ad: AdminAd }> => {
+  const res = await api.post<{ message: string; ad: AdminAd }>(
+    `/admin/ads/${id}/boost`,
+    { days }
+  );
+  return res.data;
+};
+
+export const removeAdBoost = async (
+  id: string
+): Promise<{ message: string; ad: AdminAd }> => {
+  const res = await api.delete<{ message: string; ad: AdminAd }>(
+    `/admin/ads/${id}/boost`
+  );
+  return res.data;
 };
 
 // ============ USERS ============

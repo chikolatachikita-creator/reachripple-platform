@@ -1,0 +1,142 @@
+- generic [ref=e2]:
+  - link "Skip to main content" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - main [ref=e4]:
+    - generic [ref=e9]:
+      - generic [ref=e11]:
+        - link [ref=e12] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e13]
+        - generic [ref=e15]:
+          - heading "Post an Ad" [level=1] [ref=e16]
+          - paragraph [ref=e17]: Choose a category to get started
+      - generic [ref=e19]:
+        - button "💎 Escorts Browse verified escort listings in your area Premium →" [active] [ref=e20] [cursor=pointer]:
+          - generic [ref=e21]:
+            - generic [ref=e22]: 💎
+            - generic [ref=e23]:
+              - heading "Escorts" [level=3] [ref=e24]
+              - paragraph [ref=e25]: Browse verified escort listings in your area
+              - generic [ref=e26]: Premium
+            - generic [ref=e27]: →
+        - button "✨ Massage & Wellness Professional massage and wellness services FREE →" [ref=e28] [cursor=pointer]:
+          - generic [ref=e29]:
+            - generic [ref=e30]: ✨
+            - generic [ref=e31]:
+              - heading "Massage & Wellness" [level=3] [ref=e32]
+              - paragraph [ref=e33]: Professional massage and wellness services
+              - generic [ref=e34]: FREE
+            - generic [ref=e35]: →
+        - button "💝 Dating & Personals Connect with like-minded people near you FREE →" [ref=e36] [cursor=pointer]:
+          - generic [ref=e37]:
+            - generic [ref=e38]: 💝
+            - generic [ref=e39]:
+              - heading "Dating & Personals" [level=3] [ref=e40]
+              - paragraph [ref=e41]: Connect with like-minded people near you
+              - generic [ref=e42]: FREE
+            - generic [ref=e43]: →
+        - button "💼 Jobs & Services Find and post job opportunities FREE →" [ref=e44] [cursor=pointer]:
+          - generic [ref=e45]:
+            - generic [ref=e46]: 💼
+            - generic [ref=e47]:
+              - heading "Jobs & Services" [level=3] [ref=e48]
+              - paragraph [ref=e49]: Find and post job opportunities
+              - generic [ref=e50]: FREE
+            - generic [ref=e51]: →
+        - button "🎵 Entertainment Events, nightlife, and entertainment listings FREE →" [ref=e52] [cursor=pointer]:
+          - generic [ref=e53]:
+            - generic [ref=e54]: 🎵
+            - generic [ref=e55]:
+              - heading "Entertainment" [level=3] [ref=e56]
+              - paragraph [ref=e57]: Events, nightlife, and entertainment listings
+              - generic [ref=e58]: FREE
+            - generic [ref=e59]: →
+        - button "🌿 Alternative Lifestyle Explore alternative lifestyle communities FREE →" [ref=e60] [cursor=pointer]:
+          - generic [ref=e61]:
+            - generic [ref=e62]: 🌿
+            - generic [ref=e63]:
+              - heading "Alternative Lifestyle" [level=3] [ref=e64]
+              - paragraph [ref=e65]: Explore alternative lifestyle communities
+              - generic [ref=e66]: FREE
+            - generic [ref=e67]: →
+        - button "🛒 Buy & Sell Electronics, furniture, fashion, collectibles and more FREE →" [ref=e68] [cursor=pointer]:
+          - generic [ref=e69]:
+            - generic [ref=e70]: 🛒
+            - generic [ref=e71]:
+              - heading "Buy & Sell" [level=3] [ref=e72]
+              - paragraph [ref=e73]: Electronics, furniture, fashion, collectibles and more
+              - generic [ref=e74]: FREE
+            - generic [ref=e75]: →
+        - button "🚗 Vehicles Cars, motorbikes, vans, caravans and parts FREE →" [ref=e76] [cursor=pointer]:
+          - generic [ref=e77]:
+            - generic [ref=e78]: 🚗
+            - generic [ref=e79]:
+              - heading "Vehicles" [level=3] [ref=e80]
+              - paragraph [ref=e81]: Cars, motorbikes, vans, caravans and parts
+              - generic [ref=e82]: FREE
+            - generic [ref=e83]: →
+        - button "🏠 Property Houses, flats, rooms, commercial and holiday lets FREE →" [ref=e84] [cursor=pointer]:
+          - generic [ref=e85]:
+            - generic [ref=e86]: 🏠
+            - generic [ref=e87]:
+              - heading "Property" [level=3] [ref=e88]
+              - paragraph [ref=e89]: Houses, flats, rooms, commercial and holiday lets
+              - generic [ref=e90]: FREE
+            - generic [ref=e91]: →
+        - button "🐾 Pets & Animals Dogs, cats, birds, fish, horses and pet supplies FREE →" [ref=e92] [cursor=pointer]:
+          - generic [ref=e93]:
+            - generic [ref=e94]: 🐾
+            - generic [ref=e95]:
+              - heading "Pets & Animals" [level=3] [ref=e96]
+              - paragraph [ref=e97]: Dogs, cats, birds, fish, horses and pet supplies
+              - generic [ref=e98]: FREE
+            - generic [ref=e99]: →
+        - button "🤝 Community Local events, notices, volunteering and social groups FREE →" [ref=e100] [cursor=pointer]:
+          - generic [ref=e101]:
+            - generic [ref=e102]: 🤝
+            - generic [ref=e103]:
+              - heading "Community" [level=3] [ref=e104]
+              - paragraph [ref=e105]: Local events, notices, volunteering and social groups
+              - generic [ref=e106]: FREE
+            - generic [ref=e107]: →
+        - button "🔧 Services Tradesmen, tutors, beauty, events and business services FREE →" [ref=e108] [cursor=pointer]:
+          - generic [ref=e109]:
+            - generic [ref=e110]: 🔧
+            - generic [ref=e111]:
+              - heading "Services" [level=3] [ref=e112]
+              - paragraph [ref=e113]: Tradesmen, tutors, beauty, events and business services
+              - generic [ref=e114]: FREE
+            - generic [ref=e115]: →
+        - button "🧹 Domestic Help Childcare, housekeeping, eldercare and home help FREE →" [ref=e116] [cursor=pointer]:
+          - generic [ref=e117]:
+            - generic [ref=e118]: 🧹
+            - generic [ref=e119]:
+              - heading "Domestic Help" [level=3] [ref=e120]
+              - paragraph [ref=e121]: Childcare, housekeeping, eldercare and home help
+              - generic [ref=e122]: FREE
+            - generic [ref=e123]: →
+        - button "📚 Classes & Lessons Tutoring, music, languages, driving and sports coaching FREE →" [ref=e124] [cursor=pointer]:
+          - generic [ref=e125]:
+            - generic [ref=e126]: 📚
+            - generic [ref=e127]:
+              - heading "Classes & Lessons" [level=3] [ref=e128]
+              - paragraph [ref=e129]: Tutoring, music, languages, driving and sports coaching
+              - generic [ref=e130]: FREE
+            - generic [ref=e131]: →
+        - button "✈️ Holidays & Travel Holiday homes, flights, hotels and travel experiences FREE →" [ref=e132] [cursor=pointer]:
+          - generic [ref=e133]:
+            - generic [ref=e134]: ✈️
+            - generic [ref=e135]:
+              - heading "Holidays & Travel" [level=3] [ref=e136]
+              - paragraph [ref=e137]: Holiday homes, flights, hotels and travel experiences
+              - generic [ref=e138]: FREE
+            - generic [ref=e139]: →
+        - button "🌾 Farming & Agriculture Farm equipment, livestock, land and agricultural services FREE →" [ref=e140] [cursor=pointer]:
+          - generic [ref=e141]:
+            - generic [ref=e142]: 🌾
+            - generic [ref=e143]:
+              - heading "Farming & Agriculture" [level=3] [ref=e144]
+              - paragraph [ref=e145]: Farm equipment, livestock, land and agricultural services
+              - generic [ref=e146]: FREE
+            - generic [ref=e147]: →
+  - generic "Notifications"

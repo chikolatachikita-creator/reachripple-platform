@@ -4,7 +4,7 @@ import DOMPurify from 'dompurify';
 import api from '../api/client';
 import { useToastContext } from '../context/ToastContextGlobal';
 import { useAuth } from '../context/AuthContext';
-import { getAssetUrl } from '../config/api';
+import { getAssetUrl, proxyImage } from '../config/api';
 import { useReportModal } from '../components/trust/ReportModal';
 import AdCard from '../components/AdCard';
 import Footer from '../components/Footer';
@@ -98,7 +98,7 @@ export default function ListingProfilePage() {
         const response = await api.get(`/ads/${id}`);
         const data = response.data;
         const gallery = [];
-        if (data.images?.length > 0) data.images.forEach((img) => gallery.push(getImageUrl(img)));
+        if (data.images?.length > 0) data.images.forEach((img) => gallery.push(proxyImage(getImageUrl(img), 1200)));
         setProfile({ ...data, gallery });
         api.post('/analytics/view', { adId: id }).catch(() => {});
         if (isLoggedIn) {

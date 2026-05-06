@@ -29,6 +29,7 @@ import boostRoutes from "./routes/boostRoutes";
 import tierRoutes from "./routes/tierRoutes";
 import { processSubscriptionRenewals } from "./routes/tierRoutes";
 import healthRoutes from "./routes/healthRoutes";
+import imgRoutes from "./routes/imgRoutes";
 import verificationRoutes from "./routes/verificationRoutes";
 import contactRoutes from "./routes/contactRoutes";
 import analyticsRoutes from "./routes/analyticsRoutes";
@@ -217,6 +218,7 @@ app.post("/api/auth/resend-verification", authRateLimiter);
 app.use("/api/auth", authRoutes);
 
 // ============ PUBLIC API ROUTES ============
+app.use("/api/img", imgRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/ads", adsRateLimiter, adRoutes);
 app.use("/api/users", userRoutes);

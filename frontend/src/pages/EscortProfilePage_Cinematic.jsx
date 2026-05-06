@@ -4,7 +4,7 @@ import DOMPurify from 'dompurify';
 import api from '../api/client';
 import { useToastContext } from '../context/ToastContextGlobal';
 import { useAuth } from '../context/AuthContext';
-import { getAssetUrl } from '../config/api';
+import { getAssetUrl, proxyImage } from '../config/api';
 import Icons from '../components/ProfileIcons';
 import { LoadingScreen, ErrorScreen, Lightbox } from '../components/ProfileSubComponents';
 import PlatformDisclaimer from '../components/trust/PlatformDisclaimer';
@@ -129,7 +129,12 @@ const EscortProfilePage = () => {
         
         const gallery = [];
         if (data.images?.length > 0) {
-          data.images.forEach((img) => gallery.push({ type: 'image', src: getImageUrl(img) }));
+          // Hero is full-bleed (≤1600w); thumbs are tiny. Proxy resizes to suit.
+          data.images.forEach((img) => gallery.push({
+            type: 'image',
+            src: proxyImage(getImageUrl(img), 1600),
+            thumb: proxyImage(getImageUrl(img), 300),
+          }));
         }
         if (data.videos?.length > 0) {
           data.videos.forEach((vid) => gallery.push({ type: 'video', src: getImageUrl(vid.url || vid) }));
@@ -677,7 +682,7 @@ const EscortProfilePage = () => {
                   </>
                 ) : (
                   <>
-                    <img src={item.src} alt="" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/placeholder-profile.svg'; }} />
+                    <img src={item.thumb || item.src} alt="" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/placeholder-profile.svg'; }} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </>
                 )}

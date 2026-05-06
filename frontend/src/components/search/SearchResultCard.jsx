@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { getAssetUrl } from "../../config/api";
+import { getAssetUrl, proxyImage } from "../../config/api";
 
 const FALLBACK_IMG = "/placeholder-profile.svg";
 
@@ -13,7 +13,7 @@ const SearchResultCard = ({ profile, index, onQuickView }) => {
 
   const mainImage =
     profile.images && profile.images.length > 0
-      ? getAssetUrl(profile.images[0])
+      ? proxyImage(getAssetUrl(profile.images[0]), 500)
       : FALLBACK_IMG;
 
   const handleClick = () => {

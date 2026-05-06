@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Eye } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import ProfileQuickViewModal from "./ProfileQuickViewModal";
-import { getAssetUrl } from "../config/api";
+import { getAssetUrl, proxyImage } from "../config/api";
 
 const getImageUrl = (path) => getAssetUrl(path);
 
@@ -134,10 +134,13 @@ function AdCard({
         : ad.images[0]?.url
       : null;
   const imageUrl = getImageUrl(rawImagePath);
+  // Route external images through /api/img for resize+webp+caching+fallback.
+  // Card width is ~640px on mobile and ~400px in 4-up desktop grid.
+  const displayImageUrl = proxyImage(imageUrl, 800);
 
   // Additional thumbnails for VIP cards
   const thumbnailImages = ad.images && ad.images.length > 1 
-    ? ad.images.slice(1, 4).map(img => getImageUrl(typeof img === "string" ? img : img?.url))
+    ? ad.images.slice(1, 4).map(img => proxyImage(getImageUrl(typeof img === "string" ? img : img?.url), 200))
     : [];
 
   // Variant normalization - use tier from ad data or variant prop
@@ -233,7 +236,7 @@ function AdCard({
 
           {imageUrl && !imageError ? (
           <img
-            src={imageUrl}
+            src={displayImageUrl}
             alt={ad.title}
             className={getImageClasses()}
             loading={loading}

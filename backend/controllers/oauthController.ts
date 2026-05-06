@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import crypto from "crypto";
+import jwt from "jsonwebtoken";
 import User from "../models/User";
 import { signAccessToken, signRefreshToken } from "../utils/jwt";
 import logger from "../utils/logger";
@@ -38,7 +39,7 @@ const issueTokens = (res: Response, userId: string) => {
 // Shared logic: find-or-create user by OAuth provider, then issue JWT
 const handleOAuthLogin = async (
   res: Response,
-  provider: "google" | "github",
+  provider: "google" | "github" | "facebook" | "apple",
   profile: { id: string; email: string; name: string; avatarUrl?: string }
 ) => {
   // 1. Check if an account already exists with this OAuth provider + id
@@ -236,15 +237,191 @@ export const githubCallback = async (req: Request, res: Response) => {
 // GET /api/auth/oauth/config
 // Returns public OAuth client IDs (no secrets) so the frontend can build consent URLs
 export const getOAuthConfig = async (_req: Request, res: Response) => {
+  const frontend = process.env.FRONTEND_URL || "http://localhost:3000";
   res.json({
     google: {
       enabled: !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET),
       clientId: process.env.GOOGLE_CLIENT_ID || null,
-      redirectUri: process.env.GOOGLE_REDIRECT_URI || `${process.env.FRONTEND_URL || "http://localhost:3000"}/auth/google/callback`,
+      redirectUri: process.env.GOOGLE_REDIRECT_URI || `${frontend}/auth/google/callback`,
     },
     github: {
       enabled: !!(process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET),
       clientId: process.env.GITHUB_CLIENT_ID || null,
     },
+    facebook: {
+      enabled: !!(process.env.FACEBOOK_CLIENT_ID && process.env.FACEBOOK_CLIENT_SECRET),
+      clientId: process.env.FACEBOOK_CLIENT_ID || null,
+      redirectUri: process.env.FACEBOOK_REDIRECT_URI || `${frontend}/auth/facebook/callback`,
+    },
+    apple: {
+      enabled: !!(
+        process.env.APPLE_CLIENT_ID &&
+        process.env.APPLE_TEAM_ID &&
+        process.env.APPLE_KEY_ID &&
+        process.env.APPLE_PRIVATE_KEY
+      ),
+      clientId: process.env.APPLE_CLIENT_ID || null,
+      redirectUri: process.env.APPLE_REDIRECT_URI || `${frontend}/auth/apple/callback`,
+    },
   });
+};
+
+// ─── FACEBOOK OAuth ─────────────────────────────────
+// POST /api/auth/oauth/facebook
+// Body: { code: string } — the authorization code from Facebook's consent screen
+export const facebookCallback = async (req: Request, res: Response) => {
+  try {
+    const { code } = req.body as { code?: string };
+    if (!code) return res.status(400).json({ message: "Authorization code is required" });
+
+    const clientId = process.env.FACEBOOK_CLIENT_ID;
+    const clientSecret = process.env.FACEBOOK_CLIENT_SECRET;
+    const redirectUri =
+      process.env.FACEBOOK_REDIRECT_URI ||
+      `${process.env.FRONTEND_URL || "http://localhost:3000"}/auth/facebook/callback`;
+
+    if (!clientId || !clientSecret) {
+      return res.status(501).json({ message: "Facebook OAuth is not configured" });
+    }
+
+    // Exchange code for access token (Facebook uses GET with query params)
+    const tokenUrl = new URL("https://graph.facebook.com/v18.0/oauth/access_token");
+    tokenUrl.searchParams.set("client_id", clientId);
+    tokenUrl.searchParams.set("client_secret", clientSecret);
+    tokenUrl.searchParams.set("redirect_uri", redirectUri);
+    tokenUrl.searchParams.set("code", code);
+
+    const tokenRes = await fetch(tokenUrl.toString());
+    const tokenData = (await tokenRes.json()) as any;
+
+    if (!tokenRes.ok || !tokenData.access_token) {
+      logger.error("Facebook token exchange failed", tokenData);
+      return res.status(401).json({ message: "Failed to authenticate with Facebook" });
+    }
+
+    // Fetch user profile (email is only returned if the user granted the email scope)
+    const profileRes = await fetch(
+      `https://graph.facebook.com/me?fields=id,name,email,picture.type(large)&access_token=${encodeURIComponent(
+        tokenData.access_token
+      )}`
+    );
+    const userInfo = (await profileRes.json()) as any;
+
+    if (!userInfo.id) {
+      return res.status(400).json({ message: "Could not retrieve profile from Facebook" });
+    }
+    if (!userInfo.email) {
+      return res.status(400).json({
+        message: "Facebook did not return an email address. Please use a different sign-in method.",
+      });
+    }
+
+    return handleOAuthLogin(res, "facebook", {
+      id: String(userInfo.id),
+      email: userInfo.email,
+      name: userInfo.name || userInfo.email.split("@")[0],
+      avatarUrl: userInfo.picture?.data?.url,
+    });
+  } catch (err: any) {
+    logger.error("Facebook OAuth error:", err);
+    return res.status(500).json({ message: "OAuth authentication failed" });
+  }
+};
+
+// ─── APPLE OAuth (Sign in with Apple) ────────────────────────
+// POST /api/auth/oauth/apple
+// Body: { code: string, user?: { name?: { firstName?: string; lastName?: string } } }
+//
+// Apple is special:
+//   1. The "client_secret" is a short-lived JWT we sign with our .p8 private key
+//      (ES256, kid=APPLE_KEY_ID, iss=APPLE_TEAM_ID, sub=APPLE_CLIENT_ID).
+//   2. The user's name is ONLY sent on the very first authorisation, in the
+//      front-end form post (`user` field). We accept it on the request body so
+//      the client can forward it.
+//   3. The token endpoint returns an `id_token` (a JWT). We decode it for the
+//      user's email and `sub` (stable Apple user ID).
+export const appleCallback = async (req: Request, res: Response) => {
+  try {
+    const { code, user: appleUser } = req.body as {
+      code?: string;
+      user?: { name?: { firstName?: string; lastName?: string } };
+    };
+    if (!code) return res.status(400).json({ message: "Authorization code is required" });
+
+    const clientId = process.env.APPLE_CLIENT_ID;
+    const teamId = process.env.APPLE_TEAM_ID;
+    const keyId = process.env.APPLE_KEY_ID;
+    const privateKey = process.env.APPLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+    const redirectUri =
+      process.env.APPLE_REDIRECT_URI ||
+      `${process.env.FRONTEND_URL || "http://localhost:3000"}/auth/apple/callback`;
+
+    if (!clientId || !teamId || !keyId || !privateKey) {
+      return res.status(501).json({ message: "Apple OAuth is not configured" });
+    }
+
+    // 1. Build the client_secret JWT
+    const now = Math.floor(Date.now() / 1000);
+    const clientSecret = jwt.sign(
+      {
+        iss: teamId,
+        iat: now,
+        exp: now + 60 * 5, // 5 minutes
+        aud: "https://appleid.apple.com",
+        sub: clientId,
+      },
+      privateKey,
+      { algorithm: "ES256", keyid: keyId }
+    );
+
+    // 2. Exchange code for tokens
+    const tokenBody = new URLSearchParams({
+      grant_type: "authorization_code",
+      code,
+      client_id: clientId,
+      client_secret: clientSecret,
+      redirect_uri: redirectUri,
+    });
+
+    const tokenRes = await fetch("https://appleid.apple.com/auth/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: tokenBody.toString(),
+    });
+    const tokenData = (await tokenRes.json()) as any;
+
+    if (!tokenRes.ok || !tokenData.id_token) {
+      logger.error("Apple token exchange failed", tokenData);
+      return res.status(401).json({ message: "Failed to authenticate with Apple" });
+    }
+
+    // 3. Decode id_token (we trust it because it came directly from Apple over TLS).
+    //    For stricter verification you'd validate the signature against Apple's
+    //    JWKS — omitted here to avoid extra dependencies; the channel itself is
+    //    authenticated by the client_secret JWT we just signed.
+    const decoded = jwt.decode(tokenData.id_token) as any;
+    if (!decoded?.sub) {
+      return res.status(401).json({ message: "Invalid Apple identity token" });
+    }
+
+    const email: string | undefined = decoded.email;
+    if (!email) {
+      return res.status(400).json({
+        message: "Apple did not return an email address. Please use a different sign-in method.",
+      });
+    }
+
+    const fullName = appleUser?.name
+      ? [appleUser.name.firstName, appleUser.name.lastName].filter(Boolean).join(" ").trim()
+      : "";
+
+    return handleOAuthLogin(res, "apple", {
+      id: String(decoded.sub),
+      email,
+      name: fullName || email.split("@")[0],
+    });
+  } catch (err: any) {
+    logger.error("Apple OAuth error:", err);
+    return res.status(500).json({ message: "OAuth authentication failed" });
+  }
 };

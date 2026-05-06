@@ -271,17 +271,18 @@ const EscortProfilePage = () => {
       showToast('Please log in to save profiles');
       return;
     }
+    // Optimistic UI: flip immediately, revert on error
+    const wasSaved = saved;
+    setSaved(!wasSaved);
+    showToast(wasSaved ? 'Removed from favorites' : '💖 Saved to favorites!');
     try {
-      if (saved) {
+      if (wasSaved) {
         await api.delete(`/saved-profiles/${id}`);
-        setSaved(false);
-        showToast('Removed from favorites');
       } else {
         await api.post('/saved-profiles', { adId: id });
-        setSaved(true);
-        showToast('💖 Saved to favorites!');
       }
     } catch {
+      setSaved(wasSaved);
       showToast('Failed to update saved profiles');
     }
   }, [saved, id, showToast, isLoggedIn]);
@@ -386,6 +387,7 @@ const EscortProfilePage = () => {
                   className={`w-full h-full object-contain object-center transition-all duration-700 ${imageLoaded[idx] ? 'blur-0' : 'blur-md'}`}
                   loading={idx === 0 ? 'eager' : 'lazy'}
                   onLoad={() => setImageLoaded(prev => ({ ...prev, [idx]: true }))}
+                  onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/placeholder-profile.svg'; }}
                 />
               )}
             </div>
@@ -675,7 +677,7 @@ const EscortProfilePage = () => {
                   </>
                 ) : (
                   <>
-                    <img src={item.src} alt="" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={item.src} alt="" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/placeholder-profile.svg'; }} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </>
                 )}
@@ -1073,7 +1075,7 @@ const EscortProfilePage = () => {
                   {/* Image */}
                   <div className="aspect-[3/4] overflow-hidden">
                     <img 
-                      src={similar.images?.[0] ? getImageUrl(similar.images[0]) : similar.gallery?.[0]?.src || '/placeholder-profile.jpg'}
+                      src={similar.images?.[0] ? getImageUrl(similar.images[0]) : similar.gallery?.[0]?.src || '/placeholder-profile.svg'}
                       alt={similar.title}
                       loading="lazy"
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"

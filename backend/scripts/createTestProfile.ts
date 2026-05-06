@@ -40,20 +40,20 @@ async function createTestProfile() {
       status: 'approved',
       isDeleted: false,
       
-      // Images (using placeholder URLs)
+      // Images (using picsum placeholders — no third-party CDN dependency)
       images: [
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1400&q=80',
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1400&q=80',
-        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=1400&q=80',
-        'https://images.unsplash.com/photo-1520975682031-aee3f56a2c95?auto=format&fit=crop&w=1400&q=80'
+        'https://picsum.photos/seed/reachripple-test-1/1400/1750',
+        'https://picsum.photos/seed/reachripple-test-2/1400/1750',
+        'https://picsum.photos/seed/reachripple-test-3/1400/1750',
+        'https://picsum.photos/seed/reachripple-test-4/1400/1750'
       ],
 
       // Gallery with videos
       gallery: [
-        { type: 'image', src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1400&q=80' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1400&q=80' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=1400&q=80' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1520975682031-aee3f56a2c95?auto=format&fit=crop&w=1400&q=80' },
+        { type: 'image', src: 'https://picsum.photos/seed/reachripple-test-1/1400/1750' },
+        { type: 'image', src: 'https://picsum.photos/seed/reachripple-test-2/1400/1750' },
+        { type: 'image', src: 'https://picsum.photos/seed/reachripple-test-3/1400/1750' },
+        { type: 'image', src: 'https://picsum.photos/seed/reachripple-test-4/1400/1750' },
         { type: 'video', src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4' }
       ],
 

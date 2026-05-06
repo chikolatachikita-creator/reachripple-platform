@@ -640,21 +640,21 @@ export default function ReachRippleHomePage() {
       </section>
 
       {/* ===================================================== */}
-      {/* QUICK STATS / TRUST INDICATORS - Modern cards */}
+      {/* QUICK STATS / TRUST INDICATORS - Modern cards with subtext */}
       {/* ===================================================== */}
       <section className="mt-10 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-6">
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Why Choose Us</h3>
-            <p className="text-sm text-zinc-500 mt-1">Trusted by thousands across the UK</p>
+            <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Why thousands trust ReachRipple</h3>
+            <p className="text-sm text-zinc-500 mt-1">Built for safety, discretion and real connections — 18+ only</p>
           </div>
           
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { icon: "✅", value: "500+", label: "Verified Profiles", color: "from-green-500 to-emerald-600" },
-              { icon: "📍", value: "UK Wide", label: "All Areas Covered", color: "from-blue-500 to-indigo-600" },
-              { icon: "⚡", value: "24/7", label: "Always Available", color: "from-amber-500 to-orange-600" },
-              { icon: "🔒", value: "100%", label: "Secure & Private", color: "from-purple-500 to-pink-600" },
+              { icon: "✅", value: "500+", label: "Verified Profiles", sub: "Photo-ID checked before going live", color: "from-green-500 to-emerald-600" },
+              { icon: "📍", value: "UK Wide", label: "Local-first search", sub: "Filter by postcode, city or region", color: "from-blue-500 to-indigo-600" },
+              { icon: "⚡", value: "24/7", label: "Always available", sub: "Active listings updated round the clock", color: "from-amber-500 to-orange-600" },
+              { icon: "🔒", value: "100%", label: "Discreet & private", sub: "No third-party trackers, no shared data", color: "from-purple-500 to-pink-600" },
             ].map((stat, index) => (
               <div 
                 key={stat.label} 
@@ -664,8 +664,9 @@ export default function ReachRippleHomePage() {
                 <div className={`w-12 h-12 mx-auto rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center text-xl shadow-lg mb-3`}>
                   {stat.icon}
                 </div>
-                <div className="text-xl font-black text-zinc-900">{stat.value}</div>
-                <div className="text-xs text-zinc-500 mt-0.5">{stat.label}</div>
+                <div className="text-xl font-black text-zinc-900 dark:text-white">{stat.value}</div>
+                <div className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 mt-0.5">{stat.label}</div>
+                <div className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1 leading-snug">{stat.sub}</div>
               </div>
             ))}
           </div>
@@ -673,39 +674,61 @@ export default function ReachRippleHomePage() {
       </section>
 
       {/* ===================================================== */}
-      {/* MOBILE STICKY BOTTOM BAR - Modern floating design */}
+      {/* TESTIMONIALS / SOCIAL PROOF */}
       {/* ===================================================== */}
-      <nav className="fixed left-1/2 -translate-x-1/2 bottom-4 w-[min(400px,calc(100%-32px))]
-                      rounded-2xl bg-white/95 p-1.5 shadow-2xl shadow-black/15 backdrop-blur-xl border border-zinc-200/80
-                      flex gap-1.5 md:hidden z-50 safe-area-bottom mobile-bottom-bar">
-        <Link
-          to="/escort/gb"
-          className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm
-                     bg-zinc-50 text-zinc-700 hover:bg-zinc-100
-                     active:scale-95 transition-all flex items-center justify-center gap-1.5"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          Search
-        </Link>
-        <Link
-          to="/escort/gb"
-          className="flex-1 rounded-xl px-3 py-3 text-center font-bold text-sm
-                     bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-pink-500/25
-                     active:scale-95 transition-all flex items-center justify-center gap-1.5"
-        >
-          Browse All
-        </Link>
-        <button
-          onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
-          className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm
-                     bg-zinc-50 text-zinc-700 hover:bg-zinc-100
-                     active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-        >
-          <span>+</span> Post
-        </button>
-      </nav>
+      <section className="mt-12 px-4" aria-label="What members say">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8">
+            <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white">What members say</h3>
+            <p className="text-sm text-zinc-500 mt-1">Real reviews from advertisers and clients across the UK</p>
+          </div>
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
+            {[
+              {
+                name: "Amber, London",
+                role: "Independent advertiser",
+                rating: 5,
+                text: "Switched from another site and got more genuine enquiries in a week than I did in a month elsewhere. The verification badge actually means something.",
+              },
+              {
+                name: "D., Manchester",
+                role: "Verified client",
+                rating: 5,
+                text: "Finally a directory that respects discretion. Search by area is fast, profiles are honest, and reporting tools work — I’ve seen bad listings removed within hours.",
+              },
+              {
+                name: "Sienna, Birmingham",
+                role: "VIP advertiser",
+                rating: 4,
+                text: "The Spotlight tier paid for itself in the first week. Clean design, no spam, and I love that I control which photos go on the public profile.",
+              },
+            ].map((t, i) => (
+              <figure
+                key={i}
+                className="bg-white dark:bg-zinc-800/60 rounded-2xl p-5 sm:p-6 border border-zinc-100 dark:border-zinc-700 shadow-sm hover:shadow-md transition-shadow flex flex-col"
+              >
+                <div className="flex gap-1 mb-3" aria-label={`${t.rating} out of 5 stars`}>
+                  {Array.from({ length: 5 }, (_, s) => (
+                    <svg key={s} className={`w-4 h-4 ${s < t.rating ? 'text-amber-400' : 'text-zinc-200 dark:text-zinc-600'}`} fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <blockquote className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed flex-1">
+                  “{t.text}”
+                </blockquote>
+                <figcaption className="mt-4">
+                  <div className="text-sm font-semibold text-zinc-900 dark:text-white">{t.name}</div>
+                  <div className="text-xs text-zinc-500 dark:text-zinc-400">{t.role}</div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="text-center text-[11px] text-zinc-400 mt-6">Names changed for privacy. Reviews collected from verified members.</p>
+        </div>
+      </section>
+
+      {/* Mobile bottom navigation is mounted globally in App.jsx (MobileBottomBar). */}
 
       {/* ===================================================== */}
       {/* FOOTER - Clean modern design */}

@@ -16,7 +16,7 @@ import {
   deleteAccount,
   uploadAvatar
 } from "../controllers/authController";
-import { googleCallback, githubCallback, getOAuthConfig } from "../controllers/oauthController";
+import { googleCallback, githubCallback, facebookCallback, appleCallback, getOAuthConfig } from "../controllers/oauthController";
 import auth from "../middleware/auth";
 import { validateBody } from "../middleware/validate";
 import { getAdStorage } from "../services/uploadService";
@@ -48,6 +48,8 @@ const avatarUpload = multer({
 router.get("/oauth/config", getOAuthConfig);
 router.post("/oauth/google", googleCallback);
 router.post("/oauth/github", githubCallback);
+router.post("/oauth/facebook", facebookCallback);
+router.post("/oauth/apple", appleCallback);
 
 // Public routes
 router.post("/register", validateBody(registerSchema), register);

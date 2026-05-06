@@ -279,19 +279,27 @@ export const getAds = async (req: Request, res: Response) => {
     };
 
     if (search) {
-      // Use MongoDB $text index for fast full-text search (index on title + description)
-      // Falls back to regex for short queries or location search
-      if (search.length >= 3) {
-        query.$text = { $search: search };
-      } else {
-        // Short queries: regex fallback
-        const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const safeSearch = escapeRegex(search);
-        query.$or = [
-          { title: new RegExp(safeSearch, "i") },
-          { description: new RegExp(safeSearch, "i") },
-          { location: new RegExp(safeSearch, "i") },
-        ];
+      // Search strategy:
+      //  - 1 token >= 3 chars  → MongoDB $text index (fast, ranked, indexed)
+      //  - everything else     → AND'd regex tokens across title/description/location
+      //    (so "blonde london" requires BOTH terms; partial words like "lond"
+      //     still match "london", giving a fuzzy feel without an extra service)
+      const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const tokens = String(search).trim().split(/\s+/).filter((t) => t.length >= 2);
+
+      if (tokens.length === 1 && tokens[0].length >= 3) {
+        query.$text = { $search: tokens[0] };
+      } else if (tokens.length > 0) {
+        query.$and = tokens.map((t) => {
+          const re = new RegExp(escapeRegex(t), "i");
+          return {
+            $or: [
+              { title: re },
+              { description: re },
+              { location: re },
+            ],
+          };
+        });
       }
     }
     const categoryFilter = buildCategoryFilter(category);

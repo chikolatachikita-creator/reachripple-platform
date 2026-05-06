@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams, useParams } from "react-router-dom";
-import { oauthLogin } from "../api/auth";
+import { oauthLogin, OAuthProvider } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
 import { useToastContext } from "../context/ToastContextGlobal";
+
+const PROVIDER_LABEL: Record<OAuthProvider, string> = {
+  google: "Google",
+  github: "GitHub",
+  facebook: "Facebook",
+  apple: "Apple",
+};
 
 /**
  * Handles the OAuth redirect callback.
  * Route: /auth/:provider/callback?code=...
  *
- * After the user consents on Google/GitHub, they are redirected here with a
- * `code` query parameter. This page sends it to the backend and logs the user in.
+ * After the user consents on Google / GitHub / Facebook / Apple, they are
+ * redirected here with a `code` query parameter (Apple may also POST it as a
+ * form field; we read it from the search params either way). We send it to
+ * the backend and log the user in.
  */
 const OAuthCallbackPage: React.FC = () => {
   const { provider } = useParams<{ provider: string }>();
@@ -27,19 +36,26 @@ const OAuthCallbackPage: React.FC = () => {
       return;
     }
 
-    if (provider !== "google" && provider !== "github") {
+    if (!(provider in PROVIDER_LABEL)) {
       setError("Invalid OAuth provider");
       return;
     }
 
     let cancelled = false;
 
+    // Apple posts an optional `user` JSON blob on first sign-in only.
+    const userParam = searchParams.get("user");
+    let appleExtra: { user?: any } | undefined;
+    if (provider === "apple" && userParam) {
+      try { appleExtra = { user: JSON.parse(userParam) }; } catch { /* ignore */ }
+    }
+
     (async () => {
       try {
-        const user = await oauthLogin(provider, code);
+        const user = await oauthLogin(provider as OAuthProvider, code, appleExtra);
         if (!cancelled) {
           authLogin(user as any);
-          showSuccess(`Signed in with ${provider === "google" ? "Google" : "GitHub"}`);
+          showSuccess(`Signed in with ${PROVIDER_LABEL[provider as OAuthProvider]}`);
           navigate("/dashboard", { replace: true });
         }
       } catch (err: any) {

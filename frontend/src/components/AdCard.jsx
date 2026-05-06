@@ -118,6 +118,7 @@ function AdCard({
 }) {
   const { isLoggedIn } = useAuth();
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
 
   // Adult content blur logic
@@ -174,16 +175,18 @@ function AdCard({
     return `${base} hover:-translate-y-1 hover:shadow-xl ${ad.highlight ? "ring-2 ring-pink-200 shadow-pink-100" : ""}`;
   };
 
-  // Image height based on variant - responsive for mobile
-  const getImageHeight = () => {
-    if (isVip) return 'h-44 sm:h-52 md:h-56'; // Bigger for VIP
-    if (isPopular) return 'h-40 sm:h-48 md:h-52';
-    return 'h-36 sm:h-44 md:h-48'; // Standard
+  // Image height based on variant - responsive for mobile.
+  // We use aspect-ratio (4:3) so every card has the same shape regardless of
+  // the source image dimensions; the variant only nudges the desktop max.
+  const getImageWrapperClasses = () => {
+    const base = "relative overflow-hidden aspect-[4/3] w-full bg-zinc-100";
+    if (isVip) return `${base} md:aspect-[5/4]`; // slightly taller on desktop for VIP
+    return base;
   };
 
   // Image classes based on variant
   const getImageClasses = () => {
-    const base = "w-full h-full object-cover transition-opacity duration-300";
+    const base = "w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-[1.06]";
     if (shouldBlur) {
       return `${base} blur-xl scale-110`;
     }
@@ -222,13 +225,13 @@ function AdCard({
         </button>
 
         {/* Image */}
-        <div className={`${getImageHeight()} relative overflow-hidden`}>
+        <div className={getImageWrapperClasses()}>
           {/* Placeholder skeleton */}
-          {!imageLoaded && imageUrl && (
+          {!imageLoaded && imageUrl && !imageError && (
             <div className="absolute inset-0 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 animate-pulse" />
           )}
 
-          {imageUrl ? (
+          {imageUrl && !imageError ? (
           <img
             src={imageUrl}
             alt={ad.title}
@@ -237,12 +240,12 @@ function AdCard({
             decoding="async"
             fetchPriority={fetchPriority || "auto"}
             onLoad={() => setImageLoaded(true)}
-            onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; setImageLoaded(true); }}
+            onError={() => { setImageError(true); setImageLoaded(true); }}
             style={{ opacity: imageLoaded ? 1 : 0.7 }}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         ) : (
-          /* Category-aware placeholder — no image uploaded */
+          /* Category-aware placeholder — no image uploaded or image failed to load */
           (() => {
             const pm = getPlaceholderMeta(ad.category);
             return (

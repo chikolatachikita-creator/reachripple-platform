@@ -9,6 +9,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import SkipLink from "./components/ui/SkipLink";
 import ScrollToTop from "./components/ScrollToTop";
 import AgeGateModal from "./components/trust/AgeGateModal";
+import MobileBottomBar from "./components/MobileBottomBar";
 // import SupportChatWidget from "./components/SupportChatWidget"; // Removed: support chat widget deleted
 
 // Critical public pages (eager load for fast first paint)
@@ -145,13 +146,17 @@ export default function App() {
                   <Routes>
 
             {/* PUBLIC ROUTES */}
-            <Route path="/" element={<MainHomePage />} />
+            {/* Option B: Adult/dating directory is the primary identity. */}
+            {/* Home renders the EscortsHomePage; the legacy classifieds landing */}
+            {/* is preserved at /classifieds for backwards-compatible deep links. */}
+            <Route path="/" element={<EscortsHomePage />} />
+            <Route path="/classifieds" element={<MainHomePage />} />
             
             {/* ===== VIVASTREET-STYLE UNIFIED ROUTE ===== */}
             {/* Pattern: /escort/:location (e.g., /escort/gb, /escort/london) */}
             <Route path="/escort/:location" element={<SearchResultsPage />} />
             
-            {/* Specific /escorts route for homepage */}
+            {/* /escorts kept as alias for the home page */}
             <Route path="/escorts" element={<EscortsHomePage />} />
             
             {/* Category pages (non-escort categories) */}
@@ -279,6 +284,7 @@ export default function App() {
               </Routes>
               </Suspense>
               </main>
+              <MobileBottomBar />
               </ToastProviderGlobal>
           </AuthProvider>
         </ThemeProvider>

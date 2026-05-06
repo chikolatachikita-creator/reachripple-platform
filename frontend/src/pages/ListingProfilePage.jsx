@@ -88,6 +88,8 @@ export default function ListingProfilePage() {
   const [showPhone, setShowPhone] = useState(false);
   const [similarListings, setSimilarListings] = useState([]);
   const [contactOpen, setContactOpen] = useState(false);
+  // Track which gallery indexes failed to load so we can swap to placeholder
+  const [brokenImages, setBrokenImages] = useState(() => new Set());
 
   // Fetch profile
   useEffect(() => {
@@ -151,17 +153,20 @@ export default function ListingProfilePage() {
 
   const handleSave = useCallback(async () => {
     if (!isLoggedIn) { showToast('Please log in to save listings'); return; }
+    // Optimistic UI: flip immediately, revert on error
+    const wasSaved = saved;
+    setSaved(!wasSaved);
+    showToast(wasSaved ? 'Removed from saved' : '💖 Saved to your list!');
     try {
-      if (saved) {
+      if (wasSaved) {
         await api.delete(`/saved-profiles/${id}`);
-        setSaved(false);
-        showToast('Removed from saved');
       } else {
         await api.post('/saved-profiles', { adId: id });
-        setSaved(true);
-        showToast('💖 Saved to your list!');
       }
-    } catch { showToast('Failed to update saved'); }
+    } catch {
+      setSaved(wasSaved);
+      showToast('Failed to update saved');
+    }
   }, [saved, id, showToast, isLoggedIn]);
 
   const handleShare = async () => {
@@ -252,11 +257,12 @@ export default function ListingProfilePage() {
               className="relative rounded-2xl overflow-hidden bg-zinc-200 dark:bg-zinc-800 aspect-[4/3] cursor-zoom-in group"
               onClick={() => hasGallery && setLightboxOpen(true)}
             >
-              {hasGallery ? (
+              {hasGallery && !brokenImages.has(activeImage) ? (
                 <img
                   src={profile.gallery[activeImage]}
                   alt={profile.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  onError={() => setBrokenImages((prev) => new Set(prev).add(activeImage))}
                 />
               ) : (
                 <ImagePlaceholder category={profile.category} className="w-full h-full" />
@@ -286,7 +292,16 @@ export default function ListingProfilePage() {
                     onClick={() => setActiveImage(i)}
                     className={`flex-shrink-0 w-20 h-16 rounded-xl overflow-hidden border-2 transition-all ${i === activeImage ? 'border-zinc-900 dark:border-white shadow-lg scale-105' : 'border-transparent opacity-60 hover:opacity-100'}`}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    {brokenImages.has(i) ? (
+                      <ImagePlaceholder category={profile.category} className="w-full h-full" />
+                    ) : (
+                      <img
+                        src={img}
+                        alt=""
+                        className="w-full h-full object-cover"
+                        onError={() => setBrokenImages((prev) => new Set(prev).add(i))}
+                      />
+                    )}
                   </button>
                 ))}
               </div>

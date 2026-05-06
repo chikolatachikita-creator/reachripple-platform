@@ -87,9 +87,13 @@ export const forgotPassword = async (email: string) => {
 
 // ============ OAuth ============
 
+export type OAuthProvider = "google" | "github" | "facebook" | "apple";
+
 export interface OAuthConfig {
-  google: { enabled: boolean; clientId: string | null; redirectUri: string };
-  github: { enabled: boolean; clientId: string | null };
+  google:   { enabled: boolean; clientId: string | null; redirectUri: string };
+  github:   { enabled: boolean; clientId: string | null };
+  facebook: { enabled: boolean; clientId: string | null; redirectUri: string };
+  apple:    { enabled: boolean; clientId: string | null; redirectUri: string };
 }
 
 export const getOAuthConfig = async (): Promise<OAuthConfig> => {
@@ -97,8 +101,14 @@ export const getOAuthConfig = async (): Promise<OAuthConfig> => {
   return res.data;
 };
 
-export const oauthLogin = async (provider: "google" | "github", code: string) => {
-  const res = await api.post<AuthResponse>(`/auth/oauth/${provider}`, { code });
+export const oauthLogin = async (
+  provider: OAuthProvider,
+  code: string,
+  extra?: { user?: { name?: { firstName?: string; lastName?: string } } }
+) => {
+  const body: any = { code };
+  if (provider === "apple" && extra?.user) body.user = extra.user;
+  const res = await api.post<AuthResponse>(`/auth/oauth/${provider}`, body);
   const { accessToken, refreshToken, user } = res.data;
 
   setTokens(accessToken, refreshToken);

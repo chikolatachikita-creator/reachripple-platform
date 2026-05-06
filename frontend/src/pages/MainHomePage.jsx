@@ -1060,38 +1060,7 @@ export default function MainHomePage() {
           </div>
         </section>
 
-        {/* Mobile Bottom Bar */}
-        <nav className="fixed left-1/2 -translate-x-1/2 bottom-4 w-[min(400px,calc(100%-32px))]
-                        rounded-2xl bg-white/95 dark:bg-zinc-900/95 p-1.5 shadow-2xl shadow-black/15 backdrop-blur-xl border border-zinc-200/80 dark:border-zinc-700/80
-                        flex gap-1.5 md:hidden z-50 safe-area-bottom mobile-bottom-bar">
-          <a
-            href="#search"
-            className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm
-                       bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700
-                       active:scale-95 transition-all flex items-center justify-center gap-1.5"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            Search
-          </a>
-          <button
-            onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
-            className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm
-                       bg-gradient-to-r from-orange-500 to-pink-600 text-white shadow-lg shadow-orange-500/25
-                       active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-          >
-            <span>+</span> Post
-          </button>
-          <Link
-            to="/saved"
-            className="flex-1 rounded-xl px-3 py-3 text-center font-semibold text-sm
-                       bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700
-                       active:scale-95 transition-all flex items-center justify-center gap-1.5"
-          >
-            <span>⭐</span> Saved
-          </Link>
-        </nav>
+        {/* Mobile bottom navigation is mounted globally in App.jsx (MobileBottomBar). */}
       </main>
 
       <Footer />

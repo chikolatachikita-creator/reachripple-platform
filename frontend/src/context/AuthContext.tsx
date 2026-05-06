@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { getMe, logout as logoutAPI, adminLogout as adminLogoutAPI } from "../api/auth";
+import { clearTokens } from "../api/client";
 
 export interface User {
   _id: string;
@@ -42,10 +43,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           setUser(currentUser as User);
           setError(null);
         } else {
+          // Token existed but /auth/me failed (e.g. 401). Clear stale
+          // session so the UI doesn't render a logged-in shell.
+          clearTokens();
+          localStorage.removeItem("userId");
+          localStorage.removeItem("userName");
+          localStorage.removeItem("userEmail");
+          localStorage.removeItem("userRole");
           setUser(null);
         }
       } catch (err) {
         console.error("Failed to initialize user:", err);
+        clearTokens();
         setUser(null);
       } finally {
         setIsLoading(false);

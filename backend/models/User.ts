@@ -5,7 +5,7 @@ export type UserStatus = "active" | "suspended";
 export type AccountType = "independent" | "agency";
 export type VerificationStatus = "unverified" | "pending" | "verified" | "rejected";
 export type PostingPlan = "free" | "basic" | "premium";
-export type OAuthProvider = "local" | "google" | "github";
+export type OAuthProvider = "local" | "google" | "github" | "facebook" | "apple";
 
 export interface UserDocument extends Document {
   name: string;
@@ -80,7 +80,7 @@ const UserSchema = new Schema<UserDocument>(
     password: { type: String, required: false, select: false }, // Not required for OAuth users
     oauthProvider: {
       type: String,
-      enum: ["local", "google", "github"],
+      enum: ["local", "google", "github", "facebook", "apple"],
       default: "local",
     },
     oauthId: { type: String },      // Provider-specific user ID

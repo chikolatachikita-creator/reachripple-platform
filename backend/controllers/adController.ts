@@ -279,17 +279,17 @@ export const getAds = async (req: Request, res: Response) => {
     };
 
     if (search) {
-      // Search strategy:
-      //  - 1 token >= 3 chars  → MongoDB $text index (fast, ranked, indexed)
-      //  - everything else     → AND'd regex tokens across title/description/location
-      //    (so "blonde london" requires BOTH terms; partial words like "lond"
-      //     still match "london", giving a fuzzy feel without an extra service)
+      // Search strategy: AND'd case-insensitive regex tokens across
+      // title / description / location.
+      //   - "blonde london" → ad must contain BOTH terms somewhere
+      //   - "lond"          → still matches "london" (substring/prefix)
+      // We deliberately do NOT use Mongo $text here because it requires
+      // whole-word matches and breaks partial queries; a regex AND is
+      // good enough for our corpus size and gives users a fuzzy feel.
       const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       const tokens = String(search).trim().split(/\s+/).filter((t) => t.length >= 2);
 
-      if (tokens.length === 1 && tokens[0].length >= 3) {
-        query.$text = { $search: tokens[0] };
-      } else if (tokens.length > 0) {
+      if (tokens.length > 0) {
         query.$and = tokens.map((t) => {
           const re = new RegExp(escapeRegex(t), "i");
           return {

@@ -1,9 +1,44 @@
 import { Request, Response } from "express";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
+import jwksClient from "jwks-rsa";
 import User from "../models/User";
 import { signAccessToken, signRefreshToken } from "../utils/jwt";
 import logger from "../utils/logger";
+
+// JWKS client for Apple id_token signature verification.
+// Apple's public keys rotate; jwks-rsa caches them with TTL + rate limit.
+const appleJwks = jwksClient({
+  jwksUri: "https://appleid.apple.com/auth/keys",
+  cache: true,
+  cacheMaxEntries: 5,
+  cacheMaxAge: 24 * 60 * 60 * 1000, // 24h
+  rateLimit: true,
+  jwksRequestsPerMinute: 10,
+});
+
+const verifyAppleIdToken = (idToken: string, audience: string): Promise<any> =>
+  new Promise((resolve, reject) => {
+    jwt.verify(
+      idToken,
+      (header, callback) => {
+        if (!header.kid) return callback(new Error("Missing kid in id_token header"));
+        appleJwks.getSigningKey(header.kid, (err, key) => {
+          if (err) return callback(err);
+          callback(null, key?.getPublicKey());
+        });
+      },
+      {
+        algorithms: ["RS256"],
+        issuer: "https://appleid.apple.com",
+        audience,
+      },
+      (err, decoded) => {
+        if (err) return reject(err);
+        resolve(decoded);
+      }
+    );
+  });
 
 // Helper to sanitize user object for response
 const sanitizeUser = (user: any) => ({
@@ -395,11 +430,14 @@ export const appleCallback = async (req: Request, res: Response) => {
       return res.status(401).json({ message: "Failed to authenticate with Apple" });
     }
 
-    // 3. Decode id_token (we trust it because it came directly from Apple over TLS).
-    //    For stricter verification you'd validate the signature against Apple's
-    //    JWKS — omitted here to avoid extra dependencies; the channel itself is
-    //    authenticated by the client_secret JWT we just signed.
-    const decoded = jwt.decode(tokenData.id_token) as any;
+    // 3. Verify id_token signature against Apple's JWKS, plus iss + aud claims.
+    let decoded: any;
+    try {
+      decoded = await verifyAppleIdToken(tokenData.id_token, clientId);
+    } catch (verifyErr: any) {
+      logger.error("Apple id_token verification failed:", verifyErr?.message || verifyErr);
+      return res.status(401).json({ message: "Invalid Apple identity token" });
+    }
     if (!decoded?.sub) {
       return res.status(401).json({ message: "Invalid Apple identity token" });
     }

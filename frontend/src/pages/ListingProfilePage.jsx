@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import DOMPurify from 'dompurify';
 import api from '../api/client';
 import { useToastContext } from '../context/ToastContextGlobal';
@@ -207,8 +208,28 @@ export default function ListingProfilePage() {
   const displayPrice = profile.price ? `£${Number(profile.price).toLocaleString('en-GB')}` : null;
   const displayPhone = profile.phone || profile.contactPhone || null;
 
+  const seoTitle = `${profile.title}${displayPrice ? ` — ${displayPrice}` : ''} | ReachRipple`;
+  const seoDescRaw = (profile.description || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  const seoDesc = seoDescRaw.length > 160 ? seoDescRaw.slice(0, 157) + '…' : (seoDescRaw || `${meta.label} listing on ReachRipple — Premium Classifieds & Services.`);
+  const seoImage = profile.gallery?.[0] ? getImageUrl(profile.gallery[0]) : null;
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/listing/${profile._id || ''}` : '';
+
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col">
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+        <meta property="og:type" content="product" />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+        {seoImage && <meta property="og:image" content={seoImage} />}
+        <meta name="twitter:card" content={seoImage ? 'summary_large_image' : 'summary'} />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
+      </Helmet>
       {/* ===== NAVBAR ===== */}
       <nav className="sticky top-0 z-50 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">

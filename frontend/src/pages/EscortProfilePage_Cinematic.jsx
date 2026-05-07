@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import DOMPurify from 'dompurify';
 import api from '../api/client';
 import { useToastContext } from '../context/ToastContextGlobal';
@@ -337,10 +338,33 @@ const EscortProfilePage = () => {
   const dynamicPrice = Object.values(profile.pricing || {}).find((value) => Boolean(value));
   const primaryPrice = profile.price || profile.pricing?.price_1hour || profile.pricing?.price_fixed || dynamicPrice || '—';
 
+  // SEO meta
+  const seoLocation = profile.location || profile.district || '';
+  const seoTitle = `${profile.title || 'Profile'}${seoLocation ? ` — ${seoLocation}` : ''} | ReachRipple`;
+  const seoDescRaw = (profile.description || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  const seoDesc = seoDescRaw.length > 160 ? seoDescRaw.slice(0, 157) + '…' : (seoDescRaw || `View profile on ReachRipple — Premium Classifieds & Services.`);
+  const seoImage = profile.gallery?.[0] ? getAssetUrl(profile.gallery[0]) : null;
+  const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/profile/${profile._id || id}` : '';
+
   // ─── Render ───
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a0f] via-[#1a1520] to-[#faf8f9]">
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta name="robots" content="noindex,nofollow" />
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+        <meta property="og:type" content="profile" />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+        {seoImage && <meta property="og:image" content={seoImage} />}
+        <meta name="twitter:card" content={seoImage ? 'summary_large_image' : 'summary'} />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
+      </Helmet>
       
       {/* Page-wide gradient overlay for smooth transition */}
       <div className="fixed inset-0 pointer-events-none z-0">

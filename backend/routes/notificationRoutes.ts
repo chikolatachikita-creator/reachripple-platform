@@ -61,4 +61,32 @@ router.patch("/:id/read", auth, async (req: Request, res: Response) => {
   }
 });
 
+// DELETE /api/notifications/:id - Delete a single notification
+router.delete("/:id", auth, async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).userId;
+    const result = await Notification.findOneAndDelete({
+      _id: req.params.id,
+      user: userId,
+    });
+    if (!result) return res.status(404).json({ message: "Not found" });
+    res.json({ success: true });
+  } catch (err) {
+    logger.error("Delete notification error:", err);
+    res.status(500).json({ message: "Failed to delete notification" });
+  }
+});
+
+// DELETE /api/notifications - Clear all notifications for current user
+router.delete("/", auth, async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).userId;
+    const result = await Notification.deleteMany({ user: userId });
+    res.json({ success: true, deleted: result.deletedCount || 0 });
+  } catch (err) {
+    logger.error("Clear notifications error:", err);
+    res.status(500).json({ message: "Failed to clear notifications" });
+  }
+});
+
 export default router;

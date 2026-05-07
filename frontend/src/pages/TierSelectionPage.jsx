@@ -26,6 +26,7 @@ import {
 } from "../api/tiers";
 import { useToastContext } from "../context/ToastContextGlobal";
 import { useAuth } from "../context/AuthContext";
+import { useConfirmModal } from "../components/ConfirmModal";
 
 // ===== TIER VISUAL CONFIG =====
 const TIER_STYLES = {
@@ -104,6 +105,7 @@ function FeatureIcon({ feature }) {
 export default function TierSelectionPage() {
   const { showSuccess, showError } = useToastContext();
   const { user } = useAuth();
+  const { confirm, ConfirmModal } = useConfirmModal();
 
   // State
   const [plans, setPlans] = useState([]);
@@ -156,6 +158,16 @@ export default function TierSelectionPage() {
 
   async function handleCancel() {
     if (cancelling) return;
+    const ok = await confirm({
+      title: "Cancel subscription?",
+      message: subscription?.currentPeriodEnd
+        ? `Your plan will remain active until ${new Date(subscription.currentPeriodEnd).toLocaleDateString()} and won’t renew. You can resubscribe at any time.`
+        : "Your plan will be cancelled and won’t renew. You can resubscribe at any time.",
+      type: "warning",
+      confirmText: "Cancel plan",
+      cancelText: "Keep plan",
+    });
+    if (!ok) return;
     setCancelling(true);
     try {
       const result = await cancelSubscription();
@@ -192,6 +204,7 @@ export default function TierSelectionPage() {
 
   return (
     <div className="min-h-screen bg-zinc-50">
+      <ConfirmModal />
       {/* Header */}
       <div className="bg-white border-b border-zinc-200">
         <div className="max-w-6xl mx-auto px-4 py-6">

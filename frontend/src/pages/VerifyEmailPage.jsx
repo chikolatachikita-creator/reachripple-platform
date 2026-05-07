@@ -7,6 +7,24 @@ export default function VerifyEmailPage() {
   const token = searchParams.get("token");
   const [status, setStatus] = useState("verifying"); // verifying | success | error
   const [message, setMessage] = useState("");
+  const [resendEmail, setResendEmail] = useState("");
+  const [resendLoading, setResendLoading] = useState(false);
+  const [resendMessage, setResendMessage] = useState("");
+
+  const handleResend = async (e) => {
+    e.preventDefault();
+    if (!resendEmail.trim() || resendLoading) return;
+    setResendLoading(true);
+    setResendMessage("");
+    try {
+      const res = await api.post("/auth/resend-verification-public", { email: resendEmail.trim() });
+      setResendMessage(res.data?.message || "If that account exists and is unverified, a new verification email has been sent.");
+    } catch (err) {
+      setResendMessage("If that account exists and is unverified, a new verification email has been sent.");
+    } finally {
+      setResendLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (!token) {
@@ -69,6 +87,31 @@ export default function VerifyEmailPage() {
             </div>
             <h1 className="text-xl font-semibold text-zinc-800 dark:text-white">Verification Failed</h1>
             <p className="text-zinc-500 dark:text-zinc-400 mt-2">{message}</p>
+
+            <form onSubmit={handleResend} className="mt-6 text-left space-y-3">
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                Resend verification email
+              </label>
+              <input
+                type="email"
+                required
+                value={resendEmail}
+                onChange={(e) => setResendEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-500"
+              />
+              <button
+                type="submit"
+                disabled={resendLoading || !resendEmail.trim()}
+                className="w-full px-4 py-2.5 rounded-lg bg-rose-500 text-white font-medium hover:bg-rose-600 disabled:opacity-50 disabled:cursor-not-allowed transition"
+              >
+                {resendLoading ? "Sending..." : "Resend verification email"}
+              </button>
+              {resendMessage && (
+                <p className="text-sm text-green-600 dark:text-green-400">{resendMessage}</p>
+              )}
+            </form>
+
             <Link
               to="/login"
               className="mt-6 inline-block px-6 py-2.5 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition font-medium"

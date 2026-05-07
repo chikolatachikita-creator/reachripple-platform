@@ -76,10 +76,11 @@ const ADDON_INFO = {
 };
 
 const DURATION_OPTIONS = [
+  { days: 1, label: '1 Day' },
+  { days: 3, label: '3 Days' },
   { days: 7, label: '1 Week' },
   { days: 14, label: '2 Weeks' },
-  { days: 30, label: '1 Month' },
-  { days: 90, label: '3 Months' }
+  { days: 30, label: '1 Month' }
 ];
 
 export default function BoostModal({ isOpen, onClose, ad }) {
@@ -343,7 +344,9 @@ export default function BoostModal({ isOpen, onClose, ad }) {
 
 // Tier Card Component
 function TierCard({ tier, info, price, availableSlots, selected, onSelect, duration, compact = false }) {
-  const soldOut = availableSlots !== undefined && availableSlots <= 0;
+  const hasFiniteCap = Number.isFinite(availableSlots);
+  const soldOut = hasFiniteCap && availableSlots <= 0;
+  const lowStock = hasFiniteCap && availableSlots > 0 && availableSlots <= 5;
   
   return (
     <button
@@ -363,7 +366,7 @@ function TierCard({ tier, info, price, availableSlots, selected, onSelect, durat
         </span>
       )}
       
-      {availableSlots !== undefined && availableSlots > 0 && availableSlots <= 5 && (
+      {lowStock && (
         <span className={`absolute top-3 right-3 px-2 py-1 text-xs font-bold rounded-lg ${
           selected ? 'bg-white/20 text-white' : 'bg-amber-100 text-amber-700'
         }`}>

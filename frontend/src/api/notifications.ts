@@ -27,6 +27,14 @@ export const notificationsAPI = {
   // Mark all notifications as read
   markAllAsRead: () =>
     api.patch<{ success: boolean }>("/notifications/mark-all-read"),
+
+  // Delete a single notification
+  deleteOne: (id: string) =>
+    api.delete<{ success: boolean }>(`/notifications/${id}`),
+
+  // Clear all notifications
+  clearAll: () =>
+    api.delete<{ success: boolean; deleted: number }>("/notifications"),
 };
 
 export default notificationsAPI;

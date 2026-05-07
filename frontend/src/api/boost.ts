@@ -78,11 +78,43 @@ export interface HomeData {
 /**
  * Get pricing matrix for all boost types
  */
-export const getBoostPricing = async (location: string = 'gb', durationDays: number = 7) => {
-  const res = await api.get<{ pricing: BoostPricing[] }>('/boost/pricing', {
-    params: { location, durationDays }
-  });
-  return res.data.pricing;
+export const getBoostPricing = async (location: string = 'gb', durationDays: number = 7): Promise<BoostPricing[]> => {
+  const res = await api.get<{
+    success: boolean;
+    data: {
+      pricing: Record<string, { name: string; description: string; durations: Array<{ days: number; basePriceGBP: number; demandMultiplier: number; durationFactor: number; finalPriceGBP: number; formattedPrice: string }> }>;
+      capacity: Record<string, { hasCapacity: boolean; cap: number; currentCount: number; remaining: number }> | null;
+      config: any;
+    };
+  }>('/boost/pricing', { params: { location, durationDays } });
+
+  const payload = res.data?.data;
+  if (!payload?.pricing) return [];
+
+  // Flatten { TIER: { durations: [...] } } -> [{ tier, finalPriceGBP, availableSlots, ... }]
+  // Pick the duration entry matching the requested durationDays (or closest).
+  const out: BoostPricing[] = [];
+  for (const tier of Object.keys(payload.pricing)) {
+    const tierEntry = payload.pricing[tier];
+    if (!tierEntry?.durations?.length) continue;
+    const match =
+      tierEntry.durations.find((d) => d.days === durationDays) ||
+      tierEntry.durations[0];
+    const cap = payload.capacity?.[tier];
+    out.push({
+      boostType: tier,
+      tier,
+      location,
+      basePriceGBP: match.basePriceGBP,
+      demandMultiplier: match.demandMultiplier,
+      durationFactor: match.durationFactor,
+      finalPriceGBP: match.finalPriceGBP,
+      // Only TIER endpoints have capacity; addons are unlimited (Number.POSITIVE_INFINITY signals "no limit")
+      availableSlots: cap ? cap.remaining : Number.POSITIVE_INFINITY,
+      durations: tierEntry.durations.map((d) => d.days),
+    });
+  }
+  return out;
 };
 
 /**

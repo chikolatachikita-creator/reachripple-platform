@@ -378,7 +378,35 @@ export const resendVerification = async (req: Request, res: Response) => {
   }
 };
 
-// FORGOT PASSWORD
+// PUBLIC RESEND VERIFICATION EMAIL (no auth required)
+// Always returns success regardless to avoid email enumeration.
+export const resendVerificationPublic = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body as { email?: string };
+    const genericResponse = { message: "If that account exists and is unverified, a new verification email has been sent." };
+
+    if (!email || typeof email !== "string") {
+      return res.json(genericResponse);
+    }
+
+    const user = await User.findOne({ email: email.toLowerCase().trim() });
+    if (!user || user.isVerified) {
+      return res.json(genericResponse);
+    }
+
+    const emailVerificationToken = generateToken();
+    const emailVerificationExpires = new Date(Date.now() + securityConfig.tokens.emailVerificationExpiry);
+    user.emailVerificationToken = emailVerificationToken;
+    user.emailVerificationExpires = emailVerificationExpires;
+    await user.save();
+
+    await sendVerificationEmail(user.email, user.name, emailVerificationToken);
+    return res.json(genericResponse);
+  } catch (err: any) {
+    logger.error("resendVerificationPublic error:", err);
+    return res.json({ message: "If that account exists and is unverified, a new verification email has been sent." });
+  }
+};
 export const forgotPassword = async (req: Request, res: Response) => {
   try {
     const { email } = req.body as { email?: string };

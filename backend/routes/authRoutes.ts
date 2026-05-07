@@ -9,6 +9,7 @@ import {
   changePassword,
   verifyEmail,
   resendVerification,
+  resendVerificationPublic,
   forgotPassword,
   resetPassword,
   logout,
@@ -56,6 +57,7 @@ router.post("/register", validateBody(registerSchema), register);
 router.post("/login", validateBody(loginSchema), login);
 router.post("/refresh", validateBody(refreshTokenSchema), refresh);
 router.post("/verify-email", verifyEmail);
+router.post("/resend-verification-public", resendVerificationPublic);
 router.post("/forgot-password", validateBody(forgotPasswordSchema), forgotPassword);
 router.post("/reset-password", validateBody(resetPasswordSchema), resetPassword);
 

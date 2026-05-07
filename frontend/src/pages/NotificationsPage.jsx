@@ -83,6 +83,31 @@ export default function NotificationsPage() {
     }
   };
 
+  const handleDelete = async (id) => {
+    const previous = notifications;
+    setNotifications((prev) => prev.filter((item) => item._id !== id));
+    try {
+      await notificationsAPI.deleteOne(id);
+    } catch (error) {
+      setNotifications(previous);
+      showToast("Could not delete notification", "error");
+    }
+  };
+
+  const handleClearAll = async () => {
+    if (notifications.length === 0) return;
+    if (!window.confirm("Clear all notifications? This cannot be undone.")) return;
+    const previous = notifications;
+    setNotifications([]);
+    try {
+      await notificationsAPI.clearAll();
+      showToast("All notifications cleared", "success");
+    } catch (error) {
+      setNotifications(previous);
+      showToast("Could not clear notifications", "error");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       <Helmet>
@@ -110,6 +135,14 @@ export default function NotificationsPage() {
                 className="px-3 py-2 rounded-xl text-sm font-semibold bg-slate-900 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-700 transition-colors"
               >
                 Mark all read
+              </button>
+              <button
+                onClick={handleClearAll}
+                disabled={notifications.length === 0}
+                className="px-3 py-2 rounded-xl text-sm font-semibold border border-red-200 text-red-600 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-red-50 dark:border-red-700/40 dark:text-red-300 dark:hover:bg-red-900/20 transition-colors"
+                title="Delete all notifications"
+              >
+                Clear all
               </button>
             </div>
           </div>
@@ -191,6 +224,16 @@ export default function NotificationsPage() {
                         Mark read
                       </button>
                     )}
+                    <button
+                      onClick={() => handleDelete(item._id)}
+                      className="text-slate-400 hover:text-red-600 dark:hover:text-red-400 p-1 rounded-md hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex-shrink-0"
+                      title="Delete notification"
+                      aria-label="Delete notification"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
                   </article>
                 );
               })

@@ -134,6 +134,8 @@ interface UseConfirmModalState {
   title: string;
   message: string;
   type: "danger" | "warning" | "info";
+  confirmText?: string;
+  cancelText?: string;
   onConfirm: () => void;
 }
 
@@ -152,6 +154,8 @@ export const useConfirmModal = () => {
       title: string;
       message: string;
       type?: "danger" | "warning" | "info";
+      confirmText?: string;
+      cancelText?: string;
     }): Promise<boolean> => {
       return new Promise((resolve) => {
         setState({
@@ -159,6 +163,8 @@ export const useConfirmModal = () => {
           title: options.title,
           message: options.message,
           type: options.type || "danger",
+          confirmText: options.confirmText,
+          cancelText: options.cancelText,
           onConfirm: () => {
             resolve(true);
             setState((prev) => ({ ...prev, isOpen: false }));
@@ -180,6 +186,8 @@ export const useConfirmModal = () => {
         title={state.title}
         message={state.message}
         type={state.type}
+        confirmText={state.confirmText}
+        cancelText={state.cancelText}
         onConfirm={state.onConfirm}
         onCancel={close}
         isLoading={isLoading}

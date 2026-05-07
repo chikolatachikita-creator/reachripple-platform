@@ -25,8 +25,27 @@ interface GetMeResponse {
   user: User;
 }
 
-export const register = async (name: string, email: string, password: string) => {
-  const res = await api.post<AuthResponse>("/auth/register", { name, email, password });
+export const register = async (
+  name: string,
+  email: string,
+  password: string,
+  extra?: {
+    accountType?: "independent" | "agency";
+    agencyDetails?: {
+      companyName?: string;
+      companyNumber?: string;
+      website?: string;
+      directorName?: string;
+      phone?: string;
+    };
+  }
+) => {
+  const res = await api.post<AuthResponse>("/auth/register", {
+    name,
+    email,
+    password,
+    ...(extra || {}),
+  });
   const { accessToken, refreshToken, user } = res.data;
 
   setTokens(accessToken, refreshToken);

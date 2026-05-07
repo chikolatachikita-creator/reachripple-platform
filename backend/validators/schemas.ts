@@ -23,6 +23,16 @@ export const registerSchema = z.object({
     .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
     .regex(/[a-z]/, "Password must contain at least one lowercase letter")
     .regex(/[0-9]/, "Password must contain at least one number"),
+  accountType: z.enum(["independent", "agency"]).optional(),
+  agencyDetails: z
+    .object({
+      companyName: z.string().trim().min(2).max(120).optional(),
+      companyNumber: z.string().trim().max(40).optional(),
+      website: z.string().trim().url().optional().or(z.literal("")),
+      directorName: z.string().trim().max(120).optional(),
+      phone: z.string().trim().max(40).optional(),
+    })
+    .optional(),
 });
 
 export const loginSchema = z.object({

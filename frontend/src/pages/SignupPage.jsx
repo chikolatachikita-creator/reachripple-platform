@@ -21,6 +21,13 @@ export default function SignupPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
 
+  // Account type (Individual / Agency) — VivaStreet-style split
+  const [accountType, setAccountType] = useState("independent"); // "independent" | "agency"
+  const [agencyName, setAgencyName] = useState("");
+  const [agencyWebsite, setAgencyWebsite] = useState("");
+  const [agencyPhone, setAgencyPhone] = useState("");
+  const [agencyCompanyNumber, setAgencyCompanyNumber] = useState("");
+
   // Post-signup verify-email screen
   const [signupSuccess, setSignupSuccess] = useState(false);
   const [signupEmail, setSignupEmail] = useState("");
@@ -158,10 +165,26 @@ export default function SignupPage() {
       return;
     }
 
+    if (accountType === "agency" && !agencyName.trim()) {
+      setError("Agency / business name is required");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const user = await register(name, email, password);
+      const extra = accountType === "agency"
+        ? {
+            accountType,
+            agencyDetails: {
+              companyName: agencyName.trim(),
+              companyNumber: agencyCompanyNumber.trim() || undefined,
+              website: agencyWebsite.trim() || undefined,
+              phone: agencyPhone.trim() || undefined,
+            },
+          }
+        : { accountType: "independent" };
+      const user = await register(name, email, password, extra);
       
       if (user) {
         // Store user info for route guards
@@ -303,6 +326,40 @@ export default function SignupPage() {
 
           {/* Form */}
           <form onSubmit={handleSignup} className="space-y-5">
+            {/* Account type selector — Individual vs Agency (VivaStreet-style) */}
+            <div>
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">I'm signing up as</label>
+              <div className="grid grid-cols-2 gap-2 p-1 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
+                <button
+                  type="button"
+                  onClick={() => setAccountType("independent")}
+                  className={`h-11 rounded-lg text-sm font-semibold transition-all ${
+                    accountType === "independent"
+                      ? "bg-white dark:bg-zinc-700 text-orange-600 dark:text-orange-400 shadow-sm"
+                      : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-800"
+                  }`}
+                >
+                  👤 Individual
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAccountType("agency")}
+                  className={`h-11 rounded-lg text-sm font-semibold transition-all ${
+                    accountType === "agency"
+                      ? "bg-white dark:bg-zinc-700 text-orange-600 dark:text-orange-400 shadow-sm"
+                      : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-800"
+                  }`}
+                >
+                  🏢 Agency / Business
+                </button>
+              </div>
+              <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+                {accountType === "agency"
+                  ? "Agency accounts get higher posting limits, multi-listing dashboards and a public agency page. Verification required before listings go live."
+                  : "Individual accounts can post personal listings across all categories."}
+              </p>
+            </div>
+
             {/* Name */}
             <div>
               <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Full name</label>
@@ -482,6 +539,66 @@ export default function SignupPage() {
               </div>
               <FieldError fieldName="passwordConfirm" />
             </div>
+
+            {/* Agency-only fields */}
+            {accountType === "agency" && (
+              <div className="space-y-4 p-4 rounded-xl border border-orange-200 bg-orange-50/40 dark:border-orange-800/40 dark:bg-orange-900/10">
+                <div>
+                  <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
+                    Agency / business name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Velvet Models Ltd"
+                    value={agencyName}
+                    onChange={(e) => setAgencyName(e.target.value)}
+                    className="w-full h-11 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 dark:text-white px-4 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500"
+                    required
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
+                      Companies House number
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. 12345678"
+                      value={agencyCompanyNumber}
+                      onChange={(e) => setAgencyCompanyNumber(e.target.value)}
+                      className="w-full h-11 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 dark:text-white px-4 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
+                      Business phone
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="+44 ..."
+                      value={agencyPhone}
+                      onChange={(e) => setAgencyPhone(e.target.value)}
+                      className="w-full h-11 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 dark:text-white px-4 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
+                    Website
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://yoursite.com"
+                    value={agencyWebsite}
+                    onChange={(e) => setAgencyWebsite(e.target.value)}
+                    className="w-full h-11 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 dark:text-white px-4 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500"
+                  />
+                </div>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  Your agency will be created in <strong>pending verification</strong>. Listings can be drafted but won't go live until our team verifies your business details. You can complete KYC documents from your dashboard.
+                </p>
+              </div>
+            )}
 
             {/* Terms */}
             <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">

@@ -33,10 +33,18 @@ const generateToken = (): string => crypto.randomBytes(32).toString("hex");
 // REGISTER
 export const register = async (req: Request, res: Response) => {
   try {
-    const { name, email, password } = req.body as {
+    const { name, email, password, accountType, agencyDetails } = req.body as {
       name?: string;
       email?: string;
       password?: string;
+      accountType?: "independent" | "agency";
+      agencyDetails?: {
+        companyName?: string;
+        companyNumber?: string;
+        website?: string;
+        directorName?: string;
+        phone?: string;
+      };
     };
 
     if (!name || !email || !password) {
@@ -50,6 +58,13 @@ export const register = async (req: Request, res: Response) => {
         message: "Password does not meet requirements",
         errors: passwordValidation.errors 
       });
+    }
+
+    const isAgency = accountType === "agency";
+    if (isAgency) {
+      if (!agencyDetails?.companyName || agencyDetails.companyName.trim().length < 2) {
+        return res.status(400).json({ message: "Agency / business name is required for agency accounts" });
+      }
     }
 
     // Check if user already exists
@@ -75,6 +90,19 @@ export const register = async (req: Request, res: Response) => {
       isVerified: false,
       emailVerificationToken,
       emailVerificationExpires,
+      accountType: isAgency ? "agency" : "independent",
+      ...(isAgency
+        ? {
+            phone: agencyDetails?.phone?.trim() || undefined,
+            agencyDetails: {
+              companyName: agencyDetails?.companyName?.trim(),
+              companyNumber: agencyDetails?.companyNumber?.trim() || undefined,
+              website: agencyDetails?.website?.trim() || undefined,
+              directorName: agencyDetails?.directorName?.trim() || undefined,
+            },
+            verificationStatus: "pending",
+          }
+        : {}),
     });
 
     // Send verification email

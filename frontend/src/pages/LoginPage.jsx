@@ -80,6 +80,8 @@ export default function LoginPage() {
         
         if (user.role === "admin") {
           navigate("/admin/dashboard");
+        } else if (user.accountType === "agency" && user.verificationStatus !== "verified") {
+          navigate("/agency");
         } else {
           navigate("/");
         }

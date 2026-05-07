@@ -23,6 +23,8 @@ const sanitizeUser = (user: any) => ({
   phone: user.phone,
   bio: user.bio,
   avatarUrl: user.avatarUrl,
+  accountType: user.accountType,
+  verificationStatus: user.verificationStatus,
   createdAt: user.createdAt,
   updatedAt: user.updatedAt,
 });

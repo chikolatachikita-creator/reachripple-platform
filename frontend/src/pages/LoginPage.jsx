@@ -301,6 +301,8 @@ export default function LoginPage() {
             </LoadingButton>
           </form>
 
+          {(oauthConfig?.google?.enabled || oauthConfig?.facebook?.enabled || oauthConfig?.apple?.enabled) && (
+          <>
           {/* Divider */}
           <div className="my-8 flex items-center gap-4">
             <div className="h-px bg-zinc-200 dark:bg-zinc-700 flex-1"></div>
@@ -310,11 +312,10 @@ export default function LoginPage() {
 
           {/* Social Login Buttons */}
           <div>
+            {oauthConfig?.google?.enabled && (
             <button
               type="button"
-              disabled={!oauthConfig?.google?.enabled}
               onClick={() => {
-                if (!oauthConfig?.google?.enabled) return;
                 const params = new URLSearchParams({
                   client_id: oauthConfig.google.clientId,
                   redirect_uri: oauthConfig.google.redirectUri,
@@ -325,10 +326,7 @@ export default function LoginPage() {
                 });
                 window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
               }}
-              className={`w-full h-11 rounded-xl border font-medium text-sm flex items-center justify-center gap-2 relative group transition-colors
-                ${oauthConfig?.google?.enabled
-                  ? "border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:border-zinc-300 cursor-pointer"
-                  : "border-zinc-200 bg-white text-zinc-400 cursor-not-allowed opacity-60"}`}
+              className="w-full h-11 rounded-xl border font-medium text-sm flex items-center justify-center gap-2 relative group transition-colors border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:border-zinc-300 cursor-pointer"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -337,10 +335,8 @@ export default function LoginPage() {
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
               </svg>
               Continue with Google
-              {!oauthConfig?.google?.enabled && (
-                <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-zinc-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Not configured</span>
-              )}
             </button>
+            )}
 
             {/* Facebook */}
             {oauthConfig?.facebook?.enabled && (
@@ -394,6 +390,8 @@ export default function LoginPage() {
               Sign up with email — 30 seconds
             </Link>
           </div>
+          </>
+          )}
 
           {/* Back to Home */}
           <Link

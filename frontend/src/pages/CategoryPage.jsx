@@ -8,6 +8,12 @@ import Footer from "../components/Footer";
 import ThemeToggle from "../components/ThemeToggle";
 import api from "../api/client";
 
+const ADULT_CATEGORIES = new Set([
+  "escorts", "escort", "adult-entertainment", "trans-escorts", "gay-escorts",
+  "adult-dating", "swingers", "straight-relationships", "gay-and-lesbian", "massage",
+]);
+const isAdultSlug = (slug) => ADULT_CATEGORIES.has((slug || "").toLowerCase().trim());
+
 /**
  * CategoryPage — Generic page for non-escort categories.
  * Shows hero banner, subcategory filter buttons, listing grid with pagination.
@@ -178,7 +184,7 @@ export default function CategoryPage() {
               {listings.map((ad) => (
                 <Link
                   key={ad._id}
-                  to={`/profile/${ad._id}`}
+                  to={isAdultSlug(ad.categorySlug || categorySlug) ? `/profile/${ad._id}` : `/listing/${ad._id}`}
                   className="bg-white dark:bg-zinc-800 rounded-xl shadow-sm hover:shadow-md transition-all group overflow-hidden"
                 >
                   {ad.images && ad.images[0] ? (

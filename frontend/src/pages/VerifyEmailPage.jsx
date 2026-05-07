@@ -5,7 +5,7 @@ import api from "../api/client";
 export default function VerifyEmailPage() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
-  const [status, setStatus] = useState("verifying"); // verifying | success | error
+  const [status, setStatus] = useState(token ? "verifying" : "prompt"); // verifying | success | error | prompt
   const [message, setMessage] = useState("");
   const [resendEmail, setResendEmail] = useState("");
   const [resendLoading, setResendLoading] = useState(false);
@@ -28,8 +28,7 @@ export default function VerifyEmailPage() {
 
   useEffect(() => {
     if (!token) {
-      setStatus("error");
-      setMessage("No verification token provided.");
+      // Neutral prompt state — user landed without a token
       return;
     }
 
@@ -91,6 +90,51 @@ export default function VerifyEmailPage() {
             <form onSubmit={handleResend} className="mt-6 text-left space-y-3">
               <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
                 Resend verification email
+              </label>
+              <input
+                type="email"
+                required
+                value={resendEmail}
+                onChange={(e) => setResendEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-500"
+              />
+              <button
+                type="submit"
+                disabled={resendLoading || !resendEmail.trim()}
+                className="w-full px-4 py-2.5 rounded-lg bg-rose-500 text-white font-medium hover:bg-rose-600 disabled:opacity-50 disabled:cursor-not-allowed transition"
+              >
+                {resendLoading ? "Sending..." : "Resend verification email"}
+              </button>
+              {resendMessage && (
+                <p className="text-sm text-green-600 dark:text-green-400">{resendMessage}</p>
+              )}
+            </form>
+
+            <Link
+              to="/login"
+              className="mt-6 inline-block px-6 py-2.5 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition font-medium"
+            >
+              Back to Login
+            </Link>
+          </>
+        )}
+
+        {status === "prompt" && (
+          <>
+            <div className="w-16 h-16 bg-rose-100 dark:bg-rose-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h1 className="text-xl font-semibold text-zinc-800 dark:text-white">Check your inbox</h1>
+            <p className="text-zinc-500 dark:text-zinc-400 mt-2">
+              We sent a verification link to your email. Click it to activate your account.
+            </p>
+
+            <form onSubmit={handleResend} className="mt-6 text-left space-y-3">
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                Didn't get it? Resend
               </label>
               <input
                 type="email"

@@ -251,13 +251,13 @@ export default function HelpPage() {
               <h3 className="font-bold text-gray-900 dark:text-white mb-4">Quick Links</h3>
               <ul className="space-y-3">
                  <li>
-                  <Link to="/my-ads" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400 text-sm">
+                  <Link to="/pricing" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400 text-sm">
                     <CreditCard className="w-4 h-4" />
                     Ad Pricing & Boosts
                   </Link>
                 </li>
                 <li>
-                  <Link to="/login" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400 text-sm">
+                  <Link to="/forgot-password" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400 text-sm">
                     <Lock className="w-4 h-4" />
                     Reset Password
                   </Link>

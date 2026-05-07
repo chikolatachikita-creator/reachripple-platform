@@ -146,10 +146,9 @@ export default function App() {
                   <Routes>
 
             {/* PUBLIC ROUTES */}
-            {/* Option B: Adult/dating directory is the primary identity. */}
-            {/* Home renders the EscortsHomePage; the legacy classifieds landing */}
-            {/* is preserved at /classifieds for backwards-compatible deep links. */}
-            <Route path="/" element={<EscortsHomePage />} />
+            {/* Home is the multi-category classifieds landing. */}
+            {/* Adult directory lives at /escorts (and legacy /classifieds → MainHomePage too). */}
+            <Route path="/" element={<MainHomePage />} />
             <Route path="/classifieds" element={<MainHomePage />} />
             
             {/* ===== VIVASTREET-STYLE UNIFIED ROUTE ===== */}

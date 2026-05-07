@@ -198,6 +198,21 @@ export default function UserDashboardPage() {
                   🛡️ Verify ID
                 </Link>
               )}
+              {user.accountType === 'agency' ? (
+                <Link
+                  to="/agency"
+                  className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold hover:bg-sky-200 transition-colors"
+                >
+                  🏢 Agency Account
+                </Link>
+              ) : (
+                <Link
+                  to="/agency"
+                  className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-violet-100 text-violet-700 text-xs font-semibold hover:bg-violet-200 transition-colors"
+                >
+                  🏢 Switch to Agency
+                </Link>
+              )}
             </div>
             {postingLimits && (
               <div className="flex items-center gap-3">

@@ -12,6 +12,7 @@ import {
   LogOut,
   ShieldAlert,
   GitBranch,
+  Building2,
 } from "lucide-react";
 
 export default function AdminSidebar() {
@@ -128,6 +129,21 @@ export default function AdminSidebar() {
         >
           <GitBranch size={20} />
           <span>Network Detection</span>
+        </NavLink>
+
+        {/* Agency Verification */}
+        <NavLink
+          to="/admin/agencies"
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+              isActive
+                ? "bg-white/25 shadow-lg backdrop-blur-sm border border-white/30"
+                : "text-white/80 hover:bg-white/10"
+            }`
+          }
+        >
+          <Building2 size={20} />
+          <span>Agencies</span>
         </NavLink>
 
         {/* Analytics */}

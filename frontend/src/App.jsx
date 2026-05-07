@@ -50,6 +50,8 @@ const AdminAnalyticsPage = React.lazy(() => import("./pages/AdminAnalyticsPage.t
 const AdminModerationPage = React.lazy(() => import("./pages/AdminModerationPage.tsx"));
 const AdminRevenuePage = React.lazy(() => import("./pages/AdminRevenuePage.tsx"));
 const AdminNetworkPage = React.lazy(() => import("./pages/AdminNetworkPage.tsx"));
+const AdminAgencyVerificationPage = React.lazy(() => import("./pages/AdminAgencyVerificationPage.tsx"));
+const AgencyDashboardPage = React.lazy(() => import("./pages/AgencyDashboardPage.tsx"));
 
 // Lazy-loaded static pages
 const SafetyPage = React.lazy(() => import("./pages/SafetyPage.jsx"));
@@ -237,6 +239,10 @@ export default function App() {
             element={<RequireUser><VerificationPage /></RequireUser>} 
           />
           <Route 
+            path="/agency" 
+            element={<RequireUser><AgencyDashboardPage /></RequireUser>} 
+          />
+          <Route 
             path="/help" 
             element={<HelpPage />} 
           />
@@ -269,6 +275,7 @@ export default function App() {
             <Route path="revenue" element={<AdminRevenuePage />} />
             <Route path="moderation" element={<AdminModerationPage />} />
             <Route path="network" element={<AdminNetworkPage />} />
+            <Route path="agencies" element={<AdminAgencyVerificationPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
 
             {/* CATCH-ALL FOR BAD ADMIN ROUTES */}

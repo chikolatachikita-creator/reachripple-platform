@@ -31,6 +31,7 @@ import { processSubscriptionRenewals } from "./routes/tierRoutes";
 import healthRoutes from "./routes/healthRoutes";
 import imgRoutes from "./routes/imgRoutes";
 import verificationRoutes from "./routes/verificationRoutes";
+import agencyRoutes from "./routes/agencyRoutes";
 import contactRoutes from "./routes/contactRoutes";
 import analyticsRoutes from "./routes/analyticsRoutes";
 
@@ -235,6 +236,7 @@ app.use("/api/boost", boostRoutes);
 // app.use("/api/credits", creditRoutes); // Removed: credits system replaced with direct pricing
 app.use("/api/tiers", tierRoutes);
 app.use("/api/verification", verificationRoutes);
+app.use("/api/agency", agencyRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/analytics", analyticsRoutes);
 

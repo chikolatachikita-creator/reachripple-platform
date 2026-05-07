@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { login, getOAuthConfig } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
 import { validators } from "../utils/formValidation";
 import { LoadingButton } from "../components/ui/LoadingButton";
 import ThemeToggle from "../components/ThemeToggle";
 
+const SAFE_NEXT_RE = /^\/[a-z0-9\-\/_?=&%.]*$/i;
+const safeNext = (raw) => (raw && SAFE_NEXT_RE.test(raw) && !raw.startsWith("//") ? raw : null);
+
 export default function LoginPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const nextPath = safeNext(searchParams.get("next"));
   const { login: authLogin } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -80,6 +85,8 @@ export default function LoginPage() {
         
         if (user.role === "admin") {
           navigate("/admin/dashboard");
+        } else if (nextPath) {
+          navigate(nextPath);
         } else if (user.accountType === "agency" && user.verificationStatus !== "verified") {
           navigate("/agency");
         } else {
@@ -151,9 +158,14 @@ export default function LoginPage() {
           {/* Title */}
           <div className="mb-8">
             <h1 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white">Sign in to your account</h1>
+            {nextPath && (
+              <p className="mt-2 text-sm px-3 py-2 rounded-lg bg-orange-50 text-orange-700 dark:bg-orange-900/20 dark:text-orange-300">
+                Sign in to continue to <span className="font-semibold">{nextPath}</span>
+              </p>
+            )}
             <p className="mt-2 text-zinc-500 dark:text-zinc-400">
               Don't have an account?{" "}
-              <Link to="/signup" className="text-orange-600 font-medium hover:text-orange-700">
+              <Link to={nextPath ? `/signup?next=${encodeURIComponent(nextPath)}` : "/signup"} className="text-orange-600 font-medium hover:text-orange-700">
                 Create one
               </Link>
             </p>

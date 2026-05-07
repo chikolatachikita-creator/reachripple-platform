@@ -5,27 +5,10 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function NotFoundPage() {
   const navigate = useNavigate();
   const [fadeIn, setFadeIn] = useState(false);
-  const [countdown, setCountdown] = useState(10);
 
   useEffect(() => {
     requestAnimationFrame(() => setFadeIn(true));
   }, []);
-
-  // Auto-redirect countdown
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown(prev => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          navigate('/');
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [navigate]);
 
   return (
     <div className={`min-h-screen bg-gradient-to-br from-zinc-50 via-purple-50/30 to-pink-50/30 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 flex items-center justify-center p-6 transition-all duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
@@ -78,13 +61,6 @@ export default function NotFoundPage() {
             Go Back
           </button>
         </div>
-
-        {/* Auto-redirect notice */}
-        <p className="text-sm text-gray-400 dark:text-zinc-500">
-          Redirecting to home in{' '}
-          <span className="font-semibold text-purple-600">{countdown}</span>
-          {' '}seconds...
-        </p>
 
         {/* Quick links */}
         <div className="mt-10 pt-8 border-t border-gray-100 dark:border-zinc-800">

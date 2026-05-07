@@ -111,16 +111,18 @@ function AuthLoadingSpinner() {
 
 function RequireUser({ children }) {
   const { isLoggedIn, isAdmin, isLoading } = useAuth();
+  const loc = useLocation();
   if (isLoading) return <AuthLoadingSpinner />;
-  if (!isLoggedIn) return <Navigate to="/login" replace />;
+  if (!isLoggedIn) return <Navigate to={`/login?next=${encodeURIComponent(loc.pathname + loc.search)}`} replace />;
   if (isAdmin) return <Navigate to="/admin/dashboard" replace />;
   return children;
 }
 
 function RequireAuth({ children }) {
   const { isLoggedIn, isLoading } = useAuth();
+  const loc = useLocation();
   if (isLoading) return <AuthLoadingSpinner />;
-  if (!isLoggedIn) return <Navigate to="/login" replace />;
+  if (!isLoggedIn) return <Navigate to={`/login?next=${encodeURIComponent(loc.pathname + loc.search)}`} replace />;
   return children;
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 /**
  * SkipLink - Allows keyboard users to skip to main content
@@ -28,7 +28,7 @@ export default function SkipLink({
         rounded-br-lg
         text-sm font-medium
         transition-transform duration-200
-        focus:outline-none focus:ring-2 focus:ring-pink-500
+        focus:outline-none focus:ring-2 focus:ring-blue-500
       "
     >
       {children}
@@ -73,7 +73,7 @@ export function FocusRing({ children, className = '' }) {
   return (
     <div 
       className={`
-        focus-within:ring-2 focus-within:ring-pink-500 focus-within:ring-offset-2
+        focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2
         rounded-lg
         ${className}
       `}

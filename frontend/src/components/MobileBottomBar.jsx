@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -39,9 +39,9 @@ export default function MobileBottomBar() {
       "flex-1 rounded-xl px-2 py-2.5 text-center text-[11px] font-semibold " +
       "active:scale-95 transition-all flex flex-col items-center justify-center gap-0.5";
     const cls = primary
-      ? `${base} bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-pink-500/25`
+      ? `${base} bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/25`
       : active
-      ? `${base} bg-pink-50 text-pink-600`
+      ? `${base} bg-blue-50 text-blue-600`
       : `${base} text-zinc-700 hover:bg-zinc-100`;
     return to ? (
       <Link to={to} className={cls} aria-label={label}>

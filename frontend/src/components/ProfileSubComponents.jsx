@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import Icons from './ProfileIcons';
 
@@ -8,7 +8,7 @@ import Icons from './ProfileIcons';
 export const LoadingScreen = () => (
   <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f]">
     <div className="text-center">
-      <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-rose-500 to-purple-600 flex items-center justify-center shadow-xl shadow-rose-500/30">
+      <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-xl shadow-blue-500/30">
         <div className="w-10 h-10 rounded-full border-4 border-white/30 border-t-white animate-spin" />
       </div>
       <p className="text-white/60 font-medium">Loading profile...</p>
@@ -22,13 +22,13 @@ export const LoadingScreen = () => (
 export const ErrorScreen = ({ error }) => (
   <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f] p-6">
     <div className="text-center max-w-md bg-[#12121a] rounded-3xl p-8 border border-white/5">
-      <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-rose-500/20 to-purple-500/20 flex items-center justify-center">
+      <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
         <span className="text-4xl">😢</span>
       </div>
       <h1 className="text-2xl font-black text-white mb-3">Oops!</h1>
       <p className="text-white/50 mb-6">{error}</p>
       <div className="flex gap-3 justify-center">
-        <Link to="/escort/gb" className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-rose-500 to-purple-600 text-white font-bold hover:shadow-lg hover:shadow-rose-500/25 transition-all">
+        <Link to="/escort/gb" className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold hover:shadow-lg hover:shadow-blue-500/25 transition-all">
           Browse Profiles
         </Link>
         <Link to="/" className="px-6 py-3.5 rounded-xl bg-white/10 text-white font-bold hover:bg-white/20 transition-all">

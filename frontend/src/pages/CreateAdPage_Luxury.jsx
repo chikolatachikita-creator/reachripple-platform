@@ -1,4 +1,4 @@
-// src/pages/CreateAdPage_Luxury.jsx - Luxury Ad Creation with EscortProfilePage styling
+﻿// src/pages/CreateAdPage_Luxury.jsx - Luxury Ad Creation with EscortProfilePage styling
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, Link } from "react-router-dom";
@@ -481,7 +481,7 @@ function CreateAdPageLuxury() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
       <Helmet><title>Create Ad | ReachRipple</title></Helmet>
       {/* Header with Glassmorphism */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/40 border-b border-pink-500/10">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/40 border-b border-blue-500/10">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to="/" className="p-2 hover:bg-white/10 rounded-lg transition-colors">
@@ -489,13 +489,13 @@ function CreateAdPageLuxury() {
             </Link>
             <div>
               <h1 className="text-xl font-bold text-white">Create Your Profile</h1>
-              <p className="text-sm text-pink-300">Step {currentStep + 1} of 5</p>
+              <p className="text-sm text-blue-300">Step {currentStep + 1} of 5</p>
             </div>
           </div>
           {previewMode && (
             <button
               onClick={() => setPreviewMode(false)}
-              className="px-4 py-2 bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 rounded-lg transition-colors"
+              className="px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 rounded-lg transition-colors"
             >
               ✕ Exit Preview
             </button>
@@ -507,7 +507,7 @@ function CreateAdPageLuxury() {
         <div className="max-w-5xl mx-auto px-4 pb-4">
           <div className="h-1 bg-white/5 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-pink-500 to-purple-500 transition-all"
+              className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all"
               style={{ width: `${((currentStep === 0 ? 0 : currentStep) / 4) * 100}%` }}
             />
           </div>
@@ -554,7 +554,7 @@ function CreateAdPageLuxury() {
                       onClick={() => toggleFeature(key)}
                       className={`p-5 rounded-xl border-2 transition-all text-left ${
                         enabledFeatures[key]
-                          ? 'border-pink-500 bg-pink-500/10'
+                          ? 'border-blue-500 bg-blue-500/10'
                           : 'border-white/10 bg-white/5 hover:bg-white/10'
                       }`}
                     >
@@ -562,7 +562,7 @@ function CreateAdPageLuxury() {
                         <span className="text-2xl">{def.icon}</span>
                         <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${
                           enabledFeatures[key]
-                            ? 'border-pink-500 bg-pink-500'
+                            ? 'border-blue-500 bg-blue-500'
                             : 'border-white/30'
                         }`}>
                           {enabledFeatures[key] && <Check className="w-4 h-4 text-white" />}
@@ -600,10 +600,10 @@ function CreateAdPageLuxury() {
                       onChange={(e) => handleInputChange("title", e.target.value)}
                       placeholder="e.g., Victoria Grace - Luxury Companion"
                       maxLength={100}
-                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-white/50 focus:focus:ring-2 focus:ring-pink-500/20 outline-none transition-all ${
+                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-white/50 focus:focus:ring-2 focus:ring-blue-500/20 outline-none transition-all ${
                         validationErrors.title
                           ? "border-red-500 focus:border-red-500"
-                          : "border-white/20 focus:border-pink-500"
+                          : "border-white/20 focus:border-blue-500"
                       }`}
                     />
                     {validationErrors.title && (
@@ -624,10 +624,10 @@ function CreateAdPageLuxury() {
                       placeholder="Tell clients about yourself, your personality, and what makes you special..."
                       maxLength={1000}
                       rows={6}
-                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-pink-500/20 outline-none transition-all resize-none ${
+                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none ${
                         validationErrors.description
                           ? "border-red-500 focus:border-red-500"
-                          : "border-white/20 focus:border-pink-500"
+                          : "border-white/20 focus:border-blue-500"
                       }`}
                     />
                     {validationErrors.description && (
@@ -645,7 +645,7 @@ function CreateAdPageLuxury() {
                     <select
                       value={formData.category}
                       onChange={(e) => handleInputChange("category", e.target.value)}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-pink-500 outline-none transition-all"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-blue-500 outline-none transition-all"
                     >
                       <option value="Escorts">Escorts</option>
                       <option value="Massage & Wellness">Massage & Wellness</option>
@@ -665,10 +665,10 @@ function CreateAdPageLuxury() {
                       value={formData.location}
                       onChange={(e) => handleInputChange("location", e.target.value)}
                       placeholder="e.g., London, Manchester, SW1A"
-                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-pink-500/20 outline-none transition-all ${
+                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all ${
                         validationErrors.location
                           ? "border-red-500 focus:border-red-500"
-                          : "border-white/20 focus:border-pink-500"
+                          : "border-white/20 focus:border-blue-500"
                       }`}
                     />
                     {validationErrors.location && (
@@ -692,7 +692,7 @@ function CreateAdPageLuxury() {
                   <button
                     type="button"
                     onClick={() => setCurrentStep(0)}
-                    className="px-4 py-2 bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 rounded-lg transition-colors"
+                    className="px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 rounded-lg transition-colors"
                   >
                     ← Go Back to Feature Selection
                   </button>
@@ -712,7 +712,7 @@ function CreateAdPageLuxury() {
                       value={formData.location}
                       onChange={(e) => handleInputChange("location", e.target.value)}
                       placeholder="e.g., London, Manchester"
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-pink-500 outline-none transition-all"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
 
@@ -727,7 +727,7 @@ function CreateAdPageLuxury() {
                       max="100"
                       value={formData.age}
                       onChange={(e) => handleInputChange("age", e.target.value)}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-pink-500 outline-none transition-all"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
 
@@ -785,7 +785,7 @@ function CreateAdPageLuxury() {
                             type="checkbox"
                             checked={formData.languages.includes(lang)}
                             onChange={() => handleCheckboxArray("languages", lang)}
-                            className="w-4 h-4 accent-pink-500"
+                            className="w-4 h-4 accent-blue-500"
                           />
                           <span className="text-white/70">{lang}</span>
                         </label>
@@ -805,7 +805,7 @@ function CreateAdPageLuxury() {
                             type="checkbox"
                             checked={formData.serviceFor.includes(sf)}
                             onChange={() => handleCheckboxArray("serviceFor", sf)}
-                            className="w-4 h-4 accent-pink-500"
+                            className="w-4 h-4 accent-blue-500"
                           />
                           <span className="text-white/70">{sf}</span>
                         </label>
@@ -910,7 +910,7 @@ function CreateAdPageLuxury() {
                           type="checkbox"
                           checked={formData.services.includes(service)}
                           onChange={() => handleCheckboxArray("services", service)}
-                          className="w-4 h-4 accent-pink-500"
+                          className="w-4 h-4 accent-blue-500"
                         />
                         <span className="text-white/70">{service}</span>
                       </label>
@@ -934,7 +934,7 @@ function CreateAdPageLuxury() {
                             value={formData.pricing[key]}
                             onChange={(e) => handlePricingChange(key, e.target.value)}
                             placeholder="0"
-                            className="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:border-pink-500 outline-none transition-all"
+                            className="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:border-blue-500 outline-none transition-all"
                           />
                         </div>
                       </div>
@@ -1004,14 +1004,14 @@ function CreateAdPageLuxury() {
                   {images.length > 0 && (
                     <div className="grid grid-cols-3 md:grid-cols-4 gap-3 mb-4">
                       {images.map((img, idx) => (
-                        <div key={idx} className={`relative group rounded-lg overflow-hidden border-2 ${idx === 0 ? "border-pink-500 shadow-lg shadow-pink-500/30" : "border-transparent"}`}>
+                        <div key={idx} className={`relative group rounded-lg overflow-hidden border-2 ${idx === 0 ? "border-blue-500 shadow-lg shadow-blue-500/30" : "border-transparent"}`}>
                           <img
                             src={img.preview}
                             alt={`Upload ${idx + 1}`}
                             className="w-full aspect-square object-cover"
                           />
                           {idx === 0 && (
-                            <span className="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded bg-pink-500 text-white shadow flex items-center gap-1">
+                            <span className="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded bg-blue-500 text-white shadow flex items-center gap-1">
                               <Star className="w-3 h-3 fill-white" /> Main
                             </span>
                           )}
@@ -1030,7 +1030,7 @@ function CreateAdPageLuxury() {
                                 type="button"
                                 onClick={() => handleSetMain(idx)}
                                 title="Set as main photo"
-                                className="p-2 bg-white/90 hover:bg-white rounded-lg text-pink-600"
+                                className="p-2 bg-white/90 hover:bg-white rounded-lg text-blue-600"
                               >
                                 <Star className="w-4 h-4" />
                               </button>
@@ -1049,13 +1049,13 @@ function CreateAdPageLuxury() {
                     </div>
                   )}
 
-                  <label className="flex items-center justify-center w-full p-4 sm:p-6 md:p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-pink-500/50 transition-colors cursor-pointer">
+                  <label className="flex items-center justify-center w-full p-4 sm:p-6 md:p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-blue-500/50 transition-colors cursor-pointer">
                     <div className="text-center">
-                      <Camera className="w-8 h-8 text-pink-400 mx-auto mb-2" />
+                      <Camera className="w-8 h-8 text-blue-400 mx-auto mb-2" />
                       <p className="text-white/70">Drag photos here or click to browse</p>
                       <p className="text-xs text-white/50 mt-1">Up to 12 photos. Large images will be auto-compressed.</p>
                       {pendingImages > 0 && (
-                        <p className="text-xs text-pink-300 mt-2 animate-pulse">
+                        <p className="text-xs text-blue-300 mt-2 animate-pulse">
                           Processing {pendingImages} image{pendingImages > 1 ? 's' : ''}…
                         </p>
                       )}
@@ -1093,9 +1093,9 @@ function CreateAdPageLuxury() {
                     </div>
                   )}
 
-                  <label className="flex items-center justify-center w-full p-4 sm:p-6 md:p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-pink-500/50 transition-colors cursor-pointer">
+                  <label className="flex items-center justify-center w-full p-4 sm:p-6 md:p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-blue-500/50 transition-colors cursor-pointer">
                     <div className="text-center">
-                      <Video className="w-8 h-8 text-pink-400 mx-auto mb-2" />
+                      <Video className="w-8 h-8 text-blue-400 mx-auto mb-2" />
                       <p className="text-white/70">Drag video here or click to browse</p>
                       <p className="text-xs text-white/50 mt-1">Max 50MB</p>
                     </div>
@@ -1121,7 +1121,7 @@ function CreateAdPageLuxury() {
                       value={formData.phone}
                       onChange={(e) => handleInputChange("phone", e.target.value)}
                       placeholder="+44 7700 900000"
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-pink-500 outline-none transition-all"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
 
@@ -1132,7 +1132,7 @@ function CreateAdPageLuxury() {
                       value={formData.whatsapp}
                       onChange={(e) => handleInputChange("whatsapp", e.target.value)}
                       placeholder="+44 7700 900000"
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-pink-500 outline-none transition-all"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
 
@@ -1143,7 +1143,7 @@ function CreateAdPageLuxury() {
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
                       placeholder="your@email.com"
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-pink-500 outline-none transition-all"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -1157,7 +1157,7 @@ function CreateAdPageLuxury() {
                     type="checkbox"
                     checked={agreeToTerms}
                     onChange={(e) => setAgreeToTerms(e.target.checked)}
-                    className="w-5 h-5 accent-pink-500 mt-1"
+                    className="w-5 h-5 accent-blue-500 mt-1"
                   />
                   <span className="text-white/70">
                     I agree to the terms and conditions. I understand my listing will be reviewed before appearing.
@@ -1186,7 +1186,7 @@ function CreateAdPageLuxury() {
             <button
               type="submit"
               disabled={loading}
-              className="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 disabled:opacity-50 text-white font-semibold rounded-xl transition-all flex items-center gap-2"
+              className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 disabled:opacity-50 text-white font-semibold rounded-xl transition-all flex items-center gap-2"
             >
               {currentStep === 4 ? (
                 <>

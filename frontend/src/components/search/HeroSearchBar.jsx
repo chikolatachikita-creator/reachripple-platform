@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+﻿import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, MapPin, X, ChevronDown, Filter } from "lucide-react";
 import api from "../../api/client";
@@ -259,13 +259,13 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
       <div className="w-full relative z-30">
         
         {/* Main Bar */}
-        <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-3xl p-3 shadow-2xl border border-white/50 dark:border-zinc-700/50 transition-all duration-300 hover:shadow-pink-500/5">
+        <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-3xl p-3 shadow-2xl border border-white/50 dark:border-zinc-700/50 transition-all duration-300 hover:shadow-blue-500/5">
             
             <div className="flex flex-col lg:flex-row gap-3">
                 
                 {/* Keywords */}
                 <div className="flex-1 relative group">
-                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-pink-500 transition-colors">
+                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-blue-500 transition-colors">
                         <Search size={20} />
                     </div>
                     <input
@@ -274,16 +274,16 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
                         value={keywords}
                         onChange={(e) => setKeywords(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        className="w-full h-14 pl-12 pr-4 bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-700 rounded-2xl focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 outline-none transition-all placeholder:text-zinc-400 text-zinc-800 dark:text-zinc-100 font-medium"
+                        className="w-full h-14 pl-12 pr-4 bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-700 rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all placeholder:text-zinc-400 text-zinc-800 dark:text-zinc-100 font-medium"
                     />
-                    <label className="absolute -top-2.5 left-4 bg-white dark:bg-zinc-900 px-1 text-[10px] font-bold uppercase tracking-wider text-zinc-400 group-focus-within:text-pink-500 transition-colors rounded">
+                    <label className="absolute -top-2.5 left-4 bg-white dark:bg-zinc-900 px-1 text-[10px] font-bold uppercase tracking-wider text-zinc-400 group-focus-within:text-blue-500 transition-colors rounded">
                         Keywords
                     </label>
                 </div>
 
                 {/* Location */}
                 <div className="flex-[1.2] relative group z-50">
-                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-pink-500 transition-colors">
+                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-blue-500 transition-colors">
                         <MapPin size={20} />
                     </div>
                     <input
@@ -297,9 +297,9 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
                         }}
                         onKeyDown={handleKeyDown}
                         onFocus={() => locationItems.length > 0 && setMenuOpen(true)}
-                        className="w-full h-14 pl-12 pr-10 bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-700 rounded-2xl focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 outline-none transition-all placeholder:text-zinc-400 text-zinc-800 dark:text-zinc-100 font-medium"
+                        className="w-full h-14 pl-12 pr-10 bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-700 rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all placeholder:text-zinc-400 text-zinc-800 dark:text-zinc-100 font-medium"
                     />
-                    <label className="absolute -top-2.5 left-4 bg-white dark:bg-zinc-900 px-1 text-[10px] font-bold uppercase tracking-wider text-zinc-400 group-focus-within:text-pink-500 transition-colors rounded">
+                    <label className="absolute -top-2.5 left-4 bg-white dark:bg-zinc-900 px-1 text-[10px] font-bold uppercase tracking-wider text-zinc-400 group-focus-within:text-blue-500 transition-colors rounded">
                         Location
                     </label>
 
@@ -320,7 +320,7 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
 
                     {/* Loading */}
                     {loading && (
-                        <div className="absolute right-10 top-1/2 -translate-y-1/2 w-4 h-4 border-2 border-pink-500 border-t-transparent rounded-full animate-spin" />
+                        <div className="absolute right-10 top-1/2 -translate-y-1/2 w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
                     )}
 
                     {/* Dropdown */}
@@ -346,7 +346,7 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
                 {/* Search Button */}
                 <button
                     onClick={handleSearch}
-                    className="h-14 px-6 sm:px-8 rounded-2xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-base sm:text-lg shadow-lg shadow-pink-500/30 hover:shadow-pink-500/40 active:scale-95 transition-all flex items-center justify-center gap-2 min-w-0 sm:min-w-[140px] w-full lg:w-auto"
+                    className="h-14 px-6 sm:px-8 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold text-base sm:text-lg shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 active:scale-95 transition-all flex items-center justify-center gap-2 min-w-0 sm:min-w-[140px] w-full lg:w-auto"
                 >
                     <Search size={20} strokeWidth={2.5} />
                     Search
@@ -366,16 +366,16 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
                         step="5"
                         value={distance}
                         onChange={(e) => setDistance(Number(e.target.value))}
-                        className="distance-slider w-24 h-1.5 cursor-pointer accent-pink-500"
+                        className="distance-slider w-24 h-1.5 cursor-pointer accent-blue-500"
                     />
-                    <span className="font-bold text-pink-600 min-w-[3ch] text-right">{distance}</span>
+                    <span className="font-bold text-blue-600 min-w-[3ch] text-right">{distance}</span>
                     <span className="text-xs">mi</span>
                 </div>
 
                 {/* Advanced Toggle */}
                 <button 
                     onClick={() => setShowAdvanced(!showAdvanced)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all ${showAdvanced ? 'bg-pink-50 border-pink-200 text-pink-700' : 'bg-transparent border-transparent hover:bg-zinc-50'}`}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all ${showAdvanced ? 'bg-blue-50 border-blue-200 text-blue-700' : 'bg-transparent border-transparent hover:bg-zinc-50'}`}
                 >
                     <Filter size={14} />
                     <span className="font-semibold">{showAdvanced ? 'Hide Filters' : 'More Filters'}</span>
@@ -389,7 +389,7 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
                     <select 
                         value={gender} 
                         onChange={e => setGender(e.target.value)}
-                        className="h-10 px-3 rounded-xl bg-zinc-50 border border-zinc-200 text-sm outline-none focus:border-pink-500"
+                        className="h-10 px-3 rounded-xl bg-zinc-50 border border-zinc-200 text-sm outline-none focus:border-blue-500"
                     >
                         {GENDERS.map(g => <option key={g.value} value={g.value}>{g.label}</option>)}
                     </select>
@@ -397,7 +397,7 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
                     <select 
                         value={bodyType} 
                         onChange={e => setBodyType(e.target.value)}
-                        className="h-10 px-3 rounded-xl bg-zinc-50 border border-zinc-200 text-sm outline-none focus:border-pink-500"
+                        className="h-10 px-3 rounded-xl bg-zinc-50 border border-zinc-200 text-sm outline-none focus:border-blue-500"
                     >
                         {BODY_TYPES.map(b => <option key={b.value} value={b.value}>{b.label}</option>)}
                     </select>

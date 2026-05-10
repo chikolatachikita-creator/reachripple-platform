@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Platform Categories Configuration
  *
  * Defines all categories available on the platform.
@@ -11,8 +11,8 @@ export const PLATFORM_CATEGORIES = [
     name: "Escorts",
     description: "Browse verified escort listings in your area",
     icon: "Heart",
-    color: "text-pink-600",
-    bgGradient: "from-pink-500 to-rose-600",
+    color: "text-blue-600",
+    bgGradient: "from-blue-500 to-blue-600",
     monetized: true,
     subcategories: [
       "Female Escorts",
@@ -46,7 +46,7 @@ export const PLATFORM_CATEGORIES = [
     description: "Connect with like-minded people near you",
     icon: "HeartHandshake",
     color: "text-red-500",
-    bgGradient: "from-red-400 to-pink-500",
+    bgGradient: "from-red-400 to-blue-500",
     monetized: false,
     subcategories: [
       "Men Seeking Women",
@@ -211,8 +211,8 @@ export const PLATFORM_CATEGORIES = [
     name: "Domestic Help",
     description: "Childcare, housekeeping, eldercare and home help",
     icon: "Home",
-    color: "text-rose-500",
-    bgGradient: "from-rose-400 to-pink-500",
+    color: "text-blue-500",
+    bgGradient: "from-blue-400 to-blue-500",
     monetized: false,
     subcategories: [
       "Babysitting & Nannies",

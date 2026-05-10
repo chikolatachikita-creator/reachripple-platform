@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { X } from "lucide-react";
 
 /**
@@ -26,7 +26,7 @@ export default function ActiveFilterChips({
       key: "location",
       label: locationLabel,
       icon: "📍",
-      color: "bg-pink-100 text-pink-700 border-pink-200",
+      color: "bg-blue-100 text-blue-700 border-blue-200",
     });
   }
 

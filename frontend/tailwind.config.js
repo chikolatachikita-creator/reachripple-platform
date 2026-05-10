@@ -8,33 +8,77 @@ module.exports = {
          COLOR PALETTE
          ======================================== */
       colors: {
-        // Brand colors
+        // Brand: Deep midnight navy — premium, safe, marketplace-trustworthy
         brand: {
-          50: '#fdf2f8',
-          100: '#fce7f3',
-          200: '#fbcfe8',
-          300: '#f9a8d4',
-          400: '#f472b6',
-          500: '#ec4899',  // Primary pink
-          600: '#db2777',
-          700: '#be185d',
-          800: '#9d174d',
-          900: '#831843',
-          950: '#500724',
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#cbd5e1',
+          400: '#94a3b8',
+          500: '#475569',
+          600: '#334155',
+          700: '#1e293b',
+          800: '#101828',  // Primary navy
+          900: '#0b1220',
+          950: '#060912',
         },
+        // Accent: Marketplace trust blue (links, focus, verified, category icons)
         accent: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',  // Primary marketplace blue
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+          950: '#172554',
+        },
+        // CTA: Amber orange (Post Ad, Buy Now, Promote, Contact Seller)
+        cta: {
+          50: '#fffbeb',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#f59e0b',  // Primary amber
+          600: '#d97706',
+          700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
+        },
+        // Trust: Teal (verified, safe seller, success-trusted listings)
+        trust: {
+          50: '#f0fdfa',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6',  // Primary teal
+          600: '#0d9488',
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#134e4a',
+        },
+        // Adult: Deep plum (adult-services category accent only)
+        adult: {
           50: '#f5f3ff',
           100: '#ede9fe',
           200: '#ddd6fe',
           300: '#c4b5fd',
           400: '#a78bfa',
-          500: '#8b5cf6',  // Primary purple
+          500: '#8b5cf6',
           600: '#7c3aed',
-          700: '#6d28d9',
+          700: '#6d28d9',  // Primary plum
           800: '#5b21b6',
           900: '#4c1d95',
-          950: '#2e1065',
         },
+        // Body / muted text and surface tokens
+        ink: '#1f2937',
+        mute: '#64748b',
+        canvas: '#f8fafc',
         // Semantic colors
         success: {
           50: '#f0fdf4',

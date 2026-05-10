@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { useNavigate } from "react-router-dom";
 import { getAssetUrl, proxyImage } from "../../config/api";
 
@@ -22,7 +22,7 @@ const SearchResultCard = ({ profile, index, onQuickView }) => {
 
   return (
     <div
-      className="group relative bg-white rounded-xl overflow-hidden border border-zinc-200/60 hover:border-pink-300 hover:shadow-lg transition-all cursor-pointer"
+      className="group relative bg-white rounded-xl overflow-hidden border border-zinc-200/60 hover:border-blue-300 hover:shadow-lg transition-all cursor-pointer"
       onClick={handleClick}
     >
       {/* Image */}
@@ -44,7 +44,7 @@ const SearchResultCard = ({ profile, index, onQuickView }) => {
                   ? "bg-amber-400 text-amber-900"
                   : profile.tier === "PRIORITY_PLUS"
                   ? "bg-purple-500 text-white"
-                  : "bg-pink-500 text-white"
+                  : "bg-blue-500 text-white"
               }`}
             >
               {profile.tier === "FEATURED"
@@ -90,7 +90,7 @@ const SearchResultCard = ({ profile, index, onQuickView }) => {
           <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${
             profile.profileFields?.type === 'Agency'
               ? 'bg-sky-50 text-sky-600'
-              : 'bg-pink-50 text-pink-600'
+              : 'bg-blue-50 text-blue-600'
           }`}>
             {profile.profileFields?.type === 'Agency' ? '🏢 Agency' : '👤 Independent'}
           </span>
@@ -108,7 +108,7 @@ const SearchResultCard = ({ profile, index, onQuickView }) => {
           )}
         </div>
         {profile.price && (
-          <p className="text-sm font-bold text-pink-600 mt-1">
+          <p className="text-sm font-bold text-blue-600 mt-1">
             £{profile.price}
           </p>
         )}

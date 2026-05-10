@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import DOMPurify from 'dompurify';
@@ -20,11 +20,11 @@ const CATEGORY_META = {
   'property':           { icon: '🏠', color: 'from-emerald-400 to-teal-500', label: 'Property' },
   'jobs':               { icon: '💼', color: 'from-violet-400 to-purple-500', label: 'Jobs' },
   'services':           { icon: '🔧', color: 'from-orange-400 to-amber-500', label: 'Services' },
-  'community':          { icon: '🤝', color: 'from-pink-400 to-rose-500',    label: 'Community' },
+  'community':          { icon: '🤝', color: 'from-blue-400 to-blue-500',    label: 'Community' },
   'farming':            { icon: '🚜', color: 'from-green-400 to-lime-500',   label: 'Farming' },
   'electronics':        { icon: '💻', color: 'from-blue-500 to-indigo-600',  label: 'Electronics' },
   'furniture':          { icon: '🛋️', color: 'from-amber-400 to-yellow-500', label: 'Furniture' },
-  'fashion':            { icon: '👗', color: 'from-pink-400 to-fuchsia-500', label: 'Fashion' },
+  'fashion':            { icon: '👗', color: 'from-blue-400 to-blue-500', label: 'Fashion' },
   'sports':             { icon: '⚽', color: 'from-green-400 to-emerald-500', label: 'Sports' },
   'default':            { icon: '📦', color: 'from-zinc-400 to-zinc-500',    label: 'Listing' },
 };
@@ -236,7 +236,7 @@ export default function ListingProfilePage() {
           <Link to="/" className="flex items-center gap-2.5 group flex-shrink-0">
             <img src="/logomark.png" alt="ReachRipple" className="w-9 h-9 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <span className="hidden sm:block font-black text-sm">
-              <span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span>
+              <span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span>
             </span>
           </Link>
 
@@ -257,7 +257,7 @@ export default function ListingProfilePage() {
             </button>
             <button
               onClick={handleSave}
-              className={`p-2 rounded-lg transition-all ${saved ? 'text-rose-500 bg-rose-50 dark:bg-rose-950/30' : 'text-zinc-500 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30'}`}
+              className={`p-2 rounded-lg transition-all ${saved ? 'text-blue-500 bg-blue-50 dark:bg-blue-950/30' : 'text-zinc-500 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30'}`}
               title={saved ? 'Remove from saved' : 'Save listing'}
             >
               <svg className="w-5 h-5" fill={saved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
@@ -468,7 +468,7 @@ export default function ListingProfilePage() {
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={handleSave}
-                  className={`flex items-center justify-center gap-2 h-10 rounded-xl text-sm font-semibold transition-all border ${saved ? 'bg-rose-50 dark:bg-rose-950/30 text-rose-600 border-rose-200 dark:border-rose-800' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600'}`}
+                  className={`flex items-center justify-center gap-2 h-10 rounded-xl text-sm font-semibold transition-all border ${saved ? 'bg-blue-50 dark:bg-blue-950/30 text-blue-600 border-blue-200 dark:border-blue-800' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600'}`}
                 >
                   <svg className="w-4 h-4" fill={saved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -491,7 +491,7 @@ export default function ListingProfilePage() {
             <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5">
               <h3 className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-3">Seller</h3>
               <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
                   {(profile.user?.name || profile.sellerName || 'S')[0].toUpperCase()}
                 </div>
                 <div className="min-w-0">

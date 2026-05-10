@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { X, Star, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { getAssetUrl } from '../config/api';
@@ -114,7 +114,7 @@ export default function ProfileQuickViewModal({ profile, isOpen, onClose }) {
                         <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75"></span>
                       </span>
                    )}
-                   <span className="text-xs font-bold tracking-wider text-pink-600 uppercase">
+                   <span className="text-xs font-bold tracking-wider text-blue-600 uppercase">
                       {profile.isOnline ? 'Online Now' : 'Featured Profile'}
                    </span>
                 </div>
@@ -155,7 +155,7 @@ export default function ProfileQuickViewModal({ profile, isOpen, onClose }) {
                     <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-3">Services</h4>
                     <div className="flex flex-wrap gap-2">
                         {profile.selectedServices.slice(0, 6).map((service, idx) => (
-                            <span key={idx} className="px-3 py-1.5 rounded-lg bg-pink-50 text-pink-700 text-xs font-semibold border border-pink-100">
+                            <span key={idx} className="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">
                                 {service}
                             </span>
                         ))}
@@ -188,9 +188,9 @@ export default function ProfileQuickViewModal({ profile, isOpen, onClose }) {
                     }}
                     className="
                       flex-1 py-3.5 px-6 rounded-xl 
-                      border-2 border-pink-200 bg-white
-                      text-pink-600 font-bold 
-                      hover:bg-pink-50 hover:border-pink-300 hover:-translate-y-0.5
+                      border-2 border-blue-200 bg-white
+                      text-blue-600 font-bold 
+                      hover:bg-blue-50 hover:border-blue-300 hover:-translate-y-0.5
                       transition-all duration-200
                       flex items-center justify-center gap-2
                     "
@@ -201,10 +201,10 @@ export default function ProfileQuickViewModal({ profile, isOpen, onClose }) {
                     onClick={handleNavigate}
                     className="
                       flex-[2] py-3.5 px-6 rounded-xl 
-                      bg-gradient-to-r from-pink-600 to-purple-600 
+                      bg-gradient-to-r from-blue-600 to-purple-600 
                       text-white font-bold 
-                      shadow-lg shadow-pink-500/20 
-                      hover:shadow-pink-500/40 hover:scale-[1.02] hover:-translate-y-0.5
+                      shadow-lg shadow-blue-500/20 
+                      hover:shadow-blue-500/40 hover:scale-[1.02] hover:-translate-y-0.5
                       active:scale-[0.98] 
                       transition-all duration-200
                       flex items-center justify-center gap-2

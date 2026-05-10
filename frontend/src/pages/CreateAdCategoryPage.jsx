@@ -1,4 +1,4 @@
-// src/pages/CreateAdCategoryPage.jsx - Adaptive ad creation form per category
+﻿// src/pages/CreateAdCategoryPage.jsx - Adaptive ad creation form per category
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams, Link } from "react-router-dom";
@@ -14,36 +14,36 @@ import ImageEditorModal from "../components/ImageEditorModal";
 
 // ===== ACCENT COLOR MAPS (Tailwind can't interpolate dynamic classes) =====
 const BORDER_ACCENT = {
-  purple: "border-purple-500", rose: "border-rose-500", blue: "border-blue-500",
+  purple: "border-purple-500", rose: "border-blue-500", blue: "border-blue-500",
   amber: "border-amber-500", green: "border-green-500", orange: "border-orange-500",
   slate: "border-slate-400", emerald: "border-emerald-500", yellow: "border-yellow-500",
-  sky: "border-sky-500", pink: "border-pink-500",
+  sky: "border-sky-500", pink: "border-blue-500",
 };
 const RING_ACCENT = {
-  purple: "ring-purple-500/20", rose: "ring-rose-500/20", blue: "ring-blue-500/20",
+  purple: "ring-purple-500/20", rose: "ring-blue-500/20", blue: "ring-blue-500/20",
   amber: "ring-amber-500/20", green: "ring-green-500/20", orange: "ring-orange-500/20",
   slate: "ring-slate-400/20", emerald: "ring-emerald-500/20", yellow: "ring-yellow-500/20",
-  sky: "ring-sky-500/20", pink: "ring-pink-500/20",
+  sky: "ring-sky-500/20", pink: "ring-blue-500/20",
 };
 const BG_ACCENT_LIGHT = {
-  purple: "bg-purple-500/20", rose: "bg-rose-500/20", blue: "bg-blue-500/20",
+  purple: "bg-purple-500/20", rose: "bg-blue-500/20", blue: "bg-blue-500/20",
   amber: "bg-amber-500/20", green: "bg-green-500/20", orange: "bg-orange-500/20",
   slate: "bg-slate-500/20", emerald: "bg-emerald-500/20", yellow: "bg-yellow-500/20",
-  sky: "bg-sky-500/20", pink: "bg-pink-500/20",
+  sky: "bg-sky-500/20", pink: "bg-blue-500/20",
 };
 const TEXT_ACCENT = {
-  purple: "text-purple-300", rose: "text-rose-300", blue: "text-blue-300",
+  purple: "text-purple-300", rose: "text-blue-300", blue: "text-blue-300",
   amber: "text-amber-300", green: "text-green-300", orange: "text-orange-300",
   slate: "text-slate-300", emerald: "text-emerald-300", yellow: "text-yellow-300",
-  sky: "text-sky-300", pink: "text-pink-300",
+  sky: "text-sky-300", pink: "text-blue-300",
 };
 const GRADIENT_BAR = {
-  purple: "from-purple-500 to-indigo-500", rose: "from-rose-400 to-pink-500",
+  purple: "from-purple-500 to-indigo-500", rose: "from-blue-400 to-blue-500",
   blue: "from-blue-500 to-cyan-500", amber: "from-amber-400 to-orange-500",
   green: "from-green-500 to-emerald-500", orange: "from-orange-400 to-amber-500",
   slate: "from-slate-400 to-zinc-500", emerald: "from-emerald-500 to-teal-500",
   yellow: "from-yellow-400 to-orange-500", sky: "from-sky-500 to-blue-500",
-  pink: "from-pink-500 to-purple-500",
+  pink: "from-blue-500 to-purple-500",
 };
 
 export default function CreateAdCategoryPage() {
@@ -686,14 +686,14 @@ export default function CreateAdCategoryPage() {
                   {images.length > 0 && (
                     <div className="grid grid-cols-3 md:grid-cols-4 gap-3 mb-4">
                       {images.map((img, idx) => (
-                        <div key={idx} className={`relative group rounded-lg overflow-hidden border-2 ${idx === 0 ? "border-pink-500 shadow-lg shadow-pink-500/30" : "border-transparent"}`}>
+                        <div key={idx} className={`relative group rounded-lg overflow-hidden border-2 ${idx === 0 ? "border-blue-500 shadow-lg shadow-blue-500/30" : "border-transparent"}`}>
                           <img
                             src={img.preview}
                             alt={`Upload ${idx + 1}`}
                             className="w-full aspect-square object-cover"
                           />
                           {idx === 0 && (
-                            <span className="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded bg-pink-500 text-white shadow flex items-center gap-1">
+                            <span className="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded bg-blue-500 text-white shadow flex items-center gap-1">
                               <Star className="w-3 h-3 fill-white" /> Main
                             </span>
                           )}
@@ -711,7 +711,7 @@ export default function CreateAdCategoryPage() {
                                 type="button"
                                 onClick={() => handleSetMain(idx)}
                                 title="Set as main photo"
-                                className="p-2 bg-white/90 hover:bg-white rounded-lg text-pink-600"
+                                className="p-2 bg-white/90 hover:bg-white rounded-lg text-blue-600"
                               >
                                 <Star className="w-4 h-4" />
                               </button>

@@ -1,4 +1,4 @@
-// src/pages/SearchPage.jsx — Keyword search across ALL categories (no escort bias)
+﻿// src/pages/SearchPage.jsx — Keyword search across ALL categories (no escort bias)
 import React, { useState, useEffect, useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -101,12 +101,12 @@ export default function SearchPage() {
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search all listings..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-pink-500 outline-none text-sm text-zinc-900 dark:text-white"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-transparent focus:border-blue-500 outline-none text-sm text-zinc-900 dark:text-white"
               />
             </div>
             <button
               type="submit"
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white text-sm font-semibold hover:shadow-lg transition-shadow"
+              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold hover:shadow-lg transition-shadow"
             >
               Search
             </button>
@@ -122,7 +122,7 @@ export default function SearchPage() {
             {initialQ ? (
               <>
                 {filtered.length} result{filtered.length === 1 ? "" : "s"} for{" "}
-                <span className="text-pink-600">"{initialQ}"</span>
+                <span className="text-blue-600">"{initialQ}"</span>
               </>
             ) : (
               "Search Listings"
@@ -133,7 +133,7 @@ export default function SearchPage() {
               type="checkbox"
               checked={includeAdult}
               onChange={(e) => setIncludeAdult(e.target.checked)}
-              className="w-4 h-4 accent-pink-500"
+              className="w-4 h-4 accent-blue-500"
             />
             Include adult listings
           </label>
@@ -195,7 +195,7 @@ export default function SearchPage() {
                     <div className="flex items-center justify-between text-xs">
                       <span className="text-zinc-500 dark:text-zinc-400 truncate">{ad.location}</span>
                       {ad.price > 0 && (
-                        <span className="font-bold text-pink-600 dark:text-pink-400 ml-2 whitespace-nowrap">
+                        <span className="font-bold text-blue-600 dark:text-blue-400 ml-2 whitespace-nowrap">
                           £{ad.price.toLocaleString()}
                         </span>
                       )}

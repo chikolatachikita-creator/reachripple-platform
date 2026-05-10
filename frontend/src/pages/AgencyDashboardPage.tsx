@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+﻿import React, { useEffect, useState, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -134,7 +134,7 @@ function UpgradeToAgencyCard({ onUpgraded }: { onUpgraded: () => void }) {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 to-violet-700 text-white font-semibold disabled:opacity-50"
+          className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-violet-700 text-white font-semibold disabled:opacity-50"
         >
           {submitting ? "Upgrading…" : "Upgrade to agency"}
         </button>

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Category-specific form configuration.
  * Each category defines its own fields, services, pricing, and placeholders
  * so the ad creation form adapts to the category's purpose.
@@ -53,7 +53,7 @@ export const CATEGORY_FORM_CONFIG = {
     name: "Dating & Personals",
     icon: "💝",
     accentColor: "rose",
-    gradient: "from-rose-400 to-pink-500",
+    gradient: "from-blue-400 to-blue-500",
     titlePlaceholder: "e.g., Friendly 28-year-old looking for genuine connections",
     descriptionPlaceholder: "Tell people about yourself – your interests, hobbies, what you're looking for...",
     descriptionLabel: "About You",

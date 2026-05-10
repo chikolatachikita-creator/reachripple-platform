@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+﻿import React, { useEffect, useRef } from "react";
 import { ETHNICITIES, BODY_TYPES } from "../utils/constants";
 
 /**
@@ -143,7 +143,7 @@ export default function FilterBottomSheet({
                   onClick={() => updateFilter("gender", value)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     filters.gender === value
-                      ? "bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-md"
+                      ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md"
                       : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                   }`}
                 >
@@ -159,7 +159,7 @@ export default function FilterBottomSheet({
             <select
               value={filters.ethnicity || ""}
               onChange={(e) => updateFilter("ethnicity", e.target.value)}
-              className="w-full h-11 rounded-xl border border-slate-200 px-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-pink-300"
+              className="w-full h-11 rounded-xl border border-slate-200 px-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-300"
             >
               <option value="">Any</option>
               {ETHNICITIES.map((eth) => (
@@ -174,7 +174,7 @@ export default function FilterBottomSheet({
             <select
               value={filters.bodyType || ""}
               onChange={(e) => updateFilter("bodyType", e.target.value)}
-              className="w-full h-11 rounded-xl border border-slate-200 px-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-pink-300"
+              className="w-full h-11 rounded-xl border border-slate-200 px-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-300"
             >
               <option value="">Any</option>
               {BODY_TYPES.map((type) => (
@@ -196,7 +196,7 @@ export default function FilterBottomSheet({
               step={1}
               value={filters.d || 10}
               onChange={(e) => updateFilter("d", Number(e.target.value))}
-              className="w-full cursor-pointer accent-pink-500 h-2"
+              className="w-full cursor-pointer accent-blue-500 h-2"
             />
             <div className="flex justify-between text-xs text-slate-400 mt-1">
               <span>1 mi</span>
@@ -244,21 +244,21 @@ export default function FilterBottomSheet({
           <div>
             <label className="text-sm font-semibold text-slate-700 mb-2 block">Meeting Type</label>
             <div className="flex gap-3">
-              <label className="flex-1 flex items-center justify-center gap-2 h-11 rounded-xl border border-slate-200 cursor-pointer hover:bg-pink-50 transition-colors">
+              <label className="flex-1 flex items-center justify-center gap-2 h-11 rounded-xl border border-slate-200 cursor-pointer hover:bg-blue-50 transition-colors">
                 <input
                   type="checkbox"
                   checked={filters.incall || false}
                   onChange={(e) => updateFilter("incall", e.target.checked)}
-                  className="w-4 h-4 rounded text-pink-500 focus:ring-pink-300"
+                  className="w-4 h-4 rounded text-blue-500 focus:ring-blue-300"
                 />
                 <span className="text-sm text-slate-700">Incall</span>
               </label>
-              <label className="flex-1 flex items-center justify-center gap-2 h-11 rounded-xl border border-slate-200 cursor-pointer hover:bg-pink-50 transition-colors">
+              <label className="flex-1 flex items-center justify-center gap-2 h-11 rounded-xl border border-slate-200 cursor-pointer hover:bg-blue-50 transition-colors">
                 <input
                   type="checkbox"
                   checked={filters.outcall || false}
                   onChange={(e) => updateFilter("outcall", e.target.checked)}
-                  className="w-4 h-4 rounded text-pink-500 focus:ring-pink-300"
+                  className="w-4 h-4 rounded text-blue-500 focus:ring-blue-300"
                 />
                 <span className="text-sm text-slate-700">Outcall</span>
               </label>
@@ -284,7 +284,7 @@ export default function FilterBottomSheet({
                     }}
                     className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                       isSelected
-                        ? "bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-sm"
+                        ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-sm"
                         : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                     }`}
                   >
@@ -309,7 +309,7 @@ export default function FilterBottomSheet({
               onApply();
               onClose();
             }}
-            className="flex-1 h-12 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 shadow-md hover:brightness-110 transition-all"
+            className="flex-1 h-12 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 shadow-md hover:brightness-110 transition-all"
           >
             Apply Filters
           </button>

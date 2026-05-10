@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'; // Verified build
+﻿import React, { useState, useEffect, useCallback } from 'react'; // Verified build
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { getAssetUrl } from '../config/api';
@@ -160,7 +160,7 @@ export default function FeaturedProfilesCarousel({ profiles = [], autoPlayInterv
               )}
 
               {(new Date().getTime() - new Date(profile.createdAt).getTime()) < 48 * 60 * 60 * 1000 && (
-                <div className="px-3 py-1 rounded-full bg-pink-500/20 border border-pink-400 text-sm">
+                <div className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400 text-sm">
                   ✨ New
                 </div>
               )}
@@ -179,10 +179,10 @@ export default function FeaturedProfilesCarousel({ profiles = [], autoPlayInterv
                 onClick={() => navigate(`/profile/${profile._id}`)}
                 className="
                   px-6 py-2 rounded-lg 
-                  bg-gradient-to-r from-pink-500 to-purple-600 
+                  bg-gradient-to-r from-blue-500 to-purple-600 
                   text-white font-semibold 
-                  shadow-lg shadow-pink-500/20
-                  hover:shadow-pink-500/40 hover:scale-105 
+                  shadow-lg shadow-blue-500/20
+                  hover:shadow-blue-500/40 hover:scale-105 
                   transition-all duration-300 active:scale-95
                 "
               >

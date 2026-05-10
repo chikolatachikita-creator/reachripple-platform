@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 
 /**
  * EmptyState — shown when search has no results or an error.
@@ -15,7 +15,7 @@ const EmptyState = ({ type = "no-results", location, onClearFilters, suggestedLo
         </p>
         <button
           onClick={() => window.location.reload()}
-          className="px-6 py-2.5 text-sm font-semibold bg-pink-500 text-white rounded-xl hover:bg-pink-600 transition-colors"
+          className="px-6 py-2.5 text-sm font-semibold bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors"
         >
           Refresh Page
         </button>
@@ -37,7 +37,7 @@ const EmptyState = ({ type = "no-results", location, onClearFilters, suggestedLo
         {onClearFilters && (
           <button
             onClick={onClearFilters}
-            className="px-6 py-2.5 text-sm font-semibold bg-pink-500 text-white rounded-xl hover:bg-pink-600 transition-colors"
+            className="px-6 py-2.5 text-sm font-semibold bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors"
           >
             Clear All Filters
           </button>

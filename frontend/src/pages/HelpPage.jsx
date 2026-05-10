@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
   Search, 
@@ -31,7 +31,7 @@ export default function HelpPage() {
     { id: 'safety', name: 'Safety & Security', icon: Shield, color: 'text-emerald-500', bg: 'bg-emerald-50 dark:bg-emerald-900/20' },
     { id: 'account', name: 'My Account', icon: Lock, color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-900/20' },
     { id: 'ads', name: 'Posting Ads', icon: Camera, color: 'text-purple-500', bg: 'bg-purple-50 dark:bg-purple-900/20' },
-    { id: 'payments', name: 'Pricing & Billing', icon: CreditCard, color: 'text-pink-500', bg: 'bg-pink-50 dark:bg-pink-900/20' },
+    { id: 'payments', name: 'Pricing & Billing', icon: CreditCard, color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-900/20' },
     { id: 'verification', name: 'Verification', icon: CheckCircle, color: 'text-orange-500', bg: 'bg-orange-50 dark:bg-orange-900/20' },
     { id: 'policies', name: 'Rules & Policies', icon: Flag, color: 'text-red-500', bg: 'bg-red-50 dark:bg-red-900/20' },
   ];
@@ -123,22 +123,22 @@ export default function HelpPage() {
       <Navbar />
       
       {/* Hero Search Section */}
-      <div className="bg-gradient-to-r from-pink-600 via-purple-600 to-blue-800 pt-20 pb-24 px-4 text-center text-white relative overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 pt-20 pb-24 px-4 text-center text-white relative overflow-hidden">
         {/* Abstract shapes/decoration */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
           <div className="absolute -top-10 -left-10 w-64 h-64 rounded-full bg-white blur-3xl"></div>
-          <div className="absolute top-20 right-10 w-40 h-40 rounded-full bg-pink-400 blur-3xl"></div>
+          <div className="absolute top-20 right-10 w-40 h-40 rounded-full bg-blue-400 blur-3xl"></div>
         </div>
 
         <div className="relative z-10 max-w-2xl mx-auto">
           <h1 className="text-3xl md:text-5xl font-bold mb-6">How can we help you?</h1>
-          <p className="text-pink-100 text-lg mb-8">Search our help center for answers to common questions</p>
+          <p className="text-blue-100 text-lg mb-8">Search our help center for answers to common questions</p>
           
           <div className="relative max-w-xl mx-auto">
             <input
               type="text"
               placeholder="Search e.g. 'verification', 'payment', 'banned'..."
-              className="w-full pl-12 pr-4 py-4 rounded-xl text-gray-900 placeholder-gray-500 shadow-xl focus:outline-none focus:ring-4 focus:ring-pink-500/30 text-lg"
+              className="w-full pl-12 pr-4 py-4 rounded-xl text-gray-900 placeholder-gray-500 shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500/30 text-lg"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -157,8 +157,8 @@ export default function HelpPage() {
               onClick={() => setActiveCategory(activeCategory === cat.id ? 'all' : cat.id)}
               className={`p-6 rounded-2xl shadow-sm transition-all text-center flex flex-col items-center gap-3 border ${
                 activeCategory === cat.id 
-                  ? 'bg-white dark:bg-gray-800 ring-2 ring-pink-500 border-transparent transform -translate-y-1' 
-                  : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700 hover:shadow-md hover:border-pink-200 dark:hover:border-pink-900'
+                  ? 'bg-white dark:bg-gray-800 ring-2 ring-blue-500 border-transparent transform -translate-y-1' 
+                  : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-900'
               }`}
             >
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${cat.bg} ${cat.color}`}>
@@ -242,7 +242,7 @@ export default function HelpPage() {
               <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                 <strong>NEVER</strong> send money for "booking fees" or "deposits" before meeting. Legitimate advertisers will not ask for prepaid cards, crypto, or irreversible payments.
               </p>
-              <Link to="/safety" className="text-pink-600 dark:text-pink-400 text-sm font-semibold hover:underline flex items-center gap-1">
+              <Link to="/safety" className="text-blue-600 dark:text-blue-400 text-sm font-semibold hover:underline flex items-center gap-1">
                 Read our full safety guide <ChevronDown className="w-4 h-4 rotate-270" />
               </Link>
             </div>
@@ -251,19 +251,19 @@ export default function HelpPage() {
               <h3 className="font-bold text-gray-900 dark:text-white mb-4">Quick Links</h3>
               <ul className="space-y-3">
                  <li>
-                  <Link to="/pricing" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400 text-sm">
+                  <Link to="/pricing" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm">
                     <CreditCard className="w-4 h-4" />
                     Ad Pricing & Boosts
                   </Link>
                 </li>
                 <li>
-                  <Link to="/forgot-password" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400 text-sm">
+                  <Link to="/forgot-password" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm">
                     <Lock className="w-4 h-4" />
                     Reset Password
                   </Link>
                 </li>
                  <li>
-                  <Link to="/create-ad" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400 text-sm">
+                  <Link to="/create-ad" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm">
                     <FileText className="w-4 h-4" />
                     Post an Ad
                   </Link>

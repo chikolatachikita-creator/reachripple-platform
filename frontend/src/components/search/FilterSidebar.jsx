@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 
 /**
  * FilterSidebar — desktop sidebar with all filter options.
@@ -17,7 +17,7 @@ const FilterSidebar = ({ filters, onFilterChange, onClear, loading }) => {
         <select
           value={filters.category || ""}
           onChange={(e) => handleChange("category", e.target.value || undefined)}
-          className="w-full px-3 py-2 text-sm border border-zinc-300 rounded-lg bg-white focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+          className="w-full px-3 py-2 text-sm border border-zinc-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           disabled={loading}
         >
           <option value="">All Categories</option>
@@ -36,7 +36,7 @@ const FilterSidebar = ({ filters, onFilterChange, onClear, loading }) => {
             placeholder="Min"
             value={filters.ageMin || ""}
             onChange={(e) => handleChange("ageMin", e.target.value ? Number(e.target.value) : undefined)}
-            className="w-full px-3 py-2 text-sm border border-zinc-300 rounded-lg focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 text-sm border border-zinc-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             min={18}
             max={99}
             disabled={loading}
@@ -47,7 +47,7 @@ const FilterSidebar = ({ filters, onFilterChange, onClear, loading }) => {
             placeholder="Max"
             value={filters.ageMax || ""}
             onChange={(e) => handleChange("ageMax", e.target.value ? Number(e.target.value) : undefined)}
-            className="w-full px-3 py-2 text-sm border border-zinc-300 rounded-lg focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 text-sm border border-zinc-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             min={18}
             max={99}
             disabled={loading}
@@ -64,7 +64,7 @@ const FilterSidebar = ({ filters, onFilterChange, onClear, loading }) => {
             placeholder="Min"
             value={filters.priceMin || ""}
             onChange={(e) => handleChange("priceMin", e.target.value ? Number(e.target.value) : undefined)}
-            className="w-full px-3 py-2 text-sm border border-zinc-300 rounded-lg focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 text-sm border border-zinc-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             min={0}
             disabled={loading}
           />
@@ -74,7 +74,7 @@ const FilterSidebar = ({ filters, onFilterChange, onClear, loading }) => {
             placeholder="Max"
             value={filters.priceMax || ""}
             onChange={(e) => handleChange("priceMax", e.target.value ? Number(e.target.value) : undefined)}
-            className="w-full px-3 py-2 text-sm border border-zinc-300 rounded-lg focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 text-sm border border-zinc-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             min={0}
             disabled={loading}
           />
@@ -94,7 +94,7 @@ const FilterSidebar = ({ filters, onFilterChange, onClear, loading }) => {
               type="checkbox"
               checked={!!filters[key]}
               onChange={(e) => handleChange(key, e.target.checked || undefined)}
-              className="w-4 h-4 text-pink-500 border-zinc-300 rounded focus:ring-pink-500"
+              className="w-4 h-4 text-blue-500 border-zinc-300 rounded focus:ring-blue-500"
               disabled={loading}
             />
             <span className="text-sm text-zinc-600 group-hover:text-zinc-900">{label}</span>
@@ -105,7 +105,7 @@ const FilterSidebar = ({ filters, onFilterChange, onClear, loading }) => {
       {/* Clear all */}
       <button
         onClick={onClear}
-        className="w-full px-4 py-2.5 text-sm font-semibold text-pink-600 bg-pink-50 hover:bg-pink-100 rounded-xl transition-colors"
+        className="w-full px-4 py-2.5 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors"
         disabled={loading}
       >
         Clear All Filters

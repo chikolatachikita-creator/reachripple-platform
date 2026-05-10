@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
@@ -11,7 +11,7 @@ export default function Footer() {
               <img src="/logomark.png" alt="ReachRipple" className="w-8 h-8 rounded-lg object-cover" />
             </Link>
             <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-              © {new Date().getFullYear()} <span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span>
+              © {new Date().getFullYear()} <span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span>
             </span>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2 gap-y-1">

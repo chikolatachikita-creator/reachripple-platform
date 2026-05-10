@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -11,17 +11,17 @@ export default function NotFoundPage() {
   }, []);
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-zinc-50 via-purple-50/30 to-pink-50/30 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 flex items-center justify-center p-6 transition-all duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`min-h-screen bg-gradient-to-br from-zinc-50 via-purple-50/30 to-blue-50/30 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 flex items-center justify-center p-6 transition-all duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <Helmet><title>Page Not Found | ReachRipple</title></Helmet>
       <div className="max-w-lg w-full text-center">
         {/* Animated 404 illustration */}
         <div className="relative mb-8">
           {/* Background glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-purple-400/20 to-blue-400/20 rounded-full blur-3xl" />
           
           {/* 404 Number */}
           <div className="relative">
-            <h1 className="text-[150px] sm:text-[180px] font-black text-transparent bg-clip-text bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 leading-none select-none">
+            <h1 className="text-[150px] sm:text-[180px] font-black text-transparent bg-clip-text bg-gradient-to-br from-purple-600 via-blue-500 to-orange-400 leading-none select-none">
               404
             </h1>
             {/* Floating emoji */}
@@ -44,7 +44,7 @@ export default function NotFoundPage() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
           <Link
             to="/"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold shadow-lg shadow-purple-500/25 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold shadow-lg shadow-purple-500/25 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />

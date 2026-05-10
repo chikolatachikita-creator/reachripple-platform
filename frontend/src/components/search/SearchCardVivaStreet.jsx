@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+﻿import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, MapPin, Navigation, X, ChevronDown } from "lucide-react";
 import api from "../../api/client";
@@ -396,7 +396,7 @@ export default function SearchCardVivaStreet({
                     onFocus={() => { if (items.length) setMenuOpen(true); }}
                     onKeyDown={onKeyDown}
                     placeholder={compact ? "Area or postcode" : "Search UK area (e.g. N1, Manchester)"}
-                    className={`w-full ${inputHeight} ${compact ? 'pl-9 pr-8' : 'pl-12 pr-10'} ${inputRadius} bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 outline-none text-zinc-800 dark:text-zinc-100 font-medium placeholder:text-zinc-400 ${fontSize} transition-all shadow-inner`}
+                    className={`w-full ${inputHeight} ${compact ? 'pl-9 pr-8' : 'pl-12 pr-10'} ${inputRadius} bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none text-zinc-800 dark:text-zinc-100 font-medium placeholder:text-zinc-400 ${fontSize} transition-all shadow-inner`}
                     autoComplete="off"
                     spellCheck={false}
                     role="combobox"
@@ -407,7 +407,7 @@ export default function SearchCardVivaStreet({
                 {/* Clear / Loading Indicator */}
                 <div className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 flex items-center">
                     {loading ? (
-                        <div className={`${compact ? 'w-4 h-4' : 'w-5 h-5'} border-2 border-pink-500 border-t-transparent rounded-full animate-spin`} />
+                        <div className={`${compact ? 'w-4 h-4' : 'w-5 h-5'} border-2 border-blue-500 border-t-transparent rounded-full animate-spin`} />
                     ) : locText ? (
                         <button
                             onClick={() => {
@@ -438,7 +438,7 @@ export default function SearchCardVivaStreet({
                                 onMouseEnter={() => setHighlight(i)}
                                 className={`w-full text-left px-4 py-3 flex flex-col gap-0.5 transition-colors ${
                                     i === highlight 
-                                        ? 'bg-pink-50 dark:bg-white/5' 
+                                        ? 'bg-blue-50 dark:bg-white/5' 
                                         : 'hover:bg-zinc-50 dark:hover:bg-white/5'
                                 }`}
                             >
@@ -464,7 +464,7 @@ export default function SearchCardVivaStreet({
                 <select
                     value={distance}
                     onChange={(e) => setDistance(Number(e.target.value))}
-                    className={`w-full ${inputHeight} ${compact ? 'pl-8 pr-6 md:pl-10 md:pr-8' : 'pl-10 pr-8'} ${inputRadius} bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 outline-none text-zinc-800 dark:text-zinc-100 font-medium ${fontSize} appearance-none cursor-pointer transition-all shadow-inner`}
+                    className={`w-full ${inputHeight} ${compact ? 'pl-8 pr-6 md:pl-10 md:pr-8' : 'pl-10 pr-8'} ${inputRadius} bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none text-zinc-800 dark:text-zinc-100 font-medium ${fontSize} appearance-none cursor-pointer transition-all shadow-inner`}
                 >
                     {distances.map((d) => (
                         <option key={d.value} value={d.value}>{d.label}</option>
@@ -480,7 +480,7 @@ export default function SearchCardVivaStreet({
                 <button
                     onClick={runSearch}
                     disabled={loading}
-                    className={`${compact ? 'w-auto' : 'w-full md:w-auto'} ${inputHeight} ${compact ? 'px-4 md:px-6' : 'px-8'} ${inputRadius} bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold ${fontSize} shadow-lg shadow-pink-500/25 active:scale-95 transition-all flex items-center justify-center gap-1.5 md:gap-2`}
+                    className={`${compact ? 'w-auto' : 'w-full md:w-auto'} ${inputHeight} ${compact ? 'px-4 md:px-6' : 'px-8'} ${inputRadius} bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold ${fontSize} shadow-lg shadow-blue-500/25 active:scale-95 transition-all flex items-center justify-center gap-1.5 md:gap-2`}
                 >
                     <Search size={iconSize} strokeWidth={2.5} />
                     {!compact && <span>Search</span>}
@@ -493,7 +493,7 @@ export default function SearchCardVivaStreet({
         {!compact && (
             <div className="mt-3 px-2 flex flex-wrap gap-4 text-xs font-medium text-zinc-500/80 dark:text-zinc-400">
                  <div className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-pink-500/50" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500/50" />
                     Try "N1", "Soho", or "SW1"
                  </div>
                  <div className="flex items-center gap-1.5">

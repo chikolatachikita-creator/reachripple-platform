@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 /**
  * Verification Badge Component
@@ -46,8 +46,8 @@ export default function VerificationBadges({ profile = {} }) {
       id: 'rating',
       icon: '⭐',
       label: `${profile.averageRating.toFixed(1)}★ Rating`,
-      color: 'bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300',
-      borderColor: 'border-rose-200 dark:border-rose-700'
+      color: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
+      borderColor: 'border-blue-200 dark:border-blue-700'
     });
   }
 

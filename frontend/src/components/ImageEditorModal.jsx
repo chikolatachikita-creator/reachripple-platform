@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+﻿import React, { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
 import { X, RotateCw, RotateCcw, Check, Crop as CropIcon } from "lucide-react";
 
@@ -50,7 +50,7 @@ export default function ImageEditorModal({
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-white/10">
           <h3 className="text-white font-semibold flex items-center gap-2">
-            <CropIcon className="w-5 h-5 text-pink-400" /> Edit photo
+            <CropIcon className="w-5 h-5 text-blue-400" /> Edit photo
           </h3>
           <button
             type="button"
@@ -95,7 +95,7 @@ export default function ImageEditorModal({
                 onClick={() => setAspectRatio(opt.value)}
                 className={`px-3 py-1 text-xs rounded-full border transition ${
                   Math.abs(aspectRatio - opt.value) < 0.01
-                    ? "bg-pink-500 border-pink-500 text-white"
+                    ? "bg-blue-500 border-blue-500 text-white"
                     : "bg-white/5 border-white/10 text-white/70 hover:bg-white/10"
                 }`}
               >
@@ -115,7 +115,7 @@ export default function ImageEditorModal({
                 step={0.05}
                 value={zoom}
                 onChange={(e) => setZoom(parseFloat(e.target.value))}
-                className="flex-1 accent-pink-500"
+                className="flex-1 accent-blue-500"
               />
             </label>
             <div className="flex items-center justify-end gap-2">
@@ -149,7 +149,7 @@ export default function ImageEditorModal({
               type="button"
               onClick={handleSave}
               disabled={saving || !croppedAreaPixels}
-              className="px-5 py-2 bg-gradient-to-r from-pink-500 to-purple-500 hover:brightness-110 text-white font-semibold text-sm rounded-lg shadow flex items-center gap-2 disabled:opacity-50"
+              className="px-5 py-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:brightness-110 text-white font-semibold text-sm rounded-lg shadow flex items-center gap-2 disabled:opacity-50"
             >
               <Check className="w-4 h-4" /> {saving ? "Saving..." : "Apply"}
             </button>

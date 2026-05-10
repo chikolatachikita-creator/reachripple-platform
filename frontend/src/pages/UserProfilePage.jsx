@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+﻿import React, { useState, useEffect, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import client from "../api/client";
@@ -240,7 +240,7 @@ export default function UserProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white via-pink-50 to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-purple-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
           <p className="text-gray-500 mt-4">Loading...</p>
@@ -250,14 +250,14 @@ export default function UserProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-pink-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-purple-50">
       <Helmet><title>My Profile | ReachRipple</title></Helmet>
       {/* Navigation */}
       <nav className="w-full bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
-            <div className="text-sm font-bold leading-tight"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></div>
+            <div className="text-sm font-bold leading-tight"><span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></div>
           </Link>
           <div className="flex items-center gap-4">
             <Link
@@ -354,7 +354,7 @@ export default function UserProfilePage() {
             <form onSubmit={handleProfileUpdate} className="space-y-6">
               {/* Avatar upload */}
               <div className="flex items-center gap-5">
-                <div className="relative w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-pink-100 to-purple-100 border border-gray-200 flex-shrink-0">
+                <div className="relative w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100 border border-gray-200 flex-shrink-0">
                   {avatarUrl ? (
                     <img
                       src={avatarUrl.startsWith("http") ? avatarUrl : `${process.env.REACT_APP_API_URL || ""}${avatarUrl}`}
@@ -448,7 +448,7 @@ export default function UserProfilePage() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-6 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   {saving ? "Saving..." : "Save Changes"}
                 </button>
@@ -508,7 +508,7 @@ export default function UserProfilePage() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-6 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   {saving ? "Changing..." : "Change Password"}
                 </button>
@@ -673,7 +673,7 @@ export default function UserProfilePage() {
                 <button
                   type="submit"
                   disabled={submittingVerification || !verificationFile}
-                  className="px-6 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   {submittingVerification ? "Submitting..." : "Submit for Verification"}
                 </button>
@@ -763,7 +763,7 @@ export default function UserProfilePage() {
       <footer className="bg-white border-t border-gray-200 py-6 mt-12">
         <div className="max-w-6xl mx-auto px-4">
           <p className="text-center text-xs text-gray-500">
-            © {new Date().getFullYear()} <span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span>. All rights reserved.
+            © {new Date().getFullYear()} <span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span>. All rights reserved.
           </p>
         </div>
       </footer>

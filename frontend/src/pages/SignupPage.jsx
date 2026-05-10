@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../api/auth";
@@ -235,7 +235,7 @@ export default function SignupPage() {
       <div className={`min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 flex items-center justify-center px-5 py-8 transition-all duration-500 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
         <Helmet><title>Verify your email | ReachRipple</title></Helmet>
         <div className="w-full max-w-md bg-white dark:bg-zinc-900 rounded-2xl shadow-xl border border-zinc-100 dark:border-zinc-800 p-8 text-center">
-          <div className="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/40 dark:to-purple-900/40 flex items-center justify-center mb-5">
+          <div className="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/40 dark:to-purple-900/40 flex items-center justify-center mb-5">
             <svg className="w-10 h-10 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
@@ -271,7 +271,7 @@ export default function SignupPage() {
           <button
             type="button"
             onClick={() => navigate("/")}
-            className="mt-3 w-full h-12 rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 text-white font-semibold hover:brightness-110 transition shadow-md"
+            className="mt-3 w-full h-12 rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 text-white font-semibold hover:brightness-110 transition shadow-md"
           >
             Continue to homepage
           </button>
@@ -297,7 +297,7 @@ export default function SignupPage() {
           <div className="lg:hidden flex items-center justify-between mb-8">
             <Link to="/" className="flex items-center gap-3">
               <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md" />
-              <span className="text-zinc-900 dark:text-white font-bold text-lg"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></span>
+              <span className="text-zinc-900 dark:text-white font-bold text-lg"><span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></span>
             </Link>
             <ThemeToggle />
           </div>
@@ -638,19 +638,19 @@ export default function SignupPage() {
       {/* Right Panel - Decorative */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 relative overflow-hidden">
         {/* Animated gradient orbs */}
-        <div className="absolute top-20 right-10 w-72 h-72 bg-pink-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-20 right-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-orange-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0.5s' }} />
         
         <div className="relative z-10 flex flex-col justify-center px-12 xl:px-20">
           <Link to="/" className="flex items-center gap-3 mb-12">
-            <img src="/logomark.png" alt="ReachRipple" className="w-14 h-14 rounded-xl object-cover shadow-lg shadow-pink-500/30 ring-1 ring-white/10" />
-            <span className="text-white font-bold text-xl"><span className="text-pink-400">Reach</span><span className="text-purple-400">Ripple</span></span>
+            <img src="/logomark.png" alt="ReachRipple" className="w-14 h-14 rounded-xl object-cover shadow-lg shadow-blue-500/30 ring-1 ring-white/10" />
+            <span className="text-white font-bold text-xl"><span className="text-blue-400">Reach</span><span className="text-purple-400">Ripple</span></span>
           </Link>
           
           <h2 className="text-4xl xl:text-5xl font-bold text-white leading-tight">
             Join thousands of
-            <span className="block bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent mt-1">
+            <span className="block bg-gradient-to-r from-orange-400 to-blue-500 bg-clip-text text-transparent mt-1">
               active users
             </span>
           </h2>

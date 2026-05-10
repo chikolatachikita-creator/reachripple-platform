@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { getAdminStats, AdminStats } from "../api/admin";
 import { Link } from "react-router-dom";
 import { ErrorAlert } from "../components/Alerts";
@@ -88,7 +88,7 @@ export default function AdminDashboardPage() {
       title: "Reports",
       value: stats?.reports.pending || 0,
       subtitle: `${stats?.reports.total || 0} total`,
-      color: "from-red-500 to-pink-500",
+      color: "from-red-500 to-blue-500",
       icon: "🚩",
       link: "/admin/reports",
     },

@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Bell, Search } from "lucide-react";
 
 export default function AdminTopbar() {
@@ -28,7 +28,7 @@ export default function AdminTopbar() {
 
         {/* Profile Dropdown */}
         <div className="flex items-center gap-3 pl-6 border-l border-gray-200">
-          <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">
+          <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">
             {adminName.charAt(0).toUpperCase()}
           </div>
           <div className="text-sm">

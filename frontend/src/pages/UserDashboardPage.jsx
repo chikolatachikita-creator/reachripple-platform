@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/client";
@@ -66,7 +66,7 @@ export default function UserDashboardPage() {
       <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white">
         <nav className="w-full bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-zinc-100">
           <div className="max-w-6xl mx-auto px-4 h-16 flex items-center">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600"></div>
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600"></div>
           </div>
         </nav>
         <div className="max-w-6xl mx-auto px-4 py-10">
@@ -96,7 +96,7 @@ export default function UserDashboardPage() {
           <Link to="/" className="flex items-center gap-3 group">
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <div className="hidden sm:block">
-              <div className="text-sm font-bold leading-tight"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></div>
+              <div className="text-sm font-bold leading-tight"><span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></div>
               <div className="text-[11px] text-zinc-400 dark:text-zinc-500 leading-tight">Dashboard</div>
             </div>
           </Link>
@@ -113,8 +113,8 @@ export default function UserDashboardPage() {
             <Link 
               to="/create-ad" 
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold
-                         bg-gradient-to-r from-pink-500 to-purple-600 text-white 
-                         shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 
+                         bg-gradient-to-r from-blue-500 to-purple-600 text-white 
+                         shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 
                          hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -141,7 +141,7 @@ export default function UserDashboardPage() {
         {/* Welcome Section */}
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-pink-500/25">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/25">
               {user?.name?.[0]?.toUpperCase() || "U"}
             </div>
             <div>
@@ -169,13 +169,13 @@ export default function UserDashboardPage() {
           <div className={`mb-6 rounded-2xl border p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
             user.accountType === 'agency'
               ? 'bg-sky-50 border-sky-200'
-              : 'bg-pink-50 border-pink-200'
+              : 'bg-blue-50 border-blue-200'
           }`}>
             <div className="flex items-center gap-3">
               <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-bold ${
                 user.accountType === 'agency'
                   ? 'bg-sky-100 text-sky-700'
-                  : 'bg-pink-100 text-pink-700'
+                  : 'bg-blue-100 text-blue-700'
               }`}>
                 {user.accountType === 'agency' ? '🏢 Agency' : '👤 Independent'}
               </span>
@@ -225,7 +225,7 @@ export default function UserDashboardPage() {
                 <div className="w-24 h-2 rounded-full bg-white overflow-hidden">
                   <div 
                     className={`h-full rounded-full transition-all ${
-                      postingLimits.currentCount >= postingLimits.maxAllowed ? 'bg-red-500' : 'bg-gradient-to-r from-pink-500 to-purple-500'
+                      postingLimits.currentCount >= postingLimits.maxAllowed ? 'bg-red-500' : 'bg-gradient-to-r from-blue-500 to-purple-500'
                     }`}
                     style={{ width: `${Math.min(100, (postingLimits.currentCount / postingLimits.maxAllowed) * 100)}%` }}
                   />
@@ -254,7 +254,7 @@ export default function UserDashboardPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-white dark:bg-zinc-800/60 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100 dark:border-zinc-700 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-100 to-pink-50 dark:from-purple-900/40 dark:to-pink-900/20 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-100 to-blue-50 dark:from-purple-900/40 dark:to-blue-900/20 flex items-center justify-center">
                 <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
@@ -287,7 +287,7 @@ export default function UserDashboardPage() {
           </div>
           <div className="bg-white dark:bg-zinc-800/60 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100 dark:border-zinc-700 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-100 to-rose-50 dark:from-red-900/40 dark:to-rose-900/20 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-100 to-blue-50 dark:from-red-900/40 dark:to-blue-900/20 flex items-center justify-center">
                 <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -319,8 +319,8 @@ export default function UserDashboardPage() {
             <Link
               to="/create-ad"
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold
-                         bg-gradient-to-r from-pink-500 to-purple-600 text-white 
-                         shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 
+                         bg-gradient-to-r from-blue-500 to-purple-600 text-white 
+                         shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 
                          hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -342,8 +342,8 @@ export default function UserDashboardPage() {
               <Link 
                 to="/create-ad" 
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm
-                           bg-gradient-to-r from-pink-500 to-purple-600 text-white 
-                           shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 
+                           bg-gradient-to-r from-blue-500 to-purple-600 text-white 
+                           shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 
                            hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
                 Post Your First Ad
@@ -380,7 +380,7 @@ export default function UserDashboardPage() {
                                 <span className="text-2xl opacity-60">{ICON_BY_SLUG[slug] || "📦"}</span>
                               )}
                             </div>
-                            <Link to={detailLink} className="text-zinc-900 dark:text-white hover:text-pink-600 dark:hover:text-pink-400 font-semibold transition-colors line-clamp-1">
+                            <Link to={detailLink} className="text-zinc-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 font-semibold transition-colors line-clamp-1">
                               {ad.title}
                             </Link>
                           </div>
@@ -423,7 +423,7 @@ export default function UserDashboardPage() {
                 <div className="p-4 border-t border-zinc-100 dark:border-zinc-700 bg-zinc-50/50 dark:bg-zinc-800/30 text-center">
                   <Link 
                     to="/my-ads" 
-                    className="text-sm font-semibold text-pink-600 hover:text-pink-700 transition-colors"
+                    className="text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors"
                   >
                     View all {ads.length} ads →
                   </Link>
@@ -440,8 +440,8 @@ export default function UserDashboardPage() {
             className="group bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100
                        hover:shadow-lg hover:-translate-y-1 transition-all flex items-center gap-4"
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-100 to-pink-50 flex items-center justify-center 
-                            group-hover:from-purple-500 group-hover:to-pink-500 transition-all duration-300">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-100 to-blue-50 flex items-center justify-center 
+                            group-hover:from-purple-500 group-hover:to-blue-500 transition-all duration-300">
               <svg className="w-6 h-6 text-purple-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -458,8 +458,8 @@ export default function UserDashboardPage() {
             className="group bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100
                        hover:shadow-lg hover:-translate-y-1 transition-all flex items-center gap-4"
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-100 to-fuchsia-50 flex items-center justify-center 
-                            group-hover:from-purple-500 group-hover:to-fuchsia-500 transition-all duration-300">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-100 to-blue-50 flex items-center justify-center 
+                            group-hover:from-purple-500 group-hover:to-blue-500 transition-all duration-300">
               <svg className="w-6 h-6 text-purple-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
               </svg>
@@ -492,9 +492,9 @@ export default function UserDashboardPage() {
             className="group bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 border border-zinc-100
                        hover:shadow-lg hover:-translate-y-1 transition-all flex items-center gap-4"
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-100 to-rose-50 flex items-center justify-center 
-                            group-hover:from-pink-500 group-hover:to-rose-500 transition-all duration-300">
-              <svg className="w-6 h-6 text-pink-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center 
+                            group-hover:from-blue-500 group-hover:to-blue-500 transition-all duration-300">
+              <svg className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </div>
@@ -529,7 +529,7 @@ export default function UserDashboardPage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <img src="/logomark.png" alt="ReachRipple" className="w-8 h-8 rounded-lg object-cover" />
-              <span className="text-sm font-medium text-zinc-600">© 2026 <span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></span>
+              <span className="text-sm font-medium text-zinc-600">© 2026 <span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></span>
             </div>
             <div className="flex items-center gap-6">
               <Link to="/privacy" className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">Privacy</Link>

@@ -1,4 +1,4 @@
-// src/pages/MyAdsPage.jsx
+﻿// src/pages/MyAdsPage.jsx
 import React, { useState, useEffect, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
@@ -140,7 +140,7 @@ export default function MyAdsPage() {
           <Link to="/" className="flex items-center gap-3 group">
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <div className="hidden sm:block">
-              <div className="text-sm font-bold leading-tight"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></div>
+              <div className="text-sm font-bold leading-tight"><span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></div>
               <div className="text-[11px] text-zinc-400 dark:text-zinc-500 leading-tight">My Ads</div>
             </div>
           </Link>
@@ -157,8 +157,8 @@ export default function MyAdsPage() {
             <Link 
               to="/create-ad" 
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold
-                         bg-gradient-to-r from-pink-500 to-purple-600 text-white 
-                         shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 
+                         bg-gradient-to-r from-blue-500 to-purple-600 text-white 
+                         shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 
                          hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -178,7 +178,7 @@ export default function MyAdsPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-lg shadow-pink-500/25">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/25">
               <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
@@ -198,8 +198,8 @@ export default function MyAdsPage() {
           <Link
             to="/create-ad"
             className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm
-                       bg-gradient-to-r from-pink-500 to-purple-600 text-white 
-                       shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 
+                       bg-gradient-to-r from-blue-500 to-purple-600 text-white 
+                       shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 
                        hover:scale-[1.02] active:scale-[0.98] transition-all"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -267,8 +267,8 @@ export default function MyAdsPage() {
             <Link
               to="/create-ad"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-sm
-                         bg-gradient-to-r from-pink-500 to-purple-600 text-white 
-                         shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 
+                         bg-gradient-to-r from-blue-500 to-purple-600 text-white 
+                         shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 
                          hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -316,7 +316,7 @@ export default function MyAdsPage() {
                     )}
                   </div>
                   <div className="min-w-0">
-                    <Link to={`/profile/${ad._id}`} className="font-semibold text-zinc-900 dark:text-white hover:text-pink-600 dark:hover:text-pink-400 transition-colors line-clamp-1">
+                    <Link to={`/profile/${ad._id}`} className="font-semibold text-zinc-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors line-clamp-1">
                       {ad.title}
                     </Link>
                     <p className="text-sm text-zinc-500 dark:text-zinc-400">{ad.location} • £{ad.price}{String(ad.category || '').toLowerCase() === 'escorts' ? '/hr' : ''}</p>
@@ -360,7 +360,7 @@ export default function MyAdsPage() {
                 {/* Actions */}
                 <div className="col-span-2 flex items-center justify-end gap-2">
                   {actionLoading === ad._id ? (
-                    <div className="w-6 h-6 border-2 border-pink-500 border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
                   ) : (
                     <>
                       {/* Boost (escorts only) */}
@@ -458,7 +458,7 @@ export default function MyAdsPage() {
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-white dark:bg-zinc-800/60 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100 dark:border-zinc-700">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-100 to-pink-50 dark:from-purple-900/40 dark:to-pink-900/20 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-100 to-blue-50 dark:from-purple-900/40 dark:to-blue-900/20 flex items-center justify-center">
                   <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
@@ -492,13 +492,13 @@ export default function MyAdsPage() {
             </div>
             <div className="bg-white dark:bg-zinc-800/60 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-zinc-100 dark:border-zinc-700">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-100 to-rose-50 dark:from-pink-900/40 dark:to-rose-900/20 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-900/40 dark:to-blue-900/20 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                   </svg>
                 </div>
               </div>
-              <p className="text-2xl font-black text-pink-600">{ads.reduce((sum, a) => sum + (a.clicks || 0), 0)}</p>
+              <p className="text-2xl font-black text-blue-600">{ads.reduce((sum, a) => sum + (a.clicks || 0), 0)}</p>
               <p className="text-sm text-zinc-500">Total Clicks</p>
             </div>
           </div>
@@ -511,7 +511,7 @@ export default function MyAdsPage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <img src="/logomark.png" alt="ReachRipple" className="w-8 h-8 rounded-lg object-cover" />
-              <span className="text-sm font-medium text-zinc-600">© 2026 <span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></span>
+              <span className="text-sm font-medium text-zinc-600">© 2026 <span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></span>
             </div>
             <div className="flex items-center gap-6">
               <Link to="/privacy" className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">Privacy</Link>

@@ -1,4 +1,4 @@
-// src/pages/AgencyPublisherPage.jsx
+﻿// src/pages/AgencyPublisherPage.jsx
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -57,7 +57,7 @@ export default function AgencyPublisherPage() {
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <div className="hidden sm:block">
               <div className="text-sm font-bold leading-tight">
-                <span className="text-pink-500">Reach</span>
+                <span className="text-blue-500">Reach</span>
                 <span className="text-purple-600">Ripple</span>
               </div>
             </div>
@@ -140,7 +140,7 @@ export default function AgencyPublisherPage() {
             </p>
             <Link
               to="/"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
             >
               Browse All Listings
             </Link>
@@ -162,7 +162,7 @@ export default function AgencyPublisherPage() {
               <img src="/logomark.png" alt="ReachRipple" className="w-8 h-8 rounded-lg object-cover" />
               <span className="text-sm font-medium text-zinc-600">
                 © 2026{" "}
-                <span className="text-pink-500">Reach</span>
+                <span className="text-blue-500">Reach</span>
                 <span className="text-purple-600">Ripple</span>
               </span>
             </div>

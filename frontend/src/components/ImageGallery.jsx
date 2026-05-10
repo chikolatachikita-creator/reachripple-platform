@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+﻿import React, { useState, useRef, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { getAssetUrl } from '../config/api';
 
@@ -180,8 +180,8 @@ export default function ImageGallery({ images = [], title = '', isAdult = false 
                   onClick={(e) => goToSlide(idx, e)}
                   className={`flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden border-3 transition-all snap-start ${
                     idx === selectedIndex
-                      ? 'border-pink-500 ring-2 ring-pink-500/50 shadow-lg scale-105'
-                      : 'border-slate-300 dark:border-slate-600 opacity-70 hover:opacity-100 hover:border-pink-300'
+                      ? 'border-blue-500 ring-2 ring-blue-500/50 shadow-lg scale-105'
+                      : 'border-slate-300 dark:border-slate-600 opacity-70 hover:opacity-100 hover:border-blue-300'
                   }`}
                 >
                   <img 
@@ -271,7 +271,7 @@ export default function ImageGallery({ images = [], title = '', isAdult = false 
                       onClick={(e) => goToSlide(idx, e)}
                       className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 transition-all snap-start ${
                         idx === selectedIndex
-                          ? 'border-pink-500 ring-2 ring-pink-500/50'
+                          ? 'border-blue-500 ring-2 ring-blue-500/50'
                           : 'border-white/30 opacity-60 hover:opacity-100'
                       }`}
                     >

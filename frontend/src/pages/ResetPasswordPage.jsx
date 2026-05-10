@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import api from "../api/client";
 
@@ -61,7 +61,7 @@ export default function ResetPasswordPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 py-2.5 border border-zinc-300 dark:border-zinc-600 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none bg-white dark:bg-zinc-700 dark:text-white"
+                  className="w-full px-3 py-2.5 border border-zinc-300 dark:border-zinc-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white dark:bg-zinc-700 dark:text-white"
                   placeholder="Min 8 characters, 1 uppercase, 1 number"
                   required
                   minLength={8}
@@ -73,7 +73,7 @@ export default function ResetPasswordPage() {
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-3 py-2.5 border border-zinc-300 dark:border-zinc-600 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none bg-white dark:bg-zinc-700 dark:text-white"
+                  className="w-full px-3 py-2.5 border border-zinc-300 dark:border-zinc-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white dark:bg-zinc-700 dark:text-white"
                   placeholder="Re-enter your password"
                   required
                   minLength={8}
@@ -81,7 +81,7 @@ export default function ResetPasswordPage() {
               </div>
               <button
                 type="submit"
-                className="w-full py-2.5 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition font-medium"
+                className="w-full py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-medium"
               >
                 Reset Password
               </button>
@@ -91,7 +91,7 @@ export default function ResetPasswordPage() {
 
         {status === "loading" && (
           <div className="text-center py-8">
-            <div className="w-12 h-12 border-4 border-rose-200 border-t-rose-500 rounded-full animate-spin mx-auto mb-4" />
+            <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-500 rounded-full animate-spin mx-auto mb-4" />
             <p className="text-zinc-500 dark:text-zinc-400">Resetting your password...</p>
           </div>
         )}
@@ -107,7 +107,7 @@ export default function ResetPasswordPage() {
             <p className="text-zinc-500 dark:text-zinc-400 mt-2">{message}</p>
             <Link
               to="/login"
-              className="mt-6 inline-block px-6 py-2.5 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition font-medium"
+              className="mt-6 inline-block px-6 py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-medium"
             >
               Go to Login
             </Link>

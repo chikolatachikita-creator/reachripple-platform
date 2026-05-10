@@ -1,4 +1,4 @@
-// src/components/BoostModal.jsx
+﻿// src/components/BoostModal.jsx
 import React, { useState, useEffect } from 'react';
 import { getBoostPricing, purchaseBoost } from '../api/boost';
 import { useToastContext } from '../context/ToastContextGlobal';
@@ -18,7 +18,7 @@ const TIER_INFO = {
   },
   PRIORITY_PLUS: {
     name: 'Priority Plus',
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-purple-500 to-blue-500',
     icon: '💎',
     description: 'Premium placement above standard and priority',
     features: [
@@ -321,7 +321,7 @@ export default function BoostModal({ isOpen, onClose, ad }) {
                   <button
                     onClick={handlePurchase}
                     disabled={!selectedTier || purchasing}
-                    className="px-8 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-purple-500/30"
+                    className="px-8 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-purple-500/30"
                   >
                     {purchasing ? (
                       <div className="flex items-center gap-2">

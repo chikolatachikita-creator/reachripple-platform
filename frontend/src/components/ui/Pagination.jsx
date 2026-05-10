@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 /**
  * Pagination - A reusable pagination component
@@ -50,17 +50,17 @@ export default function Pagination({
   const variants = {
     default: {
       base: 'border border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-700',
-      active: 'bg-gradient-to-r from-pink-500 to-purple-500 text-white border-transparent shadow-md',
+      active: 'bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent shadow-md',
       disabled: 'bg-zinc-100 text-zinc-400 cursor-not-allowed border-zinc-200',
     },
     rounded: {
       base: 'border border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-700 rounded-full',
-      active: 'bg-gradient-to-r from-pink-500 to-purple-500 text-white border-transparent shadow-md rounded-full',
+      active: 'bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent shadow-md rounded-full',
       disabled: 'bg-zinc-100 text-zinc-400 cursor-not-allowed border-zinc-200 rounded-full',
     },
     minimal: {
       base: 'bg-transparent hover:bg-zinc-100 text-zinc-600',
-      active: 'bg-pink-100 text-pink-700 font-semibold',
+      active: 'bg-blue-100 text-blue-700 font-semibold',
       disabled: 'text-zinc-300 cursor-not-allowed',
     },
   };
@@ -114,7 +114,7 @@ export default function Pagination({
   // Button base styles
   const buttonBase = `
     inline-flex items-center justify-center font-medium rounded-lg
-    transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500/30
+    transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/30
     ${sizeConfig.button}
   `;
 

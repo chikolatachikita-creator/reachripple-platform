@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { adminLogin } from "../api/auth";
 
 export default function AdminLoginPage() {
@@ -42,11 +42,11 @@ export default function AdminLoginPage() {
           Admin Login
         </h1>
         <p className="text-xs text-slate-500 mb-6 text-center">
-          Private access for <span className="font-semibold"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></span> admins.
+          Private access for <span className="font-semibold"><span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></span> admins.
         </p>
 
         {error && (
-          <p className="mb-3 text-xs text-rose-600 bg-rose-50 border border-rose-100 rounded-lg px-3 py-2">
+          <p className="mb-3 text-xs text-blue-600 bg-blue-50 border border-blue-100 rounded-lg px-3 py-2">
             {error}
           </p>
         )}
@@ -85,7 +85,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-700 text-white text-sm font-semibold py-2.5 shadow-md hover:shadow-lg hover:scale-[1.01] transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-blue-700 text-white text-sm font-semibold py-2.5 shadow-md hover:shadow-lg hover:scale-[1.01] transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? "Logging in..." : "Log in as Admin"}
           </button>

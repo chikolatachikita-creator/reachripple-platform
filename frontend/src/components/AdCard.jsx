@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'; // Verified build 
+﻿import React, { useState, memo } from 'react'; // Verified build 
 import { Link } from "react-router-dom";
 import { Eye } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
@@ -9,22 +9,22 @@ const getImageUrl = (path) => getAssetUrl(path);
 
 // Category-aware placeholder metadata
 const PLACEHOLDER_META = {
-  'escorts':            { icon: '💝', color: 'from-rose-400 to-pink-500' },
-  'adult-entertainment':{ icon: '🔞', color: 'from-pink-500 to-purple-500' },
+  'escorts':            { icon: '💝', color: 'from-blue-400 to-blue-500' },
+  'adult-entertainment':{ icon: '🔞', color: 'from-blue-500 to-purple-500' },
   'trans-escorts':      { icon: '💜', color: 'from-purple-400 to-violet-500' },
-  'gay-escorts':        { icon: '🌈', color: 'from-pink-400 to-rose-500' },
-  'adult-dating':       { icon: '💘', color: 'from-red-400 to-rose-500' },
+  'gay-escorts':        { icon: '🌈', color: 'from-blue-400 to-blue-500' },
+  'adult-dating':       { icon: '💘', color: 'from-red-400 to-blue-500' },
   'buy-sell':           { icon: '🛒', color: 'from-blue-400 to-cyan-500' },
   'vehicles':           { icon: '🚗', color: 'from-slate-500 to-zinc-600' },
   'cars':               { icon: '🚗', color: 'from-slate-500 to-zinc-600' },
   'property':           { icon: '🏠', color: 'from-emerald-400 to-teal-500' },
   'jobs':               { icon: '💼', color: 'from-violet-400 to-purple-500' },
   'services':           { icon: '🔧', color: 'from-orange-400 to-amber-500' },
-  'community':          { icon: '🤝', color: 'from-pink-400 to-rose-400' },
+  'community':          { icon: '🤝', color: 'from-blue-400 to-blue-400' },
   'farming':            { icon: '🚜', color: 'from-green-400 to-lime-500' },
   'electronics':        { icon: '💻', color: 'from-blue-500 to-indigo-600' },
   'furniture':          { icon: '🛋️', color: 'from-amber-400 to-yellow-500' },
-  'fashion':            { icon: '👗', color: 'from-pink-400 to-fuchsia-500' },
+  'fashion':            { icon: '👗', color: 'from-blue-400 to-blue-500' },
   'sports':             { icon: '⚽', color: 'from-green-400 to-emerald-500' },
   'default':            { icon: '📦', color: 'from-zinc-300 to-zinc-400' },
 };
@@ -168,14 +168,14 @@ function AdCard({
     }
     if (isGlow) {
       // GLOW/Highlight: Pink ring, glowing effect - visual pop in feed
-      return `${base} ring-2 ring-pink-400/60 shadow-pink-100 hover:-translate-y-1 hover:shadow-xl hover:shadow-pink-200`;
+      return `${base} ring-2 ring-blue-400/60 shadow-blue-100 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-200`;
     }
     if (showTrending) {
       // Trending: Orange glow effect
       return `${base} ring-2 ring-orange-300/50 shadow-orange-100 hover:-translate-y-1 hover:shadow-xl`;
     }
     // Normal - subtle lift hover
-    return `${base} hover:-translate-y-1 hover:shadow-xl ${ad.highlight ? "ring-2 ring-pink-200 shadow-pink-100" : ""}`;
+    return `${base} hover:-translate-y-1 hover:shadow-xl ${ad.highlight ? "ring-2 ring-blue-200 shadow-blue-100" : ""}`;
   };
 
   // Image height based on variant - responsive for mobile.
@@ -219,7 +219,7 @@ function AdCard({
             absolute top-3 right-3 z-30 p-2 rounded-full 
             bg-white/80 backdrop-blur-md text-zinc-700 
             opacity-0 group-hover:opacity-100 transition-all duration-200
-            hover:bg-white hover:text-pink-600 hover:scale-110 shadow-sm
+            hover:bg-white hover:text-blue-600 hover:scale-110 shadow-sm
           "
           title="Quick View"
           aria-label="Quick preview of profile"
@@ -290,7 +290,7 @@ function AdCard({
             <span
               className="
                 px-2 py-0.5 text-[10px] font-bold uppercase rounded-full
-                bg-gradient-to-r from-purple-500 to-pink-500 text-white
+                bg-gradient-to-r from-purple-500 to-blue-500 text-white
                 shadow-md flex items-center gap-1
               "
             >
@@ -304,7 +304,7 @@ function AdCard({
             <span
               className="
                 px-2 py-0.5 text-[10px] font-bold uppercase rounded-full
-                bg-gradient-to-r from-pink-400 to-rose-500 text-white
+                bg-gradient-to-r from-blue-400 to-blue-500 text-white
                 shadow-md flex items-center gap-1
               "
             >
@@ -397,7 +397,7 @@ function AdCard({
             {ad.services.slice(0, isVip ? 4 : 3).map((service, idx) => (
               <span
                 key={idx}
-                className="px-2 py-0.5 bg-pink-50 text-pink-600 rounded-full text-[10px] font-medium"
+                className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-medium"
               >
                 {service}
               </span>

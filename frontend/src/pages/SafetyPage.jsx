@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Shield, Eye, AlertTriangle, Lock, MapPin, Phone, MessageCircle } from 'lucide-react';
 import Navbar from '../components/Navbar';
@@ -62,16 +62,16 @@ export default function SafetyPage() {
             {/* Detailed Section 1 */}
             <section className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700">
               <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
-                <MessageCircle className="text-pink-500" />
+                <MessageCircle className="text-blue-500" />
                 Communication Safety
               </h2>
               <ul className="space-y-4 text-gray-700 dark:text-gray-300">
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-sm font-bold">1</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm font-bold">1</span>
                   <span><strong>Stay on the platform:</strong> Scammers often try to move you immediately to WhatsApp, Telegram, or email to avoid our safety filters. Be cautious of anyone insisting on switching apps instantly.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-sm font-bold">2</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm font-bold">2</span>
                   <span><strong>Watch for scripts:</strong> Generic messages that don't reference your profile specifically, or broken English mixed with overly formal language, can be signs of automated scam bots.</span>
                 </li>
               </ul>

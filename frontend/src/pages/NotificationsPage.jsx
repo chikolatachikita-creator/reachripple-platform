@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+﻿import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -126,7 +126,7 @@ export default function NotificationsPage() {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center rounded-full bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300 px-3 py-1 text-xs font-bold">
+              <span className="inline-flex items-center rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 px-3 py-1 text-xs font-bold">
                 {unreadCount} unread
               </span>
               <button
@@ -168,7 +168,7 @@ export default function NotificationsPage() {
             ) : visibleNotifications.length === 0 ? (
               <div className="p-12 sm:p-16 text-center">
                 <div className="relative w-24 h-24 mx-auto mb-6">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 animate-pulse" />
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 animate-pulse" />
                   <div className="relative w-full h-full flex items-center justify-center">
                     <span className="text-5xl animate-[wiggle_1.5s_ease-in-out_infinite]" style={{ display: 'inline-block', transformOrigin: 'top center' }}>🔔</span>
                   </div>
@@ -180,7 +180,7 @@ export default function NotificationsPage() {
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                   <Link
                     to="/dashboard"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-violet-700 text-white text-sm font-bold shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-violet-700 text-white text-sm font-bold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
                   >
                     Back to Dashboard
                   </Link>

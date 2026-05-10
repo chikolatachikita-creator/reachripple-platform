@@ -1,4 +1,4 @@
-// src/pages/EditAdPage_Luxury.jsx - Luxury Ad Editing with EscortProfilePage styling
+﻿// src/pages/EditAdPage_Luxury.jsx - Luxury Ad Editing with EscortProfilePage styling
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams, Link } from "react-router-dom";
@@ -449,7 +449,7 @@ function EditAdPageLuxury() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 border-4 border-pink-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
           <span className="text-white">Loading profile...</span>
         </div>
       </div>
@@ -461,7 +461,7 @@ function EditAdPageLuxury() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
       <Helmet><title>Edit Ad | ReachRipple</title></Helmet>
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/40 border-b border-pink-500/10">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/40 border-b border-blue-500/10">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to="/my-ads" className="p-2 hover:bg-white/10 rounded-lg transition-colors">
@@ -469,7 +469,7 @@ function EditAdPageLuxury() {
             </Link>
             <div>
               <h1 className="text-xl font-bold text-white">Edit Your Profile</h1>
-              <p className="text-sm text-pink-300">Update your listing details</p>
+              <p className="text-sm text-blue-300">Update your listing details</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -508,7 +508,7 @@ function EditAdPageLuxury() {
                   onClick={() => setTabActive(tab.id)}
                   className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
                     tabActive === tab.id
-                      ? "border-pink-500 text-pink-400"
+                      ? "border-blue-500 text-blue-400"
                       : "border-transparent text-white/60 hover:text-white"
                   }`}
                 >
@@ -547,7 +547,7 @@ function EditAdPageLuxury() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-white/80 mb-2">
-                      Headline <span className="text-pink-500 font-bold ml-1" title="Required">*</span>
+                      Headline <span className="text-blue-500 font-bold ml-1" title="Required">*</span>
                     </label>
                     <input
                       type="text"
@@ -555,7 +555,7 @@ function EditAdPageLuxury() {
                       onChange={(e) => handleInputChange("title", e.target.value)}
                       maxLength={100}
                       className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-white/50 focus:outline-none transition-all ${
-                        validationErrors.title ? "border-red-500 focus:border-red-600" : "border-white/20 focus:border-pink-500"
+                        validationErrors.title ? "border-red-500 focus:border-red-600" : "border-white/20 focus:border-blue-500"
                       }`}
                     />
                     {validationErrors.title && (
@@ -565,7 +565,7 @@ function EditAdPageLuxury() {
 
                   <div>
                     <label className="block text-sm font-medium text-white/80 mb-2">
-                      Description <span className="text-pink-500 font-bold ml-1" title="Required">*</span>
+                      Description <span className="text-blue-500 font-bold ml-1" title="Required">*</span>
                     </label>
                     <textarea
                       value={formData.description}
@@ -573,7 +573,7 @@ function EditAdPageLuxury() {
                       maxLength={1000}
                       rows={6}
                       className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-white/50 focus:outline-none transition-all resize-none ${
-                        validationErrors.description ? "border-red-500 focus:border-red-600" : "border-white/20 focus:border-pink-500"
+                        validationErrors.description ? "border-red-500 focus:border-red-600" : "border-white/20 focus:border-blue-500"
                       }`}
                     />
                     {validationErrors.description && (
@@ -607,14 +607,14 @@ function EditAdPageLuxury() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   <div>
                     <label className="block text-sm font-medium text-white/80 mb-2">
-                      Location <span className="text-pink-500 font-bold ml-1" title="Required">*</span>
+                      Location <span className="text-blue-500 font-bold ml-1" title="Required">*</span>
                     </label>
                     <input
                       type="text"
                       value={formData.location}
                       onChange={(e) => handleInputChange("location", e.target.value)}
                       className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white outline-none transition-all ${
-                        validationErrors.location ? "border-red-500 focus:border-red-600" : "border-white/20 focus:border-pink-500"
+                        validationErrors.location ? "border-red-500 focus:border-red-600" : "border-white/20 focus:border-blue-500"
                       }`}
                     />
                     {validationErrors.location && (
@@ -623,7 +623,7 @@ function EditAdPageLuxury() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-white/80 mb-2">
-                      Age <span className="text-pink-500 font-bold ml-1" title="Required">*</span>
+                      Age <span className="text-blue-500 font-bold ml-1" title="Required">*</span>
                     </label>
                     <input
                       type="number"
@@ -632,7 +632,7 @@ function EditAdPageLuxury() {
                       value={formData.age}
                       onChange={(e) => handleInputChange("age", e.target.value)}
                       className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white outline-none transition-all ${
-                        validationErrors.age ? "border-red-500 focus:border-red-600" : "border-white/20 focus:border-pink-500"
+                        validationErrors.age ? "border-red-500 focus:border-red-600" : "border-white/20 focus:border-blue-500"
                       }`}
                     />
                     {validationErrors.age && (
@@ -683,7 +683,7 @@ function EditAdPageLuxury() {
                           type="checkbox"
                           checked={formData.languages.includes(lang)}
                           onChange={() => handleCheckboxArray("languages", lang)}
-                          className="w-4 h-4 accent-pink-500"
+                          className="w-4 h-4 accent-blue-500"
                         />
                         <span className="text-white/70">{lang}</span>
                       </label>
@@ -701,7 +701,7 @@ function EditAdPageLuxury() {
                           type="checkbox"
                           checked={formData.serviceFor.includes(sf)}
                           onChange={() => handleCheckboxArray("serviceFor", sf)}
-                          className="w-4 h-4 accent-pink-500"
+                          className="w-4 h-4 accent-blue-500"
                         />
                         <span className="text-white/70">{sf}</span>
                       </label>
@@ -808,7 +808,7 @@ function EditAdPageLuxury() {
                               value={val}
                               onChange={(e) => handleCategoryFieldChange(field.key, e.target.value)}
                               placeholder={field.placeholder || ""}
-                              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 outline-none focus:border-pink-500 transition-all"
+                              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 outline-none focus:border-blue-500 transition-all"
                             />
                           </div>
                         );
@@ -825,7 +825,7 @@ function EditAdPageLuxury() {
                               placeholder={field.placeholder || ""}
                               min={field.min}
                               max={field.max}
-                              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 outline-none focus:border-pink-500 transition-all"
+                              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 outline-none focus:border-blue-500 transition-all"
                             />
                           </div>
                         );
@@ -838,7 +838,7 @@ function EditAdPageLuxury() {
                             <select
                               value={val}
                               onChange={(e) => handleCategoryFieldChange(field.key, e.target.value)}
-                              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white outline-none focus:border-pink-500 transition-all"
+                              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white outline-none focus:border-blue-500 transition-all"
                             >
                               <option value="">Select...</option>
                               {(field.options || []).map((opt) => (
@@ -858,7 +858,7 @@ function EditAdPageLuxury() {
                                     type="checkbox"
                                     checked={(categoryFields[field.key] || []).includes(opt)}
                                     onChange={() => handleCategoryCheckboxField(field.key, opt)}
-                                    className="w-4 h-4 accent-pink-500"
+                                    className="w-4 h-4 accent-blue-500"
                                   />
                                   <span className="text-white/70 text-sm">{opt}</span>
                                 </label>
@@ -876,12 +876,12 @@ function EditAdPageLuxury() {
                               onChange={(e) => setTagInput(e.target.value)}
                               onKeyDown={(e) => handleCategoryTagAdd(field.key, e)}
                               placeholder={field.placeholder || "Type and press Enter"}
-                              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 outline-none focus:border-pink-500 transition-all"
+                              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 outline-none focus:border-blue-500 transition-all"
                             />
                             {(categoryFields[field.key] || []).length > 0 && (
                               <div className="flex flex-wrap gap-2 mt-2">
                                 {(categoryFields[field.key] || []).map((tag) => (
-                                  <span key={tag} className="inline-flex items-center gap-1 px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-sm">
+                                  <span key={tag} className="inline-flex items-center gap-1 px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm">
                                     {tag}
                                     <button type="button" onClick={() => handleCategoryTagRemove(field.key, tag)} className="hover:text-white">
                                       <X className="w-3 h-3" />
@@ -910,7 +910,7 @@ function EditAdPageLuxury() {
                           type="checkbox"
                           checked={formData.services.includes(service)}
                           onChange={() => handleCheckboxArray("services", service)}
-                          className="w-4 h-4 accent-pink-500"
+                          className="w-4 h-4 accent-blue-500"
                         />
                         <span className="text-white/70">{service}</span>
                       </label>
@@ -961,7 +961,7 @@ function EditAdPageLuxury() {
                           type="checkbox"
                           checked={formData.services.includes(service)}
                           onChange={() => handleCheckboxArray("services", service)}
-                          className="w-4 h-4 accent-pink-500"
+                          className="w-4 h-4 accent-blue-500"
                         />
                         <span className="text-white/70">{service}</span>
                       </label>
@@ -1050,9 +1050,9 @@ function EditAdPageLuxury() {
                     </div>
                   )}
 
-                  <label className="flex items-center justify-center w-full p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-pink-500/50 transition-colors cursor-pointer">
+                  <label className="flex items-center justify-center w-full p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-blue-500/50 transition-colors cursor-pointer">
                     <div className="text-center">
-                      <Camera className="w-8 h-8 text-pink-400 mx-auto mb-2" />
+                      <Camera className="w-8 h-8 text-blue-400 mx-auto mb-2" />
                       <p className="text-white/70">Click to add more photos</p>
                       <p className="text-xs text-white/50 mt-1">Max 5MB per image</p>
                     </div>
@@ -1104,9 +1104,9 @@ function EditAdPageLuxury() {
                     </div>
                   )}
 
-                  <label className="flex items-center justify-center w-full p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-pink-500/50 transition-colors cursor-pointer">
+                  <label className="flex items-center justify-center w-full p-8 border-2 border-dashed border-white/20 rounded-xl hover:border-blue-500/50 transition-colors cursor-pointer">
                     <div className="text-center">
-                      <Video className="w-8 h-8 text-pink-400 mx-auto mb-2" />
+                      <Video className="w-8 h-8 text-blue-400 mx-auto mb-2" />
                       <p className="text-white/70">Click to upload video</p>
                       <p className="text-xs text-white/50 mt-1">Max 50MB</p>
                     </div>
@@ -1135,7 +1135,7 @@ function EditAdPageLuxury() {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => handleInputChange("phone", e.target.value)}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-pink-500 outline-none transition-all"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
 
@@ -1145,7 +1145,7 @@ function EditAdPageLuxury() {
                       type="tel"
                       value={formData.whatsapp}
                       onChange={(e) => handleInputChange("whatsapp", e.target.value)}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-pink-500 outline-none transition-all"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
 
@@ -1155,7 +1155,7 @@ function EditAdPageLuxury() {
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-pink-500 outline-none transition-all"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -1195,7 +1195,7 @@ function EditAdPageLuxury() {
                       onClick={() => toggleFeature(key)}
                       className={`p-5 rounded-xl border-2 transition-all text-left ${
                         enabledFeatures[key]
-                          ? 'border-pink-500 bg-pink-500/10'
+                          ? 'border-blue-500 bg-blue-500/10'
                           : 'border-white/10 bg-white/5 hover:bg-white/10'
                       }`}
                     >
@@ -1203,7 +1203,7 @@ function EditAdPageLuxury() {
                         <span className="text-2xl">{def.icon}</span>
                         <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${
                           enabledFeatures[key]
-                            ? 'border-pink-500 bg-pink-500'
+                            ? 'border-blue-500 bg-blue-500'
                             : 'border-white/30'
                         }`}>
                           {enabledFeatures[key] && <Check className="w-4 h-4 text-white" />}
@@ -1235,7 +1235,7 @@ function EditAdPageLuxury() {
             <button
               type="submit"
               disabled={saving}
-              className="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 disabled:opacity-50 text-white font-semibold rounded-xl transition-all flex items-center gap-2"
+              className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 disabled:opacity-50 text-white font-semibold rounded-xl transition-all flex items-center gap-2"
             >
               <Save className="w-4 h-4" />
               {saving ? "Saving..." : "Save Changes"}

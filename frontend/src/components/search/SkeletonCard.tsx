@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+﻿import React, { memo } from "react";
 
 /**
  * SkeletonCard - Animated loading placeholder for search results
@@ -105,7 +105,7 @@ function SkeletonCard({ variant = "normal" }: SkeletonCardProps) {
             style={{ animationDelay: "500ms" }}
           />
           <div
-            className="h-10 bg-gradient-to-r from-pink-100 to-purple-100 rounded-xl w-28 animate-pulse"
+            className="h-10 bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl w-28 animate-pulse"
             style={{ animationDelay: "550ms" }}
           />
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   TrendingUp,
@@ -154,7 +154,7 @@ export default function GrowthDashboardPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-4 border-pink-500 border-t-transparent rounded-full" />
+        <div className="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full" />
       </div>
     );
   }
@@ -260,14 +260,14 @@ export default function GrowthDashboardPage() {
 
             {/* Tier Upgrade CTA */}
             {accountTier !== "spotlight" && (
-              <div className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-2xl shadow-sm p-6 text-white">
+              <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl shadow-sm p-6 text-white">
                 <h3 className="text-lg font-semibold mb-2">Upgrade Your Tier</h3>
                 <p className="text-sm opacity-90 mb-4">
                   Get higher visibility multipliers, more ad slots, and faster bump cooldowns.
                 </p>
                 <Link
                   to="/pricing"
-                  className="inline-block bg-white text-pink-600 font-semibold px-5 py-2.5 rounded-lg hover:bg-pink-50 transition-colors"
+                  className="inline-block bg-white text-blue-600 font-semibold px-5 py-2.5 rounded-lg hover:bg-blue-50 transition-colors"
                 >
                   View Plans →
                 </Link>
@@ -297,7 +297,7 @@ export default function GrowthDashboardPage() {
                   {ads.map((ad) => (
                     <tr key={ad._id} className="border-b border-gray-50 hover:bg-gray-50">
                       <td className="py-3">
-                        <Link to={`/ad/${ad._id}`} className="text-pink-600 hover:underline font-medium truncate max-w-[200px] block">
+                        <Link to={`/ad/${ad._id}`} className="text-blue-600 hover:underline font-medium truncate max-w-[200px] block">
                           {ad.title}
                         </Link>
                       </td>

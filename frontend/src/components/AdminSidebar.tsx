@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ConfirmModal from "./ConfirmModal";
 import {
@@ -29,7 +29,7 @@ export default function AdminSidebar() {
   };
 
   return (
-    <aside className="w-64 min-h-screen bg-gradient-to-br from-pink-500 via-purple-600 to-blue-900 text-white flex flex-col shadow-lg">
+    <aside className="w-64 min-h-screen bg-gradient-to-br from-blue-500 via-purple-600 to-blue-900 text-white flex flex-col shadow-lg">
       {/* Header */}
       <div className="px-6 py-6 border-b border-white/20">
         <div className="flex items-center gap-3">

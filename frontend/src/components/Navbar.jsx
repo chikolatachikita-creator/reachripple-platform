@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import NotificationCenter from "./NotificationCenter";
@@ -29,7 +29,7 @@ export default function Navbar({ showSaved = true }) {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
           <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
-          <div className="text-sm font-bold leading-tight"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></div>
+          <div className="text-sm font-bold leading-tight"><span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></div>
         </Link>
 
         {/* Right side actions */}
@@ -146,7 +146,7 @@ export default function Navbar({ showSaved = true }) {
               {/* Post an Ad */}
               <button
                 onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
-                className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-white shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 hover:brightness-110 transition-all whitespace-nowrap cursor-pointer"
+                className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold text-white shadow-md bg-gradient-to-r from-amber-500 to-orange-500 hover:brightness-110 transition-all whitespace-nowrap cursor-pointer"
               >
                 + Post Ad
               </button>
@@ -243,10 +243,10 @@ export default function Navbar({ showSaved = true }) {
                     <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                       Log in
                     </Link>
-                    <Link to="/signup" onClick={() => setMobileMenuOpen(false)} className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:brightness-110 transition-all">
+                    <Link to="/signup" onClick={() => setMobileMenuOpen(false)} className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:brightness-110 transition-all">
                       Sign Up
                     </Link>
-                    <button onClick={() => { setMobileMenuOpen(false); navigate(isLoggedIn ? '/create-ad' : '/login'); }} className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-900 text-white hover:brightness-110 transition-all cursor-pointer">
+                    <button onClick={() => { setMobileMenuOpen(false); navigate(isLoggedIn ? '/create-ad' : '/login'); }} className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 text-white hover:brightness-110 transition-all cursor-pointer">
                       Post an Ad
                     </button>
                   </div>

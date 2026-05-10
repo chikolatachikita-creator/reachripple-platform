@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import api from "../api/client";
@@ -100,7 +100,7 @@ export default function SavedProfilesPage() {
         <nav className="w-full bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-zinc-100">
           <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-pink-400 to-purple-500 animate-pulse" />
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-400 to-purple-500 animate-pulse" />
               <div className="hidden sm:block space-y-1">
                 <div className="h-4 bg-zinc-200 rounded w-24 animate-pulse" />
                 <div className="h-3 bg-zinc-100 rounded w-16 animate-pulse" />
@@ -112,7 +112,7 @@ export default function SavedProfilesPage() {
         {/* Content skeleton */}
         <div className="max-w-6xl mx-auto px-4 py-10">
           <div className="mb-8 flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-200 to-purple-200 animate-pulse" />
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-200 to-purple-200 animate-pulse" />
             <div className="space-y-2">
               <div className="h-7 bg-zinc-200 rounded w-40 animate-pulse" />
               <div className="h-4 bg-zinc-100 rounded w-24 animate-pulse" />
@@ -128,7 +128,7 @@ export default function SavedProfilesPage() {
                   <div className="h-4 bg-zinc-100 rounded w-1/2" />
                   <div className="flex gap-2">
                     <div className="h-6 bg-zinc-100 rounded-full w-16" />
-                    <div className="h-6 bg-pink-100 rounded-full w-12" />
+                    <div className="h-6 bg-blue-100 rounded-full w-12" />
                   </div>
                 </div>
               </div>
@@ -148,7 +148,7 @@ export default function SavedProfilesPage() {
           <Link to="/" className="flex items-center gap-3 group">
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <div className="hidden sm:block">
-              <div className="text-sm font-bold leading-tight"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></div>
+              <div className="text-sm font-bold leading-tight"><span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></div>
               <div className="text-[11px] text-zinc-400 dark:text-zinc-500 leading-tight">Saved Listings</div>
             </div>
           </Link>
@@ -173,7 +173,7 @@ export default function SavedProfilesPage() {
         {/* Header section */}
         <div className="mb-8 flex items-end justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-lg shadow-pink-500/20">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
               <span className="text-white text-xl">⭐</span>
             </div>
             <div>
@@ -190,7 +190,7 @@ export default function SavedProfilesPage() {
                 id="sort"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="h-10 px-3 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm font-medium text-zinc-900 dark:text-white outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100 dark:focus:ring-pink-900 cursor-pointer"
+                className="h-10 px-3 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm font-medium text-zinc-900 dark:text-white outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 cursor-pointer"
               >
                 <option value="recent">Recently saved</option>
                 <option value="price-asc">Price: low to high</option>
@@ -214,8 +214,8 @@ export default function SavedProfilesPage() {
             <Link
               to="/search"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-sm
-                         bg-gradient-to-r from-pink-500 to-purple-600 text-white 
-                         shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 
+                         bg-gradient-to-r from-blue-500 to-purple-600 text-white 
+                         shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 
                          hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -262,7 +262,7 @@ export default function SavedProfilesPage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <img src="/logomark.png" alt="ReachRipple" className="w-8 h-8 rounded-lg object-cover" />
-              <span className="text-sm font-medium text-zinc-600">© 2026 <span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></span>
+              <span className="text-sm font-medium text-zinc-600">© 2026 <span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></span>
             </div>
             <div className="flex items-center gap-6">
               <Link to="/privacy" className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">Privacy</Link>

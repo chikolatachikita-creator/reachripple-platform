@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Crown, 
@@ -129,7 +129,7 @@ const UpsellBanner = ({
     : upsellType === 'TAP_UP'
     ? 'from-purple-500/20 to-indigo-500/10 border-purple-400/30'
     : upsellType === 'HIGHLIGHT'
-    ? 'from-pink-500/20 to-rose-500/10 border-pink-400/30'
+    ? 'from-blue-500/20 to-blue-500/10 border-blue-400/30'
     : 'from-brand-500/20 to-accent-500/10 border-brand-400/30';
 
   const iconBg = upsellType === 'FEATURED'
@@ -137,7 +137,7 @@ const UpsellBanner = ({
     : upsellType === 'TAP_UP'
     ? 'bg-gradient-to-r from-purple-500 to-indigo-500'
     : upsellType === 'HIGHLIGHT'
-    ? 'bg-gradient-to-r from-pink-500 to-rose-500'
+    ? 'bg-gradient-to-r from-blue-500 to-blue-500'
     : 'bg-gradient-to-r from-brand-500 to-accent-500';
 
   const buttonBg = upsellType === 'FEATURED'
@@ -145,7 +145,7 @@ const UpsellBanner = ({
     : upsellType === 'TAP_UP'
     ? 'bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600'
     : upsellType === 'HIGHLIGHT'
-    ? 'bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600'
+    ? 'bg-gradient-to-r from-blue-500 to-blue-500 hover:from-blue-600 hover:to-blue-600'
     : 'bg-gradient-to-r from-brand-500 to-accent-500 hover:from-brand-600 hover:to-accent-600';
 
   if (variant === 'compact') {
@@ -271,7 +271,7 @@ export const UpsellCard = ({
   const borderColor = selected
     ? type === 'FEATURED' ? 'border-amber-400' 
       : type === 'TAP_UP' ? 'border-purple-400'
-      : type === 'HIGHLIGHT' ? 'border-pink-400'
+      : type === 'HIGHLIGHT' ? 'border-blue-400'
       : 'border-brand-400'
     : 'border-surface-600';
 
@@ -302,13 +302,13 @@ export const UpsellCard = ({
         <div className={`p-2 rounded-lg ${
           type === 'FEATURED' ? 'bg-amber-500/20' 
           : type === 'TAP_UP' ? 'bg-purple-500/20'
-          : type === 'HIGHLIGHT' ? 'bg-pink-500/20'
+          : type === 'HIGHLIGHT' ? 'bg-blue-500/20'
           : 'bg-brand-500/20'
         }`}>
           <Icon className={`w-5 h-5 ${
             type === 'FEATURED' ? 'text-amber-400' 
             : type === 'TAP_UP' ? 'text-purple-400'
-            : type === 'HIGHLIGHT' ? 'text-pink-400'
+            : type === 'HIGHLIGHT' ? 'text-blue-400'
             : 'text-brand-400'
           }`} />
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getCategoryBySlug } from "../config/categories";
 import { PLATFORM_CATEGORIES } from "../config/categories";
@@ -63,7 +63,7 @@ export default function CategoryPage() {
         <div className="text-center">
           <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">Category Not Found</h1>
           <p className="text-gray-500 dark:text-zinc-400 mb-6">The category you're looking for doesn't exist.</p>
-          <Link to="/" className="text-pink-600 hover:underline font-medium">
+          <Link to="/" className="text-blue-600 hover:underline font-medium">
             ← Back to Home
           </Link>
         </div>
@@ -132,7 +132,7 @@ export default function CategoryPage() {
               placeholder={`Search ${category.name}...`}
               value={searchQuery}
               onChange={(e) => { setSearchQuery(e.target.value); setPage(1); }}
-              className="w-full h-11 sm:h-10 border border-gray-200 dark:border-zinc-700 rounded-xl pl-9 pr-4 text-sm outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-100 bg-white dark:bg-zinc-800 dark:text-white dark:placeholder-zinc-500"
+              className="w-full h-11 sm:h-10 border border-gray-200 dark:border-zinc-700 rounded-xl pl-9 pr-4 text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 bg-white dark:bg-zinc-800 dark:text-white dark:placeholder-zinc-500"
             />
             <svg className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -141,7 +141,7 @@ export default function CategoryPage() {
           <select
             value={sortBy}
             onChange={(e) => { setSortBy(e.target.value); setPage(1); }}
-            className="h-11 sm:h-10 border border-gray-200 dark:border-zinc-700 rounded-xl px-3 text-sm outline-none focus:border-pink-400 bg-white dark:bg-zinc-800 dark:text-white cursor-pointer"
+            className="h-11 sm:h-10 border border-gray-200 dark:border-zinc-700 rounded-xl px-3 text-sm outline-none focus:border-blue-400 bg-white dark:bg-zinc-800 dark:text-white cursor-pointer"
           >
             <option value="">Sort: Default</option>
             <option value="newest">Newest First</option>
@@ -165,12 +165,12 @@ export default function CategoryPage() {
           </div>
         ) : listings.length === 0 ? (
           <div className="text-center py-20">
-            <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 flex items-center justify-center">
+            <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 flex items-center justify-center">
               <IconComponent className={`w-10 h-10 ${category.color} opacity-60`} />
             </div>
             <h3 className="text-2xl font-bold text-zinc-800 dark:text-white mb-2">No listings yet</h3>
             <p className="text-zinc-500 dark:text-zinc-400 mb-1">Be the first to post in {category.name}!</p>
-            <p className="text-sm text-pink-500 dark:text-pink-400 font-medium">Early listings get featured free ⭐</p>
+            <p className="text-sm text-blue-500 dark:text-blue-400 font-medium">Early listings get featured free ⭐</p>
             <Link
               to={`/create-ad/${category.slug}`}
               className={`mt-6 inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r ${category.bgGradient} text-white rounded-xl hover:shadow-lg hover:scale-[1.03] active:scale-[0.97] transition-all font-bold`}
@@ -200,7 +200,7 @@ export default function CategoryPage() {
                     </div>
                   )}
                   <div className="p-4">
-                    <h3 className="font-semibold text-gray-800 dark:text-white truncate group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
+                    <h3 className="font-semibold text-gray-800 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {ad.title}
                     </h3>
                     <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1">{ad.location}</p>
@@ -250,7 +250,7 @@ export default function CategoryPage() {
                 <Link
                   key={c.slug}
                   to={`/category/${c.slug}`}
-                  className="group flex flex-col items-center gap-2 p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-pink-300 dark:hover:border-pink-700 hover:shadow-md hover:-translate-y-0.5 transition-all text-center"
+                  className="group flex flex-col items-center gap-2 p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-md hover:-translate-y-0.5 transition-all text-center"
                 >
                   <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${c.bgGradient} flex items-center justify-center text-white group-hover:scale-110 transition-transform`}>
                     <Icon className="w-5 h-5" />

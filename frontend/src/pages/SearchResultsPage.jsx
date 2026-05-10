@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef, useMemo, useState } from "react";
+﻿import React, { useEffect, useCallback, useRef, useMemo, useState } from "react";
 import { useSearchParams, useParams, useLocation, useNavigate } from "react-router-dom";
 import { getAds, getAd } from "../api/ads";
 import { saveSearch } from "../api/searchHistory";
@@ -705,7 +705,7 @@ export default function SearchResultsPage() {
             <div className="relative max-w-7xl mx-auto px-4 md:px-6 pt-20 sm:pt-24 md:pt-32 lg:pt-36 pb-28 sm:pb-32 md:pb-40 lg:pb-48">
               <div className="max-w-2xl">
                 <div className="mb-4">
-                  <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.28em] text-pink-300/90">
+                  <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.28em] text-blue-300/90">
                     Featured location
                   </span>
                 </div>
@@ -759,7 +759,7 @@ export default function SearchResultsPage() {
       {!loading && vipProfiles.length > 0 && (
         <section className="relative overflow-hidden">
           {/* Premium gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-50 via-yellow-50/80 to-pink-50 dark:from-amber-950/30 dark:via-zinc-900 dark:to-pink-950/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-50 via-yellow-50/80 to-blue-50 dark:from-amber-950/30 dark:via-zinc-900 dark:to-blue-950/30" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(251,191,36,0.15),transparent_60%)]" />
           
           {/* Subtle top/bottom borders */}
@@ -774,7 +774,7 @@ export default function SearchResultsPage() {
                   <span className="text-sm md:text-base">⭐</span>
                 </div>
                 <div>
-                  <h2 className="text-sm md:text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-600 to-pink-600">
+                  <h2 className="text-sm md:text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-600 to-blue-600">
                     VIP & Featured
                   </h2>
                   <p className="text-[10px] md:text-xs text-amber-600/70 font-medium -mt-0.5 hidden sm:block">Premium verified profiles</p>
@@ -803,10 +803,10 @@ export default function SearchResultsPage() {
 
       {/* SEARCH INTENT CONFIRMATION (VivaStreet-style) */}
       {(searchIntentLabel.locationPart || searchIntentLabel.distancePart) && (
-        <section className="px-4 py-2 bg-gradient-to-r from-pink-50 to-purple-50 border-y border-pink-100">
+        <section className="px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 border-y border-blue-100">
           <div className="max-w-7xl mx-auto">
             <p className="text-sm font-medium text-zinc-700">
-              <span className="font-bold text-pink-600">{searchIntentLabel.categoryLabel}</span>
+              <span className="font-bold text-blue-600">{searchIntentLabel.categoryLabel}</span>
               {searchIntentLabel.locationPart && (
                 <span className="text-zinc-600"> {searchIntentLabel.locationPart}</span>
               )}
@@ -874,7 +874,7 @@ export default function SearchResultsPage() {
           <div className="flex items-center gap-3">
             {loading ? (
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 border-2 border-pink-500 border-t-transparent rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
                 <span className="text-sm text-zinc-400">Searching...</span>
               </div>
             ) : (
@@ -946,7 +946,7 @@ export default function SearchResultsPage() {
                 {/* Smart Distance Expansion (VivaStreet-style) */}
                 {/* Shows when: has location filter + current distance < 20 miles */}
                 {suggestedDistances.length > 0 && (filters.outcode || filters.district) && (
-                  <div className="bg-gradient-to-r from-pink-50 via-white to-purple-50 rounded-2xl p-6 max-w-md mx-auto border border-pink-100 shadow-sm">
+                  <div className="bg-gradient-to-r from-blue-50 via-white to-purple-50 rounded-2xl p-6 max-w-md mx-auto border border-blue-100 shadow-sm">
                     <div className="flex items-center justify-center gap-2 mb-4">
                       <span className="text-xl">🔍</span>
                       <p className="text-sm font-semibold text-zinc-700">
@@ -959,8 +959,8 @@ export default function SearchResultsPage() {
                           key={dist}
                           onClick={() => handleFilterChange({ ...filters, d: dist })}
                           className="px-5 py-2.5 text-sm font-semibold rounded-xl
-                                   bg-white border-2 border-pink-200 text-pink-600
-                                   hover:bg-pink-50 hover:border-pink-400 hover:scale-105
+                                   bg-white border-2 border-blue-200 text-blue-600
+                                   hover:bg-blue-50 hover:border-blue-400 hover:scale-105
                                    active:scale-95 transition-all shadow-sm"
                         >
                           Search within {dist} miles
@@ -1041,7 +1041,7 @@ export default function SearchResultsPage() {
           type="button"
           onClick={() => handleOpenFilters("all")}
           className="flex-1 rounded-xl px-3 py-3 text-center font-bold text-sm relative
-                     bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-pink-500/25
+                     bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/25
                      active:scale-95 transition-all flex items-center justify-center gap-1.5"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1049,7 +1049,7 @@ export default function SearchResultsPage() {
           </svg>
           Filters
           {activeFilterCount > 0 && (
-            <span className="absolute -top-1 -right-1 w-5 h-5 bg-white text-pink-600 text-[10px] font-bold rounded-full flex items-center justify-center shadow-sm">
+            <span className="absolute -top-1 -right-1 w-5 h-5 bg-white text-blue-600 text-[10px] font-bold rounded-full flex items-center justify-center shadow-sm">
               {activeFilterCount}
             </span>
           )}

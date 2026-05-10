@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useMemo, useCallback, useState } from "react";
+﻿import React, { useEffect, useRef, useMemo, useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAds } from "../api/ads";
 import { getHomeData } from "../api/boost";
@@ -51,9 +51,9 @@ const AnimatedHeroBackground = () => (
     </video>
     
     {/* Animated gradient orbs - above video */}
-    <div className="absolute top-0 left-1/4 w-96 h-96 bg-pink-500/30 rounded-full blur-3xl animate-pulse z-20" />
+    <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl animate-pulse z-20" />
     <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/30 rounded-full blur-3xl animate-pulse z-20" style={{ animationDelay: '1s' }} />
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse z-20" style={{ animationDelay: '0.5s' }} />
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse z-20" style={{ animationDelay: '0.5s' }} />
     
     {/* Transparent overlay */}
     <div className="absolute inset-0 z-30" />
@@ -229,13 +229,13 @@ export default function ReachRippleHomePage() {
           </h1>
           
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mt-2 drop-shadow-lg">
-            <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
               Desired Fantasy Companion
             </span>
           </h2>
           
           <p className="mt-4 sm:mt-6 text-white/90 text-base sm:text-lg md:text-xl lg:text-2xl max-w-2xl px-2 leading-relaxed font-semibold">
-            Not just any companion. <span className="text-pink-300">Your perfect one.</span>
+            Not just any companion. <span className="text-blue-300">Your perfect one.</span>
           </p>
           
           <p className="mt-3 text-white/70 text-base sm:text-lg max-w-xl px-2">
@@ -247,8 +247,8 @@ export default function ReachRippleHomePage() {
             <Link
               to="/escort/gb"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-xl text-white font-bold text-base
-                         bg-gradient-to-r from-pink-500 to-pink-600 shadow-lg shadow-pink-500/40
-                         hover:shadow-pink-500/60 hover:scale-[1.05] active:scale-[0.97] transition-all"
+                         bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg shadow-blue-500/40
+                         hover:shadow-blue-500/60 hover:scale-[1.05] active:scale-[0.97] transition-all"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -287,15 +287,15 @@ export default function ReachRippleHomePage() {
       {!isLoading && vipRow.length === 0 && popularRow.length === 0 && standardFeed.length === 0 && (
         <section className="mt-4 px-4" aria-label="No listings available">
           <div className="max-w-2xl mx-auto text-center py-16">
-            <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 flex items-center justify-center">
+            <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 flex items-center justify-center">
               <span className="text-3xl">💎</span>
             </div>
             <h3 className="text-2xl font-bold text-zinc-800 dark:text-white mb-2">No listings yet</h3>
             <p className="text-zinc-500 dark:text-zinc-400 mb-1">Be the first to post and get maximum visibility!</p>
-            <p className="text-sm text-pink-500 dark:text-pink-400 font-medium">Early listings get featured free ⭐</p>
+            <p className="text-sm text-blue-500 dark:text-blue-400 font-medium">Early listings get featured free ⭐</p>
             <button
               onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
-              className="mt-6 inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 hover:scale-[1.03] active:scale-[0.97] transition-all font-bold cursor-pointer"
+              className="mt-6 inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-[1.03] active:scale-[0.97] transition-all font-bold cursor-pointer"
             >
               <span className="text-lg">+</span> Post a Listing
             </button>
@@ -309,7 +309,7 @@ export default function ReachRippleHomePage() {
       {!isLoading && vipRow.length > 0 && (
         <section className="mb-12 px-4 sm:px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl font-bold mb-6 text-zinc-900 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent inline-block">
+            <h2 className="text-2xl font-bold mb-6 text-zinc-900 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block">
               Featured Profiles
             </h2>
             <FeaturedProfilesCarousel 
@@ -425,7 +425,7 @@ export default function ReachRippleHomePage() {
             {/* Section header */}
             <div className="flex items-center justify-between mb-4 px-1">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg shadow-purple-500/25">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-lg shadow-purple-500/25">
                   <span className="text-white text-base">⭐</span>
                 </div>
                 <div>
@@ -448,7 +448,7 @@ export default function ReachRippleHomePage() {
                   {[...Array(5)].map((_, i) => (
                     <div key={i} className="w-[60vw] sm:w-[38vw] md:w-[240px] flex-shrink-0 snap-start animate-pulse">
                       <div className="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm">
-                        <div className="h-36 bg-gradient-to-br from-purple-50 to-pink-50" />
+                        <div className="h-36 bg-gradient-to-br from-purple-50 to-blue-50" />
                         <div className="p-3 space-y-2">
                           <div className="h-4 bg-gray-100 rounded w-3/4" />
                           <div className="h-3 bg-gray-100 rounded w-1/2" />
@@ -491,8 +491,8 @@ export default function ReachRippleHomePage() {
       {localStorage.getItem('accessToken') && (
         <section className="mt-8 px-3 sm:px-4" aria-label="Upgrade your listing">
           <div className="max-w-6xl mx-auto">
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-pink-500 p-[2px] shadow-lg shadow-orange-500/20">
-              <div className="bg-gradient-to-r from-amber-50 via-orange-50 to-pink-50 rounded-2xl p-4 sm:p-6">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-blue-500 p-[2px] shadow-lg shadow-orange-500/20">
+              <div className="bg-gradient-to-r from-amber-50 via-orange-50 to-blue-50 rounded-2xl p-4 sm:p-6">
                 <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
                   {/* Crown icon */}
                   <div className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-400/30">
@@ -610,7 +610,7 @@ export default function ReachRippleHomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="relative rounded-3xl overflow-hidden shadow-xl">
             {/* Gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500" />
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-blue-600 to-orange-500" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.15),transparent_50%)]" />
             
             {/* Floating orbs */}
@@ -654,7 +654,7 @@ export default function ReachRippleHomePage() {
               { icon: "✅", value: "500+", label: "Verified Profiles", sub: "Photo-ID checked before going live", color: "from-green-500 to-emerald-600" },
               { icon: "📍", value: "UK Wide", label: "Local-first search", sub: "Filter by postcode, city or region", color: "from-blue-500 to-indigo-600" },
               { icon: "⚡", value: "24/7", label: "Always available", sub: "Active listings updated round the clock", color: "from-amber-500 to-orange-600" },
-              { icon: "🔒", value: "100%", label: "Discreet & private", sub: "No third-party trackers, no shared data", color: "from-purple-500 to-pink-600" },
+              { icon: "🔒", value: "100%", label: "Discreet & private", sub: "No third-party trackers, no shared data", color: "from-purple-500 to-blue-600" },
             ].map((stat, index) => (
               <div 
                 key={stat.label} 
@@ -738,7 +738,7 @@ export default function ReachRippleHomePage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <img src="/logomark.png" alt="ReachRipple" className="w-8 h-8 rounded-lg object-cover" />
-              <span className="text-sm font-medium text-zinc-600">© 2026 <span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></span>
+              <span className="text-sm font-medium text-zinc-600">© 2026 <span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></span>
             </div>
             <div className="flex items-center gap-6">
               <Link to="/privacy" className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors">Privacy</Link>

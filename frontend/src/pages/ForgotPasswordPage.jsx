@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import api from "../api/client";
@@ -56,7 +56,7 @@ export default function ForgotPasswordPage() {
               </p>
               <Link
                 to="/login"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-pink-600 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-blue-600 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all"
               >
                 ← Back to login
               </Link>

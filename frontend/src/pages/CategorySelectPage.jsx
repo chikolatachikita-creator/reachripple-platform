@@ -1,4 +1,4 @@
-// src/pages/CategorySelectPage.jsx - Category selection before ad creation
+﻿// src/pages/CategorySelectPage.jsx - Category selection before ad creation
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, Link } from "react-router-dom";
@@ -81,7 +81,7 @@ export default function CategorySelectPage() {
                     {cat.description}
                   </p>
                   {cat.monetized ? (
-                    <span className="inline-block mt-2 text-xs font-medium px-2 py-0.5 bg-pink-500/20 text-pink-300 rounded-full">
+                    <span className="inline-block mt-2 text-xs font-medium px-2 py-0.5 bg-blue-500/20 text-blue-300 rounded-full">
                       Premium
                     </span>
                   ) : (

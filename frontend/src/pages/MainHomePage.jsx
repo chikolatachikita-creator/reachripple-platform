@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import ThemeToggle from "../components/ThemeToggle";
@@ -411,7 +411,7 @@ export default function MainHomePage() {
           <Link to="/" className="flex items-center gap-3 group">
             <img src="/logomark.png" alt="ReachRipple" className="w-10 h-10 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <div>
-              <div className="text-sm font-bold leading-tight"><span className="text-pink-500">Reach</span><span className="text-purple-600">Ripple</span></div>
+              <div className="text-sm font-bold leading-tight"><span className="text-blue-500">Reach</span><span className="text-purple-600">Ripple</span></div>
               <div className="text-xs text-zinc-400 dark:text-zinc-500 leading-tight">Premium Classifieds & Services</div>
             </div>
           </Link>
@@ -446,8 +446,8 @@ export default function MainHomePage() {
             <button
               onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
               className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl
-                         bg-gradient-to-r from-orange-500 to-pink-600 text-white font-semibold text-xs sm:text-sm
-                         shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap cursor-pointer"
+                         bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-xs sm:text-sm
+                         shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap cursor-pointer"
             >
               + Post Ad
             </button>
@@ -474,7 +474,7 @@ export default function MainHomePage() {
                     onClick={() => setActiveTab(activeTab === cat.id ? null : cat.id)}
                     className={`relative px-4 py-3 text-sm font-semibold whitespace-nowrap transition-all cursor-pointer
                       ${activeTab === cat.id
-                        ? "text-pink-600 dark:text-pink-400"
+                        ? "text-blue-600 dark:text-blue-400"
                         : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200"
                       }`}
                   >
@@ -483,7 +483,7 @@ export default function MainHomePage() {
                       <span>{cat.title}</span>
                     </span>
                     {activeTab === cat.id && (
-                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-t" />
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-t" />
                     )}
                   </button>
                 ))}
@@ -512,9 +512,9 @@ export default function MainHomePage() {
                         key={sub.slug}
                         to={sub.link || (isPersonals ? `/escorts` : `/category/${activeCat.id}`)}
                         onClick={() => setActiveTab(null)}
-                        className="text-sm text-zinc-700 dark:text-zinc-300 hover:text-pink-600 dark:hover:text-pink-400 transition-colors py-1 flex items-center gap-1.5 group"
+                        className="text-sm text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-1 flex items-center gap-1.5 group"
                       >
-                        <span className="text-zinc-300 dark:text-zinc-600 group-hover:text-pink-400 transition-colors">›</span>
+                        <span className="text-zinc-300 dark:text-zinc-600 group-hover:text-blue-400 transition-colors">›</span>
                         {sub.name}
                         {sub.popular && <span className="ml-auto text-[10px] font-bold text-orange-500 bg-orange-50 dark:bg-orange-900/30 px-1.5 py-0.5 rounded">HOT</span>}
                       </Link>
@@ -531,7 +531,7 @@ export default function MainHomePage() {
           <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900" />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-transparent to-zinc-900/50" />
           <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
 
           <div className="relative max-w-6xl mx-auto px-4 py-12 md:py-24">
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
@@ -544,7 +544,7 @@ export default function MainHomePage() {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
                   Get More Replies on Your Ads
                   <span className="block mt-1">
-                    <span className="bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">— Faster &amp; Safer</span>
+                    <span className="bg-gradient-to-r from-orange-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">— Faster &amp; Safer</span>
                   </span>
                 </h1>
 
@@ -556,7 +556,7 @@ export default function MainHomePage() {
                   <button
                     onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl
-                               bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold text-base
+                               bg-gradient-to-r from-orange-500 to-blue-600 text-white font-bold text-base
                                shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                   >
                     <span>⚡</span> Post Your Ad in 60 Seconds
@@ -631,7 +631,7 @@ export default function MainHomePage() {
                     </div>
                     <button
                       type="submit"
-                      className="w-full h-12 bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-orange-500/30
+                      className="w-full h-12 bg-gradient-to-r from-orange-500 to-blue-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-orange-500/30
                                  hover:shadow-orange-500/50 hover:scale-[1.01] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -666,12 +666,12 @@ export default function MainHomePage() {
 
         {/* ===== LIVE STATS ===== */}
         {liveStats.totalAds > 0 && (
-          <section className="bg-gradient-to-r from-orange-50 via-pink-50 to-purple-50 dark:from-orange-950/20 dark:via-pink-950/20 dark:to-purple-950/20 border-b border-zinc-100 dark:border-zinc-800">
+          <section className="bg-gradient-to-r from-orange-50 via-blue-50 to-purple-50 dark:from-orange-950/20 dark:via-blue-950/20 dark:to-purple-950/20 border-b border-zinc-100 dark:border-zinc-800">
             <div className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-sm">
               <div className="flex items-center gap-2">
                 <span className="text-lg">📊</span>
                 <span className="text-zinc-700 dark:text-zinc-300">
-                  <span className="font-black text-pink-600 dark:text-pink-400">{liveStats.totalAds.toLocaleString()}</span> live listings
+                  <span className="font-black text-blue-600 dark:text-blue-400">{liveStats.totalAds.toLocaleString()}</span> live listings
                 </span>
               </div>
               {liveStats.postedThisWeek > 0 && (
@@ -695,7 +695,7 @@ export default function MainHomePage() {
                   <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">Latest Listings</h2>
                   <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Fresh listings from across the platform</p>
                 </div>
-                <Link to="/search" className="hidden sm:inline-block text-sm font-semibold text-pink-600 dark:text-pink-400 hover:underline">View all →</Link>
+                <Link to="/search" className="hidden sm:inline-block text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline">View all →</Link>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                 {latestListings.map((ad) => {
@@ -721,7 +721,7 @@ export default function MainHomePage() {
                         <div className="flex items-center justify-between text-xs">
                           <span className="text-zinc-500 dark:text-zinc-400 truncate">{ad.location}</span>
                           {ad.price > 0 && (
-                            <span className="font-bold text-pink-600 dark:text-pink-400 ml-2 whitespace-nowrap">£{Number(ad.price).toLocaleString()}</span>
+                            <span className="font-bold text-blue-600 dark:text-blue-400 ml-2 whitespace-nowrap">£{Number(ad.price).toLocaleString()}</span>
                           )}
                         </div>
                       </div>
@@ -761,7 +761,7 @@ export default function MainHomePage() {
 
         {/* ===== OFFER SECTION ===== */}
         <section className="relative overflow-hidden py-12 sm:py-16">
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600" />
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-blue-500 to-purple-600" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.15),transparent_60%)]" />
           <div className="relative max-w-4xl mx-auto px-4 text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
@@ -809,7 +809,7 @@ export default function MainHomePage() {
                 { step: "3", icon: "💬", title: "Start getting replies", desc: "Real users reach out to you. Faster and safer than ever." },
               ].map((item) => (
                 <div key={item.step} className="relative bg-white dark:bg-zinc-800 rounded-2xl p-6 sm:p-8 border border-zinc-100 dark:border-zinc-700 shadow-sm text-center hover:shadow-md transition-shadow">
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center text-white text-sm font-black shadow-lg">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-blue-600 flex items-center justify-center text-white text-sm font-black shadow-lg">
                     {item.step}
                   </div>
                   <span className="text-4xl block mt-2 mb-4">{item.icon}</span>
@@ -867,7 +867,7 @@ export default function MainHomePage() {
             <button
               onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
               className="mt-8 inline-flex items-center gap-2 px-10 py-4 rounded-xl
-                         bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold text-base
+                         bg-gradient-to-r from-orange-500 to-blue-600 text-white font-bold text-base
                          shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
             >
               <span>🚀</span> Post Your Ad Now
@@ -946,7 +946,7 @@ export default function MainHomePage() {
                   features: ["5 active ads", "15 images per ad", "3 videos per ad", "1h bump cooldown", "10% boost discount", "Priority support"],
                   cta: "Go Prime",
                   highlighted: true,
-                  gradient: "from-orange-500 to-pink-600",
+                  gradient: "from-orange-500 to-blue-600",
                 },
                 {
                   name: "Spotlight",
@@ -963,12 +963,12 @@ export default function MainHomePage() {
                   key={plan.name}
                   className={`relative rounded-2xl p-6 border transition-all hover:shadow-lg ${
                     plan.highlighted
-                      ? "bg-gradient-to-br from-orange-50 to-pink-50 dark:from-orange-950/30 dark:to-pink-950/30 border-orange-200 dark:border-orange-800 shadow-md ring-2 ring-orange-400/30"
+                      ? "bg-gradient-to-br from-orange-50 to-blue-50 dark:from-orange-950/30 dark:to-blue-950/30 border-orange-200 dark:border-orange-800 shadow-md ring-2 ring-orange-400/30"
                       : "bg-white dark:bg-zinc-800/60 border-zinc-100 dark:border-zinc-700 shadow-sm"
                   }`}
                 >
                   {plan.highlighted && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-orange-500 to-pink-600 text-white text-xs font-bold shadow-lg">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-orange-500 to-blue-600 text-white text-xs font-bold shadow-lg">
                       Most Popular
                     </div>
                   )}
@@ -995,7 +995,7 @@ export default function MainHomePage() {
                     onClick={() => navigate(isLoggedIn ? '/dashboard' : '/signup')}
                     className={`w-full py-3 rounded-xl font-bold text-sm transition-all cursor-pointer ${
                       plan.highlighted
-                        ? "bg-gradient-to-r from-orange-500 to-pink-600 text-white shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98]"
+                        ? "bg-gradient-to-r from-orange-500 to-blue-600 text-white shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98]"
                         : "bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-600"
                     }`}
                   >

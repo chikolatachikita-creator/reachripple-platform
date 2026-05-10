@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import DOMPurify from 'dompurify';
@@ -368,24 +368,24 @@ const EscortProfilePage = () => {
       
       {/* Page-wide gradient overlay for smooth transition */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-rose-100/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-blue-100/20" />
         <div className="absolute bottom-0 left-0 right-0 h-[60vh] bg-gradient-to-t from-[#fdf8f8] via-[#f8f0f5] to-transparent" />
-        <div className="absolute bottom-0 left-0 w-1/2 h-[40vh] bg-gradient-to-tr from-pink-200/30 via-purple-200/20 to-transparent blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-1/2 h-[40vh] bg-gradient-to-tl from-blue-200/30 via-rose-200/20 to-transparent blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-1/2 h-[40vh] bg-gradient-to-tr from-blue-200/30 via-purple-200/20 to-transparent blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-1/2 h-[40vh] bg-gradient-to-tl from-blue-200/30 via-blue-200/20 to-transparent blur-3xl" />
       </div>
       
       {/* ===== GLASS NAVBAR ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 navbar-glass">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 font-bold text-lg text-white hover:text-rose-300 transition-colors group">
+          <Link to="/" className="flex items-center gap-2 font-bold text-lg text-white hover:text-blue-300 transition-colors group">
             <img src="/logomark.png" alt="ReachRipple" className="w-8 h-8 object-contain" /> 
-            <span className="font-black"><span className="text-pink-400">Reach</span><span className="bg-gradient-to-r from-purple-400 to-blue-900 bg-clip-text text-transparent">Ripple</span></span>
+            <span className="font-black"><span className="text-blue-400">Reach</span><span className="bg-gradient-to-r from-purple-400 to-blue-900 bg-clip-text text-transparent">Ripple</span></span>
           </Link>
           <div className="flex items-center gap-2">
             <button onClick={handleShare} className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-all hover:scale-105 active:scale-95 backdrop-blur-sm" title="Share">
               <Icons.Share className="w-5 h-5" />
             </button>
-            <button onClick={handleSave} className={`p-2.5 rounded-xl transition-all hover:scale-105 active:scale-95 backdrop-blur-sm ${saved ? 'bg-rose-500/20 text-rose-400' : 'bg-white/5 hover:bg-white/10 text-white/70 hover:text-rose-400'}`} title={saved ? 'Saved' : 'Save'}>
+            <button onClick={handleSave} className={`p-2.5 rounded-xl transition-all hover:scale-105 active:scale-95 backdrop-blur-sm ${saved ? 'bg-blue-500/20 text-blue-400' : 'bg-white/5 hover:bg-white/10 text-white/70 hover:text-blue-400'}`} title={saved ? 'Saved' : 'Save'}>
               <Icons.Heart filled={saved} className={`w-5 h-5 ${saved ? 'animate-heartPop' : ''}`} />
             </button>
           </div>
@@ -425,7 +425,7 @@ const EscortProfilePage = () => {
           <div className={`absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-[#0a0a0f]/30 transition-opacity duration-500 ${cinemaMode ? 'opacity-30' : 'opacity-100'}`} />
           <div className={`absolute inset-0 bg-gradient-to-r from-[#0a0a0f]/60 via-transparent to-[#0a0a0f]/40 transition-opacity duration-500 ${cinemaMode ? 'opacity-20' : 'opacity-100'}`} />
           {/* Animated glow */}
-          <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-40 bg-gradient-to-r from-rose-500/20 via-purple-500/20 to-rose-500/20 blur-3xl animate-pulse-slow transition-opacity duration-500 ${cinemaMode ? 'opacity-30' : 'opacity-100'}`} />
+          <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-40 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 blur-3xl animate-pulse-slow transition-opacity duration-500 ${cinemaMode ? 'opacity-30' : 'opacity-100'}`} />
           
           {/* Image Counter (shows in cinema mode) */}
           {profile.gallery?.length > 1 && (
@@ -510,13 +510,13 @@ const EscortProfilePage = () => {
                   )}
                   {profile.location && (
                     <span className="flex items-center gap-1.5 text-sm sm:text-base">
-                      <Icons.MapPin className="w-4 h-4 text-rose-400" />
+                      <Icons.MapPin className="w-4 h-4 text-blue-400" />
                       <span className="font-medium">{profile.location}</span>
                     </span>
                   )}
                   {isEscortCategory && profile.age && (
                     <span className="flex items-center gap-1.5 text-sm sm:text-base">
-                      <span className="w-1 h-1 rounded-full bg-rose-400" />
+                      <span className="w-1 h-1 rounded-full bg-blue-400" />
                       <span className="font-medium">{profile.age} years</span>
                     </span>
                   )}
@@ -541,7 +541,7 @@ const EscortProfilePage = () => {
                 <div className="stat-chip">
                   {isEscortCategory && profile.profileFields?.type === 'Agency'
                     ? <Icons.Building className="w-3 h-3 sm:w-4 sm:h-4 text-sky-400" />
-                    : <Icons.Shield className="w-3 h-3 sm:w-4 sm:h-4 text-pink-400" />}
+                    : <Icons.Shield className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" />}
                   <span className="text-white/90 text-xs sm:text-sm">{isEscortCategory ? (profile.profileFields?.type || 'Independent') : (profile.category || 'Listing')}</span>
                 </div>
 
@@ -556,7 +556,7 @@ const EscortProfilePage = () => {
               <div className={`animate-slideUp transition-all duration-500 ${cinemaMode ? 'translate-y-0' : ''}`} style={{ animationDelay: '0.2s' }}>
                 <div className="inline-flex items-baseline gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-4 rounded-xl sm:rounded-2xl glass-card">
                   <span className="text-white/60 text-xs sm:text-sm font-medium">From</span>
-                  <span className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-rose-300 via-purple-300 to-rose-300 bg-clip-text text-transparent">
+                  <span className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-blue-300 via-purple-300 to-blue-300 bg-clip-text text-transparent">
                     £{primaryPrice}
                   </span>
                   {isEscortCategory && (
@@ -611,11 +611,11 @@ const EscortProfilePage = () => {
               <div className="glass-card p-6 rounded-3xl space-y-4">
                 <div className="flex items-center gap-4">
                   <div className="relative">
-                    <div className="w-16 h-16 rounded-2xl overflow-hidden ring-2 ring-rose-500/50">
+                    <div className="w-16 h-16 rounded-2xl overflow-hidden ring-2 ring-blue-500/50">
                       {profile.gallery?.[0] ? (
                         <img src={profile.gallery[0].src} alt="" loading="lazy" className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-rose-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl">
+                        <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl">
                           {profile.title?.charAt(0)}
                         </div>
                       )}
@@ -679,7 +679,7 @@ const EscortProfilePage = () => {
             <h2 className="text-2xs font-semibold text-white/70 flex items-center gap-0.5">
               📸 Gallery
             </h2>
-            <button onClick={() => setLightboxOpen(true)} className="text-2xs text-rose-400/70 hover:text-rose-300 font-medium transition-colors">
+            <button onClick={() => setLightboxOpen(true)} className="text-2xs text-blue-400/70 hover:text-blue-300 font-medium transition-colors">
               View All ({profile.gallery?.length || 0})
             </button>
           </div>
@@ -702,7 +702,7 @@ const EscortProfilePage = () => {
                         <Icons.Play className="w-5 h-5 text-white ml-0.5" />
                       </div>
                     </div>
-                    <span className="absolute top-2 left-2 px-2 py-1 rounded-lg bg-rose-500/80 text-white text-xs font-bold">Video</span>
+                    <span className="absolute top-2 left-2 px-2 py-1 rounded-lg bg-blue-500/80 text-white text-xs font-bold">Video</span>
                   </>
                 ) : (
                   <>
@@ -732,7 +732,7 @@ const EscortProfilePage = () => {
               {/* ABOUT ME & SERVICES (merged) */}
               <section className="content-card animate-fadeIn">
                 <h2 className="section-title">
-                  <span className="section-icon from-rose-500 to-pink-600">✨</span>
+                  <span className="section-icon from-blue-500 to-blue-600">✨</span>
                   {isEscortCategory ? 'About Me' : 'Listing Details'}
                 </h2>
                 
@@ -785,7 +785,7 @@ const EscortProfilePage = () => {
                 {/* Incall / Outcall */}
                 {isEscortCategory && <div className="mt-6 pt-6 border-t border-gray-200">
                   <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
-                    <Icons.MapPin className="w-4 h-4 text-rose-500" />
+                    <Icons.MapPin className="w-4 h-4 text-blue-500" />
                     Service Locations
                   </h3>
                   <div className="grid grid-cols-2 gap-2 sm:gap-3">
@@ -887,17 +887,17 @@ const EscortProfilePage = () => {
                           <div className="flex items-center gap-3">
                             <span className="text-2xl">{info.icon}</span>
                             <div className="flex-1">
-                              <p className={`font-semibold ${info.featured ? 'text-rose-600' : 'text-gray-800'}`}>{info.label}</p>
+                              <p className={`font-semibold ${info.featured ? 'text-blue-600' : 'text-gray-800'}`}>{info.label}</p>
                               {info.tag && <p className="text-xs text-gray-400">{info.tag}</p>}
                             </div>
                             <div className="text-right">
-                              <p className={`text-xl font-black ${info.featured ? 'bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent' : 'text-gray-800'}`}>
+                              <p className={`text-xl font-black ${info.featured ? 'bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent' : 'text-gray-800'}`}>
                                 £{typeof value === 'number' ? value.toLocaleString() : value}
                               </p>
                             </div>
                           </div>
                           {info.featured && (
-                            <span className="absolute -top-1 -right-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-rose-500 to-purple-500 text-white text-[9px] font-bold shadow-lg">
+                            <span className="absolute -top-1 -right-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[9px] font-bold shadow-lg">
                               ⭐ Popular
                             </span>
                           )}
@@ -972,7 +972,7 @@ const EscortProfilePage = () => {
                 </div>
                 
                 {/* Still have questions? */}
-                <div className="mt-4 sm:mt-6 p-3 sm:p-4 rounded-xl bg-gradient-to-r from-purple-50 to-rose-50 border border-purple-100">
+                <div className="mt-4 sm:mt-6 p-3 sm:p-4 rounded-xl bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-100">
                   <p className="text-sm text-gray-700 flex items-center gap-2">
                     <Icons.HelpCircle className="w-4 h-4 text-purple-500 flex-shrink-0" />
                     <span><strong>Still have questions?</strong> Don't hesitate to reach out - I'm happy to chat!</span>
@@ -988,11 +988,11 @@ const EscortProfilePage = () => {
               <div className="sidebar-card sticky top-24">
                 <div className="flex items-center gap-4 mb-6 pb-6 border-b border-gray-200">
                   <div className="relative">
-                    <div className="w-16 h-16 rounded-2xl overflow-hidden ring-2 ring-rose-500/30">
+                    <div className="w-16 h-16 rounded-2xl overflow-hidden ring-2 ring-blue-500/30">
                       {profile.gallery?.[0] ? (
                         <img src={profile.gallery[0].src} alt="" loading="lazy" className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-rose-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl">
+                        <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl">
                           {profile.title?.charAt(0)}
                         </div>
                       )}
@@ -1020,7 +1020,7 @@ const EscortProfilePage = () => {
                     {isEscortCategory && <span className={`inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full text-xs font-semibold ${
                       profile.profileFields?.type === 'Agency'
                         ? 'bg-sky-100 text-sky-700 border border-sky-200'
-                        : 'bg-pink-100 text-pink-700 border border-pink-200'
+                        : 'bg-blue-100 text-blue-700 border border-blue-200'
                     }`}>
                       {profile.profileFields?.type === 'Agency' ? '🏢' : '👤'} {profile.profileFields?.type || 'Independent'}
                     </span>}
@@ -1038,7 +1038,7 @@ const EscortProfilePage = () => {
                   {profile.phone && (
                     <a
                       href={`sms:${profile.phone}?body=${encodeURIComponent(`Hi! I saw your profile on ReachRipple and I'm interested.`)}`}
-                      className="w-full flex items-center justify-center gap-2 py-4 text-base rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:brightness-110 transition-all"
+                      className="w-full flex items-center justify-center gap-2 py-4 text-base rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold hover:brightness-110 transition-all"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -1135,14 +1135,14 @@ const EscortProfilePage = () => {
                       )}
                     </div>
                     {(similar.price || similar.pricing?.price_1hour) && (
-                      <p className="mt-0 sm:mt-2 text-rose-300 font-bold text-2xs sm:text-base">
+                      <p className="mt-0 sm:mt-2 text-blue-300 font-bold text-2xs sm:text-base">
                         £{similar.price || similar.pricing?.price_1hour}
                       </p>
                     )}
                   </div>
                   
                   {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-rose-600/40 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-600/40 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Link>
               ))}
             </div>
@@ -1151,7 +1151,7 @@ const EscortProfilePage = () => {
             <div className="text-center mt-2 sm:mt-8">
               <Link 
                 to={isEscortCategory ? `/escort/${profile.location?.toLowerCase().replace(/\s+/g, '-') || 'gb'}` : `/category/${categorySlug || 'buy-sell'}`}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-rose-500 to-purple-600 text-white font-bold hover:shadow-lg hover:shadow-rose-500/25 transition-all hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:-translate-y-0.5"
               >
                 {isEscortCategory ? `View All in ${profile.location}` : `View More ${profile.category || 'Listings'}`}
                 <Icons.ChevronRight className="w-5 h-5" />
@@ -1167,13 +1167,13 @@ const EscortProfilePage = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
             <div className="flex items-center gap-2">
               <img src="/logomark.png" alt="ReachRipple" className="w-8 h-8 object-contain" />
-              <span className="font-bold"><span className="text-pink-500">Reach</span><span className="bg-gradient-to-r from-purple-500 to-blue-900 bg-clip-text text-transparent">Ripple</span></span>
+              <span className="font-bold"><span className="text-blue-500">Reach</span><span className="bg-gradient-to-r from-purple-500 to-blue-900 bg-clip-text text-transparent">Ripple</span></span>
             </div>
             <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-500">
-              <Link to="/help" className="hover:text-rose-500 transition-colors">Help</Link>
-              <Link to="/privacy" className="hover:text-rose-500 transition-colors">Privacy</Link>
-              <Link to="/terms" className="hover:text-rose-500 transition-colors">Terms</Link>
-              <Link to="/contact" className="hover:text-rose-500 transition-colors">Contact</Link>
+              <Link to="/help" className="hover:text-blue-500 transition-colors">Help</Link>
+              <Link to="/privacy" className="hover:text-blue-500 transition-colors">Privacy</Link>
+              <Link to="/terms" className="hover:text-blue-500 transition-colors">Terms</Link>
+              <Link to="/contact" className="hover:text-blue-500 transition-colors">Contact</Link>
             </div>
             <p className="text-xs text-gray-400">
               © {new Date().getFullYear()} All rights reserved
@@ -1192,7 +1192,7 @@ const EscortProfilePage = () => {
             <button onClick={() => openSafetyModal(profile.phone, id, handleReport)} className="flex-1 btn-whatsapp flex items-center justify-center gap-1.5 sm:gap-2 py-3 sm:py-4 text-sm sm:text-base cursor-pointer">
               <Icons.Message className="w-4 h-4 sm:w-5 sm:h-5" /> WhatsApp
             </button>
-            <button onClick={handleSave} className={`btn-ghost px-4 sm:px-5 py-3 sm:py-4 ${saved ? 'text-rose-400 bg-rose-500/20' : ''}`}>
+            <button onClick={handleSave} className={`btn-ghost px-4 sm:px-5 py-3 sm:py-4 ${saved ? 'text-blue-400 bg-blue-500/20' : ''}`}>
               <Icons.Heart filled={saved} className={`w-5 h-5 sm:w-6 sm:h-6 ${saved ? 'animate-heartPop' : ''}`} />
             </button>
           </div>

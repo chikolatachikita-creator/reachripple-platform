@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import api from "../api/client";
@@ -36,7 +36,7 @@ const DailyChart = ({ data }) => {
             className="group relative flex-1 min-w-[6px]"
           >
             <div
-              className="w-full rounded-t bg-gradient-to-t from-pink-500 to-purple-500 transition-all duration-300 hover:opacity-80"
+              className="w-full rounded-t bg-gradient-to-t from-blue-500 to-purple-500 transition-all duration-300 hover:opacity-80"
               style={{ height: `${Math.max(pct, 4)}%` }}
             />
             {/* Tooltip */}
@@ -136,7 +136,7 @@ export default function UserAnalyticsPage() {
           {/* Stats Row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <StatCard label="Total Views" value={totalViews?.toLocaleString()} />
-            <StatCard label="Last 30 Days" value={views30d?.toLocaleString()} accent="text-pink-600" />
+            <StatCard label="Last 30 Days" value={views30d?.toLocaleString()} accent="text-blue-600" />
             <StatCard label="Last 7 Days" value={views7d?.toLocaleString()} accent="text-purple-600" />
             <StatCard
               label="Active Ads"
@@ -177,7 +177,7 @@ export default function UserAnalyticsPage() {
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-zinc-800 truncate">{ad.title}</p>
                       </div>
-                      <span className="text-sm font-semibold text-pink-600">{ad.views}</span>
+                      <span className="text-sm font-semibold text-blue-600">{ad.views}</span>
                     </li>
                   ))}
                 </ul>

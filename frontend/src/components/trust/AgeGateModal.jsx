@@ -1,4 +1,4 @@
-// src/components/trust/AgeGateModal.jsx
+﻿// src/components/trust/AgeGateModal.jsx
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -67,7 +67,7 @@ export default function AgeGateModal() {
     >
       <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 text-center">
         {/* Logo */}
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 via-purple-600 to-blue-900 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-pink-500/25">
+        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 via-purple-600 to-blue-900 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-blue-500/25">
           <span className="text-white font-black text-xl">RR</span>
         </div>
 
@@ -93,7 +93,7 @@ export default function AgeGateModal() {
         <div className="space-y-3">
           <button
             onClick={handleConfirm}
-            className="w-full py-4 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold text-sm shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-sm shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
           >
             I am 18 or older — Enter
           </button>

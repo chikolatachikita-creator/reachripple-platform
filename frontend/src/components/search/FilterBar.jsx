@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 
 /**
  * FilterBar — mobile-only horizontal filter controls.
@@ -10,12 +10,12 @@ const FilterBar = ({ filters, onFilterChange, onOpenMore, activeCount, locationL
       {/* Filter toggle */}
       <button
         onClick={onOpenMore}
-        className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-full border border-zinc-300 hover:border-pink-400 hover:bg-pink-50 transition-all shrink-0"
+        className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-full border border-zinc-300 hover:border-blue-400 hover:bg-blue-50 transition-all shrink-0"
       >
         <span>⚡</span>
         <span>Filters</span>
         {activeCount > 0 && (
-          <span className="ml-1 min-w-[20px] h-5 flex items-center justify-center text-[10px] font-bold bg-pink-500 text-white rounded-full px-1.5">
+          <span className="ml-1 min-w-[20px] h-5 flex items-center justify-center text-[10px] font-bold bg-blue-500 text-white rounded-full px-1.5">
             {activeCount}
           </span>
         )}
@@ -38,8 +38,8 @@ const FilterBar = ({ filters, onFilterChange, onOpenMore, activeCount, locationL
             onClick={() => onFilterChange({ ...filters, [key]: !active })}
             className={`px-3 py-1.5 text-xs font-medium rounded-full border shrink-0 transition-all ${
               active
-                ? "bg-pink-500 text-white border-pink-500"
-                : "bg-white text-zinc-600 border-zinc-300 hover:border-pink-400"
+                ? "bg-blue-500 text-white border-blue-500"
+                : "bg-white text-zinc-600 border-zinc-300 hover:border-blue-400"
             }`}
           >
             {label}

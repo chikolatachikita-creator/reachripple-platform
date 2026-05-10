@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Crown,
@@ -47,7 +47,7 @@ const TIER_STYLES = {
     ring: "ring-blue-300",
   },
   prime: {
-    gradient: "from-purple-50 to-fuchsia-100",
+    gradient: "from-purple-50 to-blue-100",
     border: "border-purple-400",
     badge: "bg-purple-100 text-purple-700",
     icon: Zap,
@@ -79,12 +79,12 @@ const TIER_STYLES = {
     ring: "ring-violet-400",
   },
   agency_elite: {
-    gradient: "from-rose-50 to-pink-100",
-    border: "border-rose-400",
-    badge: "bg-rose-100 text-rose-700",
+    gradient: "from-blue-50 to-blue-100",
+    border: "border-blue-400",
+    badge: "bg-blue-100 text-blue-700",
     icon: Crown,
-    accent: "text-rose-600",
-    ring: "ring-rose-400",
+    accent: "text-blue-600",
+    ring: "ring-blue-400",
   },
 };
 

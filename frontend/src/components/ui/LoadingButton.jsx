@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 /**
  * LoadingButton - Button component with loading state
@@ -49,11 +49,11 @@ const Spinner = ({ size = 'md', className = '' }) => {
 // Button variants styles
 const variants = {
   primary: `
-    bg-gradient-to-r from-pink-500 to-purple-600 
+    bg-gradient-to-r from-blue-500 to-purple-600 
     text-white 
-    hover:from-pink-600 hover:to-purple-700
-    focus:ring-2 focus:ring-pink-500 focus:ring-offset-2
-    disabled:from-pink-300 disabled:to-purple-400 disabled:cursor-not-allowed
+    hover:from-blue-600 hover:to-purple-700
+    focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+    disabled:from-blue-300 disabled:to-purple-400 disabled:cursor-not-allowed
   `,
   secondary: `
     bg-zinc-100 dark:bg-zinc-800
@@ -70,11 +70,11 @@ const variants = {
     disabled:bg-red-300 disabled:cursor-not-allowed
   `,
   outline: `
-    border-2 border-pink-500 
-    text-pink-500 dark:text-pink-400
-    hover:bg-pink-50 dark:hover:bg-pink-500/10
-    focus:ring-2 focus:ring-pink-500 focus:ring-offset-2
-    disabled:border-pink-300 disabled:text-pink-300 disabled:cursor-not-allowed
+    border-2 border-blue-500 
+    text-blue-500 dark:text-blue-400
+    hover:bg-blue-50 dark:hover:bg-blue-500/10
+    focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+    disabled:border-blue-300 disabled:text-blue-300 disabled:cursor-not-allowed
   `,
   ghost: `
     text-zinc-700 dark:text-zinc-300

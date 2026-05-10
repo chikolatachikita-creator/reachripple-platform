@@ -246,7 +246,7 @@ export default function Navbar({ showSaved = true }) {
                     <Link to="/signup" onClick={() => setMobileMenuOpen(false)} className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:brightness-110 transition-all">
                       Sign Up
                     </Link>
-                    <button onClick={() => { setMobileMenuOpen(false); navigate(isLoggedIn ? '/create-ad' : '/login'); }} className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 text-white hover:brightness-110 transition-all cursor-pointer">
+                    <button onClick={() => { setMobileMenuOpen(false); navigate(isLoggedIn ? '/create-ad' : '/login'); }} className="block w-full text-center px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-600 via-blue-700 to-blue-900 text-white hover:brightness-110 transition-all cursor-pointer">
                       Post an Ad
                     </button>
                   </div>

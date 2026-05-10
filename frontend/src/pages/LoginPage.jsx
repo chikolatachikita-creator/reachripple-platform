@@ -112,13 +112,13 @@ export default function LoginPage() {
         
         <div className="relative z-10 flex flex-col justify-center px-12 xl:px-20">
           <Link to="/" className="flex items-center gap-3 mb-12">
-            <img src="/logomark.png" alt="ReachRipple" className="w-14 h-14 rounded-xl object-cover shadow-lg shadow-blue-500/30 ring-1 ring-white/10" />
+            <img src="/logomark.png" alt="ReachRipple" className="w-14 h-14 rounded-xl object-cover shadow-lg shadow-blue-600/30 ring-1 ring-white/10" />
             <span className="text-white font-bold text-xl"><span className="text-blue-400">Reach</span><span className="text-purple-400">Ripple</span></span>
           </Link>
           
           <h2 className="text-4xl xl:text-5xl font-bold text-white leading-tight">
             Welcome back to
-            <span className="block bg-gradient-to-r from-orange-400 to-blue-500 bg-clip-text text-transparent mt-1">
+            <span className="block bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent mt-1">
               your account
             </span>
           </h2>
@@ -397,7 +397,7 @@ export default function LoginPage() {
 
             <Link
               to="/signup"
-              className="mt-3 w-full h-11 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all"
+              className="mt-3 w-full h-11 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 hover:scale-[1.01] active:scale-[0.99] transition-all"
             >
               Sign up with email — 30 seconds
             </Link>

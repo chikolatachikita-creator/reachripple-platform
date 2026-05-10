@@ -1004,7 +1004,7 @@ function CreateAdPageLuxury() {
                   {images.length > 0 && (
                     <div className="grid grid-cols-3 md:grid-cols-4 gap-3 mb-4">
                       {images.map((img, idx) => (
-                        <div key={idx} className={`relative group rounded-lg overflow-hidden border-2 ${idx === 0 ? "border-blue-500 shadow-lg shadow-blue-500/30" : "border-transparent"}`}>
+                        <div key={idx} className={`relative group rounded-lg overflow-hidden border-2 ${idx === 0 ? "border-blue-500 shadow-lg shadow-blue-600/30" : "border-transparent"}`}>
                           <img
                             src={img.preview}
                             alt={`Upload ${idx + 1}`}

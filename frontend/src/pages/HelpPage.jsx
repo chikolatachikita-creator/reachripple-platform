@@ -123,7 +123,7 @@ export default function HelpPage() {
       <Navbar />
       
       {/* Hero Search Section */}
-      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 pt-20 pb-24 px-4 text-center text-white relative overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 pt-20 pb-24 px-4 text-center text-white relative overflow-hidden">
         {/* Abstract shapes/decoration */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
           <div className="absolute -top-10 -left-10 w-64 h-64 rounded-full bg-white blur-3xl"></div>

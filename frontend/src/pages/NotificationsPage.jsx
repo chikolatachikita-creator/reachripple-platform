@@ -180,7 +180,7 @@ export default function NotificationsPage() {
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                   <Link
                     to="/dashboard"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-violet-700 text-white text-sm font-bold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-violet-700 text-white text-sm font-bold shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
                   >
                     Back to Dashboard
                   </Link>

@@ -114,7 +114,7 @@ export default function UserDashboardPage() {
               to="/create-ad" 
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold
                          bg-gradient-to-r from-blue-500 to-purple-600 text-white 
-                         shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 
+                         shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 
                          hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -141,7 +141,7 @@ export default function UserDashboardPage() {
         {/* Welcome Section */}
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/25">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-600/25">
               {user?.name?.[0]?.toUpperCase() || "U"}
             </div>
             <div>
@@ -320,7 +320,7 @@ export default function UserDashboardPage() {
               to="/create-ad"
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold
                          bg-gradient-to-r from-blue-500 to-purple-600 text-white 
-                         shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 
+                         shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 
                          hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -343,7 +343,7 @@ export default function UserDashboardPage() {
                 to="/create-ad" 
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm
                            bg-gradient-to-r from-blue-500 to-purple-600 text-white 
-                           shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 
+                           shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 
                            hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
                 Post Your First Ad

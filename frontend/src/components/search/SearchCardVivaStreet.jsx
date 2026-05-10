@@ -480,7 +480,7 @@ export default function SearchCardVivaStreet({
                 <button
                     onClick={runSearch}
                     disabled={loading}
-                    className={`${compact ? 'w-auto' : 'w-full md:w-auto'} ${inputHeight} ${compact ? 'px-4 md:px-6' : 'px-8'} ${inputRadius} bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold ${fontSize} shadow-lg shadow-blue-500/25 active:scale-95 transition-all flex items-center justify-center gap-1.5 md:gap-2`}
+                    className={`${compact ? 'w-auto' : 'w-full md:w-auto'} ${inputHeight} ${compact ? 'px-4 md:px-6' : 'px-8'} ${inputRadius} bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold ${fontSize} shadow-lg shadow-blue-600/25 active:scale-95 transition-all flex items-center justify-center gap-1.5 md:gap-2`}
                 >
                     <Search size={iconSize} strokeWidth={2.5} />
                     {!compact && <span>Search</span>}

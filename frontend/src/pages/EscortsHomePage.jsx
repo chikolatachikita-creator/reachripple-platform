@@ -229,7 +229,7 @@ export default function ReachRippleHomePage() {
           </h1>
           
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mt-2 drop-shadow-lg">
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-400 bg-clip-text text-transparent">
               Desired Fantasy Companion
             </span>
           </h2>
@@ -247,8 +247,8 @@ export default function ReachRippleHomePage() {
             <Link
               to="/escort/gb"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-xl text-white font-bold text-base
-                         bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg shadow-blue-500/40
-                         hover:shadow-blue-500/60 hover:scale-[1.05] active:scale-[0.97] transition-all"
+                         bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg shadow-blue-600/40
+                         hover:shadow-blue-600/60 hover:scale-[1.05] active:scale-[0.97] transition-all"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -295,7 +295,7 @@ export default function ReachRippleHomePage() {
             <p className="text-sm text-blue-500 dark:text-blue-400 font-medium">Early listings get featured free ⭐</p>
             <button
               onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
-              className="mt-6 inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-[1.03] active:scale-[0.97] transition-all font-bold cursor-pointer"
+              className="mt-6 inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 hover:scale-[1.03] active:scale-[0.97] transition-all font-bold cursor-pointer"
             >
               <span className="text-lg">+</span> Post a Listing
             </button>

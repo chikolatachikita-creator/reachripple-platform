@@ -173,7 +173,7 @@ export default function SavedProfilesPage() {
         {/* Header section */}
         <div className="mb-8 flex items-end justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-600/20">
               <span className="text-white text-xl">⭐</span>
             </div>
             <div>
@@ -215,7 +215,7 @@ export default function SavedProfilesPage() {
               to="/search"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-sm
                          bg-gradient-to-r from-blue-500 to-purple-600 text-white 
-                         shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 
+                         shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 
                          hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

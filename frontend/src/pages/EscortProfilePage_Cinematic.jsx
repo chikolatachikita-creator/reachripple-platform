@@ -556,7 +556,7 @@ const EscortProfilePage = () => {
               <div className={`animate-slideUp transition-all duration-500 ${cinemaMode ? 'translate-y-0' : ''}`} style={{ animationDelay: '0.2s' }}>
                 <div className="inline-flex items-baseline gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-4 rounded-xl sm:rounded-2xl glass-card">
                   <span className="text-white/60 text-xs sm:text-sm font-medium">From</span>
-                  <span className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-blue-300 via-purple-300 to-blue-300 bg-clip-text text-transparent">
+                  <span className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-amber-200 via-amber-100 to-amber-200 bg-clip-text text-transparent">
                     £{primaryPrice}
                   </span>
                   {isEscortCategory && (
@@ -1151,7 +1151,7 @@ const EscortProfilePage = () => {
             <div className="text-center mt-2 sm:mt-8">
               <Link 
                 to={isEscortCategory ? `/escort/${profile.location?.toLowerCase().replace(/\s+/g, '-') || 'gb'}` : `/category/${categorySlug || 'buy-sell'}`}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold hover:shadow-lg hover:shadow-blue-600/25 transition-all hover:-translate-y-0.5"
               >
                 {isEscortCategory ? `View All in ${profile.location}` : `View More ${profile.category || 'Listings'}`}
                 <Icons.ChevronRight className="w-5 h-5" />

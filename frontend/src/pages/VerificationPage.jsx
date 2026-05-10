@@ -126,7 +126,7 @@ export default function VerificationPage() {
           </p>
           <Link
             to="/dashboard"
-            className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-blue-600 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all"
+            className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all"
           >
             ← Back to Dashboard
           </Link>
@@ -207,7 +207,7 @@ export default function VerificationPage() {
           <button
             onClick={handleSubmit}
             disabled={!selectedFile || submitting}
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-orange-500 to-blue-600 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {submitting ? (
               <>

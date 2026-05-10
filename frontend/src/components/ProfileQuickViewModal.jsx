@@ -203,8 +203,8 @@ export default function ProfileQuickViewModal({ profile, isOpen, onClose }) {
                       flex-[2] py-3.5 px-6 rounded-xl 
                       bg-gradient-to-r from-blue-600 to-purple-600 
                       text-white font-bold 
-                      shadow-lg shadow-blue-500/20 
-                      hover:shadow-blue-500/40 hover:scale-[1.02] hover:-translate-y-0.5
+                      shadow-lg shadow-blue-600/20 
+                      hover:shadow-blue-600/40 hover:scale-[1.02] hover:-translate-y-0.5
                       active:scale-[0.98] 
                       transition-all duration-200
                       flex items-center justify-center gap-2

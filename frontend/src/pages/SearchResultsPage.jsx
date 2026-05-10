@@ -1041,7 +1041,7 @@ export default function SearchResultsPage() {
           type="button"
           onClick={() => handleOpenFilters("all")}
           className="flex-1 rounded-xl px-3 py-3 text-center font-bold text-sm relative
-                     bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/25
+                     bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-600/25
                      active:scale-95 transition-all flex items-center justify-center gap-1.5"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -309,7 +309,7 @@ export default function FilterBottomSheet({
               onApply();
               onClose();
             }}
-            className="flex-1 h-12 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 shadow-md hover:brightness-110 transition-all"
+            className="flex-1 h-12 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 via-blue-700 to-blue-900 shadow-md hover:brightness-110 transition-all"
           >
             Apply Filters
           </button>

@@ -271,7 +271,7 @@ export default function SignupPage() {
           <button
             type="button"
             onClick={() => navigate("/")}
-            className="mt-3 w-full h-12 rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 text-white font-semibold hover:brightness-110 transition shadow-md"
+            className="mt-3 w-full h-12 rounded-xl bg-gradient-to-r from-blue-600 via-blue-700 to-blue-900 text-white font-semibold hover:brightness-110 transition shadow-md"
           >
             Continue to homepage
           </button>
@@ -644,13 +644,13 @@ export default function SignupPage() {
         
         <div className="relative z-10 flex flex-col justify-center px-12 xl:px-20">
           <Link to="/" className="flex items-center gap-3 mb-12">
-            <img src="/logomark.png" alt="ReachRipple" className="w-14 h-14 rounded-xl object-cover shadow-lg shadow-blue-500/30 ring-1 ring-white/10" />
+            <img src="/logomark.png" alt="ReachRipple" className="w-14 h-14 rounded-xl object-cover shadow-lg shadow-blue-600/30 ring-1 ring-white/10" />
             <span className="text-white font-bold text-xl"><span className="text-blue-400">Reach</span><span className="text-purple-400">Ripple</span></span>
           </Link>
           
           <h2 className="text-4xl xl:text-5xl font-bold text-white leading-tight">
             Join thousands of
-            <span className="block bg-gradient-to-r from-orange-400 to-blue-500 bg-clip-text text-transparent mt-1">
+            <span className="block bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent mt-1">
               active users
             </span>
           </h2>

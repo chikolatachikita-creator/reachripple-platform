@@ -56,7 +56,7 @@ export default function ForgotPasswordPage() {
               </p>
               <Link
                 to="/login"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-blue-600 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all"
               >
                 ← Back to login
               </Link>

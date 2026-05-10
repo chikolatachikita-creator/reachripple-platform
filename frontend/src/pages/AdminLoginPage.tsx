@@ -85,7 +85,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-blue-700 text-white text-sm font-semibold py-2.5 shadow-md hover:shadow-lg hover:scale-[1.01] transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full rounded-xl bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white text-sm font-semibold py-2.5 shadow-md hover:shadow-lg hover:scale-[1.01] transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? "Logging in..." : "Log in as Admin"}
           </button>

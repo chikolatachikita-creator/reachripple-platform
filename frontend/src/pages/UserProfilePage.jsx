@@ -240,7 +240,7 @@ export default function UserProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-blue-100 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
           <p className="text-gray-500 mt-4">Loading...</p>
@@ -250,7 +250,7 @@ export default function UserProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-blue-100">
       <Helmet><title>My Profile | ReachRipple</title></Helmet>
       {/* Navigation */}
       <nav className="w-full bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
@@ -448,7 +448,7 @@ export default function UserProfilePage() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   {saving ? "Saving..." : "Save Changes"}
                 </button>
@@ -508,7 +508,7 @@ export default function UserProfilePage() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   {saving ? "Changing..." : "Change Password"}
                 </button>
@@ -673,7 +673,7 @@ export default function UserProfilePage() {
                 <button
                   type="submit"
                   disabled={submittingVerification || !verificationFile}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-900 text-white font-semibold rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   {submittingVerification ? "Submitting..." : "Submit for Verification"}
                 </button>

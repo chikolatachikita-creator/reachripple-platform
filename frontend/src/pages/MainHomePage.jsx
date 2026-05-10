@@ -544,7 +544,7 @@ export default function MainHomePage() {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
                   Get More Replies on Your Ads
                   <span className="block mt-1">
-                    <span className="bg-gradient-to-r from-orange-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">— Faster &amp; Safer</span>
+                    <span className="bg-gradient-to-r from-amber-300 via-orange-300 to-amber-200 bg-clip-text text-transparent">— Faster &amp; Safer</span>
                   </span>
                 </h1>
 
@@ -556,8 +556,8 @@ export default function MainHomePage() {
                   <button
                     onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl
-                               bg-gradient-to-r from-orange-500 to-blue-600 text-white font-bold text-base
-                               shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                               bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-base
+                               shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                   >
                     <span>⚡</span> Post Your Ad in 60 Seconds
                   </button>
@@ -631,7 +631,7 @@ export default function MainHomePage() {
                     </div>
                     <button
                       type="submit"
-                      className="w-full h-12 bg-gradient-to-r from-orange-500 to-blue-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-orange-500/30
+                      className="w-full h-12 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-orange-500/30
                                  hover:shadow-orange-500/50 hover:scale-[1.01] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -666,7 +666,7 @@ export default function MainHomePage() {
 
         {/* ===== LIVE STATS ===== */}
         {liveStats.totalAds > 0 && (
-          <section className="bg-gradient-to-r from-orange-50 via-blue-50 to-purple-50 dark:from-orange-950/20 dark:via-blue-950/20 dark:to-purple-950/20 border-b border-zinc-100 dark:border-zinc-800">
+          <section className="bg-gradient-to-r from-amber-50 via-blue-50 to-blue-100 dark:from-orange-950/20 dark:via-blue-950/20 dark:to-purple-950/20 border-b border-zinc-100 dark:border-zinc-800">
             <div className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-sm">
               <div className="flex items-center gap-2">
                 <span className="text-lg">📊</span>
@@ -761,7 +761,7 @@ export default function MainHomePage() {
 
         {/* ===== OFFER SECTION ===== */}
         <section className="relative overflow-hidden py-12 sm:py-16">
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-blue-500 to-purple-600" />
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-500 via-orange-500 to-orange-600" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.15),transparent_60%)]" />
           <div className="relative max-w-4xl mx-auto px-4 text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
@@ -809,7 +809,7 @@ export default function MainHomePage() {
                 { step: "3", icon: "💬", title: "Start getting replies", desc: "Real users reach out to you. Faster and safer than ever." },
               ].map((item) => (
                 <div key={item.step} className="relative bg-white dark:bg-zinc-800 rounded-2xl p-6 sm:p-8 border border-zinc-100 dark:border-zinc-700 shadow-sm text-center hover:shadow-md transition-shadow">
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-blue-600 flex items-center justify-center text-white text-sm font-black shadow-lg">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white text-sm font-black shadow-lg">
                     {item.step}
                   </div>
                   <span className="text-4xl block mt-2 mb-4">{item.icon}</span>
@@ -867,8 +867,8 @@ export default function MainHomePage() {
             <button
               onClick={() => navigate(isLoggedIn ? '/create-ad' : '/login')}
               className="mt-8 inline-flex items-center gap-2 px-10 py-4 rounded-xl
-                         bg-gradient-to-r from-orange-500 to-blue-600 text-white font-bold text-base
-                         shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                         bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-base
+                         shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
             >
               <span>🚀</span> Post Your Ad Now
             </button>
@@ -946,7 +946,7 @@ export default function MainHomePage() {
                   features: ["5 active ads", "15 images per ad", "3 videos per ad", "1h bump cooldown", "10% boost discount", "Priority support"],
                   cta: "Go Prime",
                   highlighted: true,
-                  gradient: "from-orange-500 to-blue-600",
+                  gradient: "from-amber-500 to-orange-500",
                 },
                 {
                   name: "Spotlight",
@@ -963,12 +963,12 @@ export default function MainHomePage() {
                   key={plan.name}
                   className={`relative rounded-2xl p-6 border transition-all hover:shadow-lg ${
                     plan.highlighted
-                      ? "bg-gradient-to-br from-orange-50 to-blue-50 dark:from-orange-950/30 dark:to-blue-950/30 border-orange-200 dark:border-orange-800 shadow-md ring-2 ring-orange-400/30"
+                      ? "bg-gradient-to-br from-amber-50 to-orange-50 dark:from-orange-950/30 dark:to-blue-950/30 border-orange-200 dark:border-orange-800 shadow-md ring-2 ring-orange-400/30"
                       : "bg-white dark:bg-zinc-800/60 border-zinc-100 dark:border-zinc-700 shadow-sm"
                   }`}
                 >
                   {plan.highlighted && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-orange-500 to-blue-600 text-white text-xs font-bold shadow-lg">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold shadow-lg">
                       Most Popular
                     </div>
                   )}
@@ -995,7 +995,7 @@ export default function MainHomePage() {
                     onClick={() => navigate(isLoggedIn ? '/dashboard' : '/signup')}
                     className={`w-full py-3 rounded-xl font-bold text-sm transition-all cursor-pointer ${
                       plan.highlighted
-                        ? "bg-gradient-to-r from-orange-500 to-blue-600 text-white shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98]"
+                        ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98]"
                         : "bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-600"
                     }`}
                   >

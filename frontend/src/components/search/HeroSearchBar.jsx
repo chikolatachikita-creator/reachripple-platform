@@ -259,7 +259,7 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
       <div className="w-full relative z-30">
         
         {/* Main Bar */}
-        <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-3xl p-3 shadow-2xl border border-white/50 dark:border-zinc-700/50 transition-all duration-300 hover:shadow-blue-500/5">
+        <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-3xl p-3 shadow-2xl border border-white/50 dark:border-zinc-700/50 transition-all duration-300 hover:shadow-blue-600/5">
             
             <div className="flex flex-col lg:flex-row gap-3">
                 
@@ -346,7 +346,7 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
                 {/* Search Button */}
                 <button
                     onClick={handleSearch}
-                    className="h-14 px-6 sm:px-8 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold text-base sm:text-lg shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 active:scale-95 transition-all flex items-center justify-center gap-2 min-w-0 sm:min-w-[140px] w-full lg:w-auto"
+                    className="h-14 px-6 sm:px-8 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold text-base sm:text-lg shadow-lg shadow-blue-600/30 hover:shadow-blue-600/40 active:scale-95 transition-all flex items-center justify-center gap-2 min-w-0 sm:min-w-[140px] w-full lg:w-auto"
                 >
                     <Search size={20} strokeWidth={2.5} />
                     Search

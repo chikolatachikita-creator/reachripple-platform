@@ -181,8 +181,8 @@ export default function FeaturedProfilesCarousel({ profiles = [], autoPlayInterv
                   px-6 py-2 rounded-lg 
                   bg-gradient-to-r from-blue-500 to-purple-600 
                   text-white font-semibold 
-                  shadow-lg shadow-blue-500/20
-                  hover:shadow-blue-500/40 hover:scale-105 
+                  shadow-lg shadow-blue-600/20
+                  hover:shadow-blue-600/40 hover:scale-105 
                   transition-all duration-300 active:scale-95
                 "
               >

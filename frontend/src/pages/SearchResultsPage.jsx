@@ -567,7 +567,7 @@ export default function SearchResultsPage() {
   // Image is picked from a rotating pool in /images/escorts-hero/ so visitors see
   // a fresh look on each page load. Drop more JPGs into that folder + bump
   // HERO_POOL_SIZE to grow the rotation.
-  const HERO_POOL_SIZE = 5; // number of files hero-01.jpg ... hero-NN.jpg in /images/escorts-hero/
+  const HERO_POOL_SIZE = 6; // number of files hero-01.jpg ... hero-NN.jpg in /images/escorts-hero/
   const locationHero = useMemo(() => {
     // Build a friendly title from the available location signals
     let title = "Escorts near you";
@@ -670,11 +670,22 @@ export default function SearchResultsPage() {
             object-position keeps both the skyline and the subjects in frame.
           */}
           <div className="relative w-full h-[220px] sm:h-[260px] md:h-[320px] lg:h-[380px] xl:h-[420px]">
+            {/* Blurred backdrop fill — same image, scaled up + blurred — so the
+                hero never shows hard letterbox bars when the foreground image
+                is letterboxed via object-contain. */}
+            <img
+              src={locationHero.image}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-70"
+              loading="eager"
+              decoding="async"
+            />
+            {/* Foreground: full image, no cropping, original aspect preserved. */}
             <img
               src={locationHero.image}
               alt={locationHero.title}
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectPosition: "center 20%" }}
+              className="absolute inset-0 w-full h-full object-contain"
               loading="eager"
               decoding="async"
             />

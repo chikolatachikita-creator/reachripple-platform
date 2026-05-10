@@ -14,7 +14,7 @@ import ImageEditorModal from "../components/ImageEditorModal";
 function CreateAdPageLuxury() {
   const navigate = useNavigate();
   const { showToast } = useToastContext();
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
   const [error] = useState("");
@@ -488,7 +488,7 @@ function CreateAdPageLuxury() {
             </Link>
             <div>
               <h1 className="text-xl font-bold text-white">Create Your Profile</h1>
-              <p className="text-sm text-pink-300">Step {currentStep === 0 ? "Selection" : currentStep} of 4</p>
+              <p className="text-sm text-pink-300">Step {currentStep + 1} of 5</p>
             </div>
           </div>
           {previewMode && (
@@ -1157,7 +1157,7 @@ function CreateAdPageLuxury() {
             </button>
 
             <div className="text-white/60 text-sm">
-              Step {currentStep === 0 ? "Selection" : `${currentStep} of 4`}
+              Step {currentStep + 1} of 5
             </div>
 
             <button

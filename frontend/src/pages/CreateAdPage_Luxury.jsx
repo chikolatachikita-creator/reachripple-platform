@@ -58,6 +58,7 @@ function CreateAdPageLuxury() {
 
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
+  const [pendingImages, setPendingImages] = useState(0);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   // ===== FEATURE SELECTION =====
@@ -281,6 +282,8 @@ function CreateAdPageLuxury() {
       if (files.length > slotsLeft) {
         showToast(`Only ${slotsLeft} more image(s) can be added`, 'error');
       }
+      // Mark how many are being processed asynchronously
+      setPendingImages((p) => p + accepted.length);
       // Process asynchronously, append as each finishes
       accepted.forEach(async (file) => {
         try {
@@ -293,6 +296,8 @@ function CreateAdPageLuxury() {
           setImages((cur) => (cur.length >= MAX_IMAGES ? cur : [...cur, result]));
         } catch (err) {
           showToast(`Could not read image: ${file.name}`, 'error');
+        } finally {
+          setPendingImages((p) => Math.max(0, p - 1));
         }
       });
       return prevImages;
@@ -378,6 +383,10 @@ function CreateAdPageLuxury() {
     }
 
     // Validate
+    if (pendingImages > 0) {
+      showToast(`Still processing ${pendingImages} image(s)… please wait`, 'error');
+      return;
+    }
     if (images.length < 1) {
       showToast("Please upload at least 1 image", "error");
       return;
@@ -1022,6 +1031,11 @@ function CreateAdPageLuxury() {
                       <Camera className="w-8 h-8 text-pink-400 mx-auto mb-2" />
                       <p className="text-white/70">Drag photos here or click to browse</p>
                       <p className="text-xs text-white/50 mt-1">Up to 12 photos. Large images will be auto-compressed.</p>
+                      {pendingImages > 0 && (
+                        <p className="text-xs text-pink-300 mt-2 animate-pulse">
+                          Processing {pendingImages} image{pendingImages > 1 ? 's' : ''}…
+                        </p>
+                      )}
                     </div>
                     <input
                       type="file"

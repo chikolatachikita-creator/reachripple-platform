@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import multer from "multer";
 import path from "path";
 import rateLimit from "express-rate-limit";
@@ -56,7 +56,7 @@ const MAX_VIDEO_SIZE = 50 * 1024 * 1024; // 50MB per video
 const upload = multer({
   storage,
   limits: { 
-    files: 11, // 10 images + 1 video
+    files: 13, // 12 images + 1 video
     fileSize: MAX_VIDEO_SIZE // Use larger limit, validate per file type below
   },
   fileFilter: (req, file, cb) => {
@@ -68,6 +68,27 @@ const upload = multer({
     cb(null, true);
   },
 });
+
+// Wrap multer middleware to surface upload errors as JSON instead of HTML 500
+const uploadAdMedia = (req: Request, res: Response, next: NextFunction) => {
+  const handler = upload.fields([
+    { name: 'images', maxCount: 12 },
+    { name: 'videos', maxCount: 1 },
+  ]);
+  handler(req, res, (err: any) => {
+    if (err) {
+      logger.error('Ad upload multer error:', { code: err.code, message: err.message });
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(413).json({ error: 'A file is too large. Images must be under 5MB and videos under 50MB.' });
+      }
+      if (err.code === 'LIMIT_FILE_COUNT' || err.code === 'LIMIT_UNEXPECTED_FILE') {
+        return res.status(413).json({ error: 'Too many files. Up to 12 images and 1 video per listing.' });
+      }
+      return res.status(400).json({ error: err.message || 'Image upload failed' });
+    }
+    next();
+  });
+};
 
 // Public – clients can browse and view ads
 router.get("/", getAds);
@@ -437,14 +458,14 @@ router.get("/publisher/:userId", async (req: Request, res: Response) => {
 router.get("/:id", getAdById);
 
 // User can create ads (auth required but not admin) - with image and video upload
-router.post("/", auth, adCreationRateLimiter, upload.fields([{ name: 'images', maxCount: 10 }, { name: 'videos', maxCount: 1 }]), createAd);
+router.post("/", auth, adCreationRateLimiter, uploadAdMedia, createAd);
 
 // User can update/delete their own ads
-router.put("/:id/user", auth, upload.fields([{ name: 'images', maxCount: 10 }, { name: 'videos', maxCount: 1 }]), updateMyAd);
+router.put("/:id/user", auth, uploadAdMedia, updateMyAd);
 router.delete("/:id/user", auth, deleteMyAd);
 
 // Admin-only – edit / moderate ads
-router.put("/:id", auth, admin, upload.fields([{ name: 'images', maxCount: 10 }, { name: 'videos', maxCount: 1 }]), updateAd);
+router.put("/:id", auth, admin, uploadAdMedia, updateAd);
 router.put("/:id/approve", auth, admin, approveAd);
 router.put("/:id/reject", auth, admin, rejectAd);
 router.delete("/:id", auth, admin, deleteAd);

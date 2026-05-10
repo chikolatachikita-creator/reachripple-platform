@@ -650,7 +650,13 @@ export default function SearchResultsPage() {
 
   // ===== RENDER =====
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-zinc-900 text-zinc-800 dark:text-zinc-200">
+    <div className="relative min-h-screen text-zinc-800 dark:text-zinc-200">
+      {/* Glassy page background — light pink/peach wash that matches the
+          warm tones of the hero imagery, with subtle radial brand accents.
+          Sits behind everything so the hero can fade gradiently into it. */}
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-gradient-to-b from-rose-50 via-pink-50/60 to-white dark:from-zinc-950 dark:via-zinc-950 dark:to-zinc-900" />
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(252,231,243,0.7),transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(237,233,254,0.5),transparent_60%)] dark:opacity-40" />
+
       {/* Age Gate - shown once per session for adult categories */}
       <AgeGateModal />
 
@@ -660,34 +666,36 @@ export default function SearchResultsPage() {
       {/* LOCATION HERO BANNER (rotating premium imagery for escort search results) */}
       {locationHero && (
         <section
-          className="relative w-full overflow-hidden bg-gradient-to-br from-pink-950 via-zinc-900 to-purple-950"
+          className="relative w-full overflow-hidden"
           aria-label={locationHero.title}
         >
           {/*
-            Hero fills the frame at native resolution (object-cover). Two
-            stacked overlays give it a premium, glassy feel:
-              1) a soft frosted-white wash (~25%) so colors feel airy
-              2) a brand-tinted gradient (pink/purple at the corners) that
-                 visually ties the hero to the rest of the site palette
-              3) a bottom-anchored dark gradient that keeps the title legible
-            A pink "ribbon" at the very bottom hands off into the search bar
-            for a clean, premium transition.
+            Banner image fades GRADIENTLY into the page background at the
+            bottom (mask-image) instead of cutting off at a hard line. The
+            page itself sits on a glassy light-pink wash that matches the
+            warm tones in the photography, so the hero feels like the top of
+            one continuous premium surface.
           */}
-          <div className="relative w-full aspect-[16/9] max-h-[480px] sm:max-h-[440px] md:max-h-[420px]">
-            {/* Soft blurred backdrop of the same image — fills the frame so
-                the foreground image can `object-contain` (fit fully) without
-                ugly side-bars on wide screens. Heavy blur + dim makes it
-                read as ambient color, not a duplicate. */}
+          <div
+            className="relative w-full aspect-[16/9] max-h-[520px] sm:max-h-[480px] md:max-h-[460px]"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+              maskImage:
+                "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+            }}
+          >
+            {/* Soft blurred backdrop of the same image — ambient color fill */}
             <img
               src={locationHero.image}
               alt=""
               aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-60"
+              className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-70"
               loading="eager"
               decoding="async"
             />
 
-            {/* Foreground image — fully fitted, never cropped */}
+            {/* Foreground image — fully fitted, never cropped, max quality */}
             <img
               src={locationHero.image}
               alt={locationHero.title}
@@ -697,45 +705,38 @@ export default function SearchResultsPage() {
               decoding="async"
             />
 
-            {/* Glassy wash — frosted white sheen with subtle blur */}
-            <div className="absolute inset-0 bg-white/20 dark:bg-white/10 backdrop-blur-[1.5px] pointer-events-none" />
+            {/* Glassy wash — frosted sheen */}
+            <div className="absolute inset-0 bg-white/15 dark:bg-white/10 backdrop-blur-[1.5px] pointer-events-none" />
 
-            {/* Top specular highlight — gives the "glass" reflection feel */}
-            <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/30 via-white/5 to-transparent pointer-events-none" />
+            {/* Top specular highlight */}
+            <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/25 via-white/5 to-transparent pointer-events-none" />
 
-            {/* Brand-tinted radial accents (pink top-right, purple bottom-left) */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(236,72,153,0.30),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgba(139,92,246,0.30),transparent_55%)] pointer-events-none" />
+            {/* Brand-tinted radial accents */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(236,72,153,0.25),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgba(139,92,246,0.25),transparent_55%)] pointer-events-none" />
 
-            {/* Bottom readability gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent pointer-events-none" />
+            {/* Title legibility — soft dark behind text only */}
+            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/55 via-black/10 to-transparent pointer-events-none" />
 
-            {/* Inner glass border — barely-there highlight ring */}
-            <div className="absolute inset-0 ring-1 ring-inset ring-white/15 pointer-events-none" />
-
-            {/* Hero text */}
-            <div className="absolute inset-0 max-w-7xl mx-auto px-4 md:px-6 flex flex-col justify-end pb-5 md:pb-7">
+            {/* Hero text — pulled up so it isn't inside the fade-out zone */}
+            <div className="absolute inset-0 max-w-7xl mx-auto px-4 md:px-6 flex flex-col justify-end pb-[18%] sm:pb-[16%] md:pb-[14%]">
               <div className="inline-flex items-center gap-2 mb-2 w-fit">
                 <span className="px-2.5 py-1 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-wider bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white shadow-lg shadow-pink-500/30 ring-1 ring-white/20 backdrop-blur-sm">
                   Featured location
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] leading-tight">
                 {locationHero.title}
               </h1>
-              <p className="mt-1.5 text-sm sm:text-base md:text-lg text-white/95 max-w-2xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] line-clamp-2">
+              <p className="mt-1.5 text-sm sm:text-base md:text-lg text-white/95 max-w-2xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)] line-clamp-2">
                 {locationHero.subtitle}
               </p>
             </div>
-
-            {/* Pink/purple accent ribbon at the bottom for hero→search-bar handoff */}
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-600 pointer-events-none" />
           </div>
         </section>
       )}
 
-      {/* SEARCH BAR — soft brand-tinted band that flows from the hero */}
-      <section className="relative px-3 md:px-4 py-3 md:py-4 bg-gradient-to-b from-pink-50/70 via-white to-transparent dark:from-pink-950/20 dark:via-zinc-900 dark:to-transparent border-b border-pink-100/60 dark:border-zinc-800/60">
+      {/* SEARCH BAR — transparent so the glassy page background shows through */}
+      <section className="relative px-3 md:px-4 pt-2 md:pt-3 pb-3 md:pb-4 -mt-6 md:-mt-10">
         <div className="max-w-7xl mx-auto">
           <SearchCardVivaStreet
             defaultCategorySlug={categorySlug}

@@ -229,8 +229,20 @@ export default function SearchResultsPage() {
     if (pendingRedirect === key) return;
 
     // ===== RULE B: No location filters but locationSlug !== "gb" → redirect to gb =====
+    // Exception: allow well-known city/area landing pages (e.g. /escort/london) so they
+    // render as branded landing pages with hero imagery instead of being redirected away.
+    const KNOWN_CITY_SLUGS = new Set([
+      "london", "central-london",
+      "manchester", "birmingham", "leeds", "liverpool",
+      "bristol", "glasgow", "edinburgh", "cardiff", "newcastle",
+    ]);
     const hasLocationFilters = locType || outcode || district || postcode;
-    if (!hasLocationFilters && locationSlug && locationSlug !== "gb") {
+    if (
+      !hasLocationFilters &&
+      locationSlug &&
+      locationSlug !== "gb" &&
+      !KNOWN_CITY_SLUGS.has(locationSlug)
+    ) {
       setPendingRedirect(key);
       navigate(`/${categorySlug}/gb${searchParams.toString() ? `?${searchParams.toString()}` : ""}`, { replace: true });
       return;

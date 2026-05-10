@@ -639,18 +639,28 @@ export default function SearchResultsPage() {
       {/* LOCATION HERO BANNER (premium imagery for popular cities like London) */}
       {locationHero && (
         <section
-          className="relative overflow-hidden"
+          className="relative w-full overflow-hidden bg-zinc-900"
           aria-label={locationHero.title}
         >
-          <div
-            className="h-44 sm:h-56 md:h-72 lg:h-80 bg-cover bg-center"
-            style={{ backgroundImage: `url('${locationHero.image}')` }}
-          >
-            {/* Readability gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
+          {/*
+            Use the image's natural 16:9 aspect ratio so neither the skyline
+            (top) nor the subjects (bottom) get cropped. Cap height on very
+            tall viewports so it never dominates the page.
+          */}
+          <div className="relative w-full aspect-[16/9] max-h-[70vh] sm:max-h-[60vh] md:max-h-[55vh]">
+            <img
+              src={locationHero.image}
+              alt={locationHero.title}
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              loading="eager"
+              decoding="async"
+            />
 
-            <div className="relative h-full max-w-7xl mx-auto px-4 md:px-6 flex flex-col justify-end pb-5 md:pb-7">
+            {/* Readability gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent pointer-events-none" />
+
+            <div className="absolute inset-0 max-w-7xl mx-auto px-4 md:px-6 flex flex-col justify-end pb-5 md:pb-8">
               <div className="inline-flex items-center gap-2 mb-2 w-fit">
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider bg-pink-500/90 text-white shadow-lg backdrop-blur-sm">
                   Featured location
@@ -659,7 +669,7 @@ export default function SearchResultsPage() {
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white drop-shadow-lg leading-tight">
                 {locationHero.title}
               </h1>
-              <p className="mt-1.5 md:mt-2 text-sm md:text-base text-white/85 max-w-2xl drop-shadow">
+              <p className="mt-1.5 md:mt-2 text-sm md:text-base text-white/90 max-w-2xl drop-shadow">
                 {locationHero.subtitle}
               </p>
             </div>

@@ -670,14 +670,12 @@ export default function SearchResultsPage() {
             object-position keeps both the skyline and the subjects in frame.
           */}
           {/*
-            Container uses the dominant image aspect ratio (~16:9) capped on
-            tall viewports so the hero fills cleanly without dominating the page.
-            object-cover fills the frame; object-position keeps subjects in view
-            on the wide panoramic images. No upscaling — the source images are
-            1600+px wide so they always render at native resolution or above.
+            Hero fills the frame at native resolution (object-cover, no
+            letterboxing, no zoom-out). A subtle frosted-glass overlay (~30%
+            white, backdrop-blur) softens the image so it has a premium glassy
+            feel and keeps the title/subtitle legible without crushing colors.
           */}
           <div className="relative w-full aspect-[16/9] max-h-[480px] sm:max-h-[440px] md:max-h-[420px]">
-            {/* Foreground: fills the frame, no distortion. */}
             <img
               src={locationHero.image}
               alt={locationHero.title}
@@ -686,6 +684,9 @@ export default function SearchResultsPage() {
               loading="eager"
               decoding="async"
             />
+
+            {/* Frosted-glass layer (~30% white, slight blur) */}
+            <div className="absolute inset-0 bg-white/30 dark:bg-white/15 backdrop-blur-[2px] pointer-events-none" />
 
             {/* Readability gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10 pointer-events-none" />

@@ -563,31 +563,52 @@ export default function SearchResultsPage() {
     return "";
   }, [filters]);
 
-  // Location-specific hero banner (premium imagery for popular cities)
+  // Location-specific hero banner — shown on every escort search results page.
+  // Image is picked from a rotating pool in /images/escorts-hero/ so visitors see
+  // a fresh look on each page load. Drop more JPGs into that folder + bump
+  // HERO_POOL_SIZE to grow the rotation.
+  const HERO_POOL_SIZE = 5; // number of files hero-01.jpg ... hero-NN.jpg in /images/escorts-hero/
   const locationHero = useMemo(() => {
-    const haystack = [
-      locationSlug,
-      filters.location,
-      filters.district,
-      filters.outcode,
-    ]
+    // Build a friendly title from the available location signals
+    let title = "Escorts near you";
+    let subtitle = "Browse verified profiles across the UK";
+
+    const districtRaw = filters.district || "";
+    const outcodeRaw = (filters.outcode || "").toUpperCase();
+    const slugRaw = locationSlug && locationSlug !== "gb" ? locationSlug : "";
+    const slugWords = slugRaw
+      .split("-")
       .filter(Boolean)
-      .join(" ")
-      .toLowerCase();
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
 
-    // London: matches /escort/london, /escort/central-london, london districts, or central London outcodes (E*, EC*, N*, NW*, SE*, SW*, W*, WC*)
-    const isLondon =
-      /london/.test(haystack) ||
-      /\b(e|ec|n|nw|se|sw|w|wc)\d/.test(haystack);
-
-    if (isLondon) {
-      return {
-        image: "/images/escorts-london-hero.jpg",
-        title: "Escorts in London",
-        subtitle: "Premium companions across the capital — from Mayfair to Canary Wharf",
-      };
+    if (districtRaw && outcodeRaw) {
+      title = `Escorts in ${districtRaw}`;
+      subtitle = `Verified companions near ${outcodeRaw} — ${districtRaw}`;
+    } else if (districtRaw) {
+      title = `Escorts in ${districtRaw}`;
+      subtitle = "Verified companions in your area";
+    } else if (slugWords) {
+      title = `Escorts in ${slugWords}`;
+      // Special-case London for richer copy
+      if (/london/i.test(slugWords)) {
+        subtitle = "Premium companions across the capital — from Mayfair to Canary Wharf";
+      } else {
+        subtitle = `Verified companions in ${slugWords}`;
+      }
+    } else if (outcodeRaw) {
+      title = `Escorts near ${outcodeRaw}`;
+      subtitle = "Verified companions in your area";
     }
-    return null;
+
+    // Pick a rotating image — different on each page load.
+    // Index = floor(random * pool size), 1-padded to 2 digits.
+    const idx = Math.floor(Math.random() * HERO_POOL_SIZE) + 1;
+    const padded = String(idx).padStart(2, "0");
+    const image = `/images/escorts-hero/hero-${padded}.jpg`;
+
+    return { image, title, subtitle };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locationSlug, filters.location, filters.district, filters.outcode]);
 
   // Search intent confirmation (VivaStreet-style header)

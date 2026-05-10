@@ -551,6 +551,33 @@ export default function SearchResultsPage() {
     return "";
   }, [filters]);
 
+  // Location-specific hero banner (premium imagery for popular cities)
+  const locationHero = useMemo(() => {
+    const haystack = [
+      locationSlug,
+      filters.location,
+      filters.district,
+      filters.outcode,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+
+    // London: matches /escort/london, /escort/central-london, london districts, or central London outcodes (E*, EC*, N*, NW*, SE*, SW*, W*, WC*)
+    const isLondon =
+      /london/.test(haystack) ||
+      /\b(e|ec|n|nw|se|sw|w|wc)\d/.test(haystack);
+
+    if (isLondon) {
+      return {
+        image: "/images/escorts-london-hero.jpg",
+        title: "Escorts in London",
+        subtitle: "Premium companions across the capital — from Mayfair to Canary Wharf",
+      };
+    }
+    return null;
+  }, [locationSlug, filters.location, filters.district, filters.outcode]);
+
   // Search intent confirmation (VivaStreet-style header)
   const searchIntentLabel = useMemo(() => {
     const categoryLabel = CATEGORY_LABELS[categorySlug] || "Escorts";
@@ -596,6 +623,37 @@ export default function SearchResultsPage() {
 
       {/* NAVBAR */}
       <Navbar />
+
+      {/* LOCATION HERO BANNER (premium imagery for popular cities like London) */}
+      {locationHero && (
+        <section
+          className="relative overflow-hidden"
+          aria-label={locationHero.title}
+        >
+          <div
+            className="h-44 sm:h-56 md:h-72 lg:h-80 bg-cover bg-center"
+            style={{ backgroundImage: `url('${locationHero.image}')` }}
+          >
+            {/* Readability gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
+
+            <div className="relative h-full max-w-7xl mx-auto px-4 md:px-6 flex flex-col justify-end pb-5 md:pb-7">
+              <div className="inline-flex items-center gap-2 mb-2 w-fit">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider bg-pink-500/90 text-white shadow-lg backdrop-blur-sm">
+                  Featured location
+                </span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white drop-shadow-lg leading-tight">
+                {locationHero.title}
+              </h1>
+              <p className="mt-1.5 md:mt-2 text-sm md:text-base text-white/85 max-w-2xl drop-shadow">
+                {locationHero.subtitle}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* SEARCH BAR (Compact) */}
       <section className="px-3 md:px-4 py-2 md:py-3 bg-gradient-to-b from-zinc-100/50 to-transparent dark:from-zinc-800/50">

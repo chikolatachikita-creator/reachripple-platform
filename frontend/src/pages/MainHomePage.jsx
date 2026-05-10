@@ -467,14 +467,22 @@ export default function MainHomePage() {
             <div className="relative">
               <div className="overflow-x-auto hide-scrollbar -mx-4 px-4">
                 <div className="flex gap-0 min-w-max">
-                {CATEGORIES.map((cat) => (
+                {CATEGORIES.map((cat) => {
+                  const isAdultCat = cat.id === "free-personals";
+                  const activeColor = isAdultCat
+                    ? "text-violet-700 dark:text-violet-300"
+                    : "text-blue-600 dark:text-blue-400";
+                  const indicatorGradient = isAdultCat
+                    ? "from-violet-500 to-violet-700"
+                    : "from-blue-500 to-blue-700";
+                  return (
                   <button
                     key={cat.id}
                     onMouseEnter={() => setActiveTab(cat.id)}
                     onClick={() => setActiveTab(activeTab === cat.id ? null : cat.id)}
                     className={`relative px-4 py-3 text-sm font-semibold whitespace-nowrap transition-all cursor-pointer
                       ${activeTab === cat.id
-                        ? "text-blue-600 dark:text-blue-400"
+                        ? activeColor
                         : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200"
                       }`}
                   >
@@ -483,10 +491,11 @@ export default function MainHomePage() {
                       <span>{cat.title}</span>
                     </span>
                     {activeTab === cat.id && (
-                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-t" />
+                      <span className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${indicatorGradient} rounded-t`} />
                     )}
                   </button>
-                ))}
+                  );
+                })}
                 </div>
               </div>
               {/* Right-edge fade indicator */}
@@ -500,11 +509,29 @@ export default function MainHomePage() {
             if (!activeCat) return null;
             const subs = activeCat.subs;
             const isPersonals = activeCat.id === "free-personals";
+            // Adult-services section gets a contained plum tint per palette guidance
+            const dropdownBg = isPersonals
+              ? "bg-violet-50/80 dark:bg-violet-950/40 border-violet-100 dark:border-violet-900"
+              : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700";
+            const headingColor = isPersonals
+              ? "text-violet-700 dark:text-violet-300"
+              : "text-zinc-400 dark:text-zinc-500";
+            const linkHoverColor = isPersonals
+              ? "hover:text-violet-700 dark:hover:text-violet-300"
+              : "hover:text-blue-600 dark:hover:text-blue-400";
+            const chevronHoverColor = isPersonals
+              ? "group-hover:text-violet-500"
+              : "group-hover:text-blue-400";
             return (
-              <div className="absolute left-0 right-0 top-full bg-white dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 shadow-xl z-40">
+              <div className={`absolute left-0 right-0 top-full border-b shadow-xl z-40 ${dropdownBg}`}>
                 <div className="max-w-6xl mx-auto px-4 py-5 sm:py-6">
-                  <h3 className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-3">
+                  <h3 className={`text-xs font-bold uppercase tracking-widest mb-3 ${headingColor}`}>
                     {activeCat.icon} {activeCat.title}
+                    {isPersonals && (
+                      <span className="ml-2 text-[10px] font-semibold normal-case tracking-normal text-violet-600/80 dark:text-violet-400/80">
+                        18+ · Adult services
+                      </span>
+                    )}
                   </h3>
                   <div className={`grid gap-x-8 gap-y-1.5 grid-cols-1 sm:grid-cols-2 ${subs.length > 8 ? 'md:grid-cols-4' : subs.length > 4 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
                     {subs.map((sub) => (
@@ -512,9 +539,9 @@ export default function MainHomePage() {
                         key={sub.slug}
                         to={sub.link || (isPersonals ? `/escorts` : `/category/${activeCat.id}`)}
                         onClick={() => setActiveTab(null)}
-                        className="text-sm text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-1 flex items-center gap-1.5 group"
+                        className={`text-sm text-zinc-700 dark:text-zinc-300 transition-colors py-1 flex items-center gap-1.5 group ${linkHoverColor}`}
                       >
-                        <span className="text-zinc-300 dark:text-zinc-600 group-hover:text-blue-400 transition-colors">›</span>
+                        <span className={`text-zinc-300 dark:text-zinc-600 transition-colors ${chevronHoverColor}`}>›</span>
                         {sub.name}
                         {sub.popular && <span className="ml-auto text-[10px] font-bold text-orange-500 bg-orange-50 dark:bg-orange-900/30 px-1.5 py-0.5 rounded">HOT</span>}
                       </Link>

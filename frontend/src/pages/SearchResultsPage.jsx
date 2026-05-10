@@ -570,8 +570,8 @@ export default function SearchResultsPage() {
   const HERO_POOL_SIZE = 30; // number of files hero-01.jpg ... hero-NN.jpg in /images/escorts-hero/
   const locationHero = useMemo(() => {
     // Build a friendly title from the available location signals
-    let title = "Escorts near you";
-    let subtitle = "Browse verified profiles across the UK";
+    let title = "Discover Companions Near You";
+    let subtitle = "Verified, discreet introductions across the UK";
 
     const districtRaw = filters.district || "";
     const outcodeRaw = (filters.outcode || "").toUpperCase();
@@ -583,22 +583,22 @@ export default function SearchResultsPage() {
       .join(" ");
 
     if (districtRaw && outcodeRaw) {
-      title = `Escorts in ${districtRaw}`;
-      subtitle = `Verified companions near ${outcodeRaw} — ${districtRaw}`;
+      title = `Companionship in ${districtRaw}`;
+      subtitle = `Verified, discreet introductions in ${districtRaw} — near ${outcodeRaw}`;
     } else if (districtRaw) {
-      title = `Escorts in ${districtRaw}`;
-      subtitle = "Verified companions in your area";
+      title = `Companionship in ${districtRaw}`;
+      subtitle = `Verified, discreet introductions in ${districtRaw}`;
     } else if (slugWords) {
-      title = `Escorts in ${slugWords}`;
+      title = `Companionship in ${slugWords}`;
       // Special-case London for richer copy
       if (/london/i.test(slugWords)) {
         subtitle = "Premium companions across the capital — from Mayfair to Canary Wharf";
       } else {
-        subtitle = `Verified companions in ${slugWords}`;
+        subtitle = `Verified, discreet introductions in ${slugWords}`;
       }
     } else if (outcodeRaw) {
-      title = `Escorts near ${outcodeRaw}`;
-      subtitle = "Verified companions in your area";
+      title = `Companionship near ${outcodeRaw}`;
+      subtitle = "Verified, discreet introductions in your area";
     }
 
     // Pick a rotating image — different on each page load.

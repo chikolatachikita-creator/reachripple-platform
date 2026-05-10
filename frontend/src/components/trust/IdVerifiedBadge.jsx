@@ -16,7 +16,7 @@ export default function IdVerifiedBadge({ verified = false, size = "sm" }) {
 
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full font-semibold bg-emerald-100 text-emerald-700 border border-emerald-200 ${
+      className={`inline-flex items-center gap-1 rounded-full font-semibold bg-teal-50 text-teal-700 border border-teal-200 ${
         sizes[size] || sizes.sm
       }`}
       title="Identity verified by ReachRipple"

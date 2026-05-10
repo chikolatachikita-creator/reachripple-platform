@@ -346,7 +346,7 @@ export default function HeroSearchBar({ categorySlug = "escorts", defaultDistanc
                 {/* Search Button */}
                 <button
                     onClick={handleSearch}
-                    className="h-14 px-6 sm:px-8 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold text-base sm:text-lg shadow-lg shadow-blue-600/30 hover:shadow-blue-600/40 active:scale-95 transition-all flex items-center justify-center gap-2 min-w-0 sm:min-w-[140px] w-full lg:w-auto"
+                    className="h-14 px-6 sm:px-8 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold text-base sm:text-lg shadow-lg shadow-amber-500/30 hover:shadow-amber-500/40 active:scale-95 transition-all flex items-center justify-center gap-2 min-w-0 sm:min-w-[140px] w-full lg:w-auto"
                 >
                     <Search size={20} strokeWidth={2.5} />
                     Search

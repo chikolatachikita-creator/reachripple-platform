@@ -7,25 +7,25 @@
 export default function VerificationBadges({ profile = {} }) {
   const badges = [];
 
-  // Verified profile
+  // Verified profile — trust teal per palette
   if (profile.isVerified) {
     badges.push({
       id: 'verified',
       icon: '✓',
       label: 'Verified Profile',
-      color: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
-      borderColor: 'border-blue-200 dark:border-blue-700'
+      color: 'bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300',
+      borderColor: 'border-teal-200 dark:border-teal-700'
     });
   }
 
-  // Video verification
+  // Video verification — trust teal (deeper) so it visually groups with Verified
   if (profile.hasVideoVerification) {
     badges.push({
       id: 'video',
       icon: '🎥',
       label: 'Video Verified',
-      color: 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300',
-      borderColor: 'border-purple-200 dark:border-purple-700'
+      color: 'bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-200',
+      borderColor: 'border-teal-300 dark:border-teal-700'
     });
   }
 

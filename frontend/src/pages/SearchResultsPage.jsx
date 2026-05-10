@@ -669,23 +669,20 @@ export default function SearchResultsPage() {
             visible above the fold on desktop and tablet.
             object-position keeps both the skyline and the subjects in frame.
           */}
-          <div className="relative w-full h-[220px] sm:h-[260px] md:h-[320px] lg:h-[380px] xl:h-[420px]">
-            {/* Blurred backdrop fill — same image, scaled up + blurred — so the
-                hero never shows hard letterbox bars when the foreground image
-                is letterboxed via object-contain. */}
-            <img
-              src={locationHero.image}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-70"
-              loading="eager"
-              decoding="async"
-            />
-            {/* Foreground: full image, no cropping, original aspect preserved. */}
+          {/*
+            Container uses the dominant image aspect ratio (~16:9) capped on
+            tall viewports so the hero fills cleanly without dominating the page.
+            object-cover fills the frame; object-position keeps subjects in view
+            on the wide panoramic images. No upscaling — the source images are
+            1600+px wide so they always render at native resolution or above.
+          */}
+          <div className="relative w-full aspect-[16/9] max-h-[480px] sm:max-h-[440px] md:max-h-[420px]">
+            {/* Foreground: fills the frame, no distortion. */}
             <img
               src={locationHero.image}
               alt={locationHero.title}
-              className="absolute inset-0 w-full h-full object-contain"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: "center 30%" }}
               loading="eager"
               decoding="async"
             />

@@ -677,7 +677,7 @@ export default function SearchResultsPage() {
             one continuous premium surface.
           */}
           <div
-            className="relative w-full aspect-[16/9] max-h-[560px] sm:max-h-[520px] md:max-h-[500px]"
+            className="relative w-full aspect-[21/9] md:aspect-[3/1] lg:aspect-[4/1] max-h-[420px] sm:max-h-[360px] md:max-h-[320px] lg:max-h-[300px]"
             style={{
               WebkitMaskImage:
                 "linear-gradient(to bottom, black 0%, black 40%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 85%, transparent 100%)",

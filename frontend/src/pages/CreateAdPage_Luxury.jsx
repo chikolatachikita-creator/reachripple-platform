@@ -167,6 +167,7 @@ function CreateAdPageLuxury() {
       if (!formData.title) errors.title = "Headline is required";
       if (!formData.description) errors.description = "About You section is required";
       if (!formData.category) errors.category = "Category is required";
+      if (!formData.location || !formData.location.trim()) errors.location = "Location is required";
     }
     if (step === 2 && enabledFeatures.profileFields) {
       if (!formData.location) errors.location = "Location is required";
@@ -653,6 +654,28 @@ function CreateAdPageLuxury() {
                       <option value="Entertainment">Entertainment</option>
                       <option value="Alternative Lifestyle">Alternative Lifestyle</option>
                     </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-white/80 mb-2">
+                      Location <span className="text-red-400">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.location}
+                      onChange={(e) => handleInputChange("location", e.target.value)}
+                      placeholder="e.g., London, Manchester, SW1A"
+                      className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-pink-500/20 outline-none transition-all ${
+                        validationErrors.location
+                          ? "border-red-500 focus:border-red-500"
+                          : "border-white/20 focus:border-pink-500"
+                      }`}
+                    />
+                    {validationErrors.location && (
+                      <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
+                        ⚠️ {validationErrors.location}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>

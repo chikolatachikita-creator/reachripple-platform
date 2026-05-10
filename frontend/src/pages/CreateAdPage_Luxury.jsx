@@ -117,7 +117,10 @@ function CreateAdPageLuxury() {
   
   const SERVICES_LIST = [
     "Dinner Companion", "Travel", "Events", "Photography", "GFE",
-    "Massage", "Tantric", "Role Play", "BDSM", "Couples", "Webcam"
+    "PSE", "Massage", "Erotic Massage", "Tantric", "Sensual",
+    "Role Play", "Fetish", "BDSM", "Domination", "Submissive",
+    "Couples", "Threesome", "Webcam", "Phone Chat", "Video Call",
+    "Striptease", "Lap Dance", "Party Companion", "Overnight", "Weekend Getaway"
   ];
   
   const SERVICE_FOR = ["Men", "Women", "Couples", "Groups", "Trans"];
@@ -218,27 +221,85 @@ function CreateAdPageLuxury() {
     const files = Array.from(e.target.files || []);
     const MAX_IMAGES = 12;
     const MAX_SIZE = 5 * 1024 * 1024;
+    const COMPRESS_THRESHOLD = 1.5 * 1024 * 1024; // compress anything > 1.5MB
 
-    files.forEach(file => {
-      if (file.size > MAX_SIZE) {
-        showToast(`Image too large: ${file.name} (max 5MB)`, "error");
-        return;
-      }
-
-      if (images.length >= MAX_IMAGES) {
-        showToast(`Maximum ${MAX_IMAGES} images allowed`, "error");
-        return;
-      }
-
+    // Compress an oversized image to fit within MAX_SIZE
+    const compressImage = (file) => new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = (evt) => {
-        setImages(prev => [...prev, {
-          file,
-          preview: evt.target.result
-        }]);
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          const MAX_DIM = 2000;
+          let { width, height } = img;
+          if (width > MAX_DIM || height > MAX_DIM) {
+            const scale = Math.min(MAX_DIM / width, MAX_DIM / height);
+            width = Math.round(width * scale);
+            height = Math.round(height * scale);
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          // Try progressively lower quality until under MAX_SIZE
+          const tryQuality = (q) => {
+            canvas.toBlob((blob) => {
+              if (!blob) return reject(new Error('compression failed'));
+              if (blob.size <= MAX_SIZE || q <= 0.4) {
+                const compressedFile = new File([blob], file.name.replace(/\.\w+$/, '.jpg'), { type: 'image/jpeg' });
+                const r2 = new FileReader();
+                r2.onload = (e2) => resolve({ file: compressedFile, preview: e2.target.result });
+                r2.readAsDataURL(compressedFile);
+              } else {
+                tryQuality(q - 0.1);
+              }
+            }, 'image/jpeg', q);
+          };
+          tryQuality(0.85);
+        };
+        img.onerror = () => reject(new Error('image load failed'));
+        img.src = ev.target.result;
       };
+      reader.onerror = () => reject(new Error('read failed'));
       reader.readAsDataURL(file);
     });
+
+    const readAsIs = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (ev) => resolve({ file, preview: ev.target.result });
+      reader.onerror = () => reject(new Error('read failed'));
+      reader.readAsDataURL(file);
+    });
+
+    setImages((prevImages) => {
+      const slotsLeft = Math.max(0, MAX_IMAGES - prevImages.length);
+      if (slotsLeft === 0) {
+        showToast(`Maximum ${MAX_IMAGES} images allowed`, 'error');
+        return prevImages;
+      }
+      const accepted = files.slice(0, slotsLeft);
+      if (files.length > slotsLeft) {
+        showToast(`Only ${slotsLeft} more image(s) can be added`, 'error');
+      }
+      // Process asynchronously, append as each finishes
+      accepted.forEach(async (file) => {
+        try {
+          const needsCompress = file.size > COMPRESS_THRESHOLD || /image\/(heic|heif)/i.test(file.type);
+          const result = needsCompress ? await compressImage(file) : await readAsIs(file);
+          if (result.file.size > MAX_SIZE) {
+            showToast(`Image still too large after compression: ${file.name}`, 'error');
+            return;
+          }
+          setImages((cur) => (cur.length >= MAX_IMAGES ? cur : [...cur, result]));
+        } catch (err) {
+          showToast(`Could not read image: ${file.name}`, 'error');
+        }
+      });
+      return prevImages;
+    });
+
+    // Reset input so re-selecting the same file retriggers onChange
+    if (e.target) e.target.value = '';
   };
 
   const handleRemoveImage = (index) => {
@@ -960,7 +1021,7 @@ function CreateAdPageLuxury() {
                     <div className="text-center">
                       <Camera className="w-8 h-8 text-pink-400 mx-auto mb-2" />
                       <p className="text-white/70">Drag photos here or click to browse</p>
-                      <p className="text-xs text-white/50 mt-1">Max 5MB per image, up to 12 total</p>
+                      <p className="text-xs text-white/50 mt-1">Up to 12 photos. Large images will be auto-compressed.</p>
                     </div>
                     <input
                       type="file"

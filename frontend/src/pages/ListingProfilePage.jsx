@@ -211,7 +211,7 @@ export default function ListingProfilePage() {
   const seoTitle = `${profile.title}${displayPrice ? ` — ${displayPrice}` : ''} | ReachRipple`;
   const seoDescRaw = (profile.description || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
   const seoDesc = seoDescRaw.length > 160 ? seoDescRaw.slice(0, 157) + '…' : (seoDescRaw || `${meta.label} listing on ReachRipple — Premium Classifieds & Services.`);
-  const seoImage = profile.gallery?.[0] ? getImageUrl(profile.gallery[0]) : null;
+  const seoImage = profile.images?.[0] ? getImageUrl(profile.images[0]) : (profile.gallery?.[0] || null);
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/listing/${profile._id || ''}` : '';
 
   return (

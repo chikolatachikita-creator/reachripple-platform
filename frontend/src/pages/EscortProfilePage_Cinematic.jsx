@@ -343,7 +343,7 @@ const EscortProfilePage = () => {
   const seoTitle = `${profile.title || 'Profile'}${seoLocation ? ` — ${seoLocation}` : ''} | ReachRipple`;
   const seoDescRaw = (profile.description || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
   const seoDesc = seoDescRaw.length > 160 ? seoDescRaw.slice(0, 157) + '…' : (seoDescRaw || `View profile on ReachRipple — Premium Classifieds & Services.`);
-  const seoImage = profile.gallery?.[0] ? getAssetUrl(profile.gallery[0]) : null;
+  const seoImage = profile.gallery?.[0]?.src || (profile.images?.[0] ? getAssetUrl(profile.images[0]) : null);
   const canonicalUrl = typeof window !== 'undefined' ? `${window.location.origin}/profile/${profile._id || id}` : '';
 
   // ─── Render ───

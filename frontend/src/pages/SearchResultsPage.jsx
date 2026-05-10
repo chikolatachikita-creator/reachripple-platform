@@ -567,7 +567,7 @@ export default function SearchResultsPage() {
   // Image is picked from a rotating pool in /images/escorts-hero/ so visitors see
   // a fresh look on each page load. Drop more JPGs into that folder + bump
   // HERO_POOL_SIZE to grow the rotation.
-  const HERO_POOL_SIZE = 6; // number of files hero-01.jpg ... hero-NN.jpg in /images/escorts-hero/
+  const HERO_POOL_SIZE = 30; // number of files hero-01.jpg ... hero-NN.jpg in /images/escorts-hero/
   const locationHero = useMemo(() => {
     // Build a friendly title from the available location signals
     let title = "Escorts near you";

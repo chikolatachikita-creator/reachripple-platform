@@ -674,24 +674,44 @@ export default function SearchResultsPage() {
             for a clean, premium transition.
           */}
           <div className="relative w-full aspect-[16/9] max-h-[480px] sm:max-h-[440px] md:max-h-[420px]">
+            {/* Soft blurred backdrop of the same image — fills the frame so
+                the foreground image can `object-contain` (fit fully) without
+                ugly side-bars on wide screens. Heavy blur + dim makes it
+                read as ambient color, not a duplicate. */}
             <img
               src={locationHero.image}
-              alt={locationHero.title}
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectPosition: "center 30%" }}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-60"
               loading="eager"
               decoding="async"
             />
 
-            {/* Frosted-glass wash */}
-            <div className="absolute inset-0 bg-white/25 dark:bg-white/10 backdrop-blur-[2px] pointer-events-none" />
+            {/* Foreground image — fully fitted, never cropped */}
+            <img
+              src={locationHero.image}
+              alt={locationHero.title}
+              className="absolute inset-0 w-full h-full object-contain"
+              style={{ objectPosition: "center" }}
+              loading="eager"
+              decoding="async"
+            />
+
+            {/* Glassy wash — frosted white sheen with subtle blur */}
+            <div className="absolute inset-0 bg-white/20 dark:bg-white/10 backdrop-blur-[1.5px] pointer-events-none" />
+
+            {/* Top specular highlight — gives the "glass" reflection feel */}
+            <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/30 via-white/5 to-transparent pointer-events-none" />
 
             {/* Brand-tinted radial accents (pink top-right, purple bottom-left) */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(236,72,153,0.25),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgba(139,92,246,0.25),transparent_55%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(236,72,153,0.30),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgba(139,92,246,0.30),transparent_55%)] pointer-events-none" />
 
             {/* Bottom readability gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent pointer-events-none" />
+
+            {/* Inner glass border — barely-there highlight ring */}
+            <div className="absolute inset-0 ring-1 ring-inset ring-white/15 pointer-events-none" />
 
             {/* Hero text */}
             <div className="absolute inset-0 max-w-7xl mx-auto px-4 md:px-6 flex flex-col justify-end pb-5 md:pb-7">

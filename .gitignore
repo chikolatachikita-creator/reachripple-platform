@@ -49,6 +49,11 @@ uploads/
 
 # Playwright MCP snapshots
 .playwright-mcp/
+# Stray screenshots saved at repo root by browser tooling
+/london-hero-live.png
+/mobile-home.png
+/page-*.png
+/*-screenshot.png
 
 # Sensitive environment files
 render-env.txt

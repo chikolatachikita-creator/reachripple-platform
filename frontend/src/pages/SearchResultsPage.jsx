@@ -651,11 +651,11 @@ export default function SearchResultsPage() {
   // ===== RENDER =====
   return (
     <div className="relative min-h-screen text-zinc-800 dark:text-zinc-200">
-      {/* Glassy page background — light pink/peach wash that matches the
-          warm tones of the hero imagery, with subtle radial brand accents.
-          Sits behind everything so the hero can fade gradiently into it. */}
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-gradient-to-b from-[#fff5ec] via-[#ffe6e1] to-[#fff8f4] dark:from-zinc-950 dark:via-zinc-950 dark:to-zinc-900" />
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(255,200,180,0.55),transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(244,194,212,0.45),transparent_60%)] dark:opacity-40" />
+      {/* Glassy luxury page background — deep navy at the very top (where
+          the hero lives), fading through a warm midtone into a soft cream
+          near the listings. Matches the Privara-style premium look. */}
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-gradient-to-b from-[#0b1220] via-[#1a1015] via-40% to-[#fff5ec] dark:from-[#070a12] dark:via-[#1a1015] dark:to-[#1a1015]" />
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(255,180,140,0.18),transparent_50%),radial-gradient(ellipse_at_bottom_right,rgba(244,194,212,0.35),transparent_60%)]" />
 
       {/* Age Gate - shown once per session for adult categories */}
       <AgeGateModal />
@@ -676,9 +676,9 @@ export default function SearchResultsPage() {
             aria-hidden="true"
             style={{
               WebkitMaskImage:
-                "linear-gradient(to bottom, black 0%, black 45%, rgba(0,0,0,0.85) 65%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.2) 92%, transparent 100%)",
+                "linear-gradient(to bottom, black 0%, black 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 72%, rgba(0,0,0,0.3) 86%, rgba(0,0,0,0.12) 95%, transparent 100%)",
               maskImage:
-                "linear-gradient(to bottom, black 0%, black 45%, rgba(0,0,0,0.85) 65%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.2) 92%, transparent 100%)",
+                "linear-gradient(to bottom, black 0%, black 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 72%, rgba(0,0,0,0.3) 86%, rgba(0,0,0,0.12) 95%, transparent 100%)",
             }}
           >
             <img
@@ -689,9 +689,14 @@ export default function SearchResultsPage() {
               loading="eager"
               decoding="async"
             />
-            {/* Soft dark vignette behind the title for legibility */}
-            <div className="absolute inset-x-0 top-0 h-[300px] sm:h-[280px] md:h-[260px] lg:h-[240px] bg-gradient-to-t from-transparent via-black/10 to-black/20" />
-            <div className="absolute inset-x-0 top-[120px] sm:top-[110px] md:top-[100px] h-[200px] bg-gradient-to-t from-black/55 via-black/20 to-transparent" />
+            {/* Deep luxury vignette: dark navy at top corners + dark left side
+                (Privara-style) so the hero feels cinematic and the title pops */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0b1220]/80 via-[#0b1220]/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0b1220]/40 via-transparent to-transparent" />
+            {/* Warm bottom blend — image dissolves through warm rose tones
+                so the transition from dark hero to the lighter page below
+                feels gradual and on-brand */}
+            <div className="absolute inset-x-0 bottom-0 h-[280px] bg-gradient-to-t from-[#3a1a20]/70 via-[#3a1a20]/30 to-transparent" />
           </div>
 
           {/* Hero text — sits in normal flow above the backdrop */}
@@ -701,14 +706,14 @@ export default function SearchResultsPage() {
           >
             <div className="relative max-w-7xl mx-auto px-4 md:px-6 pt-20 sm:pt-24 md:pt-32 lg:pt-36 pb-28 sm:pb-32 md:pb-40 lg:pb-48">
               <div className="inline-flex items-center gap-2 mb-3">
-                <span className="px-2.5 py-1 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-wider bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white shadow-lg shadow-pink-500/30 ring-1 ring-white/20 backdrop-blur-sm">
+                <span className="px-2.5 py-1 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-pink-300/90">
                   Featured location
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-[1.05] tracking-tight">
                 {locationHero.title}
               </h1>
-              <p className="mt-3 text-sm sm:text-base md:text-lg text-white/95 max-w-2xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)] line-clamp-2">
+              <p className="mt-4 text-sm sm:text-base md:text-lg text-white/80 max-w-2xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)] line-clamp-2 font-light tracking-wide">
                 {locationHero.subtitle}
               </p>
             </div>

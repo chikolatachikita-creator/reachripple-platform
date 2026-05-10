@@ -648,12 +648,12 @@ export default function SearchResultsPage() {
             visible above the fold on desktop and tablet.
             object-position keeps both the skyline and the subjects in frame.
           */}
-          <div className="relative w-full h-[200px] sm:h-[240px] md:h-[280px] lg:h-[320px]">
+          <div className="relative w-full h-[220px] sm:h-[260px] md:h-[320px] lg:h-[380px] xl:h-[420px]">
             <img
               src={locationHero.image}
               alt={locationHero.title}
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectPosition: "center 35%" }}
+              style={{ objectPosition: "center 20%" }}
               loading="eager"
               decoding="async"
             />

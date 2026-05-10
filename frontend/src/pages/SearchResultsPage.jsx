@@ -672,13 +672,13 @@ export default function SearchResultsPage() {
               the listings below. Pointer-events-none so clicks pass through
               to the search/cards. */}
           <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-[640px] sm:h-[600px] md:h-[560px] lg:h-[540px] overflow-hidden"
+            className="pointer-events-none absolute inset-x-0 top-0 h-[820px] sm:h-[780px] md:h-[720px] lg:h-[680px] overflow-hidden"
             aria-hidden="true"
             style={{
               WebkitMaskImage:
-                "linear-gradient(to bottom, black 0%, black 30%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.2) 88%, transparent 100%)",
+                "linear-gradient(to bottom, black 0%, black 45%, rgba(0,0,0,0.85) 65%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.2) 92%, transparent 100%)",
               maskImage:
-                "linear-gradient(to bottom, black 0%, black 30%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.2) 88%, transparent 100%)",
+                "linear-gradient(to bottom, black 0%, black 45%, rgba(0,0,0,0.85) 65%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.2) 92%, transparent 100%)",
             }}
           >
             <img
@@ -699,8 +699,8 @@ export default function SearchResultsPage() {
             className="relative w-full"
             aria-label={locationHero.title}
           >
-            <div className="relative max-w-7xl mx-auto px-4 md:px-6 pt-10 sm:pt-14 md:pt-16 lg:pt-20 pb-16 sm:pb-20 md:pb-24 lg:pb-28">
-              <div className="inline-flex items-center gap-2 mb-2">
+            <div className="relative max-w-7xl mx-auto px-4 md:px-6 pt-20 sm:pt-24 md:pt-32 lg:pt-36 pb-28 sm:pb-32 md:pb-40 lg:pb-48">
+              <div className="inline-flex items-center gap-2 mb-3">
                 <span className="px-2.5 py-1 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-wider bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white shadow-lg shadow-pink-500/30 ring-1 ring-white/20 backdrop-blur-sm">
                   Featured location
                 </span>
@@ -708,14 +708,14 @@ export default function SearchResultsPage() {
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] leading-tight">
                 {locationHero.title}
               </h1>
-              <p className="mt-1.5 text-sm sm:text-base md:text-lg text-white/95 max-w-2xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)] line-clamp-2">
+              <p className="mt-3 text-sm sm:text-base md:text-lg text-white/95 max-w-2xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)] line-clamp-2">
                 {locationHero.subtitle}
               </p>
             </div>
           </section>
 
           {/* SEARCH BAR — overlaps the fade zone of the backdrop */}
-          <section className="relative px-3 md:px-4 pb-3 md:pb-4 -mt-8 md:-mt-12">
+          <section className="relative px-3 md:px-4 pb-6 md:pb-10 -mt-12 md:-mt-16">
             <div className="max-w-7xl mx-auto">
               <SearchCardVivaStreet
                 defaultCategorySlug={categorySlug}

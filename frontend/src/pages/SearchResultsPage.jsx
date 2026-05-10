@@ -689,14 +689,12 @@ export default function SearchResultsPage() {
               loading="eager"
               decoding="async"
             />
-            {/* Deep luxury vignette: dark navy at top corners + dark left side
-                (Privara-style) so the hero feels cinematic and the title pops */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0b1220]/80 via-[#0b1220]/30 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0b1220]/40 via-transparent to-transparent" />
-            {/* Warm bottom blend — image dissolves through warm rose tones
-                so the transition from dark hero to the lighter page below
-                feels gradual and on-brand */}
-            <div className="absolute inset-x-0 bottom-0 h-[280px] bg-gradient-to-t from-[#3a1a20]/70 via-[#3a1a20]/30 to-transparent" />
+            {/* Soft left-side scrim ONLY behind the title for legibility —
+                no top/global darkening so the image stays bright and clear */}
+            <div className="absolute inset-y-0 left-0 w-1/2 sm:w-2/5 bg-gradient-to-r from-black/55 via-black/20 to-transparent" />
+            {/* Warm bottom blend so the image dissolves through warm rose
+                tones into the lighter page below */}
+            <div className="absolute inset-x-0 bottom-0 h-[260px] bg-gradient-to-t from-[#3a1a20]/55 via-[#3a1a20]/15 to-transparent" />
           </div>
 
           {/* Hero text — sits in normal flow above the backdrop */}
@@ -705,17 +703,25 @@ export default function SearchResultsPage() {
             aria-label={locationHero.title}
           >
             <div className="relative max-w-7xl mx-auto px-4 md:px-6 pt-20 sm:pt-24 md:pt-32 lg:pt-36 pb-28 sm:pb-32 md:pb-40 lg:pb-48">
-              <div className="inline-flex items-center gap-2 mb-3">
-                <span className="px-2.5 py-1 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-pink-300/90">
-                  Featured location
-                </span>
+              <div className="max-w-2xl">
+                <div className="mb-4">
+                  <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.28em] text-pink-300/90">
+                    Featured location
+                  </span>
+                </div>
+                <h1
+                  className="text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] leading-[1.05] tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light"
+                  style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }}
+                >
+                  {locationHero.title}
+                </h1>
+                <p
+                  className="mt-5 text-base sm:text-lg md:text-xl text-white/85 max-w-xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)] line-clamp-2 font-light leading-relaxed"
+                  style={{ letterSpacing: "0.01em" }}
+                >
+                  {locationHero.subtitle}
+                </p>
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-[1.05] tracking-tight">
-                {locationHero.title}
-              </h1>
-              <p className="mt-4 text-sm sm:text-base md:text-lg text-white/80 max-w-2xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)] line-clamp-2 font-light tracking-wide">
-                {locationHero.subtitle}
-              </p>
             </div>
           </section>
 

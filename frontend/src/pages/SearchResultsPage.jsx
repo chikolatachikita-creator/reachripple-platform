@@ -685,28 +685,15 @@ export default function SearchResultsPage() {
                 "linear-gradient(to bottom, black 0%, black 40%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 85%, transparent 100%)",
             }}
           >
-            {/* Soft blurred backdrop of the same image — ambient color fill */}
-            <img
-              src={locationHero.image}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-50"
-              loading="eager"
-              decoding="async"
-            />
-
-            {/* Foreground image — fully fitted, full quality, NO washes on top */}
+            {/* Foreground image — fully fitted, full resolution, NO blur, NO wash */}
             <img
               src={locationHero.image}
               alt={locationHero.title}
-              className="absolute inset-0 w-full h-full object-contain"
-              style={{ objectPosition: "center" }}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: "center 30%" }}
               loading="eager"
               decoding="async"
             />
-
-            {/* Very light top highlight only — keeps premium feel without dulling the image */}
-            <div className="absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-white/15 to-transparent pointer-events-none" />
 
             {/* Subtle bottom dark vignette ONLY behind the title for legibility */}
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none" />

@@ -168,7 +168,7 @@ function CreateAdPageLuxury() {
       if (!formData.description) errors.description = "About You section is required";
       if (!formData.category) errors.category = "Category is required";
     }
-    if (step === 2) {
+    if (step === 2 && enabledFeatures.profileFields) {
       if (!formData.location) errors.location = "Location is required";
       if (!formData.age) errors.age = "Age is required";
     }

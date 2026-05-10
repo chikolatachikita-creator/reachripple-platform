@@ -663,71 +663,86 @@ export default function SearchResultsPage() {
       {/* NAVBAR */}
       <Navbar />
 
-      {/* LOCATION HERO BANNER (rotating premium imagery for escort search results) */}
+      {/* HERO + SEARCH BAR — image is a single backdrop that fades through
+          the search bar and on into the listings area */}
       {locationHero && (
-        <section
-          className="relative w-full overflow-hidden"
-          aria-label={locationHero.title}
-        >
-          {/*
-            Banner image fades GRADIENTLY into the page background at the
-            bottom (mask-image) instead of cutting off at a hard line. The
-            page itself sits on a glassy light-pink wash that matches the
-            warm tones in the photography, so the hero feels like the top of
-            one continuous premium surface.
-          */}
+        <div className="relative">
+          {/* Banner image as a tall backdrop that extends well past the
+              search bar so the fade dissolves OVER it and partially over
+              the listings below. Pointer-events-none so clicks pass through
+              to the search/cards. */}
           <div
-            className="relative w-full aspect-[21/9] md:aspect-[3/1] lg:aspect-[4/1] max-h-[420px] sm:max-h-[360px] md:max-h-[320px] lg:max-h-[300px]"
+            className="pointer-events-none absolute inset-x-0 top-0 h-[640px] sm:h-[600px] md:h-[560px] lg:h-[540px] overflow-hidden"
+            aria-hidden="true"
             style={{
               WebkitMaskImage:
-                "linear-gradient(to bottom, black 0%, black 40%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 85%, transparent 100%)",
+                "linear-gradient(to bottom, black 0%, black 30%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.2) 88%, transparent 100%)",
               maskImage:
-                "linear-gradient(to bottom, black 0%, black 40%, rgba(0,0,0,0.7) 65%, rgba(0,0,0,0.25) 85%, transparent 100%)",
+                "linear-gradient(to bottom, black 0%, black 30%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.2) 88%, transparent 100%)",
             }}
           >
-            {/* Foreground image — fully fitted, full resolution, NO blur, NO wash */}
             <img
               src={locationHero.image}
-              alt={locationHero.title}
+              alt=""
               className="absolute inset-0 w-full h-full object-cover"
               style={{ objectPosition: "center 30%" }}
               loading="eager"
               decoding="async"
             />
+            {/* Soft dark vignette behind the title for legibility */}
+            <div className="absolute inset-x-0 top-0 h-[300px] sm:h-[280px] md:h-[260px] lg:h-[240px] bg-gradient-to-t from-transparent via-black/10 to-black/20" />
+            <div className="absolute inset-x-0 top-[120px] sm:top-[110px] md:top-[100px] h-[200px] bg-gradient-to-t from-black/55 via-black/20 to-transparent" />
+          </div>
 
-            {/* Subtle bottom dark vignette ONLY behind the title for legibility */}
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none" />
-
-            {/* Hero text — sits above the fade zone */}
-            <div className="absolute inset-0 max-w-7xl mx-auto px-4 md:px-6 flex flex-col justify-end pb-[22%] sm:pb-[20%] md:pb-[18%]">
-              <div className="inline-flex items-center gap-2 mb-2 w-fit">
+          {/* Hero text — sits in normal flow above the backdrop */}
+          <section
+            className="relative w-full"
+            aria-label={locationHero.title}
+          >
+            <div className="relative max-w-7xl mx-auto px-4 md:px-6 pt-10 sm:pt-14 md:pt-16 lg:pt-20 pb-16 sm:pb-20 md:pb-24 lg:pb-28">
+              <div className="inline-flex items-center gap-2 mb-2">
                 <span className="px-2.5 py-1 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-wider bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white shadow-lg shadow-pink-500/30 ring-1 ring-white/20 backdrop-blur-sm">
                   Featured location
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] leading-tight">
                 {locationHero.title}
               </h1>
-              <p className="mt-1.5 text-sm sm:text-base md:text-lg text-white/95 max-w-2xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)] line-clamp-2">
+              <p className="mt-1.5 text-sm sm:text-base md:text-lg text-white/95 max-w-2xl drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)] line-clamp-2">
                 {locationHero.subtitle}
               </p>
             </div>
+          </section>
+
+          {/* SEARCH BAR — overlaps the fade zone of the backdrop */}
+          <section className="relative px-3 md:px-4 pb-3 md:pb-4 -mt-8 md:-mt-12">
+            <div className="max-w-7xl mx-auto">
+              <SearchCardVivaStreet
+                defaultCategorySlug={categorySlug}
+                defaultLocationSlug={locationSlug}
+                defaultDistance={filters.d}
+                loadLastLocation={true}
+                compact
+              />
+            </div>
+          </section>
+        </div>
+      )}
+
+      {/* Fallback search bar when there's no hero (no location selected) */}
+      {!locationHero && (
+        <section className="relative px-3 md:px-4 py-3 md:py-4">
+          <div className="max-w-7xl mx-auto">
+            <SearchCardVivaStreet
+              defaultCategorySlug={categorySlug}
+              defaultLocationSlug={locationSlug}
+              defaultDistance={filters.d}
+              loadLastLocation={true}
+              compact
+            />
           </div>
         </section>
       )}
-
-      {/* SEARCH BAR — transparent so the glassy page background shows through */}
-      <section className="relative px-3 md:px-4 pt-2 md:pt-3 pb-3 md:pb-4 -mt-6 md:-mt-10">
-        <div className="max-w-7xl mx-auto">
-          <SearchCardVivaStreet
-            defaultCategorySlug={categorySlug}
-            defaultLocationSlug={locationSlug}
-            defaultDistance={filters.d}
-            loadLastLocation={true}
-            compact
-          />
-        </div>
-      </section>
 
       {/* ===== VIP & FEATURED SHOWCASE (Always top, maximum visibility) ===== */}
       {!loading && vipProfiles.length > 0 && (

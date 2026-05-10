@@ -643,33 +643,35 @@ export default function SearchResultsPage() {
           aria-label={locationHero.title}
         >
           {/*
-            Use the image's natural 16:9 aspect ratio so neither the skyline
-            (top) nor the subjects (bottom) get cropped. Cap height on very
-            tall viewports so it never dominates the page.
+            Compact, balanced hero. Heights are absolute (not aspect-based) so
+            it never dominates the viewport and the search bar + results stay
+            visible above the fold on desktop and tablet.
+            object-position keeps both the skyline and the subjects in frame.
           */}
-          <div className="relative w-full aspect-[16/9] max-h-[70vh] sm:max-h-[60vh] md:max-h-[55vh]">
+          <div className="relative w-full h-[200px] sm:h-[240px] md:h-[280px] lg:h-[320px]">
             <img
               src={locationHero.image}
               alt={locationHero.title}
-              className="absolute inset-0 w-full h-full object-cover object-center"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: "center 35%" }}
               loading="eager"
               decoding="async"
             />
 
             {/* Readability gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/10 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-transparent pointer-events-none" />
 
-            <div className="absolute inset-0 max-w-7xl mx-auto px-4 md:px-6 flex flex-col justify-end pb-5 md:pb-8">
-              <div className="inline-flex items-center gap-2 mb-2 w-fit">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider bg-pink-500/90 text-white shadow-lg backdrop-blur-sm">
+            <div className="absolute inset-0 max-w-7xl mx-auto px-4 md:px-6 flex flex-col justify-end pb-4 md:pb-5">
+              <div className="inline-flex items-center gap-2 mb-1.5 w-fit">
+                <span className="px-2 py-0.5 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-wider bg-pink-500/95 text-white shadow-lg backdrop-blur-sm">
                   Featured location
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white drop-shadow-lg leading-tight">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-lg leading-tight">
                 {locationHero.title}
               </h1>
-              <p className="mt-1.5 md:mt-2 text-sm md:text-base text-white/90 max-w-2xl drop-shadow">
+              <p className="mt-1 text-xs sm:text-sm md:text-base text-white/90 max-w-2xl drop-shadow line-clamp-2">
                 {locationHero.subtitle}
               </p>
             </div>
